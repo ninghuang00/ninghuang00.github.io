@@ -7,14 +7,18 @@
   
   <title>Java基础知识 | Just Try It</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="article">
+  <meta name="description" content="Java基础知识">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
 <meta property="og:title" content="Java基础知识">
 <meta property="og:url" content="http://yoursite.com/2018/07/07/Java基础知识/index.html">
 <meta property="og:site_name" content="Just Try It">
+<meta property="og:description" content="Java基础知识">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-07T11:51:55.000Z">
+<meta property="og:updated_time" content="2018-07-07T13:50:33.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java基础知识">
+<meta name="twitter:description" content="Java基础知识">
   
     <link rel="alternate" href="/atom.xml" title="Just Try It" type="application/atom+xml">
   
@@ -71,6 +75,10 @@
   <time datetime="2018-07-07T11:51:55.000Z" itemprop="datePublished">2018-07-07</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/笔记/">笔记</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
@@ -90,16 +98,144 @@
         
 <div id="toc">
   <strong class="toc-title">文章目录</strong>
-  
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#java基础"><span class="toc-text">java基础 +++</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#面向对象"><span class="toc-text">面向对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线程安全"><span class="toc-text">线程安全</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#安全的类"><span class="toc-text">安全的类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#不安全类"><span class="toc-text">不安全类</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#集合"><span class="toc-text">集合</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#线程安全的集合"><span class="toc-text">线程安全的集合</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Vector"><span class="toc-text">Vector</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#HashTable"><span class="toc-text">HashTable</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#StringBuffer"><span class="toc-text">StringBuffer</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#线程不安全的集合"><span class="toc-text">线程不安全的集合</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ArrayList"><span class="toc-text">ArrayList</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#HashMap"><span class="toc-text">HashMap</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#异常"><span class="toc-text">异常</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#反射"><span class="toc-text">反射</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#访问私有变量和私有方法"><span class="toc-text">访问私有变量和私有方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#泛型"><span class="toc-text">泛型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#注意点"><span class="toc-text">注意点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IO-NIO"><span class="toc-text">IO/NIO</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Jdk8特性"><span class="toc-text">Jdk8特性 +++</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#lambda表达式"><span class="toc-text">lambda表达式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数式编程"><span class="toc-text">函数式编程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#stream"><span class="toc-text">stream</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FP"><span class="toc-text">FP</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#多线程"><span class="toc-text">多线程 +++</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ThreadPoolExecutor-线程池"><span class="toc-text">ThreadPoolExecutor(线程池)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#J-U-C"><span class="toc-text">J.U.C</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Atomic"><span class="toc-text">Atomic</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fork-join"><span class="toc-text">fork/join</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线程的几种状态"><span class="toc-text">线程的几种状态</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#设计模式"><span class="toc-text">设计模式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#设计模式的介绍和应用场景"><span class="toc-text">设计模式的介绍和应用场景</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#介绍"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#六大原则"><span class="toc-text">六大原则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建型模式"><span class="toc-text">创建型模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#单例模式"><span class="toc-text">单例模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#工厂方法模式"><span class="toc-text">工厂方法模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#建造者模式"><span class="toc-text">建造者模式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#结构型模式"><span class="toc-text">结构型模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#行为型模式"><span class="toc-text">行为型模式</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Servlet容器-部署配置使用"><span class="toc-text">Servlet容器(部署配置使用) ++</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#tomcat"><span class="toc-text">tomcat</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#jetty"><span class="toc-text">jetty</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#JVM相关"><span class="toc-text">JVM相关</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#类加载过程"><span class="toc-text">类加载过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#class编译"><span class="toc-text">class编译</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#加载"><span class="toc-text">加载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#执行原理过程"><span class="toc-text">执行原理过程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#内存管理"><span class="toc-text">内存管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#垃圾回收-GC"><span class="toc-text">垃圾回收(GC)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#调优技巧"><span class="toc-text">调优技巧 ++</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#实践积累"><span class="toc-text">实践积累</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#坑-容易犯错的细节"><span class="toc-text">坑(容易犯错的细节)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#细节"><span class="toc-text">细节</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#关于java中的值调用和引用调用-java核心技术p120"><span class="toc-text">关于java中的值调用和引用调用(java核心技术p120)</span></a></li></ol></li></ol>
 </div>
 
-        
+        <p> Java基础知识<br> <a id="more"></a></p>
+<h1 id="java基础"><a href="#java基础" class="headerlink" title="java基础 +++"></a>java基础 +++</h1><h2 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h2><h2 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h2><h3 id="安全的类"><a href="#安全的类" class="headerlink" title="安全的类"></a>安全的类</h3><h3 id="不安全类"><a href="#不安全类" class="headerlink" title="不安全类"></a>不安全类</h3><ol>
+<li>StringBuilder</li>
+</ol>
+<h2 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h2><h3 id="线程安全的集合"><a href="#线程安全的集合" class="headerlink" title="线程安全的集合"></a>线程安全的集合</h3><h4 id="Vector"><a href="#Vector" class="headerlink" title="Vector"></a>Vector</h4><h4 id="HashTable"><a href="#HashTable" class="headerlink" title="HashTable"></a>HashTable</h4><h4 id="StringBuffer"><a href="#StringBuffer" class="headerlink" title="StringBuffer"></a>StringBuffer</h4><h3 id="线程不安全的集合"><a href="#线程不安全的集合" class="headerlink" title="线程不安全的集合"></a>线程不安全的集合</h3><h4 id="ArrayList"><a href="#ArrayList" class="headerlink" title="ArrayList"></a>ArrayList</h4><p><code>elementData[size++] = e;</code><br>    从上面的源码中可以看出,ArrayList中增加一个元素的时候会分层两步进行:</p>
+<ol>
+<li>先在elementData[size++]的地方存放元素,</li>
+<li>然后再增大size.<br> 因此如果是多线程进行访问的话,有可能两个线程在同一个位置存放了元素.</li>
+</ol>
+<h4 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h4><p>参考地址:<a href="http://www.importnew.com/22011.html" target="_blank" rel="noopener">http://www.importnew.com/22011.html</a><br>HashMap的底层实现原理</p>
+<ul>
+<li>HashMap的结构:是一个Node&lt;K,V&gt;[]的数组,Node实现了Map.Entry,初始容量16(代码中是<code>1&lt;&lt;4</code>),最大是2^30,当检查到插入数据时容量超出<code>capacity*loadFactor</code>,就要增大Hash表的尺寸,</li>
+<li>放入规则:计算A的键的hash值,然后%数组长度就是index,放在数组的index位置,如果后面put进来B的键的hash值和A相等的,那就是<code>B.next=A,Node[index]=B</code></li>
+<li>为什么capacity的值是2的次幂:因为<code>index = hash &amp; (length - 1)</code>,相当于取余,这样length-1的二进制就是1,和hash进行&amp;操作之后不容易产生相同的结果,也就是尽量减少在同一个index放置多个元素,这样不但空间利用率最高,同时为了利用数组查找元素速度,我们当然是希望每一个位置只有一个元素,这样就不用遍历链表去比对key了.</li>
+<li>resize()死循环的问题:当HashMap进行扩容的时候,原来的链表就要进行重排,这个时候如果并发操作,由于transfer()函数,就可能形成环,然后下次get元素的时候就可能进入死循环,<br>jdk1.8好像解决了这个问题,进行优化之后省去了重新计算hash值的时间,而是通过判断扩容之后hash中新增的最高一位范围是1还是0(0则是原位置,1则是原位置+oldCap),均匀地将之前冲突的节点分散到新的桶上,</li>
+<li>支持NULL键和NULL值,而且null值的key总是放在数组第一个位置</li>
+<li>遍历的方法,取出keySet().iterator(),遍历iterator,即Map.entry,从entry中取key和value比较高效.</li>
+</ul>
+<h2 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h2><h2 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h2><h3 id="访问私有变量和私有方法"><a href="#访问私有变量和私有方法" class="headerlink" title="访问私有变量和私有方法"></a>访问私有变量和私有方法</h3><ol>
+<li>调用类的getDeclaredFields()和getDeclaredMethods()方法获得相应的field和method</li>
+<li>调用method和field的setAccessible()方法允许访问私有成员属性</li>
+<li>field调用get(实例)方法,获得对应field的值</li>
+<li>method调用invoke()方法执行私有方法</li>
+</ol>
+<h2 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h2><h3 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h3><ol>
+<li>泛型方法和泛型类的&lt;&gt;互不相干</li>
+<li>泛型擦除如果泛型参数没有指定上限(如<t extends="" string="">),那类型擦除之后T就被替换成Object,否则就是上限,如String</t></li>
+<li>类型擦除也是为什么泛型类和泛型方法中不接受基本数据类型的原因</li>
+</ol>
+<h2 id="IO-NIO"><a href="#IO-NIO" class="headerlink" title="IO/NIO"></a>IO/NIO</h2><h1 id="Jdk8特性"><a href="#Jdk8特性" class="headerlink" title="Jdk8特性 +++"></a>Jdk8特性 +++</h1><h2 id="lambda表达式"><a href="#lambda表达式" class="headerlink" title="lambda表达式"></a>lambda表达式</h2><h2 id="函数式编程"><a href="#函数式编程" class="headerlink" title="函数式编程"></a>函数式编程</h2><h2 id="stream"><a href="#stream" class="headerlink" title="stream"></a>stream</h2><h2 id="FP"><a href="#FP" class="headerlink" title="FP"></a>FP</h2><h1 id="多线程"><a href="#多线程" class="headerlink" title="多线程 +++"></a>多线程 +++</h1><h2 id="ThreadPoolExecutor-线程池"><a href="#ThreadPoolExecutor-线程池" class="headerlink" title="ThreadPoolExecutor(线程池)"></a>ThreadPoolExecutor(线程池)</h2><p>###jdk原生线程池<br>参考地址:<a href="http://www.importnew.com/19011.html" target="_blank" rel="noopener">http://www.importnew.com/19011.html</a></p>
+<p>####构造函数中各个参数的作用(四个构造函数中前三个构造函数都调用了最后一个构造器进行初始化)</p>
+<ol>
+<li>corePoolSize:核心池的大小,创建线程池之后默认情况下,线程池中是没有线程的,除非调用了prestartCoreThread()方法预创建线程,然后当有任务进来的时候,就会开始创建线程去执行任务,当线程池中的线程数目达到corePoolSize之后,就会把到达的任务放到缓存队列中</li>
+<li>maximumPoolSize:线程池的最大线程数,</li>
+<li>keepAliveTime:表示空闲线程能够存活的时间,默认情况下,只有当线程数大于corePoolSize的时候此参数才会生效,即当一个线程空闲的时间超过此参数时,线程就会终止.如果调用allowCoreThreadTimeOut(true)方法,那么线程数只要大于0,次参数就会生效.次参数的单位可以从天到纳秒</li>
+<li>workQueue:一个阻塞队列,用来存储等待执行的任务,重要参数,对线程池的运行过程产生重大影响,这里的阻塞队列一般有以下几种选择:<ol>
+<li>ArrayBlockingQueue;</li>
+<li>LinkedBlockingQueue;</li>
+<li>SynchronousQueue;<br>线程池的排队策略和阻塞队列的选择有关</li>
+</ol>
+</li>
+<li>threadFactory:线程工厂,用来创建线程</li>
+<li>handler:当线程池满了的时候选取的拒绝处理任务的策略:<ol>
+<li>ThreadPoolExecutor.AbortPolicy:丢弃任务并抛出RejectedExecutionException异常。 </li>
+<li>ThreadPoolExecutor.DiscardPolicy：也是丢弃任务，但是不抛出异常。 </li>
+<li>ThreadPoolExecutor.DiscardOldestPolicy：丢弃队列最前面的任务，然后重新尝试执行任务（重复此过程）</li>
+<li>ThreadPoolExecutor.CallerRunsPolicy：由调用线程处理该任务</li>
+</ol>
+</li>
+</ol>
+<p>####ThreadPoolExecutor类中几个重要的方法:</p>
+<pre><code>1. execute():实现了Executor接口中的方法,通过此方法想线程池提交任务,交由线程池去执行
+2. submit():继承而来的方法,也是向线程池提交任务,不过可以返回任务执行的结果,其实内部实现还是调用了execute()方法,只是利用Future来获取任务执行结果
+3. shutdown():用来关闭线程池
+4. shutdownNow():同上
+</code></pre><p>####深入理解线程池的实现</p>
+<ol>
+<li><p>线程池的状态:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">volatile</span> <span class="keyword">int</span> runState;	<span class="comment">//用来保证线程之间可见</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> RUNNING    = <span class="number">0</span>;	<span class="comment">//创建线程池后的初始状态</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> SHUTDOWN   = <span class="number">1</span>;	<span class="comment">//调用shutdown()方法,此时线程池不接受新的任务,会等待现有的任务执行完毕</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> STOP       = <span class="number">2</span>;	<span class="comment">//调用shutdownNow()方法,不接受新任务并且尝试终止正在执行的任务</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> TERMINATED = <span class="number">3</span>;	<span class="comment">//当线程池处于STOP或者SHUTDOWN状态,然后所有的工作线程都已经销毁,任务缓存队列中被清空或者执行结束,线程池被置为TERMINATED</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>任务的执行<br>ThreadPoolExecutor类中比较重要的几个成员变量</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> BlockingQueue&lt;Runnable&gt; workQueue;              <span class="comment">//任务缓存队列，用来存放等待执行的任务</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> ReentrantLock mainLock = <span class="keyword">new</span> ReentrantLock();   <span class="comment">//线程池的主要状态锁，对线程池状态（比如线程池大小、runState等）的改变都要使用这个锁</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> HashSet&lt;Worker&gt; workers = <span class="keyword">new</span> HashSet&lt;Worker&gt;();  <span class="comment">//用来存放工作集</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">long</span>  keepAliveTime;    <span class="comment">//线程存货时间   </span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">boolean</span> allowCoreThreadTimeOut;   <span class="comment">//是否允许为核心线程设置存活时间</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">int</span>   corePoolSize;     <span class="comment">//核心池的大小（即线程池中的线程数目大于这个参数时，提交的任务会被放进任务缓存队列）</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">int</span>   maximumPoolSize;   <span class="comment">//线程池最大能容忍的线程数</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">int</span>   poolSize;       <span class="comment">//线程池中当前的线程数</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">volatile</span> RejectedExecutionHandler handler; <span class="comment">//任务拒绝策略</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">volatile</span> ThreadFactory threadFactory;   <span class="comment">//线程工厂，用来创建线程</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">int</span> largestPoolSize;   <span class="comment">//用来记录线程池中曾经出现过的最大线程数</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">long</span> completedTaskCount;   <span class="comment">//用来记录已经执行完毕的任务个数</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>ThreadPoolExecutor类中的execute()的实现原理:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">execute</span><span class="params">(Runnable command)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (command == <span class="keyword">null</span>)</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException();</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * Proceed in 3 steps:</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">int</span> c = ctl.get();</span><br><span class="line">    <span class="comment">//如果当前线程数小于核心线程数,则尝试启动新线程,调用的addWorker()方法会原子性检查runState和workCount,防止错误添加线程</span></span><br><span class="line">    <span class="comment">//如果无法添加则重新获取当前线程数</span></span><br><span class="line">    <span class="keyword">if</span> (workerCountOf(c) &lt; corePoolSize) &#123;</span><br><span class="line">    	<span class="comment">//addWorker()方法中使用了ReentrantLock锁来保证线程池的状态</span></span><br><span class="line">        <span class="keyword">if</span> (addWorker(command, <span class="keyword">true</span>))</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        c = ctl.get();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//如果当前线程处于RUNNING状态,则将新任务加入缓存队列</span></span><br><span class="line">    <span class="keyword">if</span> (isRunning(c) &amp;&amp; workQueue.offer(command)) &#123;</span><br><span class="line">        <span class="keyword">int</span> recheck = ctl.get();</span><br><span class="line">        <span class="comment">//如果线程池变成非RUNNING状态,移除新任务,并reject()</span></span><br><span class="line">        <span class="keyword">if</span> (! isRunning(recheck) &amp;&amp; remove(command))</span><br><span class="line">            reject(command);</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (workerCountOf(recheck) == <span class="number">0</span>)</span><br><span class="line">            addWorker(<span class="keyword">null</span>, <span class="keyword">false</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//如果当前线程不处于RUNNING状态,尝试新建线程,创建线程失败则reject()</span></span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (!addWorker(command, <span class="keyword">false</span>))</span><br><span class="line">        reject(command);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>总结一下任务提交给线程池之后到执行的过程:</p>
+<pre><code>1. 弄清楚corePoolSize和maximumPoolSize的含义
+2. Worker的作用
+3. 任务交给线程池的处理策略
+    * 当前线程数小于核心线程数,创建新的线程处理任务
+    * 如果当前线程数大于核心线程数,那么会尝试将新任务添加到缓存队列,如果添加成功,那么新任务等待空闲线程来处理;如果添加失败,一般是队列已经满了,那么会尝试创建新的线程去处理
+    * 当前线程数达到maximumPoolSize时,会采取任务拒绝策略处理
+    * 如果当前线程数量大于corePoolSize,那么当有线程的空闲时间超过keepAliveTime,线程将被终止,知道当前线程数不大于corePoolSize;如果允许核心线程设置空闲存活时间的话,那核心线程的空闲时间超出也会被终止.
+</code></pre><ol start="3">
+<li><p>线程池的初始化</p>
+<ol>
+<li>prestartCoreThread():初始化一个核心线程,</li>
+<li><p>prestartAllCoreThread():初始化所有核心线程.<br>如何合理配置线程池的大小(N为cpu个数)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1. 如果是CPU密集型应用，则线程池大小设置为N+1</span><br><span class="line">2. 如果是IO密集型应用，则线程池大小设置为2N+1</span><br></pre></td></tr></table></figure>
+<p>以上公式只是最简单的情况(假设一台服务器上),一般线程池大小还要结合部署的系统中的CPU个数,内存大小,主要的任务执行的是计算还是I/O,还是混合操作<br>比如I/O优化中,如下公式更合适:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">最佳线程数目 = （（线程等待时间+线程CPU时间）/线程CPU时间 ）* CPU数目</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+</ol>
+<p>因为很显然，线程等待时间所占比例越高，需要越多线程。线程CPU运行时间所占比例越高，需要越少线程。</p>
+<ol start="4">
+<li>任务缓存队列及排队策略<br>在前面我们多次提到了任务缓存队列，即workQueue，它用来存放等待执行的任务。<br>workQueue的类型为BlockingQueue<runnable>，通常可以取下面三种类型：<ol>
+<li>ArrayBlockingQueue：基于数组的先进先出队列，此队列创建时必须指定大小；</li>
+<li>LinkedBlockingQueue：基于链表的先进先出队列，如果创建时没有指定此队列大小，则默认为Integer.MAX_VALUE；</li>
+<li>synchronousQueue：这个队列比较特殊，它不会保存提交的任务，而是将直接新建一个线程来执行新来的任务。</li>
+</ol>
+</runnable></li>
+<li>任务拒绝策略:上面提到的4中</li>
+<li>线程池的关闭:上面提到的2种方法</li>
+<li>线程池容量的动态调整<br>ThreadPoolExecutor提供了动态调整线程池容量大小的方法：setCorePoolSize()和setMaximumPoolSize()，<br>当上述参数从小变大时，ThreadPoolExecutor进行线程赋值，还可能立即创建新的线程来执行任务。</li>
+</ol>
+<h2 id="J-U-C"><a href="#J-U-C" class="headerlink" title="J.U.C"></a>J.U.C</h2><h2 id="Atomic"><a href="#Atomic" class="headerlink" title="Atomic"></a>Atomic</h2><h2 id="fork-join"><a href="#fork-join" class="headerlink" title="fork/join"></a>fork/join</h2><h2 id="线程的几种状态"><a href="#线程的几种状态" class="headerlink" title="线程的几种状态"></a>线程的几种状态</h2><h1 id="设计模式"><a href="#设计模式" class="headerlink" title="设计模式"></a>设计模式</h1><h2 id="设计模式的介绍和应用场景"><a href="#设计模式的介绍和应用场景" class="headerlink" title="设计模式的介绍和应用场景"></a>设计模式的介绍和应用场景</h2><h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><h3 id="六大原则"><a href="#六大原则" class="headerlink" title="六大原则"></a>六大原则</h3><h3 id="创建型模式"><a href="#创建型模式" class="headerlink" title="创建型模式"></a>创建型模式</h3><h4 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h4><p>保证内存中只存在一个对象:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span></span>&#123;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Singleton instance = <span class="keyword">new</span> Singleton();</span><br><span class="line"><span class="comment">//构造函数必须是私有的</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line"><span class="keyword">return</span> instance;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>需要全局共享资源的时候可以使用,频繁实例化然后又销毁的对象,有状态的工具类对象,日志,配置文件</p>
+<h4 id="工厂方法模式"><a href="#工厂方法模式" class="headerlink" title="工厂方法模式"></a>工厂方法模式</h4><ol>
+<li>简单工厂模式:就是根据传入不同的参数的来返回不同的类实例,这些类都继承了相同的接口,比如画图接口中有画图方法</li>
+<li>工程方法模式:就是为每种类单独写一个工厂类</li>
+<li>抽象工厂模式:就是定义一个抽象工厂来返回多个工厂,然后再有返回的每一种工厂返回对象实例</li>
+</ol>
+<h4 id="建造者模式"><a href="#建造者模式" class="headerlink" title="建造者模式"></a>建造者模式</h4><ol>
+<li>当遇到结构比较复杂的类的时候可以考虑使用</li>
+</ol>
+<h3 id="结构型模式"><a href="#结构型模式" class="headerlink" title="结构型模式"></a>结构型模式</h3><ol>
+<li>代理模式</li>
+<li>装饰模式</li>
+<li>适配器模式</li>
+</ol>
+<h3 id="行为型模式"><a href="#行为型模式" class="headerlink" title="行为型模式"></a>行为型模式</h3><ol>
+<li>命令模式</li>
+<li>模板方法模式</li>
+<li>策略模式<br>就是当有几个类的方法相似的时候,比如两数的加减乘除,可以将方法抽取到一个接口中,然后分别实现,然后在一个Condition类中定义这些类的public final static对象 实例,使用的时候只要用类名取出对象调用相应的方法就行了</li>
+<li>终结者模式</li>
+<li>观察者模式</li>
+<li>备忘录模式</li>
+<li>访问者模式</li>
+</ol>
+<h1 id="Servlet容器-部署配置使用"><a href="#Servlet容器-部署配置使用" class="headerlink" title="Servlet容器(部署配置使用) ++"></a>Servlet容器(部署配置使用) ++</h1><h2 id="tomcat"><a href="#tomcat" class="headerlink" title="tomcat"></a>tomcat</h2><h2 id="jetty"><a href="#jetty" class="headerlink" title="jetty"></a>jetty</h2><p>## </p>
+<h1 id="JVM相关"><a href="#JVM相关" class="headerlink" title="JVM相关"></a>JVM相关</h1><h2 id="类加载过程"><a href="#类加载过程" class="headerlink" title="类加载过程"></a>类加载过程</h2><h3 id="class编译"><a href="#class编译" class="headerlink" title="class编译"></a>class编译</h3><h3 id="加载"><a href="#加载" class="headerlink" title="加载"></a>加载</h3><h3 id="执行原理过程"><a href="#执行原理过程" class="headerlink" title="执行原理过程"></a>执行原理过程</h3><h2 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h2><h2 id="垃圾回收-GC"><a href="#垃圾回收-GC" class="headerlink" title="垃圾回收(GC)"></a>垃圾回收(GC)</h2><h1 id="调优技巧"><a href="#调优技巧" class="headerlink" title="调优技巧 ++"></a>调优技巧 ++</h1><h2 id="实践积累"><a href="#实践积累" class="headerlink" title="实践积累"></a>实践积累</h2><h1 id="坑-容易犯错的细节"><a href="#坑-容易犯错的细节" class="headerlink" title="坑(容易犯错的细节)"></a>坑(容易犯错的细节)</h1><h2 id="细节"><a href="#细节" class="headerlink" title="细节"></a>细节</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 代码段 --&gt;</span><br><span class="line"><span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">i = i++;</span><br><span class="line">&lt;!-- 结果i还是<span class="number">0</span>  --&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*代码段*/</span></span><br><span class="line"><span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">i = ++ i;</span><br><span class="line">&lt;!-- 结果i是<span class="number">1</span> --&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- 基本数值类型转换问题 --&gt;</span><br><span class="line"><span class="keyword">int</span> a = <span class="number">9</span>;</span><br><span class="line"><span class="keyword">int</span> b = <span class="number">4</span>;</span><br><span class="line"><span class="keyword">double</span> c = a/b;</span><br><span class="line">&lt;!-- 结果是<span class="number">2.0</span> --&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- 控制sout的小数输出位数 --&gt;</span><br><span class="line">sout(<span class="string">"%.2f"</span>,doubleNum);</span><br><span class="line">&lt;!-- 结果输出的<span class="keyword">double</span>数字会保留两位小数 --&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="关于java中的值调用和引用调用-java核心技术p120"><a href="#关于java中的值调用和引用调用-java核心技术p120" class="headerlink" title="关于java中的值调用和引用调用(java核心技术p120)"></a>关于java中的值调用和引用调用(java核心技术p120)</h2><p>引用调用是引用地址的拷贝,虽然能够实际影响到引用对象的状态,但是一个方法无法让一个对象引用一个新的对象,比如:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(Person p1,Person p2)</span></span>&#123;</span><br><span class="line">	Person temp = p1;</span><br><span class="line">	p1 = p2;</span><br><span class="line">	p2 = temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<pre><code>以上代码是无法实现交换功能的.
+</code></pre><p>##关于new对象的位置很有讲究,如果在循环的外面new的话,相当于add进list中的都是同一个对象<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String[]&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();    <span class="comment">//关于课程信息的一行数据</span></span><br><span class="line">    <span class="comment">//关于课程的所有字段</span></span><br><span class="line">    String[] fieldNames = &#123;DbHelper.COURSE_NAME, DbHelper.START_DATE, DbHelper.END_DATE, DbHelper.DAY_OF_WEEK, DbHelper.START_TIME, DbHelper.END_TIME, DbHelper.TEACHER_NAME, DbHelper.ADDRESS,DbHelper.COURSE_ID&#125;;</span><br><span class="line">    <span class="comment">//从数据库取出的一行数据</span></span><br><span class="line">    String[] fieldValues ;<span class="comment">//千万不能在这里new ,不然后面add进list的全是这个地址= new String[fieldNames.length];</span></span><br><span class="line">    Cursor cursor = db.query(DbHelper.TABLE_NAME_COURSE, <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>);</span><br><span class="line">    <span class="keyword">if</span> (cursor.moveToFirst()) &#123;</span><br><span class="line">        <span class="keyword">do</span> &#123;</span><br><span class="line">            fieldValues = <span class="keyword">new</span> String[fieldNames.length];</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; fieldNames.length; i ++) &#123;</span><br><span class="line">                fieldValues[i] = cursor.getString(cursor.getColumnIndex(fieldNames[i]));</span><br><span class="line">            &#125;</span><br><span class="line">            Log.d(<span class="string">"hn"</span>, fieldValues.toString());</span><br><span class="line">            System.out.println(fieldValues.toString());</span><br><span class="line">            list.add(fieldValues);</span><br><span class="line">        &#125; <span class="keyword">while</span> (cursor.moveToNext());</span><br><span class="line">    &#125;</span><br><span class="line">    cursor.close();</span><br></pre></td></tr></table></figure></p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/07/07/Java基础知识/" data-id="cjjbein1a0000u2t9e9eq6knl" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/07/07/Java基础知识/" data-id="cjjbgaflk0000xrt9lks1x4yl" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
+
     </footer>
   </div>
   
@@ -144,7 +280,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/大纲/">大纲</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos/">centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/大纲/">大纲</a></li></ul>
     </div>
   </div>
 
@@ -154,7 +290,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/大纲/" style="font-size: 10px;">大纲</a>
+      <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/centos/" style="font-size: 10px;">centos</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/大纲/" style="font-size: 10px;">大纲</a>
     </div>
   </div>
 
@@ -176,15 +312,23 @@
       <ul>
         
           <li>
-            <a href="/2018/07/07/项目实践积累/">项目实践积累</a>
+            <a href="/2018/07/07/算法/">算法</a>
           </li>
         
           <li>
-            <a href="/2018/07/07/Java基础知识/">Java基础知识</a>
+            <a href="/2018/07/07/开发工具及环境部署/">开发工具及环境部署</a>
           </li>
         
           <li>
-            <a href="/2018/07/07/Java开发知识框架/">Java开发知识框架</a>
+            <a href="/2018/07/07/计算机网络/">计算机网络</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/07/脚本及Linux知识/">脚本及Linux知识</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/07/数据库/">数据库</a>
           </li>
         
       </ul>
