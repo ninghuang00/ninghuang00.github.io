@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="Just Try It">
 <meta property="og:description" content="Java基础知识">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-08T07:05:02.000Z">
+<meta property="og:updated_time" content="2018-07-08T08:21:35.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java基础知识">
 <meta name="twitter:description" content="Java基础知识">
@@ -98,15 +98,12 @@
         
 <div id="toc">
   <strong class="toc-title">文章目录</strong>
-  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#java基础"><span class="toc-text">java基础 +++</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#面向对象"><span class="toc-text">面向对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线程安全"><span class="toc-text">线程安全</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#安全的类"><span class="toc-text">安全的类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#不安全类"><span class="toc-text">不安全类</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#集合"><span class="toc-text">集合</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#线程安全的集合"><span class="toc-text">线程安全的集合</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Vector"><span class="toc-text">Vector</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#HashTable"><span class="toc-text">HashTable</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#StringBuffer"><span class="toc-text">StringBuffer</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#线程不安全的集合"><span class="toc-text">线程不安全的集合</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ArrayList"><span class="toc-text">ArrayList</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#HashMap"><span class="toc-text">HashMap</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#异常"><span class="toc-text">异常</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#反射"><span class="toc-text">反射</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#访问私有变量和私有方法"><span class="toc-text">访问私有变量和私有方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#泛型"><span class="toc-text">泛型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#注意点"><span class="toc-text">注意点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IO-NIO"><span class="toc-text">IO/NIO</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Jdk8特性"><span class="toc-text">Jdk8特性 +++</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#lambda表达式"><span class="toc-text">lambda表达式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数式编程"><span class="toc-text">函数式编程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#stream"><span class="toc-text">stream</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FP"><span class="toc-text">FP</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#多线程"><span class="toc-text">多线程 +++</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#线程安全-1"><span class="toc-text">线程安全</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#volatile的使用-有两种语义"><span class="toc-text">volatile的使用(有两种语义)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#线程安全的实现方法"><span class="toc-text">线程安全的实现方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#锁"><span class="toc-text">锁</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#可重入锁和synchronized"><span class="toc-text">可重入锁和synchronized</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#锁优化"><span class="toc-text">锁优化</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#线程安全是相对的"><span class="toc-text">线程安全是相对的</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ThreadPoolExecutor-线程池"><span class="toc-text">ThreadPoolExecutor(线程池)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#J-U-C"><span class="toc-text">J.U.C</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Atomic"><span class="toc-text">Atomic</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fork-join"><span class="toc-text">fork/join</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线程的几种状态"><span class="toc-text">线程的几种状态</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#设计模式"><span class="toc-text">设计模式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#设计模式的介绍和应用场景"><span class="toc-text">设计模式的介绍和应用场景</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#介绍"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#六大原则"><span class="toc-text">六大原则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建型模式"><span class="toc-text">创建型模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#单例模式"><span class="toc-text">单例模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#单例模式应用"><span class="toc-text">单例模式应用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#工厂方法模式"><span class="toc-text">工厂方法模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#建造者模式"><span class="toc-text">建造者模式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#结构型模式"><span class="toc-text">结构型模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#代理模式"><span class="toc-text">代理模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#代理模式的应用"><span class="toc-text">代理模式的应用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#装饰模式"><span class="toc-text">装饰模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#适配器模式"><span class="toc-text">适配器模式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#行为型模式"><span class="toc-text">行为型模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#命令模式"><span class="toc-text">命令模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#模板方法模式"><span class="toc-text">模板方法模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#策略模式"><span class="toc-text">策略模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#终结者模式"><span class="toc-text">终结者模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#观察者模式"><span class="toc-text">观察者模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#备忘录模式"><span class="toc-text">备忘录模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#访问者模式"><span class="toc-text">访问者模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#回调函数"><span class="toc-text">回调函数</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Servlet容器-部署配置使用"><span class="toc-text">Servlet容器(部署配置使用) ++</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#tomcat"><span class="toc-text">tomcat</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#tomcat-Servlet"><span class="toc-text">tomcat Servlet</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#jetty"><span class="toc-text">jetty</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#JVM相关"><span class="toc-text">JVM相关</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#类加载过程"><span class="toc-text">类加载过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#class编译"><span class="toc-text">class编译</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#加载"><span class="toc-text">加载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#执行原理过程"><span class="toc-text">执行原理过程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#内存管理"><span class="toc-text">内存管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#StackOverflow"><span class="toc-text">StackOverflow</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#OutOfMemory"><span class="toc-text">OutOfMemory</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内存模型"><span class="toc-text">内存模型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#垃圾回收-GC"><span class="toc-text">垃圾回收(GC)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#引用的分类"><span class="toc-text">引用的分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#判断对象是否存活的方法"><span class="toc-text">判断对象是否存活的方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#回收方法区-HotSpot中的永久带"><span class="toc-text">回收方法区(HotSpot中的永久带)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#垃圾回收算法"><span class="toc-text">垃圾回收算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#垃圾收集器-书上列举了七种"><span class="toc-text">垃圾收集器(书上列举了七种)</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#调优技巧"><span class="toc-text">调优技巧 ++</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#实践积累"><span class="toc-text">实践积累</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#坑-容易犯错的细节"><span class="toc-text">坑(容易犯错的细节)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#细节"><span class="toc-text">细节</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#关于java中的值调用和引用调用-java核心技术p120"><span class="toc-text">关于java中的值调用和引用调用(java核心技术p120)</span></a></li></ol></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#java基础"><span class="toc-text">java基础 +++</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#面向对象"><span class="toc-text">面向对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常用类"><span class="toc-text">常用类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#StringBuilder"><span class="toc-text">StringBuilder</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#StringBuffer"><span class="toc-text">StringBuffer</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#集合"><span class="toc-text">集合</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#线程安全的集合"><span class="toc-text">线程安全的集合</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Vector"><span class="toc-text">Vector</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#HashTable"><span class="toc-text">HashTable</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#StringBuffer-1"><span class="toc-text">StringBuffer</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#线程不安全的集合"><span class="toc-text">线程不安全的集合</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ArrayList"><span class="toc-text">ArrayList</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#HashMap"><span class="toc-text">HashMap</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#异常"><span class="toc-text">异常</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#反射"><span class="toc-text">反射</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#访问私有变量和私有方法"><span class="toc-text">访问私有变量和私有方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#泛型"><span class="toc-text">泛型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#注意点"><span class="toc-text">注意点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IO-NIO"><span class="toc-text">IO/NIO</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Jdk8特性"><span class="toc-text">Jdk8特性 +++</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#lambda表达式"><span class="toc-text">lambda表达式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数式编程"><span class="toc-text">函数式编程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#stream"><span class="toc-text">stream</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FP"><span class="toc-text">FP</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#多线程"><span class="toc-text">多线程 +++</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ThreadPoolExecutor-线程池"><span class="toc-text">ThreadPoolExecutor(线程池)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#J-U-C"><span class="toc-text">J.U.C</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Atomic"><span class="toc-text">Atomic</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fork-join"><span class="toc-text">fork/join</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线程的几种状态"><span class="toc-text">线程的几种状态</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#设计模式"><span class="toc-text">设计模式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Servlet容器-部署配置使用"><span class="toc-text">Servlet容器(部署配置使用) ++</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#tomcat"><span class="toc-text">tomcat</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#tomcat-Servlet"><span class="toc-text">tomcat Servlet</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#jetty"><span class="toc-text">jetty</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#调优技巧"><span class="toc-text">调优技巧 ++</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#实践积累"><span class="toc-text">实践积累</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#坑-容易犯错的细节"><span class="toc-text">坑(容易犯错的细节)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#细节"><span class="toc-text">细节</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#关于java中的值调用和引用调用-java核心技术p120"><span class="toc-text">关于java中的值调用和引用调用(java核心技术p120)</span></a></li></ol></li></ol>
 </div>
 
         <p> Java基础知识<br> <a id="more"></a></p>
-<h1 id="java基础"><a href="#java基础" class="headerlink" title="java基础 +++"></a>java基础 +++</h1><h2 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h2><h2 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h2><h3 id="安全的类"><a href="#安全的类" class="headerlink" title="安全的类"></a>安全的类</h3><h3 id="不安全类"><a href="#不安全类" class="headerlink" title="不安全类"></a>不安全类</h3><ol>
-<li>StringBuilder</li>
-</ol>
-<hr>
-<h2 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h2><h3 id="线程安全的集合"><a href="#线程安全的集合" class="headerlink" title="线程安全的集合"></a>线程安全的集合</h3><h4 id="Vector"><a href="#Vector" class="headerlink" title="Vector"></a>Vector</h4><h4 id="HashTable"><a href="#HashTable" class="headerlink" title="HashTable"></a>HashTable</h4><h4 id="StringBuffer"><a href="#StringBuffer" class="headerlink" title="StringBuffer"></a>StringBuffer</h4><h3 id="线程不安全的集合"><a href="#线程不安全的集合" class="headerlink" title="线程不安全的集合"></a>线程不安全的集合</h3><h4 id="ArrayList"><a href="#ArrayList" class="headerlink" title="ArrayList"></a>ArrayList</h4><p><code>elementData[size++] = e;</code><br>    从上面的源码中可以看出,ArrayList中增加一个元素的时候会分层两步进行:</p>
+<h1 id="java基础"><a href="#java基础" class="headerlink" title="java基础 +++"></a>java基础 +++</h1><h2 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h2><h2 id="常用类"><a href="#常用类" class="headerlink" title="常用类"></a>常用类</h2><h3 id="StringBuilder"><a href="#StringBuilder" class="headerlink" title="StringBuilder"></a>StringBuilder</h3><h3 id="StringBuffer"><a href="#StringBuffer" class="headerlink" title="StringBuffer"></a>StringBuffer</h3><hr>
+<h2 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h2><h3 id="线程安全的集合"><a href="#线程安全的集合" class="headerlink" title="线程安全的集合"></a>线程安全的集合</h3><h4 id="Vector"><a href="#Vector" class="headerlink" title="Vector"></a>Vector</h4><h4 id="HashTable"><a href="#HashTable" class="headerlink" title="HashTable"></a>HashTable</h4><h4 id="StringBuffer-1"><a href="#StringBuffer-1" class="headerlink" title="StringBuffer"></a>StringBuffer</h4><h3 id="线程不安全的集合"><a href="#线程不安全的集合" class="headerlink" title="线程不安全的集合"></a>线程不安全的集合</h3><h4 id="ArrayList"><a href="#ArrayList" class="headerlink" title="ArrayList"></a>ArrayList</h4><p><code>elementData[size++] = e;</code><br>    从上面的源码中可以看出,ArrayList中增加一个元素的时候会分层两步进行:</p>
 <ol>
 <li>先在elementData[size++]的地方存放元素,</li>
 <li>然后再增大size.<br> 因此如果是多线程进行访问的话,有可能两个线程在同一个位置存放了元素.</li>
@@ -139,51 +136,7 @@
 <h2 id="lambda表达式"><a href="#lambda表达式" class="headerlink" title="lambda表达式"></a>lambda表达式</h2><hr>
 <h2 id="函数式编程"><a href="#函数式编程" class="headerlink" title="函数式编程"></a>函数式编程</h2><hr>
 <h2 id="stream"><a href="#stream" class="headerlink" title="stream"></a>stream</h2><hr>
-<h2 id="FP"><a href="#FP" class="headerlink" title="FP"></a>FP</h2><h1 id="多线程"><a href="#多线程" class="headerlink" title="多线程 +++"></a>多线程 +++</h1><h2 id="线程安全-1"><a href="#线程安全-1" class="headerlink" title="线程安全"></a>线程安全</h2><h3 id="volatile的使用-有两种语义"><a href="#volatile的使用-有两种语义" class="headerlink" title="volatile的使用(有两种语义)"></a>volatile的使用(有两种语义)</h3><ol>
-<li>能够保证修饰的变量对所有线程的可见性,当一条线层修改了了这个变量,其他线程可以马上得知.线程A修改了普通变量的值之后需要先回写到主内存之后,新的变量值才能被线程B读取到.但是并不能保证基于volatile变量的运算在并发下是安全的.<br> 使用volatile进行安全的并发运算的规则<ol>
-<li>运算结果不依赖变量的当前值,或者确保只有单一线程修改变量的值</li>
-<li>变量不需要与其他状态变量共同参与不变约束<br>比如多线程的累加是不安全的,因为累加不是原子操作;<br>比如布尔值的判断可以是安全的,多个线程判断一个flag是true还是false是可以线程安全的.</li>
-</ol>
-</li>
-<li>禁止指令重排序优化,普通变量不能保证普通的赋值操作和代码中的顺序是一致的.<br> 比如说线程a进行初始化工作,初始化完之后将初始化完成的标志置为true,线程b中根据初始化完成标志开始其他工作,如果线程a,b并发,这个时候就有可能出错,因为指令重排序优化的关系,线程a中的初始化标志的指令可能会提前执行,</li>
-</ol>
-<h3 id="线程安全的实现方法"><a href="#线程安全的实现方法" class="headerlink" title="线程安全的实现方法"></a>线程安全的实现方法</h3><ol>
-<li>互斥同步(阻塞同步)<br>互斥同步对性能最大的影响就是对阻塞的实现,挂起和恢复线程的操作需要切换到内核态中完成<ol>
-<li>synchronized<br>关键是要分清楚是给类加锁还是给对象实例加锁</li>
-<li>java.util.concurrent.ReentrantLock(注意锁的声明要放在需要同步的方法的外面)<br>和synchronized基本用法类似,使用lock()和unlock()方法配合try/finally语句块来完成,但是有以下三个特色:<ol>
-<li>等待可中断</li>
-<li>可实现公平锁</li>
-<li>锁可以绑定多个条件</li>
-</ol>
-</li>
-</ol>
-</li>
-<li>非阻塞同步<br>不断重试</li>
-<li>无同步方案<ol>
-<li>可重入代码<br>可以在代码执行的任何时刻中断去执行其他代码(包括递归调用自己),并且在回来的时候原来的程序不会出现任何错误</li>
-<li>线程本地存储<br>将共享数据的代码保证在同一个线程中完成</li>
-</ol>
-</li>
-</ol>
-<h3 id="锁"><a href="#锁" class="headerlink" title="锁"></a>锁</h3><h4 id="可重入锁和synchronized"><a href="#可重入锁和synchronized" class="headerlink" title="可重入锁和synchronized"></a>可重入锁和synchronized</h4><ol>
-<li>锁的实现:<br>ReentrantLock是JDK实现的,synchronized是依赖于JVM实现的</li>
-<li>性能的区别:<br>JDK1.6之后(synchronized引入了偏向锁,轻量级锁(自旋锁)之后)synchronized优化的与ReentrantLock性能差不多,在两种方法都可以使用的情况下官方建议使用synchronized,都是试图在用户态就将加锁问题解决,避免进入内核态</li>
-<li>功能的区别:<br>synchronized的使用比较简洁,由编译器保证加锁和施放锁,而ReentrantLock需要手工声明加锁和施放锁,但是ReentrantLock在锁的细粒度和灵活性方面更强<ol>
-<li>ReentrantLock可以指定公平锁和非公平锁,synchronized只能是非安全锁</li>
-<li>ReentrantLock提供了一个Condition类来实现按照满足条件分组唤醒线程,而synchronized只能是随机唤醒一个线程,要么全部唤醒</li>
-<li>ReentrantLock提供了一个可以中断等待锁的机制,通过lock.lockInterruptibly()来实现这个机制</li>
-</ol>
-</li>
-</ol>
-<h4 id="锁优化"><a href="#锁优化" class="headerlink" title="锁优化"></a>锁优化</h4><ol>
-<li>自旋锁和自适应自旋锁<br>就是当后一个线程请求锁的时候,不要一请求不到就马上挂起,而是等待一下(前提是物理机器有一个以上的处理器),但不放弃处理器的执行时间,看看持有锁的线程是否会很快释放锁,为了让线程等待,只需要让线程执行一个忙循环(自旋)</li>
-<li>锁消除(虚拟机优化)<br>虚拟机即时编译器在运行的时候会对一些代码上要求同步但是实际上不会发生数据共享竞争的锁进行消除,根据逃逸分析的数据支持,如果堆上的数据不会逃逸出去从而被其他线程访问到,就可以把他们当做是栈上的数据对待,认为他们是线程私有的,同步加锁自然无需进行,比如说StringBuilder.append()方法.</li>
-<li>锁粗化<br>就是一串连续的零碎操作都对同一个对象加锁,那么就会将加锁同步的范围扩大</li>
-<li>轻量级锁</li>
-<li>偏向锁</li>
-</ol>
-<h3 id="线程安全是相对的"><a href="#线程安全是相对的" class="headerlink" title="线程安全是相对的"></a>线程安全是相对的</h3><p>(深入理解Java虚拟机P390)<br>比如说Vector是一个线程安全的集合容器,因为它的add(),get(),size(),remove()方法都是被synchronized修饰过的,但是并不意味着调用这些方法就永远不需要额外的同步手段了,一下代码就有可能会出现ArrayIndexOutOfBoundsException.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">VectorDemo</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Vector&lt;Integer&gt; vector = <span class="keyword">new</span> Vector();</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i&lt;<span class="number">10</span>;i++) &#123;</span><br><span class="line">                vector.add(i);</span><br><span class="line">            &#125;</span><br><span class="line">            Thread removeTask = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">                <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; <span class="number">10</span>; i ++) &#123;</span><br><span class="line">                        vector.remove(i);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">            Thread printTask = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">                <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; <span class="number">10</span>; i ++) &#123;</span><br><span class="line">                        System.out.println(vector.get(i));</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">            removeTask.start();</span><br><span class="line">            printTask.start();</span><br><span class="line">            <span class="comment">//防止线程过多</span></span><br><span class="line">            <span class="keyword">while</span> (Thread.activeCount() &gt; <span class="number">20</span>) ;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="ThreadPoolExecutor-线程池"><a href="#ThreadPoolExecutor-线程池" class="headerlink" title="ThreadPoolExecutor(线程池)"></a>ThreadPoolExecutor(线程池)</h2><p>###jdk原生线程池<br>参考地址:<a href="http://www.importnew.com/19011.html" target="_blank" rel="noopener">http://www.importnew.com/19011.html</a></p>
+<h2 id="FP"><a href="#FP" class="headerlink" title="FP"></a>FP</h2><h1 id="多线程"><a href="#多线程" class="headerlink" title="多线程 +++"></a>多线程 +++</h1><h2 id="ThreadPoolExecutor-线程池"><a href="#ThreadPoolExecutor-线程池" class="headerlink" title="ThreadPoolExecutor(线程池)"></a>ThreadPoolExecutor(线程池)</h2><p>###jdk原生线程池<br>参考地址:<a href="http://www.importnew.com/19011.html" target="_blank" rel="noopener">http://www.importnew.com/19011.html</a></p>
 <p>####构造函数中各个参数的作用(四个构造函数中前三个构造函数都调用了最后一个构造器进行初始化)</p>
 <ol>
 <li>corePoolSize:核心池的大小,创建线程池之后默认情况下,线程池中是没有线程的,除非调用了prestartCoreThread()方法预创建线程,然后当有任务进来的时候,就会开始创建线程去执行任务,当线程池中的线程数目达到corePoolSize之后,就会把到达的任务放到缓存队列中</li>
@@ -251,134 +204,11 @@
 <li>线程池的关闭:上面提到的2种方法</li>
 <li>线程池容量的动态调整<br>ThreadPoolExecutor提供了动态调整线程池容量大小的方法：setCorePoolSize()和setMaximumPoolSize()，<br>当上述参数从小变大时，ThreadPoolExecutor进行线程赋值，还可能立即创建新的线程来执行任务。</li>
 </ol>
-<h2 id="J-U-C"><a href="#J-U-C" class="headerlink" title="J.U.C"></a>J.U.C</h2><h2 id="Atomic"><a href="#Atomic" class="headerlink" title="Atomic"></a>Atomic</h2><h2 id="fork-join"><a href="#fork-join" class="headerlink" title="fork/join"></a>fork/join</h2><h2 id="线程的几种状态"><a href="#线程的几种状态" class="headerlink" title="线程的几种状态"></a>线程的几种状态</h2><h1 id="设计模式"><a href="#设计模式" class="headerlink" title="设计模式"></a>设计模式</h1><h2 id="设计模式的介绍和应用场景"><a href="#设计模式的介绍和应用场景" class="headerlink" title="设计模式的介绍和应用场景"></a>设计模式的介绍和应用场景</h2><h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><h3 id="六大原则"><a href="#六大原则" class="headerlink" title="六大原则"></a>六大原则</h3><h3 id="创建型模式"><a href="#创建型模式" class="headerlink" title="创建型模式"></a>创建型模式</h3><h4 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h4><p>保证内存中只存在一个对象:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span></span>&#123;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Singleton instance = <span class="keyword">new</span> Singleton();</span><br><span class="line"><span class="comment">//构造函数必须是私有的</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line"><span class="keyword">return</span> instance;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h4 id="单例模式应用"><a href="#单例模式应用" class="headerlink" title="单例模式应用"></a>单例模式应用</h4><ol>
-<li>安卓开发中使用过,MyApplication类,使用的单例模式,用来进行全局设置,如服务器地址,屏幕宽度高度等,一些初始化信息.<br>需要全局共享资源的时候可以使用,频繁实例化然后又销毁的对象,有状态的工具类对象,日志,配置文件</li>
-</ol>
-<h4 id="工厂方法模式"><a href="#工厂方法模式" class="headerlink" title="工厂方法模式"></a>工厂方法模式</h4><ol>
-<li>简单工厂模式:就是根据传入不同的参数的来返回不同的类实例,这些类都继承了相同的接口,比如画图接口中有画图方法</li>
-<li>工程方法模式:就是为每种类单独写一个工厂类</li>
-<li>抽象工厂模式:就是定义一个抽象工厂来返回多个工厂,然后再有返回的每一种工厂返回对象实例</li>
-</ol>
-<h4 id="建造者模式"><a href="#建造者模式" class="headerlink" title="建造者模式"></a>建造者模式</h4><ol>
-<li>当遇到结构比较复杂的类的时候可以考虑使用</li>
-</ol>
-<h3 id="结构型模式"><a href="#结构型模式" class="headerlink" title="结构型模式"></a>结构型模式</h3><h4 id="代理模式"><a href="#代理模式" class="headerlink" title="代理模式"></a>代理模式</h4><p>参考地址:<a href="http://xvshell.iteye.com/blog/2363443" target="_blank" rel="noopener">http://xvshell.iteye.com/blog/2363443</a><br>参考地址:<a href="http://www.jasongj.com/design_pattern/proxy_decorator/" target="_blank" rel="noopener">http://www.jasongj.com/design_pattern/proxy_decorator/</a></p>
-<ol>
-<li>JDK动态代理:适用于要代理的业务类实现接口的情况</li>
-<li>CGlib代理:适用于要代理的业务类没有实现接口的情况<br>代理模式可以对代理对象进行增强,不过主要还是对代理对象的访问进行拦截</li>
-<li>创建代理的步骤:<ol>
-<li>首先定义一个代理类并实现要代理的接口</li>
-<li>将要代理的接口声明为成员属性,一种是直接new一个要代理的对象(这种方式下使用代理的人甚至都不知道被代理对象的存在),另一种是将要代理的对象作为参数传入(这样就和装饰模式有点像)</li>
-<li>定义代理类的构造函数,在构造函数张</li>
-<li>实现接口的方法,并在方法中调用构造函数中传入的代理对象的方法,这个时候就可以对代理对象进行加强或者拦截</li>
-</ol>
-</li>
-</ol>
-<h4 id="代理模式的应用"><a href="#代理模式的应用" class="headerlink" title="代理模式的应用"></a>代理模式的应用</h4><ul>
-<li>简单静态代理模式<ol>
-<li>适合使用在需要代理的类不多且确定的场景<br>比如日志,就是写一个代理类,实现代理对象的实现的接口,接受代理对象作为成员变量,然后在调用代理对象方法前后增加日志,这种代理能解耦,但是无法减少代码量</li>
-</ol>
-</li>
-<li><p>JDK动态代理(参考地址:<a href="https://blog.csdn.net/bjyfb/article/details/7350256" target="_blank" rel="noopener">https://blog.csdn.net/bjyfb/article/details/7350256</a>)</p>
-<ol>
-<li>比静态代理灵活,但是前提是代理目标有实现接口<br>写一个LogHandler类实现InvocationHandler接口,实现其中的<code>invoke(Object proxy, Method method, Object[] args)</code>方法,在这个方法中实现代理,添加一个<code>newProxyInstance(Object targetObject)</code>来返回一个生成的代理对象<code>return Proxy.newProxyInstance(classLoader,interface,this)</code>,<ul>
-<li>如何转发到invoke()方法?</li>
-</ul>
-</li>
-</ol>
-</li>
-<li><p>CGlib动态代理(适用于代理对象没有实现接口的场景)</p>
-</li>
-</ul>
-<h4 id="装饰模式"><a href="#装饰模式" class="headerlink" title="装饰模式"></a>装饰模式</h4><p>装饰模式就是给被装饰的对象附加更多的功能,而且可以自由组合<br>装饰模式的实现:</p>
-<ol>
-<li>定义一个装饰类并实现要装饰的接口</li>
-<li>将接口定义为成员变量</li>
-<li>定义构造函数并将要装饰的接口作为参数传入</li>
-<li>然后可以定义增强功能的类并实现要装饰的接口</li>
-<li>使用的时候就是new一个要装饰的对象,然后new一个装饰类对象,将要装饰的对象作为构造参数,然后再new另外一个装饰类对象,将刚刚这个装饰类对象作为参数传入,以此类推</li>
-</ol>
-<h4 id="适配器模式"><a href="#适配器模式" class="headerlink" title="适配器模式"></a>适配器模式</h4><h3 id="行为型模式"><a href="#行为型模式" class="headerlink" title="行为型模式"></a>行为型模式</h3><h4 id="命令模式"><a href="#命令模式" class="headerlink" title="命令模式"></a>命令模式</h4><h4 id="模板方法模式"><a href="#模板方法模式" class="headerlink" title="模板方法模式"></a>模板方法模式</h4><h4 id="策略模式"><a href="#策略模式" class="headerlink" title="策略模式"></a>策略模式</h4><p>就是当有几个类的方法相似的时候,比如两数的加减乘除,可以将方法抽取到一个接口中,然后分别实现,然后在一个Condition类中定义这些类的public final static对象 实例,使用的时候只要用类名取出对象调用相应的方法就行了</p>
-<h4 id="终结者模式"><a href="#终结者模式" class="headerlink" title="终结者模式"></a>终结者模式</h4><h4 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h4><h4 id="备忘录模式"><a href="#备忘录模式" class="headerlink" title="备忘录模式"></a>备忘录模式</h4><h4 id="访问者模式"><a href="#访问者模式" class="headerlink" title="访问者模式"></a>访问者模式</h4><h4 id="回调函数"><a href="#回调函数" class="headerlink" title="回调函数"></a>回调函数</h4><p>参考地址:<a href="https://zhuanlan.zhihu.com/p/30052334" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/30052334</a><br><a href="https://blog.csdn.net/cangchen/article/details/44063359" target="_blank" rel="noopener">https://blog.csdn.net/cangchen/article/details/44063359</a></p>
-<ol>
-<li>回调函数是什么:<ul>
-<li>回调机制就是,按照约定的接口,把内部工作流的某个功能暴露给外部使用者,让外部使用者提供数据或者实现</li>
-<li>回调函数是一个功能片段,什么时候调用由工作流决定(比如按钮),回调函数的实现者不能直接调用回调函数实现工作流的功能</li>
-</ul>
-</li>
-<li>应用场景:<ol>
-<li>安卓中的按键监听器,<code>button.setOnClickListener(new OnClickListener{...})</code></li>
-<li>多线程的Runnable接口,自定义run方法实现接口,然后传入Thread,什么时候调用run()方法由工作流决定</li>
-<li>等待网络任务的同时不能阻塞主线程任务的时候</li>
-<li>当工作流中某个功能需要调用者来定义的时候</li>
-</ol>
-</li>
-<li>优点:<ol>
-<li>工作流中的某个功能可以在调用的时候来实现,灵活,比如安卓中的Button和imageButton会进行不同的业务</li>
-<li></li>
-</ol>
-</li>
-</ol>
+<h2 id="J-U-C"><a href="#J-U-C" class="headerlink" title="J.U.C"></a>J.U.C</h2><h2 id="Atomic"><a href="#Atomic" class="headerlink" title="Atomic"></a>Atomic</h2><h2 id="fork-join"><a href="#fork-join" class="headerlink" title="fork/join"></a>fork/join</h2><h2 id="线程的几种状态"><a href="#线程的几种状态" class="headerlink" title="线程的几种状态"></a>线程的几种状态</h2><h1 id="设计模式"><a href="#设计模式" class="headerlink" title="设计模式"></a>设计模式</h1>
 <h1 id="Servlet容器-部署配置使用"><a href="#Servlet容器-部署配置使用" class="headerlink" title="Servlet容器(部署配置使用) ++"></a>Servlet容器(部署配置使用) ++</h1><h2 id="tomcat"><a href="#tomcat" class="headerlink" title="tomcat"></a>tomcat</h2><h3 id="tomcat-Servlet"><a href="#tomcat-Servlet" class="headerlink" title="tomcat Servlet"></a>tomcat Servlet</h3><ol>
 <li>是不是线程安全的:<br>单例模式,当客户端第一次请求该servlet的时候会根据web.xml实例化servlet,之后客户端再访问该servlet使用的就是同一实例,是不是线程安全看servlet的实现,如果servlet的内部属性会被多线程改变,那就是不安全的.</li>
 </ol>
-<h2 id="jetty"><a href="#jetty" class="headerlink" title="jetty"></a>jetty</h2><h1 id="JVM相关"><a href="#JVM相关" class="headerlink" title="JVM相关"></a>JVM相关</h1><hr>
-<h2 id="类加载过程"><a href="#类加载过程" class="headerlink" title="类加载过程"></a>类加载过程</h2><h3 id="class编译"><a href="#class编译" class="headerlink" title="class编译"></a>class编译</h3><h3 id="加载"><a href="#加载" class="headerlink" title="加载"></a>加载</h3><h3 id="执行原理过程"><a href="#执行原理过程" class="headerlink" title="执行原理过程"></a>执行原理过程</h3><hr>
-<h2 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h2><h3 id="StackOverflow"><a href="#StackOverflow" class="headerlink" title="StackOverflow"></a>StackOverflow</h3><p>启动一个新的线程的时候,虚拟机会分配一个栈,java栈以栈帧的方式保存线程运行状态,然后线程调用方法的时候,虚拟机就会压入新的栈帧,只要方法没有返回,栈帧就会存在,当栈帧太多就会导致溢出.</p>
-<h3 id="OutOfMemory"><a href="#OutOfMemory" class="headerlink" title="OutOfMemory"></a>OutOfMemory</h3><ol>
-<li>栈内存溢出<br> 就是启动的线程太多,没有足够的空间分配java栈了.一个线程的java栈大小由-Xss参数设置</li>
-<li>堆内存溢出<br> java堆中存放对象实例的空间不足,通过-Xmx设置最大值.</li>
-<li>方法区和运行时常量池溢出<br> <code>-XX:permSize=10M -XX:MaxPermSize=10M</code></li>
-<li>本机直接内存溢出<br> <code>-XX:MaxDirectMemorySize</code></li>
-</ol>
-<h3 id="内存模型"><a href="#内存模型" class="headerlink" title="内存模型"></a>内存模型</h3><p>根据某种特定的操作协议,对特定的内存或者高速缓存进行读写访问的过程抽象<br>8中原子操作:</p>
-<ul>
-<li>lock:作用于主内存的变量,将一个变量标记为一条线程独占</li>
-<li>unlock:主内存,施放线程独占的变量</li>
-<li>read:主内存,将变量值从主内存传输到线程的工作内存,之后要使用load操作</li>
-<li>load:作用于工作内存,将从主内存中read得到的变量值放入工作内存的变量副本中</li>
-<li>use:工作内存,将工作内存中一个变量的值传递给执行引擎</li>
-<li>assign:工作内存,将从执行引擎接收到的值赋值给工作内存中的变量</li>
-<li>store:工作内存,将工作内存中的变量值从工作内存传送到主内存,供之后的write操作使用 </li>
-<li>write:主内存,包store操作从工作内存中取得的值放入主内存的变量中</li>
-</ul>
-<h2 id="垃圾回收-GC"><a href="#垃圾回收-GC" class="headerlink" title="垃圾回收(GC)"></a>垃圾回收(GC)</h2><h3 id="引用的分类"><a href="#引用的分类" class="headerlink" title="引用的分类"></a>引用的分类</h3><ol>
-<li>强引用<br> 类似<code>Object obj = new Object()</code>这类,只要强引用在,永远不会被回收</li>
-<li>软引用<br> 有用但是非必须的,只有内存不够的时候会被回收,如果回收之后还是不够才会抛出内存溢出异常</li>
-<li>弱引用<br> 只能存活到下一次垃圾回收</li>
-<li>虚引用<br> 唯一目的就是在一个关联了虚引用的对象被回收的时候收到系统通知</li>
-</ol>
-<h3 id="判断对象是否存活的方法"><a href="#判断对象是否存活的方法" class="headerlink" title="判断对象是否存活的方法"></a>判断对象是否存活的方法</h3><ol>
-<li>引用计数法<br> 当对象被引用的时候计数加一,不用的时候减一,缺点是无法解决对象之间相互循环引用的问题,比如两个对象中的成员变量相互引用的时候</li>
-<li>可达性分析算法<br> 当一个对象到GC Roots没有任何引用链相连的时候,就是该对象不可用<br> GC Roots包括:<pre><code>1. 虚拟机栈(栈帧中的本地变量表)中的引用对象
-2. 方法区中的类的静态引用属性
-3. 方法区中的常量引用的对象
-4. 本地方法栈中JNI(即一般说的Native方法)引用的对象
-</code></pre></li>
-</ol>
-<h3 id="回收方法区-HotSpot中的永久带"><a href="#回收方法区-HotSpot中的永久带" class="headerlink" title="回收方法区(HotSpot中的永久带)"></a>回收方法区(HotSpot中的永久带)</h3><p>回收性价比比较低,主要回收弃用常量和无用的类</p>
-<ol>
-<li>判断弃用常量<br> 比如字面量”abc”,当没有String对象叫”abc”的时候</li>
-<li>判断无用的类(同时满足以下三个条件)<ol>
-<li>当java堆中没有该类的实例</li>
-<li>加载该类的ClassLoader被回收</li>
-<li>该类的java.lang.Class对象没有在任何地方被引用,也就是无法在任何地方通过反射访问该类的方法</li>
-</ol>
-</li>
-</ol>
-<h3 id="垃圾回收算法"><a href="#垃圾回收算法" class="headerlink" title="垃圾回收算法"></a>垃圾回收算法</h3><ol>
-<li>标记清除算法<br> 不足:标记和清除的效率不高,然后就是清除之后会产生大量不连续的内存碎片</li>
-<li>复制算法<br> 直接将内存一分为二,当其中一块内存用完了,将其中还存活的对象复制到另一块内存上,比较浪费空间.</li>
-<li>复制收集算法(回收新生代)<br> 将内存分为一块Eden空间和两块Survivor空间,8:1:1,回收时将Eden和Survivor中还存活的对象复制到另一块Survivor空间中,如果Survivor空间内存不够,就需要用到老年代</li>
-<li>标记整理算法(回收老年代)</li>
-<li>分代收集算法<br> 一般将java堆分成新生代和老年代,再使用合适的回收算法</li>
-</ol>
-<h3 id="垃圾收集器-书上列举了七种"><a href="#垃圾收集器-书上列举了七种" class="headerlink" title="垃圾收集器(书上列举了七种)"></a>垃圾收集器(书上列举了七种)</h3><ol>
-<li>Serial收集器<br> 单线程收集器,垃圾回收时必须暂停其他所有的工作线程</li>
-<li>ParNew收集器</li>
-</ol>
-<h1 id="调优技巧"><a href="#调优技巧" class="headerlink" title="调优技巧 ++"></a>调优技巧 ++</h1><h2 id="实践积累"><a href="#实践积累" class="headerlink" title="实践积累"></a>实践积累</h2><h1 id="坑-容易犯错的细节"><a href="#坑-容易犯错的细节" class="headerlink" title="坑(容易犯错的细节)"></a>坑(容易犯错的细节)</h1><h2 id="细节"><a href="#细节" class="headerlink" title="细节"></a>细节</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 代码段 --&gt;</span><br><span class="line"><span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">i = i++;</span><br><span class="line">&lt;!-- 结果i还是<span class="number">0</span>  --&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*代码段*/</span></span><br><span class="line"><span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">i = ++ i;</span><br><span class="line">&lt;!-- 结果i是<span class="number">1</span> --&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- 基本数值类型转换问题 --&gt;</span><br><span class="line"><span class="keyword">int</span> a = <span class="number">9</span>;</span><br><span class="line"><span class="keyword">int</span> b = <span class="number">4</span>;</span><br><span class="line"><span class="keyword">double</span> c = a/b;</span><br><span class="line">&lt;!-- 结果是<span class="number">2.0</span> --&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- 控制sout的小数输出位数 --&gt;</span><br><span class="line">sout(<span class="string">"%.2f"</span>,doubleNum);</span><br><span class="line">&lt;!-- 结果输出的<span class="keyword">double</span>数字会保留两位小数 --&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="jetty"><a href="#jetty" class="headerlink" title="jetty"></a>jetty</h2><h1 id="调优技巧"><a href="#调优技巧" class="headerlink" title="调优技巧 ++"></a>调优技巧 ++</h1><h2 id="实践积累"><a href="#实践积累" class="headerlink" title="实践积累"></a>实践积累</h2><h1 id="坑-容易犯错的细节"><a href="#坑-容易犯错的细节" class="headerlink" title="坑(容易犯错的细节)"></a>坑(容易犯错的细节)</h1><h2 id="细节"><a href="#细节" class="headerlink" title="细节"></a>细节</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 代码段 --&gt;</span><br><span class="line"><span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">i = i++;</span><br><span class="line">&lt;!-- 结果i还是<span class="number">0</span>  --&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*代码段*/</span></span><br><span class="line"><span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">i = ++ i;</span><br><span class="line">&lt;!-- 结果i是<span class="number">1</span> --&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- 基本数值类型转换问题 --&gt;</span><br><span class="line"><span class="keyword">int</span> a = <span class="number">9</span>;</span><br><span class="line"><span class="keyword">int</span> b = <span class="number">4</span>;</span><br><span class="line"><span class="keyword">double</span> c = a/b;</span><br><span class="line">&lt;!-- 结果是<span class="number">2.0</span> --&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- 控制sout的小数输出位数 --&gt;</span><br><span class="line">sout(<span class="string">"%.2f"</span>,doubleNum);</span><br><span class="line">&lt;!-- 结果输出的<span class="keyword">double</span>数字会保留两位小数 --&gt;</span><br></pre></td></tr></table></figure>
 <h2 id="关于java中的值调用和引用调用-java核心技术p120"><a href="#关于java中的值调用和引用调用-java核心技术p120" class="headerlink" title="关于java中的值调用和引用调用(java核心技术p120)"></a>关于java中的值调用和引用调用(java核心技术p120)</h2><p>引用调用是引用地址的拷贝,虽然能够实际影响到引用对象的状态,但是一个方法无法让一个对象引用一个新的对象,比如:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(Person p1,Person p2)</span></span>&#123;</span><br><span class="line">	Person temp = p1;</span><br><span class="line">	p1 = p2;</span><br><span class="line">	p2 = temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <pre><code>以上代码是无法实现交换功能的.
 </code></pre><p>##关于new对象的位置很有讲究,如果在循环的外面new的话,相当于add进list中的都是同一个对象<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String[]&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();    <span class="comment">//关于课程信息的一行数据</span></span><br><span class="line">    <span class="comment">//关于课程的所有字段</span></span><br><span class="line">    String[] fieldNames = &#123;DbHelper.COURSE_NAME, DbHelper.START_DATE, DbHelper.END_DATE, DbHelper.DAY_OF_WEEK, DbHelper.START_TIME, DbHelper.END_TIME, DbHelper.TEACHER_NAME, DbHelper.ADDRESS,DbHelper.COURSE_ID&#125;;</span><br><span class="line">    <span class="comment">//从数据库取出的一行数据</span></span><br><span class="line">    String[] fieldValues ;<span class="comment">//千万不能在这里new ,不然后面add进list的全是这个地址= new String[fieldNames.length];</span></span><br><span class="line">    Cursor cursor = db.query(DbHelper.TABLE_NAME_COURSE, <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>);</span><br><span class="line">    <span class="keyword">if</span> (cursor.moveToFirst()) &#123;</span><br><span class="line">        <span class="keyword">do</span> &#123;</span><br><span class="line">            fieldValues = <span class="keyword">new</span> String[fieldNames.length];</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; fieldNames.length; i ++) &#123;</span><br><span class="line">                fieldValues[i] = cursor.getString(cursor.getColumnIndex(fieldNames[i]));</span><br><span class="line">            &#125;</span><br><span class="line">            Log.d(<span class="string">"hn"</span>, fieldValues.toString());</span><br><span class="line">            System.out.println(fieldValues.toString());</span><br><span class="line">            list.add(fieldValues);</span><br><span class="line">        &#125; <span class="keyword">while</span> (cursor.moveToNext());</span><br><span class="line">    &#125;</span><br><span class="line">    cursor.close();</span><br></pre></td></tr></table></figure></p>
@@ -386,7 +216,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/07/07/Java基础知识/" data-id="cjjcjzxfv0000xet9ukgo3cft" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/07/07/Java基础知识/" data-id="cjjcmv7ln00062mt99m3yg90q" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
@@ -406,11 +236,6 @@
       </div>
     </a>
   
-  
-    <a href="/2018/07/07/Java开发知识框架/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Java开发知识框架</div>
-    </a>
   
 </nav>
 
@@ -435,7 +260,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos/">centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/db2/">db2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ibase4j/">ibase4j</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springMVC/">springMVC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zookeeper/">zookeeper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/快捷键/">快捷键</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/效率/">效率</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/教程/">教程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/目录/">目录</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/知识框架/">知识框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos/">centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/db2/">db2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ibase4j/">ibase4j</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaweb/">javaweb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springMVC/">springMVC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zookeeper/">zookeeper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/快捷键/">快捷键</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/效率/">效率</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/教程/">教程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/目录/">目录</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/知识框架/">知识框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/线程安全/">线程安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/虚拟机/">虚拟机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
     </div>
   </div>
 
@@ -445,7 +270,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/centos/" style="font-size: 10px;">centos</a> <a href="/tags/db2/" style="font-size: 10px;">db2</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/ibase4j/" style="font-size: 10px;">ibase4j</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/springMVC/" style="font-size: 10px;">springMVC</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/效率/" style="font-size: 10px;">效率</a> <a href="/tags/教程/" style="font-size: 10px;">教程</a> <a href="/tags/数据库/" style="font-size: 20px;">数据库</a> <a href="/tags/目录/" style="font-size: 10px;">目录</a> <a href="/tags/知识框架/" style="font-size: 10px;">知识框架</a> <a href="/tags/算法/" style="font-size: 20px;">算法</a>
+      <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/centos/" style="font-size: 10px;">centos</a> <a href="/tags/db2/" style="font-size: 10px;">db2</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/ibase4j/" style="font-size: 10px;">ibase4j</a> <a href="/tags/javaweb/" style="font-size: 10px;">javaweb</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/spring/" style="font-size: 15px;">spring</a> <a href="/tags/springMVC/" style="font-size: 10px;">springMVC</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/效率/" style="font-size: 10px;">效率</a> <a href="/tags/教程/" style="font-size: 10px;">教程</a> <a href="/tags/数据库/" style="font-size: 20px;">数据库</a> <a href="/tags/目录/" style="font-size: 10px;">目录</a> <a href="/tags/知识框架/" style="font-size: 10px;">知识框架</a> <a href="/tags/算法/" style="font-size: 15px;">算法</a> <a href="/tags/线程安全/" style="font-size: 10px;">线程安全</a> <a href="/tags/虚拟机/" style="font-size: 10px;">虚拟机</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a>
     </div>
   </div>
 
@@ -454,7 +279,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2118/07/">July 2118</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li></ul>
     </div>
   </div>
 
@@ -467,23 +292,23 @@
       <ul>
         
           <li>
-            <a href="/2018/07/08/日常小坑记录/">日常小坑记录</a>
+            <a href="/2118/07/07/Java开发知识框架/">Java开发知识框架</a>
           </li>
         
           <li>
-            <a href="/2018/07/08/快捷键/">快捷键</a>
+            <a href="/2018/07/08/配置文件集/">配置文件集</a>
           </li>
         
           <li>
-            <a href="/2018/07/08/实践出真知/">实践出真知</a>
+            <a href="/2018/07/08/Javaweb25天笔记/">Javaweb25天笔记</a>
           </li>
         
           <li>
-            <a href="/2018/07/08/iBase4J部署笔记/">iBase4J部署笔记</a>
+            <a href="/2018/07/08/spring32天笔记/">spring32天笔记</a>
           </li>
         
           <li>
-            <a href="/2018/07/08/db2部署教程/">db2部署教程</a>
+            <a href="/2018/07/08/Java虚拟机/">Java虚拟机</a>
           </li>
         
       </ul>

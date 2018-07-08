@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>spring32天笔记 | Just Try It</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="这是摘要">
+<meta name="keywords" content="spring">
+<meta property="og:type" content="article">
+<meta property="og:title" content="spring32天笔记">
+<meta property="og:url" content="http://yoursite.com/2018/07/08/spring32天笔记/index.html">
+<meta property="og:site_name" content="Just Try It">
+<meta property="og:description" content="这是摘要">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-07-08T08:54:26.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="spring32天笔记">
+<meta name="twitter:description" content="这是摘要">
+  
+    <link rel="alternate" href="/atom.xml" title="Just Try It" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Just Try It</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories">categories</a>
+        
+          <a class="main-nav-link" href="/tags">tags</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-spring32天笔记" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/07/08/spring32天笔记/" class="article-date">
+  <time datetime="2018-07-08T08:52:42.000Z" itemprop="datePublished">2018-07-08</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/笔记/">笔记</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      spring32天笔记
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+<div id="toc">
+  <strong class="toc-title">文章目录</strong>
+  
+</div>
+
+        <p> 这是摘要<br> <a id="more"></a></p>
+<p>spring 02<br>1 环境搭建，如何获得beans.xml的标签提示<br>2 在xml中配置bean</p>
+<p>spring 03 自己写的实例化bean容器<br>1 spring是如何创建bean 自己写一个</p>
+<p>spring 04 bean实例化的另外两种方式<br>1 静态工厂方法<br>2 实例工厂方法</p>
+<p>spring 05 bean的作用域<br>1 singleton<br>    单例模式，在每个spring ioc 容器中一个bean定义只有一个对象实例。（默认模式）<br>2 prototype<br>    每次从容器获取bean都是新对象<br>指定bean的初始化方法和销毁方法<br>    单例模式是在容器初始化的时候初始化（可以用lazy-init=”true”）延迟<br>    prototype是在获取bean实例的时候实例化</p>
+<p>spring 07 依赖注入<br>    1 通过构造器参数注入<br>    2 通过属性的set方法<br>    3 通过内部bean（bean无法被其他的调用）<br>    如何注入基本类型的属性</p>
+<p>spring 09 注入集合类型的属性<br>    set<br>    list<br>    map<br>    properties</p>
+<p>spring 10 通过构造器注入属性</p>
+<p>spring 11 通过Field（字段）注入（用于注解方式）<br>1 手工装配依赖对象<br>    1 xml方式<br>    2 使用注解进行装配<br>        @Autowired 默认按类型进行装配<br>        @Resource 默认按名称进行装配<br>2 自动装配依赖对象</p>
+<p>spring 11 注解方式注入 自己实现注解<br>spring 12 @Resource 实现在字段和setter方法上的注解<br>spring 13 @Autowired 注解的使用<br>        默认按类型进行装配 可以用@Qualified(“personDaoxxx”)用名称进行装配<br>    自动装配<br>spring 14 通过在classpath自动扫描的方式吧组件纳入spring容器中管理<br>    @Componet 当组件不好归类的时候用<br>    @Service 业务层<br>    @Controller    控制层<br>    @Repository DAO层<br>    @Scope(“prototype”) 指定bean的作用域<br>    @PostConstruct 指定bean的初始化方法（使用广泛）<br>    @Predestroy bean销毁前关闭资源<br>spring 15 AOP技术<br>    代理对象（权限管理）Proxy</p>
+<p>spring 16 CGlib的使用 当要代理的类没有继承接口的时候用<br>    AOP中基本概念</p>
+<p>spring 17 spring框架的AOP编程<br>    1 基于xml配置的方式<br>    2 基于注解方式</p>
+<pre><code>基于注解方式声明切面
+    //（*）任意返回值 包名加类名.（*）所有方法（..代表有无参数皆可）
+    @Pointcut(&quot;excetion (* cn.hn.service.impl.PersonServiceBean.*(..))&quot;)
+</code></pre><p>spring 18 声明切面的各种注解</p>
+<p>spring 19 使用xml配置切面</p>
+<p>spring 20 表达式的介绍</p>
+<p>spring 21 spring+JDBC组合开发<br>    beans.xml引入外部的配置 文件<br>        如果是在src目录下的话，该位置为：classpath:文件名.后缀<br>        如果是在/WEB-INF/目录下的话，该位置为： /WEB-INF/文件名.后缀。<br>spring 23 spring中的事务管理<br>    什么时候回滚<br>        Checked异常继承java.lang.Exception类。Unchecked异常继承自java.lang.RuntimeException类。<br>        遇到RuntimeException的时候回滚<br>        Exception不会回滚<br>    事务传播属性（spring实现）<br>    数据库的隔离级别（底层数据库实现）<br>spring 24 使用xml配置事务</p>
+<p>spring 25 spring+Hibernate+Struts整合开发<br>spring 26 先完成spring+Hibernate的集成，能够操作数据库<br>spring 27 然后完成struts的集成，能够通过action访问数据库<br>spring 28 使用spring的依赖注入来获得PersonService<br>    首先将action交给spring管理,在beans.xml中配置bean时要注意name属性的命名要和struts-config.xml中的action-mapping中的action的path属性命名一致。<br>    然后在struts-config中配置一个请求控制器，来先根据action中的path属性值到spring容器中寻找bean<br>spring 29 Hibernate二级缓存<br>    hibernate5和之前的有点不同<br>     <!-- 开启二级缓存 --><br>                hibernate.cache.use_second_level_cache=true<br>                hibernate.cache.use_query_cache=false<br>                <!-- 设置二级缓存插件EHCache的Provider类 --><br>                hibernate.cache.region.factory_class=org.hibernate.cache.ehcache.EhCacheRegionFactory</p>
+<pre><code>&lt;!-- hibernate3的二级缓存配置   
+   hibernate.cache.provider_class=org.hibernate.cache.EhCacheProvider
+   --&gt;
+</code></pre><p>spring 30 解决struts中文乱码问题<br>            解决Hibernate因为session关闭导致的延迟加载异常<br>spring 31 spring2.5+JPA+struts<br>spring 32 配置struts</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/07/08/spring32天笔记/" data-id="cjjcmv7m3000c2mt9b35nmrzw" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spring/">spring</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/07/08/Javaweb25天笔记/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Javaweb25天笔记
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/07/08/Java虚拟机/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Java虚拟机</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/大纲/">大纲</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/教程/">教程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/笔记/">笔记</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos/">centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/db2/">db2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ibase4j/">ibase4j</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaweb/">javaweb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springMVC/">springMVC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zookeeper/">zookeeper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/快捷键/">快捷键</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/效率/">效率</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/教程/">教程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/目录/">目录</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/知识框架/">知识框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/线程安全/">线程安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/虚拟机/">虚拟机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/centos/" style="font-size: 10px;">centos</a> <a href="/tags/db2/" style="font-size: 10px;">db2</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/ibase4j/" style="font-size: 10px;">ibase4j</a> <a href="/tags/javaweb/" style="font-size: 10px;">javaweb</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/spring/" style="font-size: 15px;">spring</a> <a href="/tags/springMVC/" style="font-size: 10px;">springMVC</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/效率/" style="font-size: 10px;">效率</a> <a href="/tags/教程/" style="font-size: 10px;">教程</a> <a href="/tags/数据库/" style="font-size: 20px;">数据库</a> <a href="/tags/目录/" style="font-size: 10px;">目录</a> <a href="/tags/知识框架/" style="font-size: 10px;">知识框架</a> <a href="/tags/算法/" style="font-size: 15px;">算法</a> <a href="/tags/线程安全/" style="font-size: 10px;">线程安全</a> <a href="/tags/虚拟机/" style="font-size: 10px;">虚拟机</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2118/07/">July 2118</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2118/07/07/Java开发知识框架/">Java开发知识框架</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/08/配置文件集/">配置文件集</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/08/Javaweb25天笔记/">Javaweb25天笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/08/spring32天笔记/">spring32天笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/08/Java虚拟机/">Java虚拟机</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 ninghuang<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">tags</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

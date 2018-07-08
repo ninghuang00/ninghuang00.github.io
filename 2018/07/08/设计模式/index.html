@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>设计模式 | Just Try It</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="设计模式概念及应用">
+<meta name="keywords" content="设计模式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="设计模式">
+<meta property="og:url" content="http://yoursite.com/2018/07/08/设计模式/index.html">
+<meta property="og:site_name" content="Just Try It">
+<meta property="og:description" content="设计模式概念及应用">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-07-08T08:19:57.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="设计模式">
+<meta name="twitter:description" content="设计模式概念及应用">
+  
+    <link rel="alternate" href="/atom.xml" title="Just Try It" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Just Try It</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories">categories</a>
+        
+          <a class="main-nav-link" href="/tags">tags</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-设计模式" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/07/08/设计模式/" class="article-date">
+  <time datetime="2018-07-08T08:07:33.000Z" itemprop="datePublished">2018-07-08</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/笔记/">笔记</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      设计模式
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+<div id="toc">
+  <strong class="toc-title">文章目录</strong>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#设计模式的介绍和应用场景"><span class="toc-text">设计模式的介绍和应用场景</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#介绍"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#六大原则"><span class="toc-text">六大原则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建型模式"><span class="toc-text">创建型模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#单例模式"><span class="toc-text">单例模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#单例模式应用"><span class="toc-text">单例模式应用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#工厂方法模式"><span class="toc-text">工厂方法模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#建造者模式"><span class="toc-text">建造者模式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#结构型模式"><span class="toc-text">结构型模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#代理模式"><span class="toc-text">代理模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#代理模式的应用"><span class="toc-text">代理模式的应用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#装饰模式"><span class="toc-text">装饰模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#适配器模式"><span class="toc-text">适配器模式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#行为型模式"><span class="toc-text">行为型模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#命令模式"><span class="toc-text">命令模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#模板方法模式"><span class="toc-text">模板方法模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#策略模式"><span class="toc-text">策略模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#终结者模式"><span class="toc-text">终结者模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#观察者模式"><span class="toc-text">观察者模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#备忘录模式"><span class="toc-text">备忘录模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#访问者模式"><span class="toc-text">访问者模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#回调函数"><span class="toc-text">回调函数</span></a></li></ol></li></ol></li></ol>
+</div>
+
+        <p> 设计模式概念及应用<br> <a id="more"></a></p>
+<h2 id="设计模式的介绍和应用场景"><a href="#设计模式的介绍和应用场景" class="headerlink" title="设计模式的介绍和应用场景"></a>设计模式的介绍和应用场景</h2><h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><h3 id="六大原则"><a href="#六大原则" class="headerlink" title="六大原则"></a>六大原则</h3><h3 id="创建型模式"><a href="#创建型模式" class="headerlink" title="创建型模式"></a>创建型模式</h3><h4 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h4><p>保证内存中只存在一个对象:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span></span>&#123;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Singleton instance = <span class="keyword">new</span> Singleton();</span><br><span class="line"><span class="comment">//构造函数必须是私有的</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line"><span class="keyword">return</span> instance;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="单例模式应用"><a href="#单例模式应用" class="headerlink" title="单例模式应用"></a>单例模式应用</h4><ol>
+<li>安卓开发中使用过,MyApplication类,使用的单例模式,用来进行全局设置,如服务器地址,屏幕宽度高度等,一些初始化信息.<br>需要全局共享资源的时候可以使用,频繁实例化然后又销毁的对象,有状态的工具类对象,日志,配置文件</li>
+</ol>
+<h4 id="工厂方法模式"><a href="#工厂方法模式" class="headerlink" title="工厂方法模式"></a>工厂方法模式</h4><ol>
+<li>简单工厂模式:就是根据传入不同的参数的来返回不同的类实例,这些类都继承了相同的接口,比如画图接口中有画图方法</li>
+<li>工程方法模式:就是为每种类单独写一个工厂类</li>
+<li>抽象工厂模式:就是定义一个抽象工厂来返回多个工厂,然后再有返回的每一种工厂返回对象实例</li>
+</ol>
+<h4 id="建造者模式"><a href="#建造者模式" class="headerlink" title="建造者模式"></a>建造者模式</h4><ol>
+<li>当遇到结构比较复杂的类的时候可以考虑使用</li>
+</ol>
+<h3 id="结构型模式"><a href="#结构型模式" class="headerlink" title="结构型模式"></a>结构型模式</h3><h4 id="代理模式"><a href="#代理模式" class="headerlink" title="代理模式"></a>代理模式</h4><p>参考地址:<a href="http://xvshell.iteye.com/blog/2363443" target="_blank" rel="noopener">http://xvshell.iteye.com/blog/2363443</a><br>参考地址:<a href="http://www.jasongj.com/design_pattern/proxy_decorator/" target="_blank" rel="noopener">http://www.jasongj.com/design_pattern/proxy_decorator/</a></p>
+<ol>
+<li>JDK动态代理:适用于要代理的业务类实现接口的情况</li>
+<li>CGlib代理:适用于要代理的业务类没有实现接口的情况<br>代理模式可以对代理对象进行增强,不过主要还是对代理对象的访问进行拦截</li>
+<li>创建代理的步骤:<ol>
+<li>首先定义一个代理类并实现要代理的接口</li>
+<li>将要代理的接口声明为成员属性,一种是直接new一个要代理的对象(这种方式下使用代理的人甚至都不知道被代理对象的存在),另一种是将要代理的对象作为参数传入(这样就和装饰模式有点像)</li>
+<li>定义代理类的构造函数,在构造函数张</li>
+<li>实现接口的方法,并在方法中调用构造函数中传入的代理对象的方法,这个时候就可以对代理对象进行加强或者拦截</li>
+</ol>
+</li>
+</ol>
+<h4 id="代理模式的应用"><a href="#代理模式的应用" class="headerlink" title="代理模式的应用"></a>代理模式的应用</h4><ul>
+<li>简单静态代理模式<ol>
+<li>适合使用在需要代理的类不多且确定的场景<br>比如日志,就是写一个代理类,实现代理对象的实现的接口,接受代理对象作为成员变量,然后在调用代理对象方法前后增加日志,这种代理能解耦,但是无法减少代码量</li>
+</ol>
+</li>
+<li><p>JDK动态代理(参考地址:<a href="https://blog.csdn.net/bjyfb/article/details/7350256" target="_blank" rel="noopener">https://blog.csdn.net/bjyfb/article/details/7350256</a>)</p>
+<ol>
+<li>比静态代理灵活,但是前提是代理目标有实现接口<br>写一个LogHandler类实现InvocationHandler接口,实现其中的<code>invoke(Object proxy, Method method, Object[] args)</code>方法,在这个方法中实现代理,添加一个<code>newProxyInstance(Object targetObject)</code>来返回一个生成的代理对象<code>return Proxy.newProxyInstance(classLoader,interface,this)</code>,<ul>
+<li>如何转发到invoke()方法?</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>CGlib动态代理(适用于代理对象没有实现接口的场景)</p>
+</li>
+</ul>
+<h4 id="装饰模式"><a href="#装饰模式" class="headerlink" title="装饰模式"></a>装饰模式</h4><p>装饰模式就是给被装饰的对象附加更多的功能,而且可以自由组合<br>装饰模式的实现:</p>
+<ol>
+<li>定义一个装饰类并实现要装饰的接口</li>
+<li>将接口定义为成员变量</li>
+<li>定义构造函数并将要装饰的接口作为参数传入</li>
+<li>然后可以定义增强功能的类并实现要装饰的接口</li>
+<li>使用的时候就是new一个要装饰的对象,然后new一个装饰类对象,将要装饰的对象作为构造参数,然后再new另外一个装饰类对象,将刚刚这个装饰类对象作为参数传入,以此类推</li>
+</ol>
+<h4 id="适配器模式"><a href="#适配器模式" class="headerlink" title="适配器模式"></a>适配器模式</h4><h3 id="行为型模式"><a href="#行为型模式" class="headerlink" title="行为型模式"></a>行为型模式</h3><h4 id="命令模式"><a href="#命令模式" class="headerlink" title="命令模式"></a>命令模式</h4><h4 id="模板方法模式"><a href="#模板方法模式" class="headerlink" title="模板方法模式"></a>模板方法模式</h4><h4 id="策略模式"><a href="#策略模式" class="headerlink" title="策略模式"></a>策略模式</h4><p>就是当有几个类的方法相似的时候,比如两数的加减乘除,可以将方法抽取到一个接口中,然后分别实现,然后在一个Condition类中定义这些类的public final static对象 实例,使用的时候只要用类名取出对象调用相应的方法就行了</p>
+<h4 id="终结者模式"><a href="#终结者模式" class="headerlink" title="终结者模式"></a>终结者模式</h4><h4 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h4><h4 id="备忘录模式"><a href="#备忘录模式" class="headerlink" title="备忘录模式"></a>备忘录模式</h4><h4 id="访问者模式"><a href="#访问者模式" class="headerlink" title="访问者模式"></a>访问者模式</h4><h4 id="回调函数"><a href="#回调函数" class="headerlink" title="回调函数"></a>回调函数</h4><p>参考地址:<a href="https://zhuanlan.zhihu.com/p/30052334" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/30052334</a><br><a href="https://blog.csdn.net/cangchen/article/details/44063359" target="_blank" rel="noopener">https://blog.csdn.net/cangchen/article/details/44063359</a></p>
+<ol>
+<li>回调函数是什么:<ul>
+<li>回调机制就是,按照约定的接口,把内部工作流的某个功能暴露给外部使用者,让外部使用者提供数据或者实现</li>
+<li>回调函数是一个功能片段,什么时候调用由工作流决定(比如按钮),回调函数的实现者不能直接调用回调函数实现工作流的功能</li>
+</ul>
+</li>
+<li>应用场景:<ol>
+<li>安卓中的按键监听器,<code>button.setOnClickListener(new OnClickListener{...})</code></li>
+<li>多线程的Runnable接口,自定义run方法实现接口,然后传入Thread,什么时候调用run()方法由工作流决定</li>
+<li>等待网络任务的同时不能阻塞主线程任务的时候</li>
+<li>当工作流中某个功能需要调用者来定义的时候</li>
+</ol>
+</li>
+<li>优点:<ol>
+<li>工作流中的某个功能可以在调用的时候来实现,灵活,比如安卓中的Button和imageButton会进行不同的业务</li>
+<li></li>
+</ol>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/07/08/设计模式/" data-id="cjjcmv7o8001d2mt9ecnoentj" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/07/08/Java虚拟机/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Java虚拟机
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/07/08/日常小坑记录/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">日常小坑记录</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/大纲/">大纲</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/教程/">教程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/笔记/">笔记</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos/">centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/db2/">db2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ibase4j/">ibase4j</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaweb/">javaweb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springMVC/">springMVC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zookeeper/">zookeeper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/快捷键/">快捷键</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/效率/">效率</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/教程/">教程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/目录/">目录</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/知识框架/">知识框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/线程安全/">线程安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/虚拟机/">虚拟机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/centos/" style="font-size: 10px;">centos</a> <a href="/tags/db2/" style="font-size: 10px;">db2</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/ibase4j/" style="font-size: 10px;">ibase4j</a> <a href="/tags/javaweb/" style="font-size: 10px;">javaweb</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/spring/" style="font-size: 15px;">spring</a> <a href="/tags/springMVC/" style="font-size: 10px;">springMVC</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/效率/" style="font-size: 10px;">效率</a> <a href="/tags/教程/" style="font-size: 10px;">教程</a> <a href="/tags/数据库/" style="font-size: 20px;">数据库</a> <a href="/tags/目录/" style="font-size: 10px;">目录</a> <a href="/tags/知识框架/" style="font-size: 10px;">知识框架</a> <a href="/tags/算法/" style="font-size: 15px;">算法</a> <a href="/tags/线程安全/" style="font-size: 10px;">线程安全</a> <a href="/tags/虚拟机/" style="font-size: 10px;">虚拟机</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2118/07/">July 2118</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2118/07/07/Java开发知识框架/">Java开发知识框架</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/08/配置文件集/">配置文件集</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/08/Javaweb25天笔记/">Javaweb25天笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/08/spring32天笔记/">spring32天笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/08/Java虚拟机/">Java虚拟机</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 ninghuang<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">tags</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
