@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>db2部署教程 | Just Try It</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="这是摘要">
+<meta name="keywords" content="教程,db2,数据库">
+<meta property="og:type" content="article">
+<meta property="og:title" content="db2部署教程">
+<meta property="og:url" content="http://yoursite.com/2018/07/08/db2部署教程/index.html">
+<meta property="og:site_name" content="Just Try It">
+<meta property="og:description" content="这是摘要">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-07-08T05:26:07.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="db2部署教程">
+<meta name="twitter:description" content="这是摘要">
+  
+    <link rel="alternate" href="/atom.xml" title="Just Try It" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Just Try It</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories">categories</a>
+        
+          <a class="main-nav-link" href="/tags">tags</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-db2部署教程" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/07/08/db2部署教程/" class="article-date">
+  <time datetime="2018-07-08T05:23:24.000Z" itemprop="datePublished">2018-07-08</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/笔记/">笔记</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      db2部署教程
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+<div id="toc">
+  <strong class="toc-title">文章目录</strong>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Install-DB2"><span class="toc-text">Install DB2</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#login-as-root"><span class="toc-text">login as root</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#download-v9-7fp5-linuxx64-ese-tar-gz-from-ftp"><span class="toc-text">download v9.7fp5_linuxx64_ese.tar.gz from ftp</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Blow-steps-is-to-create-instance"><span class="toc-text">Blow steps is to create instance</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#add-group-role"><span class="toc-text">add group role</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#add-user"><span class="toc-text">add user</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#create-db2-user-amp-instance"><span class="toc-text">create db2 user &amp; instance</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#set-database-connection-type-and-port"><span class="toc-text">set database connection type and port</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#activate-the-license"><span class="toc-text">activate the license</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#login-to-root-user"><span class="toc-text">login to root user</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#set-DB2-management-server"><span class="toc-text">set DB2 management server</span></a></li></ol>
+</div>
+
+        <p> 这是摘要<br> <a id="more"></a></p>
+<h1 id="Install-DB2"><a href="#Install-DB2" class="headerlink" title="Install DB2"></a>Install DB2</h1><p>DB2 v9.7 fp5 is recommended. Follow the command steps of installing DB2 is ok. Here is a sample script which can directly install DB2 successfully.<br>One thing to make sure is set DB2 type to be Oracle compatible. To support sql like “select <em> from </em> between 1 and 100”, Oracle compatible mode is required.<br>During DB2 installation, one user account “db2inst1” is setup and we need set its password, for example, set it as “passw0rd”.</p>
+<h1 id="login-as-root"><a href="#login-as-root" class="headerlink" title="login as root"></a>login as root</h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir /root/db2setup</span><br><span class="line"><span class="built_in">cd</span> /root/db2setup</span><br></pre></td></tr></table></figure>
+<h1 id="download-v9-7fp5-linuxx64-ese-tar-gz-from-ftp"><a href="#download-v9-7fp5-linuxx64-ese-tar-gz-from-ftp" class="headerlink" title="download v9.7fp5_linuxx64_ese.tar.gz from ftp"></a>download v9.7fp5_linuxx64_ese.tar.gz from ftp</h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">wget ftp://ningbo:sterling11@9.115.47.13/DB2/licenses/v9.7fp5_linuxx64_ese.tar.gz</span><br><span class="line">tar -zxf v9.7fp5_linuxx64_ese.tar.gz</span><br><span class="line"><span class="built_in">cd</span> ese</span><br><span class="line">./db2_install -f NOTSAMP   <span class="comment"># choose No when whether use different directory       choose ESE as the version of DB2</span></span><br></pre></td></tr></table></figure>
+<h1 id="Blow-steps-is-to-create-instance"><a href="#Blow-steps-is-to-create-instance" class="headerlink" title="Blow steps is to create instance"></a>Blow steps is to create instance</h1><h1 id="add-group-role"><a href="#add-group-role" class="headerlink" title="add group role"></a>add group role</h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">groupadd dasadm1</span><br><span class="line">groupadd db2fadm1</span><br><span class="line">groupadd db2iadm1</span><br></pre></td></tr></table></figure>
+<h1 id="add-user"><a href="#add-user" class="headerlink" title="add user"></a>add user</h1><p>( the passw0rd may not correct setted by this cmd, if so, just use passwd $username to change password )<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">useradd -m -d /home/db2inst1 -g db2iadm1 db2inst1 -p passw0rd</span><br><span class="line">useradd -m -d /home/db2fenc1 -g db2fadm1 db2fenc1 -p passw0rd</span><br><span class="line">useradd -m -d /home/dasusr1 -g dasadm1 dasusr1 -p passw0rd</span><br><span class="line">passwd db2inst1</span><br><span class="line">passwd db2fenc1</span><br><span class="line">passwd dasusr1</span><br></pre></td></tr></table></figure></p>
+<h1 id="create-db2-user-amp-instance"><a href="#create-db2-user-amp-instance" class="headerlink" title="create db2 user &amp; instance"></a>create db2 user &amp; instance</h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /opt/ibm/db2/V9.7/instance</span><br><span class="line">./db2icrt -u db2fenc1 db2inst1</span><br><span class="line">su - db2inst1</span><br></pre></td></tr></table></figure>
+<h1 id="set-database-connection-type-and-port"><a href="#set-database-connection-type-and-port" class="headerlink" title="set database connection type and port"></a>set database connection type and port</h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">db2set DB2COMM=tcpip</span><br><span class="line">db2set DB2CODEPAGE=1208</span><br><span class="line">db2 update database manager configuration using svcename 50000</span><br><span class="line"></span><br><span class="line">db2start</span><br><span class="line">db2stop</span><br></pre></td></tr></table></figure>
+<h1 id="activate-the-license"><a href="#activate-the-license" class="headerlink" title="activate the license"></a>activate the license</h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">wget ftp://ningbo:sterling11@9.115.47.13/DB2/licenses/v9.7fp5_linuxx64_ese_c.tar.gz</span><br><span class="line">tar -zxf v9.7fp5_linuxx64_ese_c.tar.gz</span><br><span class="line"><span class="built_in">cd</span> ese_c/db2/license/</span><br><span class="line">db2licm -l</span><br><span class="line">db2licm -a db2ese_c.lic</span><br><span class="line"></span><br><span class="line">db2start</span><br><span class="line">db2stop</span><br></pre></td></tr></table></figure>
+<h1 id="login-to-root-user"><a href="#login-to-root-user" class="headerlink" title="login to root user"></a>login to root user</h1><h1 id="set-DB2-management-server"><a href="#set-DB2-management-server" class="headerlink" title="set DB2 management server"></a>set DB2 management server</h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /opt/ibm/db2/V9.7/instance</span><br><span class="line">./dascrt -u dasusr1 </span><br><span class="line">su - dasusr1</span><br><span class="line">db2admin start</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/07/08/db2部署教程/" data-id="cjjcek02z0004o5t9k9e90psj" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/db2/">db2</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/教程/">教程</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/07/08/iBase4J部署笔记/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          iBase4J部署笔记
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/07/08/左程云算法课进阶班/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">左程云算法课进阶班</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/笔记/">笔记</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos/">centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/db2/">db2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ibase4j/">ibase4j</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zookeeper/">zookeeper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/大纲/">大纲</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/教程/">教程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/centos/" style="font-size: 10px;">centos</a> <a href="/tags/db2/" style="font-size: 10px;">db2</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/ibase4j/" style="font-size: 10px;">ibase4j</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/大纲/" style="font-size: 10px;">大纲</a> <a href="/tags/教程/" style="font-size: 10px;">教程</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/算法/" style="font-size: 20px;">算法</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/07/08/iBase4J部署笔记/">iBase4J部署笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/08/db2部署教程/">db2部署教程</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/08/左程云算法课进阶班/">左程云算法课进阶班</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/08/左程云算法课基础班/">左程云算法课基础班</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/07/算法/">算法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 ninghuang<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">tags</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

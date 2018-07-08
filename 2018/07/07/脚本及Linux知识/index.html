@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="Just Try It">
 <meta property="og:description" content="这是摘要">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-07T14:00:54.000Z">
+<meta property="og:updated_time" content="2018-07-08T05:21:45.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="脚本及Linux知识">
 <meta name="twitter:description" content="这是摘要">
@@ -103,22 +103,19 @@
 
         <p> 这是摘要<br> <a id="more"></a></p>
 <h1 id="centos常用命令"><a href="#centos常用命令" class="headerlink" title="centos常用命令"></a>centos常用命令</h1><h2 id="查看进程"><a href="#查看进程" class="headerlink" title="查看进程"></a>查看进程</h2><p><code>ps -ef|grep tomcat</code></p>
-<h2 id="查看端口情况"><a href="#查看端口情况" class="headerlink" title="查看端口情况"></a>查看端口情况</h2><p><code>netstat -pan|grep 1099</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//常用参数:</span><br><span class="line">-a 	显示所有连接和监听的端口</span><br><span class="line">-b 	显示包含于创建每个连接或监听端口的可执行组件。在某些情况下已知可执行组件</span><br><span class="line">-e 	显示以太网统计信息。此选项可以与 -s选项组合使用。</span><br><span class="line">-n  以数字形式显示地址和端口号。</span><br><span class="line">-o 	显示与每个连接相关的所属进程 ID。</span><br><span class="line">-p proto 	显示 proto 指定的协议的连接；proto 可以是</span><br></pre></td></tr></table></figure></p>
+<h2 id="查看端口情况"><a href="#查看端口情况" class="headerlink" title="查看端口情况"></a>查看端口情况</h2><p><code>netstat -pan|grep 1099</code><br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//常用参数:</span><br><span class="line">-a 	显示所有连接和监听的端口</span><br><span class="line">-b 	显示包含于创建每个连接或监听端口的可执行组件。在某些情况下已知可执行组件</span><br><span class="line">-e 	显示以太网统计信息。此选项可以与 -s选项组合使用。</span><br><span class="line">-n  以数字形式显示地址和端口号。</span><br><span class="line">-o 	显示与每个连接相关的所属进程 ID。</span><br><span class="line">-p proto 	显示 proto 指定的协议的连接；proto 可以是</span><br></pre></td></tr></table></figure></p>
 <h2 id="修改密码"><a href="#修改密码" class="headerlink" title="修改密码"></a>修改密码</h2><p><code>passwd username</code></p>
 <h2 id="添加用户"><a href="#添加用户" class="headerlink" title="添加用户"></a>添加用户</h2><p>连接远程主机其他接口<br><code>ssh root@ip -p port</code></p>
 <h2 id="查看系统版本信息"><a href="#查看系统版本信息" class="headerlink" title="查看系统版本信息"></a>查看系统版本信息</h2><p><code>uname -a</code></p>
 <h2 id="filename-zip的解压"><a href="#filename-zip的解压" class="headerlink" title="filename.zip的解压"></a>filename.zip的解压</h2><p><code>unzip filename.zip</code></p>
-<h2 id="解压文件"><a href="#解压文件" class="headerlink" title="解压文件"></a>解压文件</h2><p><code>tar -zxvf filename.tar.gz</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">//其中zxvf含义分别如下</span><br><span class="line">-c: 建立压缩档案</span><br><span class="line">-x：解压</span><br><span class="line">-t：查看内容</span><br><span class="line">-r：向压缩归档文件末尾追加文件</span><br><span class="line">-u：更新原压缩包中的文件</span><br><span class="line">//这五个是独立的命令，压缩解压都要用到其中一个，可以和别的命令连用但只能用其中一个。下面的参数是根据需要在压缩或解压档案时可选的。</span><br><span class="line">-z：有gzip属性的</span><br><span class="line">-j：有bz2属性的</span><br><span class="line">-Z：有compress属性的</span><br><span class="line">-v：显示所有过程</span><br><span class="line">-O：将文件解开到标准输出</span><br><span class="line">//下面的参数-f是必须的</span><br><span class="line">-f: 使用档案名字，切记，这个参数是最后一个参数，后面只能接档案名。</span><br><span class="line">//事实上, 从1.15版本开始tar就可以自动识别压缩的格式,故不需人为区分压缩格式就能正确解压</span><br><span class="line">tar -xvf filename.tar.gz</span><br><span class="line">tar -xvf filename.tar.bz2</span><br><span class="line">tar -xvf filename.tar.xz</span><br><span class="line">tar -xvf filename.tar.Z</span><br></pre></td></tr></table></figure></p>
+<h2 id="解压文件"><a href="#解压文件" class="headerlink" title="解压文件"></a>解压文件</h2><p><code>tar -zxvf filename.tar.gz</code><br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">//其中zxvf含义分别如下</span><br><span class="line">-c: 建立压缩档案</span><br><span class="line">-x：解压</span><br><span class="line">-t：查看内容</span><br><span class="line">-r：向压缩归档文件末尾追加文件</span><br><span class="line">-u：更新原压缩包中的文件</span><br><span class="line">//这五个是独立的命令，压缩解压都要用到其中一个，可以和别的命令连用但只能用其中一个。下面的参数是根据需要在压缩或解压档案时可选的。</span><br><span class="line">-z：有gzip属性的</span><br><span class="line">-j：有bz2属性的</span><br><span class="line">-Z：有compress属性的</span><br><span class="line">-v：显示所有过程</span><br><span class="line">-O：将文件解开到标准输出</span><br><span class="line">//下面的参数-f是必须的</span><br><span class="line">-f: 使用档案名字，切记，这个参数是最后一个参数，后面只能接档案名。</span><br><span class="line">//事实上, 从1.15版本开始tar就可以自动识别压缩的格式,故不需人为区分压缩格式就能正确解压</span><br><span class="line">tar -xvf filename.tar.gz</span><br><span class="line">tar -xvf filename.tar.bz2</span><br><span class="line">tar -xvf filename.tar.xz</span><br><span class="line">tar -xvf filename.tar.Z</span><br></pre></td></tr></table></figure></p>
 <h2 id="解压文件到指定文件夹"><a href="#解压文件到指定文件夹" class="headerlink" title="解压文件到指定文件夹"></a>解压文件到指定文件夹</h2><p><code>tar -zxvf jdk-8u161-linux-i586.tar.gz -C java</code></p>
 <h1 id="centos7配置环境"><a href="#centos7配置环境" class="headerlink" title="centos7配置环境"></a>centos7配置环境</h1><h2 id="配置java环境"><a href="#配置java环境" class="headerlink" title="配置java环境"></a>配置java环境</h2><ol>
 <li>先将jdk的压缩包上传到服务器<code>scp jdk.tar.gz root@xx.xxx.xxx.xxx:/usr/local/java/</code></li>
 <li>然后使用<code>tar -zxvf jdk.tar.gz</code>解压</li>
 <li><p>然后配置<code>vim /etc/profile</code>,添加以下内容到底部</p>
-<pre><code>JAVA_HOME=/usr/local/java/jdk
-PATH=$JAVA_HOME/bin:$PATH
-CLASSPATH=$JAVA_HOME/jre/lib/ext:$JAVA_HOME/lib/tools.jar
-export PATH JAVA_HOME CLASSPATH
-</code></pre></li>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">JAVA_HOME=/usr/<span class="built_in">local</span>/java/jdk</span><br><span class="line">      PATH=<span class="variable">$JAVA_HOME</span>/bin:<span class="variable">$PATH</span></span><br><span class="line">      CLASSPATH=<span class="variable">$JAVA_HOME</span>/jre/lib/ext:<span class="variable">$JAVA_HOME</span>/lib/tools.jar</span><br><span class="line">      <span class="built_in">export</span> PATH JAVA_HOME CLASSPATH</span><br></pre></td></tr></table></figure>
+</li>
 <li><p>然后<code>source /etc/profile</code> </p>
 </li>
 </ol>
@@ -131,41 +128,38 @@ export PATH JAVA_HOME CLASSPATH
 <li>查看firewalld状态,版本等<code>firewall-cmd --state</code></li>
 <li>查看已经打开的port<code>firewall-cmd --zone=dmz --list-ports</code></li>
 <li><p>开启端口<code>firewall-cmd --zone=public --add-port=1099/tcp --permanent</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">命令含义：</span><br><span class="line">–zone #作用域</span><br><span class="line">–add-port=80/tcp #添加端口，格式为：端口/通讯协议</span><br><span class="line">–permanent #永久生效，没有此参数重启后失效</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">命令含义：</span><br><span class="line">–zone <span class="comment">#作用域</span></span><br><span class="line">–add-port=80/tcp <span class="comment">#添加端口，格式为：端口/通讯协议</span></span><br><span class="line">–permanent <span class="comment">#永久生效，没有此参数重启后失效</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>重启防火墙</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --reload 				#重启firewall</span><br><span class="line">systemctl stop firewalld.service 	#停止firewall</span><br><span class="line">systemctl disable firewalld.service #禁止firewall开机启动</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --reload 				<span class="comment">#重启firewall</span></span><br><span class="line">systemctl stop firewalld.service 	<span class="comment">#停止firewall</span></span><br><span class="line">systemctl <span class="built_in">disable</span> firewalld.service <span class="comment">#禁止firewall开机启动</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>注意阿里云服务器还要在控制中心添加端口规则</p>
 </li>
 </ol>
 <h2 id="将idea-web项目部署到远程tomcat-以及开机启动tomcat"><a href="#将idea-web项目部署到远程tomcat-以及开机启动tomcat" class="headerlink" title="将idea web项目部署到远程tomcat,以及开机启动tomcat"></a>将idea web项目部署到远程tomcat,以及开机启动tomcat</h2><ol>
 <li><p>配置<code>tomcat/bin/catalina.sh</code>文件,首行加入</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">export CATALINA_OPTS=&quot;-Dcom.sun.management.jmxremote </span><br><span class="line">-Dcom.sun.management.jmxremote.port=1099 </span><br><span class="line">-Dcom.sun.management.jmxremote.ssl=false </span><br><span class="line">-Dcom.sun.management.jmxremote.authenticate=false </span><br><span class="line">-Djava.rmi.server.hostname=10.82.82.248&quot;</span><br><span class="line">export JAVA_OPTS=&quot;-Dcom.sun.management.jmxremote=</span><br><span class="line">-Dcom.sun.management.jmxremote.port=1099</span><br><span class="line">-Dcom.sun.management.jmxremote.ssl=false</span><br><span class="line">-Dcom.sun.management.jmxremote.authenticate=false&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> CATALINA_OPTS=<span class="string">"-Dcom.sun.management.jmxremote </span></span><br><span class="line"><span class="string">-Dcom.sun.management.jmxremote.port=1099 </span></span><br><span class="line"><span class="string">-Dcom.sun.management.jmxremote.ssl=false </span></span><br><span class="line"><span class="string">-Dcom.sun.management.jmxremote.authenticate=false </span></span><br><span class="line"><span class="string">-Djava.rmi.server.hostname=10.82.82.248"</span></span><br><span class="line"><span class="built_in">export</span> JAVA_OPTS=<span class="string">"-Dcom.sun.management.jmxremote=</span></span><br><span class="line"><span class="string">-Dcom.sun.management.jmxremote.port=1099</span></span><br><span class="line"><span class="string">-Dcom.sun.management.jmxremote.ssl=false</span></span><br><span class="line"><span class="string">-Dcom.sun.management.jmxremote.authenticate=false"</span></span><br></pre></td></tr></table></figure>
 </li>
-<li><p>启动tomcat<br><code>./catalina.sh run &gt; /dev/null 2&gt;&amp;1 &amp;</code><br>其中<code>&gt; /dev/null 2&gt;&amp;1 &amp;</code>是Linux中的命令：把标准输出和出错处理都放到回收站，这样就免得一大堆输出占领你的屏幕。</p>
+<li><p>启动tomcat<br><code>sh
+./catalina.sh run &gt; /dev/null 2&gt;&amp;1 &amp;</code><br>其中<code>&gt; /dev/null 2&gt;&amp;1 &amp;</code>是Linux中的命令：把标准输出和出错处理都放到回收站，这样就免得一大堆输出占领你的屏幕。</p>
 </li>
 <li><p>在用jps命令：</p>
 </li>
 <li><p>javahome: /usr/lib/jvm/java-8-oracle</p>
 </li>
 <li><p>设置tomcat开机启动,将startup.sh修改</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=/usr/local/java/jdk1.8</span><br><span class="line">export CLASSPATH=$CLASSPATH:$JAVA_HOME/lib/tools.jar:$JAVA_HOME/lib/dt.jar:.  </span><br><span class="line">export PATH=$JAVA_HOME/bin:$PATH  </span><br><span class="line">export CATALINA_HOME=/usr/local/tomcat  </span><br><span class="line">/usr/local/tomcat/bin/catalina.sh start</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> JAVA_HOME=/usr/<span class="built_in">local</span>/java/jdk1.8</span><br><span class="line"><span class="built_in">export</span> CLASSPATH=<span class="variable">$CLASSPATH</span>:<span class="variable">$JAVA_HOME</span>/lib/tools.jar:<span class="variable">$JAVA_HOME</span>/lib/dt.jar:.  </span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$JAVA_HOME</span>/bin:<span class="variable">$PATH</span>  </span><br><span class="line"><span class="built_in">export</span> CATALINA_HOME=/usr/<span class="built_in">local</span>/tomcat  </span><br><span class="line">/usr/<span class="built_in">local</span>/tomcat/bin/catalina.sh start</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>在/etc/rc.d/rc.local中加入<code>/usr/local/tomcat/bin/startup.sh</code></p>
 </li>
 </ol>
 <h2 id="docker开机自动启动"><a href="#docker开机自动启动" class="headerlink" title="docker开机自动启动"></a>docker开机自动启动</h2><p><code>systemctl  enable docker.service</code></p>
-<h2 id="使用iptables管理防火墙"><a href="#使用iptables管理防火墙" class="headerlink" title="使用iptables管理防火墙"></a>使用iptables管理防火墙</h2><pre><code>`vi /etc/sysconfig/iptables`配置端口
-`service iptables restart`重启防火墙
-`systemctl restart iptables.service`重启防火墙
-`/etc/init.d/iptables restart`重启防火墙
-`systemctl enable iptables.service`设置防火墙卡机启动
-</code></pre>
+<h2 id="使用iptables管理防火墙"><a href="#使用iptables管理防火墙" class="headerlink" title="使用iptables管理防火墙"></a>使用iptables管理防火墙</h2><p><code>vi /etc/sysconfig/iptables</code>配置端口<br><code>service iptables restart</code>重启防火墙<br><code>systemctl restart iptables.service</code>重启防火墙<br><code>/etc/init.d/iptables restart</code>重启防火墙<br><code>systemctl enable iptables.service</code>设置防火墙卡机启动</p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/07/07/脚本及Linux知识/" data-id="cjjbgafme0006xrt9segeh5i7" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/07/07/脚本及Linux知识/" data-id="cjjcek03y000no5t97672y021" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/centos/">centos</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shell/">shell</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ubuntu/">ubuntu</a></li></ul>
@@ -214,7 +208,7 @@ export PATH JAVA_HOME CLASSPATH
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos/">centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/大纲/">大纲</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos/">centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/db2/">db2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ibase4j/">ibase4j</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zookeeper/">zookeeper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/大纲/">大纲</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/教程/">教程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li></ul>
     </div>
   </div>
 
@@ -224,7 +218,7 @@ export PATH JAVA_HOME CLASSPATH
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/centos/" style="font-size: 10px;">centos</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/大纲/" style="font-size: 10px;">大纲</a>
+      <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/centos/" style="font-size: 10px;">centos</a> <a href="/tags/db2/" style="font-size: 10px;">db2</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/ibase4j/" style="font-size: 10px;">ibase4j</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/大纲/" style="font-size: 10px;">大纲</a> <a href="/tags/教程/" style="font-size: 10px;">教程</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/算法/" style="font-size: 20px;">算法</a>
     </div>
   </div>
 
@@ -246,23 +240,23 @@ export PATH JAVA_HOME CLASSPATH
       <ul>
         
           <li>
+            <a href="/2018/07/08/iBase4J部署笔记/">iBase4J部署笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/08/db2部署教程/">db2部署教程</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/08/左程云算法课进阶班/">左程云算法课进阶班</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/08/左程云算法课基础班/">左程云算法课基础班</a>
+          </li>
+        
+          <li>
             <a href="/2018/07/07/算法/">算法</a>
-          </li>
-        
-          <li>
-            <a href="/2018/07/07/开发工具及环境部署/">开发工具及环境部署</a>
-          </li>
-        
-          <li>
-            <a href="/2018/07/07/计算机网络/">计算机网络</a>
-          </li>
-        
-          <li>
-            <a href="/2018/07/07/脚本及Linux知识/">脚本及Linux知识</a>
-          </li>
-        
-          <li>
-            <a href="/2018/07/07/数据库/">数据库</a>
           </li>
         
       </ul>
