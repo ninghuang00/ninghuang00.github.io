@@ -7,17 +7,21 @@
   
   <title>开源框架 | Just Try It</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="这是摘要">
+  <meta name="description" content="开源框架学习">
+<meta name="keywords" content="spring,springMVC">
 <meta property="og:type" content="article">
 <meta property="og:title" content="开源框架">
 <meta property="og:url" content="http://yoursite.com/2018/07/07/开源框架/index.html">
 <meta property="og:site_name" content="Just Try It">
-<meta property="og:description" content="这是摘要">
+<meta property="og:description" content="开源框架学习">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-07T12:48:49.000Z">
+<meta property="og:image" content="http://yoursite.com/2018/07/07/开源框架/springMVC基本工作流程图.jpeg">
+<meta property="og:image" content="http://yoursite.com/2018/07/07/开源框架/SpringMVC中HTTP请求处理流程时序图.jpeg">
+<meta property="og:updated_time" content="2018-07-08T07:08:28.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="开源框架">
-<meta name="twitter:description" content="这是摘要">
+<meta name="twitter:description" content="开源框架学习">
+<meta name="twitter:image" content="http://yoursite.com/2018/07/07/开源框架/springMVC基本工作流程图.jpeg">
   
     <link rel="alternate" href="/atom.xml" title="Just Try It" type="application/atom+xml">
   
@@ -74,6 +78,10 @@
   <time datetime="2018-07-07T12:48:49.000Z" itemprop="datePublished">2018-07-07</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/笔记/">笔记</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
@@ -93,17 +101,67 @@
         
 <div id="toc">
   <strong class="toc-title">文章目录</strong>
-  
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Spring"><span class="toc-text">Spring</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#spring框架的基本原理"><span class="toc-text">spring框架的基本原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#依赖注入"><span class="toc-text">依赖注入()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#控制反转-IOC"><span class="toc-text">控制反转(IOC)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#切面编程-AOP"><span class="toc-text">切面编程(AOP)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#通知-Advice"><span class="toc-text">通知(Advice)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#切点-PointCut"><span class="toc-text">切点(PointCut)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用场景"><span class="toc-text">使用场景:</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代理"><span class="toc-text">代理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事务管理"><span class="toc-text">事务管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Bean的实例化过程"><span class="toc-text">Bean的实例化过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#spring和springMVC"><span class="toc-text">spring和springMVC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#传统springMVC的不足"><span class="toc-text">传统springMVC的不足</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#注解的使用"><span class="toc-text">注解的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ResponseBody"><span class="toc-text">@ResponseBody</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#返回json数据中文乱码的问题"><span class="toc-text">返回json数据中文乱码的问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SpringMVC-HTTP请求响应的过程"><span class="toc-text">SpringMVC HTTP请求响应的过程</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MyBatis"><span class="toc-text">MyBatis</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#数据关联"><span class="toc-text">数据关联</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#动态映射"><span class="toc-text">动态映射</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事务关联"><span class="toc-text">事务关联</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#log4j"><span class="toc-text">log4j</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#web-xml中的配置"><span class="toc-text">web.xml中的配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码中的使用"><span class="toc-text">代码中的使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#log4j-properties"><span class="toc-text">log4j.properties</span></a></li></ol></li></ol>
 </div>
 
-        <p> 这是摘要<br> <a id="more"></a></p>
+        <p> 开源框架学习<br> <a id="more"></a></p>
+<h1 id="Spring"><a href="#Spring" class="headerlink" title="Spring"></a>Spring</h1><h2 id="spring框架的基本原理"><a href="#spring框架的基本原理" class="headerlink" title="spring框架的基本原理"></a>spring框架的基本原理</h2><blockquote>
+<p>基本原理其实就是通过反射(反射的原理)解析类及其类的各种信息，包括构造器、方法及其参数，属性。然后将其封装成bean定义信息类、constructor信息类、method信息类、property信息类，最终放在一个map里，也就是所谓的container，池等等，其实就是个map。。汗。。。。当你写好配置文件，启动项目后，框架会先按照你的配置文件找到那个要scan的包(一般是哪些包?)，然后解析包里面的所有类，找到所有含有@bean，@service等注解的类，利用反射解析它们，包括解析构造器，方法，属性等等，然后封装成各种信息类放到一个map里。每当你需要一个bean的时候，框架就会从container找是不是有这个类的定义啊？如果找到则通过构造器new出来（这就是控制反转，不用你new,框架帮你new），再在这个类找是不是有要注入的属性或者方法，比如标有@autowired的属性，如果有则还是到container找对应的解析类，new出对象，并通过之前解析出来的信息类找到setter方法，然后用该方法注入对象（这就是依赖注入）。如果其中有一个类container里没找到，则抛出异常，比如常见的spring无法找到该类定义，无法wire的异常。还有就是嵌套bean则用了一下递归，container会放到servletcontext里面，每次reQuest从servletcontext找这个container即可，不用多次解析类定义。如果bean的scope是singleton，则会重用这个bean不再重新创建，将这个bean放到一个map里，每次用都先从这个map里面找。如果scope是session，则该bean会放到session里面。仅此而已，没必要花更多精力。</p>
+</blockquote>
+<h2 id="依赖注入"><a href="#依赖注入" class="headerlink" title="依赖注入()"></a>依赖注入()</h2><h2 id="控制反转-IOC"><a href="#控制反转-IOC" class="headerlink" title="控制反转(IOC)"></a>控制反转(IOC)</h2><h2 id="切面编程-AOP"><a href="#切面编程-AOP" class="headerlink" title="切面编程(AOP)"></a>切面编程(AOP)</h2><p>参考网址:    <a href="https://www.liaoxuefeng.com/article/0013738774263173c42eae58864423698dd40556af23bb5000" target="_blank" rel="noopener">https://www.liaoxuefeng.com/article/0013738774263173c42eae58864423698dd40556af23bb5000</a></p>
+<h3 id="通知-Advice"><a href="#通知-Advice" class="headerlink" title="通知(Advice)"></a>通知(Advice)</h3><p>定义切点何时工作,以工作内容</p>
+<pre><code>1. 前置通知(Before):一般是方法调用前打出传入参数
+2. 后置通知(After):是返回和异常通知的并集
+3. 返回通知(After-running):方法正常返回
+4. 异常通知(After-throwing):方法抛出异常
+5. 环绕通知(Around):可以同时定义前置和后置
+</code></pre><h3 id="切点-PointCut"><a href="#切点-PointCut" class="headerlink" title="切点(PointCut)"></a>切点(PointCut)</h3><p>定义在何处工作,也就是对哪个方法应用通知</p>
+<h3 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景:"></a>使用场景:</h3><ol>
+<li>比较常见的就是日志记录,如果不使用aop的话,例子中<strong>实现日志功能的代码就是切面,而需要添加日志的类或者方法就是切点.</strong><ol>
+<li>就会在业务组件的核心功能之外附带了其他功能代码,会让业务代码变得混乱,业务组件应该只关心核心功能的实现</li>
+<li>比如日志功能如果在多个组件中被使用,那么日志功能的业务逻辑发生改变时,维护修改就很麻烦</li>
+</ol>
+</li>
+<li>日志应用:可以在日志中输出监控对象的方法调用的参数输入,返回结果等<br>比如要监控的对象是要监控<code>LoginServiceImpl.login(String name,String password)</code>,只需要准备一个<code>LogServiceImpl</code>,<code>LogServiceImpl</code>中实现无参日志方法,有参日志方法,还有有参有返回值的日志方法,然后通过<code>applicationContext.xml</code>中的<code>&lt;aop:config&gt;</code>将其中一个日志方法织入<code>LoginServiceImpl</code>中配置,然后在客户端调用login方法的时候日志中就会有相应的输出内容<br>参考地址:<a href="http://www.cnblogs.com/yulinfeng/p/7719128.html" target="_blank" rel="noopener">http://www.cnblogs.com/yulinfeng/p/7719128.html</a></li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;bean id="logService" class="cn.com.spring.service.impl.LogServiceImpl"&gt;&lt;/bean&gt; </span><br><span class="line">&lt;bean id="loginService" class="cn.com.spring.service.impl.LoginServiceImpl"&gt;&lt;/bean&gt; </span><br><span class="line">&lt;aop:config&gt; </span><br><span class="line">    &lt;!-- 切入点 --&gt; </span><br><span class="line">    &lt;aop:pointcut </span><br><span class="line">        expression=<span class="string">"execution(* cn.com.spring.service.impl.LoginServiceImpl.*(..))"</span> </span><br><span class="line">        id=<span class="string">"myPointcut"</span> /&gt; </span><br><span class="line">    &lt;!-- 切面： 将哪个对象中的哪个方法，织入到哪个切入点 --&gt; </span><br><span class="line">    &lt;aop:aspect id=<span class="string">"dd"</span> ref=<span class="string">"logService"</span>&gt; </span><br><span class="line">        &lt;!-- 前置通知 </span><br><span class="line">        &lt;aop:before method=<span class="string">"log"</span> pointcut-ref=<span class="string">"myPointcut"</span> /&gt; </span><br><span class="line">        &lt;aop:after method=<span class="string">"logArg"</span> pointcut-ref=<span class="string">"myPointcut"</span>&gt; </span><br><span class="line">		--&gt; </span><br><span class="line">        &lt;aop:after-returning method=<span class="string">"logArgAndReturn"</span> returning=<span class="string">"returnObj"</span> pointcut-ref=<span class="string">"myPointcut"</span>/&gt; </span><br><span class="line">    &lt;/aop:aspect&gt; </span><br><span class="line">&lt;/aop:config&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="代理"><a href="#代理" class="headerlink" title="代理"></a>代理</h2><h2 id="事务管理"><a href="#事务管理" class="headerlink" title="事务管理"></a>事务管理</h2><h2 id="Bean的实例化过程"><a href="#Bean的实例化过程" class="headerlink" title="Bean的实例化过程"></a>Bean的实例化过程</h2><h2 id="spring和springMVC"><a href="#spring和springMVC" class="headerlink" title="spring和springMVC"></a>spring和springMVC</h2><ol>
+<li>spring是父容器,springMVC是子容器,spring容器中有Service层的bean,springMVC容器中有Controller层的bean,子容器中找不到的bean可以去父容器中找,但是父容器不能在子容器中查找bean,这就是为什么由SpringMVC容器创建的Controller可以自动注入Spring容器创建的Service的bean了</li>
+</ol>
+<h2 id="传统springMVC的不足"><a href="#传统springMVC的不足" class="headerlink" title="传统springMVC的不足"></a>传统springMVC的不足</h2><ol>
+<li>传统MVC模式的不足<ol>
+<li>每次请求都必须经过”控制器-模型-视图”才能最终在浏览器上呈现,过程略显复杂</li>
+<li>视图依赖于模型,没有模型,浏览器就无法展示页面,客户体验不好</li>
+<li>视图的渲染是在服务器端进行的,最后返回给浏览器的是带有模型的视图,渲染性能不能得到很好的优化</li>
+</ol>
+</li>
+<li>前后端分离的方式<br>就是浏览器发送AJAX请求,然后收到JSON数据返回,然后浏览器来渲染页面</li>
+</ol>
+<p>*</p>
+<h2 id="注解的使用"><a href="#注解的使用" class="headerlink" title="注解的使用"></a>注解的使用</h2><h3 id="ResponseBody"><a href="#ResponseBody" class="headerlink" title="@ResponseBody"></a>@ResponseBody</h3><p> <code>@ResponseBody</code>注解使用的返回值处理器是<code>RequestResponseBodyMethodProcessor</code>，调用 <code>HttpMessagConverter</code> 消息转换机制。</p>
+<p>##Json问题</p>
+<h3 id="返回json数据中文乱码的问题"><a href="#返回json数据中文乱码的问题" class="headerlink" title="返回json数据中文乱码的问题"></a>返回json数据中文乱码的问题</h3><ol>
+<li><p>方法1:在springMVC.xml中配置</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 处理请求返回json字符串的中文乱码问题 --&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">mvc:annotation-driven</span>&gt;</span>  </span><br><span class="line">        <span class="tag">&lt;<span class="name">mvc:message-converters</span>&gt;</span>  </span><br><span class="line">            <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.springframework.http.converter.StringHttpMessageConverter"</span>&gt;</span>  </span><br><span class="line">                <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"supportedMediaTypes"</span>&gt;</span>  </span><br><span class="line">                    <span class="tag">&lt;<span class="name">list</span>&gt;</span>  </span><br><span class="line">                        <span class="tag">&lt;<span class="name">value</span>&gt;</span>application/json;charset=UTF-8<span class="tag">&lt;/<span class="name">value</span>&gt;</span>  </span><br><span class="line">                    <span class="tag">&lt;/<span class="name">list</span>&gt;</span>  </span><br><span class="line">                <span class="tag">&lt;/<span class="name">property</span>&gt;</span>  </span><br><span class="line">            <span class="tag">&lt;/<span class="name">bean</span>&gt;</span>  </span><br><span class="line">        <span class="tag">&lt;/<span class="name">mvc:message-converters</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;/<span class="name">mvc:annotation-driven</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>方法二:在url映射注解中添加一段<br> <code>@RequestMapping(value=&quot;/getUsersByPage&quot;,produces = &quot;application/json; charset=utf-8&quot;)</code></p>
+</li>
+</ol>
+<h2 id="SpringMVC-HTTP请求响应的过程"><a href="#SpringMVC-HTTP请求响应的过程" class="headerlink" title="SpringMVC HTTP请求响应的过程"></a>SpringMVC HTTP请求响应的过程</h2><img src="/2018/07/07/开源框架/springMVC基本工作流程图.jpeg" title="springMVC基本工作流程图">
+<img src="/2018/07/07/开源框架/SpringMVC中HTTP请求处理流程时序图.jpeg" title="SpringMVC中HTTP请求处理流程时序图">
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">1.用户发起请求到前端控制器。</span><br><span class="line">2.前端控制器通过处理器映射器查找handler。</span><br><span class="line">3.处理器映射器返回执行链。</span><br><span class="line">	a)handler对象</span><br><span class="line">	b)拦截器（集合）</span><br><span class="line">4.前端控制器通处理器适配器包装，执行handler对象。思考：为什么要通过适配器来执行？</span><br><span class="line">5.通过模型handler处理业务逻辑。</span><br><span class="line">6.处理业务完成后，返回ModeAndView对象，其中有视图名称，模型数据。</span><br><span class="line">7.将视图名称和模型数据返回到前端控制器。</span><br><span class="line">8.前端控制器通过视图解释器查找视图对象。</span><br><span class="line">9.视图解释器返回真正的视图。</span><br><span class="line">10.前端控制器通过返回的视图和数据进行渲染。</span><br><span class="line">11.返回渲染完成的视图。</span><br><span class="line">12.将最终的视图返回给用户，产生响应。</span><br></pre></td></tr></table></figure>
+<h1 id="MyBatis"><a href="#MyBatis" class="headerlink" title="MyBatis"></a>MyBatis</h1><h2 id="数据关联"><a href="#数据关联" class="headerlink" title="数据关联"></a>数据关联</h2><h2 id="动态映射"><a href="#动态映射" class="headerlink" title="动态映射"></a>动态映射</h2><h2 id="事务关联"><a href="#事务关联" class="headerlink" title="事务关联"></a>事务关联</h2><h1 id="log4j"><a href="#log4j" class="headerlink" title="log4j"></a>log4j</h1><h2 id="web-xml中的配置"><a href="#web-xml中的配置" class="headerlink" title="web.xml中的配置"></a>web.xml中的配置</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--配置log4j--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">context-param</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>log4jConfigLocation<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>/WEB-INF/log4j.properties<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">context-param</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="代码中的使用"><a href="#代码中的使用" class="headerlink" title="代码中的使用"></a>代码中的使用</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String LOG_NAME = <span class="string">"hn_log"</span>;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String LOG_FORMATTER = <span class="string">"%s : %s.%s - %s"</span>;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String LOG_TAG = <span class="string">"hnexia"</span>;</span><br><span class="line">Logger logger = Logger.getLogger(LOG_NAME);</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">String result = ret.toString();</span><br><span class="line">String location = <span class="string">"in logAspect ======================================================================================================="</span>;</span><br><span class="line">logger.info(String.format(LOG_FORMATTER, location + LOG_TAG, className, methodName, result));</span><br></pre></td></tr></table></figure>
+<h2 id="log4j-properties"><a href="#log4j-properties" class="headerlink" title="log4j.properties"></a>log4j.properties</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">### set log levels ###</span><br><span class="line">log4j.rootLogger = debug,stdout,D,I,E</span><br><span class="line"></span><br><span class="line"># 控制台输出的配置，所有日志输出，都会显示在控制台</span><br><span class="line">log4j.appender.stdout = org.apache.log4j.ConsoleAppender</span><br><span class="line">log4j.appender.stdout.Target = System.out</span><br><span class="line">log4j.appender.stdout.layout = org.apache.log4j.PatternLayout</span><br><span class="line">log4j.appender.stdout.layout.ConversionPattern = [%-<span class="number">5</span>p] %d&#123;yyyy-MM-dd HH:mm:ss,SSS&#125; method:%l%n%m%n</span><br><span class="line"></span><br><span class="line"># DEBUG级别及以上级别的日志，会写到F://logs/log.log文件中，文件不存在的时候会自动创建</span><br><span class="line">#log4j.appender.D = org.apache.log4j.DailyRollingFileAppender</span><br><span class="line">#log4j.appender.D.File = /usr/local/tomcat/webapps/art-education-o2o/logs/debug.log</span><br><span class="line">#log4j.appender.D.Append = true</span><br><span class="line">#log4j.appender.D.Threshold = DEBUG</span><br><span class="line">#log4j.appender.D.layout = org.apache.log4j.PatternLayout</span><br><span class="line">#log4j.appender.D.layout.ConversionPattern = %-d&#123;yyyy-MM-dd HH:mm:ss&#125; [%p] %m%n</span><br><span class="line"></span><br><span class="line"># INFO，会写到F://logs/log.log文件中，文件不存在的时候会自动创建</span><br><span class="line">log4j.appender.I = org.apache.log4j.DailyRollingFileAppender</span><br><span class="line">log4j.appender.I.File = /usr/local/tomcat/webapps/art-education-o2o/logs/info.log</span><br><span class="line">log4j.appender.I.Append = <span class="keyword">true</span></span><br><span class="line">log4j.appender.I.Threshold = INFO</span><br><span class="line">log4j.appender.I.layout = org.apache.log4j.PatternLayout</span><br><span class="line">log4j.appender.I.layout.ConversionPattern = %-d&#123;yyyy-MM-dd HH:mm:ss&#125; [%p] %m%n</span><br><span class="line"></span><br><span class="line"># ERROR级别及以上级别的日志，会写到F://logs/error.log文件中，文件不存在的时候会自动创建</span><br><span class="line">log4j.appender.E = org.apache.log4j.DailyRollingFileAppender</span><br><span class="line">log4j.appender.E.File =/usr/local/tomcat/webapps/art-education-o2o/logs/error.log</span><br><span class="line">log4j.appender.E.Append = <span class="keyword">true</span></span><br><span class="line">log4j.appender.E.Threshold = ERROR</span><br><span class="line">log4j.appender.E.layout = org.apache.log4j.PatternLayout</span><br><span class="line">log4j.appender.E.layout.ConversionPattern = %-d&#123;yyyy-MM-dd HH:mm:ss&#125; [%p] %m%n</span><br><span class="line"></span><br><span class="line"># 指定com.neusoft包下的所有类的等级为DEBUG。可以把com.neusoft改为自己项目所用的包名。</span><br><span class="line">log4j.logger.com.neusoft =DEBUG</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/07/07/开源框架/" data-id="cjjcek03m000fo5t9a16qk8x5" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/07/07/开源框架/" data-id="cjjcjzxh7000ixet9m9s4bnrj" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spring/">spring</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/springMVC/">springMVC</a></li></ul>
+
     </footer>
   </div>
   
@@ -138,7 +196,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/笔记/">笔记</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/大纲/">大纲</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/教程/">教程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/笔记/">笔记</a></li></ul>
     </div>
   </div>
 
@@ -148,7 +206,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos/">centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/db2/">db2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ibase4j/">ibase4j</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zookeeper/">zookeeper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/大纲/">大纲</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/教程/">教程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos/">centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/db2/">db2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ibase4j/">ibase4j</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springMVC/">springMVC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zookeeper/">zookeeper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/快捷键/">快捷键</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/效率/">效率</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/教程/">教程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/目录/">目录</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/知识框架/">知识框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li></ul>
     </div>
   </div>
 
@@ -158,7 +216,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/centos/" style="font-size: 10px;">centos</a> <a href="/tags/db2/" style="font-size: 10px;">db2</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/ibase4j/" style="font-size: 10px;">ibase4j</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/大纲/" style="font-size: 10px;">大纲</a> <a href="/tags/教程/" style="font-size: 10px;">教程</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/算法/" style="font-size: 20px;">算法</a>
+      <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/centos/" style="font-size: 10px;">centos</a> <a href="/tags/db2/" style="font-size: 10px;">db2</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/ibase4j/" style="font-size: 10px;">ibase4j</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/springMVC/" style="font-size: 10px;">springMVC</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/效率/" style="font-size: 10px;">效率</a> <a href="/tags/教程/" style="font-size: 10px;">教程</a> <a href="/tags/数据库/" style="font-size: 20px;">数据库</a> <a href="/tags/目录/" style="font-size: 10px;">目录</a> <a href="/tags/知识框架/" style="font-size: 10px;">知识框架</a> <a href="/tags/算法/" style="font-size: 20px;">算法</a>
     </div>
   </div>
 
@@ -180,23 +238,23 @@
       <ul>
         
           <li>
+            <a href="/2018/07/08/日常小坑记录/">日常小坑记录</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/08/快捷键/">快捷键</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/08/实践出真知/">实践出真知</a>
+          </li>
+        
+          <li>
             <a href="/2018/07/08/iBase4J部署笔记/">iBase4J部署笔记</a>
           </li>
         
           <li>
             <a href="/2018/07/08/db2部署教程/">db2部署教程</a>
-          </li>
-        
-          <li>
-            <a href="/2018/07/08/左程云算法课进阶班/">左程云算法课进阶班</a>
-          </li>
-        
-          <li>
-            <a href="/2018/07/08/左程云算法课基础班/">左程云算法课基础班</a>
-          </li>
-        
-          <li>
-            <a href="/2018/07/07/算法/">算法</a>
           </li>
         
       </ul>
