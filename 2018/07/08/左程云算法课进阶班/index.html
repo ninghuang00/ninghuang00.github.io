@@ -7,18 +7,26 @@
   
   <title>左程云算法课进阶班 | Just Try It</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="左程云算法课进阶班">
+  <meta name="description" content="左程云算法课进阶班 代码地址:https://gitee.com/ninghuang/swordTOOffer/tree/master/src/cn/hn/algoriththm">
 <meta name="keywords" content="算法">
 <meta property="og:type" content="article">
 <meta property="og:title" content="左程云算法课进阶班">
 <meta property="og:url" content="http://yoursite.com/2018/07/08/左程云算法课进阶班/index.html">
 <meta property="og:site_name" content="Just Try It">
-<meta property="og:description" content="左程云算法课进阶班">
+<meta property="og:description" content="左程云算法课进阶班 代码地址:https://gitee.com/ninghuang/swordTOOffer/tree/master/src/cn/hn/algoriththm">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-08T05:19:01.000Z">
+<meta property="og:image" content="http://yoursite.com/2018/07/08/左程云算法课进阶班/单调栈.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/08/左程云算法课进阶班/窗口结构.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/08/左程云算法课进阶班/滑动窗口算法.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/08/左程云算法课进阶班/滑动窗口解题思路.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/08/左程云算法课进阶班/窗口结构应用.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/08/左程云算法课进阶班/bfprt算法主体.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/08/左程云算法课进阶班/最长回文可能性.png">
+<meta property="og:updated_time" content="2018-07-09T15:49:58.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="左程云算法课进阶班">
-<meta name="twitter:description" content="左程云算法课进阶班">
+<meta name="twitter:description" content="左程云算法课进阶班 代码地址:https://gitee.com/ninghuang/swordTOOffer/tree/master/src/cn/hn/algoriththm">
+<meta name="twitter:image" content="http://yoursite.com/2018/07/08/左程云算法课进阶班/单调栈.png">
   
     <link rel="alternate" href="/atom.xml" title="Just Try It" type="application/atom+xml">
   
@@ -98,27 +106,37 @@
         
 <div id="toc">
   <strong class="toc-title">文章目录</strong>
-  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#窗口结构"><span class="toc-text">窗口结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#窗口结构的应用"><span class="toc-text">窗口结构的应用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BFPRT算法"><span class="toc-text">BFPRT算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#KMP"><span class="toc-text">KMP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#KMP算法应用"><span class="toc-text">KMP算法应用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#求一棵树是否是另一棵树的子树"><span class="toc-text">求一棵树是否是另一棵树的子树</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Manacher算法"><span class="toc-text">Manacher算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#manacher应用"><span class="toc-text">manacher应用</span></a></li></ol></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#单调栈结构"><span class="toc-text">单调栈结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#窗口结构"><span class="toc-text">窗口结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#窗口结构的应用"><span class="toc-text">窗口结构的应用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BFPRT算法"><span class="toc-text">BFPRT算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#KMP"><span class="toc-text">KMP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#KMP算法应用"><span class="toc-text">KMP算法应用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#求一棵树是否是另一棵树的子树"><span class="toc-text">求一棵树是否是另一棵树的子树</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Manacher算法"><span class="toc-text">Manacher算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#manacher应用"><span class="toc-text">manacher应用</span></a></li></ol></li></ol>
 </div>
 
-        <p> 左程云算法课进阶班<br> <a id="more"></a></p>
+        <p> 左程云算法课进阶班<br> 代码地址:<a href="https://gitee.com/ninghuang/swordTOOffer/tree/master/src/cn/hn/algoriththm" target="_blank" rel="noopener">https://gitee.com/ninghuang/swordTOOffer/tree/master/src/cn/hn/algoriththm</a><br> <a id="more"></a></p>
+<h2 id="单调栈结构"><a href="#单调栈结构" class="headerlink" title="单调栈结构"></a>单调栈结构</h2><ol>
+<li>给定一个数组,希望在O(N)时间内,获得数组中每一个数字的左右离这个数字最近的大于这个数字的数<img src="/2018/07/08/左程云算法课进阶班/单调栈.png" title="单调栈">
+</li>
+</ol>
 <h2 id="窗口结构"><a href="#窗口结构" class="headerlink" title="窗口结构"></a>窗口结构</h2><ol>
-<li>窗口滑过数组,返回每次窗口中的最大值<ol>
+<li>窗口滑过数组,返回每次窗口中的最大值(窗口最大值更新结构)<ol>
 <li>准备一个双端队列,</li>
 <li>往队列尾部加元素下标,当前加的元素要是大于等于之前的元素,之前的元素的下标弹出</li>
-<li>窗口形成之后随着左边界移动从队列中移除对应下标,队列头为当前窗口最大值</li>
+<li>窗口形成之后随着左边界移动从队列中移除对应下标,队列头为当前窗口最大值<img src="/2018/07/08/左程云算法课进阶班/窗口结构.png" title="窗口结构">
+<img src="/2018/07/08/左程云算法课进阶班/滑动窗口算法.png" title="滑动窗口算法">
+</li>
 </ol>
 </li>
 </ol>
 <h3 id="窗口结构的应用"><a href="#窗口结构的应用" class="headerlink" title="窗口结构的应用"></a>窗口结构的应用</h3><ol>
-<li>求一个数组子数组的最大最小差值小于等于num的个数<ol>
+<li>求一个数组子数组的最大最小差值&lt;=num的个数<ol>
 <li>一个子数组如果满足条件,那么这个子数组的所有子数组满足条件</li>
 <li>一个子数组如果不满足条件,那么包含这个子数组的数组一定不满足条件</li>
 </ol>
 </li>
+<li>准备一个窗口最大值更新结构,一个窗口最小值更新结构</li>
+<li>L从0位置开始,R一直往右扩大,直到窗口中的(最大值-最小值)&gt;num停,假设这个时候在X位置,那么以0位置开头的满足条件的子数组个数为(X+1)个</li>
+<li>L移动到1位置,R继续往右,直到不满足条件,重复上述步骤</li>
+<li>时间复杂度就是遍历整个数组,O(N)</li>
 </ol>
-
-
+<img src="/2018/07/08/左程云算法课进阶班/滑动窗口解题思路.png" title="滑动窗口解题思路">
+<img src="/2018/07/08/左程云算法课进阶班/窗口结构应用.png" title="窗口结构应用">
 <h2 id="BFPRT算法"><a href="#BFPRT算法" class="headerlink" title="BFPRT算法"></a>BFPRT算法</h2><ol>
 <li>在一个无序数组中找到第k大的数字,时间复杂度O(n)<ol>
 <li>将数组分成五个数一组(余数一组),每组取中位数,组成的数组在分组取中位数直到最后返回一个数(O(1)+O(N)+O(N)+T(N/5))<ol>
@@ -131,7 +149,7 @@
 </ol>
 </li>
 </ol>
-
+<img src="/2018/07/08/左程云算法课进阶班/bfprt算法主体.png" title="bfprt算法主体">
 <h2 id="KMP"><a href="#KMP" class="headerlink" title="KMP"></a>KMP</h2><ul>
 <li>用来求解一个大字符串str1中是否包含小字符串str2<ol>
 <li>next数组:每一个字符之前的最大相等前缀和后缀长度</li>
@@ -159,7 +177,7 @@
 <li>当前字符在回文右边界R内<ol>
 <li>当前字符位置i关于C的对称点i’的回文半径在L内,那么i的回文半径等于i’的回文半径</li>
 <li>要是回文半径在L外头,那么i的回文半径就是R</li>
-<li>要是回文半径在L上,i的回文半径需要尝试
+<li>要是回文半径在L上,i的回文半径需要尝试<img src="/2018/07/08/左程云算法课进阶班/最长回文可能性.png">
 </li>
 </ol>
 </li>
@@ -174,7 +192,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/07/08/左程云算法课进阶班/" data-id="cjjcmv7mk000n2mt9d73gos2p" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/07/08/左程云算法课进阶班/" data-id="cjjc93e3a0001iat9z00sd74j" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
@@ -223,7 +241,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos/">centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/db2/">db2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ibase4j/">ibase4j</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaweb/">javaweb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springMVC/">springMVC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zookeeper/">zookeeper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/快捷键/">快捷键</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/效率/">效率</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/教程/">教程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/目录/">目录</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/知识框架/">知识框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/线程安全/">线程安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/虚拟机/">虚拟机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos/">centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/db2/">db2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ibase4j/">ibase4j</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaweb/">javaweb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springMVC/">springMVC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zookeeper/">zookeeper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/实践/">实践</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/快捷键/">快捷键</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/思维题/">思维题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/效率/">效率</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/教程/">教程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/目录/">目录</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/知识框架/">知识框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/线程安全/">线程安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/虚拟机/">虚拟机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
     </div>
   </div>
 
@@ -233,7 +251,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/centos/" style="font-size: 10px;">centos</a> <a href="/tags/db2/" style="font-size: 10px;">db2</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/ibase4j/" style="font-size: 10px;">ibase4j</a> <a href="/tags/javaweb/" style="font-size: 10px;">javaweb</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/spring/" style="font-size: 15px;">spring</a> <a href="/tags/springMVC/" style="font-size: 10px;">springMVC</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/效率/" style="font-size: 10px;">效率</a> <a href="/tags/教程/" style="font-size: 10px;">教程</a> <a href="/tags/数据库/" style="font-size: 20px;">数据库</a> <a href="/tags/目录/" style="font-size: 10px;">目录</a> <a href="/tags/知识框架/" style="font-size: 10px;">知识框架</a> <a href="/tags/算法/" style="font-size: 15px;">算法</a> <a href="/tags/线程安全/" style="font-size: 10px;">线程安全</a> <a href="/tags/虚拟机/" style="font-size: 10px;">虚拟机</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a>
+      <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/centos/" style="font-size: 10px;">centos</a> <a href="/tags/db2/" style="font-size: 10px;">db2</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/ibase4j/" style="font-size: 10px;">ibase4j</a> <a href="/tags/javaweb/" style="font-size: 10px;">javaweb</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/spring/" style="font-size: 15px;">spring</a> <a href="/tags/springMVC/" style="font-size: 10px;">springMVC</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/实践/" style="font-size: 10px;">实践</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/思维题/" style="font-size: 10px;">思维题</a> <a href="/tags/效率/" style="font-size: 10px;">效率</a> <a href="/tags/教程/" style="font-size: 10px;">教程</a> <a href="/tags/数据库/" style="font-size: 20px;">数据库</a> <a href="/tags/目录/" style="font-size: 10px;">目录</a> <a href="/tags/知识框架/" style="font-size: 10px;">知识框架</a> <a href="/tags/算法/" style="font-size: 20px;">算法</a> <a href="/tags/线程安全/" style="font-size: 10px;">线程安全</a> <a href="/tags/虚拟机/" style="font-size: 10px;">虚拟机</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a>
     </div>
   </div>
 
