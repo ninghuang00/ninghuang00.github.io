@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="Just Try It">
 <meta property="og:description" content="JVM相关知识">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-09T14:48:23.000Z">
+<meta property="og:updated_time" content="2018-07-10T14:17:47.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java虚拟机">
 <meta name="twitter:description" content="JVM相关知识">
@@ -121,7 +121,13 @@
 <li>store:工作内存,将工作内存中的变量值从工作内存传送到主内存,供之后的write操作使用 </li>
 <li>write:主内存,包store操作从工作内存中取得的值放入主内存的变量中</li>
 </ul>
-<h2 id="垃圾回收-GC"><a href="#垃圾回收-GC" class="headerlink" title="垃圾回收(GC)"></a>垃圾回收(GC)</h2><h3 id="什么时候回收"><a href="#什么时候回收" class="headerlink" title="什么时候回收"></a>什么时候回收</h3><h3 id="怎么回收"><a href="#怎么回收" class="headerlink" title="怎么回收"></a>怎么回收</h3><h3 id="引用的分类"><a href="#引用的分类" class="headerlink" title="引用的分类"></a>引用的分类</h3><ol>
+<h2 id="垃圾回收-GC"><a href="#垃圾回收-GC" class="headerlink" title="垃圾回收(GC)"></a>垃圾回收(GC)</h2><h3 id="什么时候回收"><a href="#什么时候回收" class="headerlink" title="什么时候回收"></a>什么时候回收</h3><p>JVM卸载类的判断条件</p>
+<ol>
+<li>该类的所有实例都已经被回收,也就是java堆中不存在该类的任何实例</li>
+<li>加载该类的ClassLoader已经被回收</li>
+<li>该类对应的java.lang.Class对象没有在任何地方呗引用,无法通过反射在任何地方访问该类的方法</li>
+</ol>
+<h3 id="怎么回收"><a href="#怎么回收" class="headerlink" title="怎么回收"></a>怎么回收</h3><h3 id="引用的分类"><a href="#引用的分类" class="headerlink" title="引用的分类"></a>引用的分类</h3><ol>
 <li>强引用<br> 类似<code>Object obj = new Object()</code>这类,只要强引用在,永远不会被回收</li>
 <li>软引用<br> 有用但是非必须的,只有内存不够的时候会被回收,如果回收之后还是不够才会抛出内存溢出异常</li>
 <li>弱引用<br> 只能存活到下一次垃圾回收</li>
@@ -204,7 +210,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/07/08/Java虚拟机/" data-id="cjjck88al001miat99szdub3p" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/07/08/Java虚拟机/" data-id="cjjhawy9u0006hxt9wjfks0jf" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/">JVM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/线程安全/">线程安全</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/虚拟机/">虚拟机</a></li></ul>

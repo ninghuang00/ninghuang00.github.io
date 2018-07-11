@@ -16,13 +16,17 @@
 <meta property="og:description" content="左程云算法课进阶班 代码地址:https://gitee.com/ninghuang/swordTOOffer/tree/master/src/cn/hn/algoriththm">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2018/07/08/左程云算法课进阶班/单调栈.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/08/左程云算法课进阶班/烽火台.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/08/左程云算法课进阶班/求最大子矩阵的大小.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/08/左程云算法课进阶班/求最大子矩阵的大小解法.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/08/左程云算法课进阶班/构造数组的maxTree.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/08/左程云算法课进阶班/窗口结构.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/08/左程云算法课进阶班/滑动窗口算法.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/08/左程云算法课进阶班/滑动窗口解题思路.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/08/左程云算法课进阶班/窗口结构应用.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/08/左程云算法课进阶班/bfprt算法主体.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/08/左程云算法课进阶班/最长回文可能性.png">
-<meta property="og:updated_time" content="2018-07-09T15:49:58.000Z">
+<meta property="og:updated_time" content="2018-07-11T15:30:04.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="左程云算法课进阶班">
 <meta name="twitter:description" content="左程云算法课进阶班 代码地址:https://gitee.com/ninghuang/swordTOOffer/tree/master/src/cn/hn/algoriththm">
@@ -106,14 +110,22 @@
         
 <div id="toc">
   <strong class="toc-title">文章目录</strong>
-  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#单调栈结构"><span class="toc-text">单调栈结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#窗口结构"><span class="toc-text">窗口结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#窗口结构的应用"><span class="toc-text">窗口结构的应用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BFPRT算法"><span class="toc-text">BFPRT算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#KMP"><span class="toc-text">KMP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#KMP算法应用"><span class="toc-text">KMP算法应用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#求一棵树是否是另一棵树的子树"><span class="toc-text">求一棵树是否是另一棵树的子树</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Manacher算法"><span class="toc-text">Manacher算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#manacher应用"><span class="toc-text">manacher应用</span></a></li></ol></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#单调栈结构"><span class="toc-text">单调栈结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#单调栈的应用"><span class="toc-text">单调栈的应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#烽火台"><span class="toc-text">烽火台</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#求最大子矩阵的大小"><span class="toc-text">求最大子矩阵的大小</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#构造数组的maxTree"><span class="toc-text">构造数组的maxTree</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#窗口结构"><span class="toc-text">窗口结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#窗口结构的应用"><span class="toc-text">窗口结构的应用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BFPRT算法"><span class="toc-text">BFPRT算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#KMP"><span class="toc-text">KMP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#KMP算法应用"><span class="toc-text">KMP算法应用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#求一棵树是否是另一棵树的子树"><span class="toc-text">求一棵树是否是另一棵树的子树</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Manacher算法"><span class="toc-text">Manacher算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#manacher应用"><span class="toc-text">manacher应用</span></a></li></ol></li></ol>
 </div>
 
         <p> 左程云算法课进阶班<br> 代码地址:<a href="https://gitee.com/ninghuang/swordTOOffer/tree/master/src/cn/hn/algoriththm" target="_blank" rel="noopener">https://gitee.com/ninghuang/swordTOOffer/tree/master/src/cn/hn/algoriththm</a><br> <a id="more"></a></p>
 <h2 id="单调栈结构"><a href="#单调栈结构" class="headerlink" title="单调栈结构"></a>单调栈结构</h2><ol>
-<li>给定一个数组,希望在O(N)时间内,获得数组中每一个数字的左右离这个数字最近的大于这个数字的数<img src="/2018/07/08/左程云算法课进阶班/单调栈.png" title="单调栈">
+<li>给定一个数组,希望在O(N)时间内,获得数组中每一个数字的左右离这个数字最近的大于这个数字的数<ol>
+<li>将数组中的数依次压入栈,要求下大上小,当当前要进栈的数字a大于当前栈顶的数字b时,将栈顶的数字b弹出,此时当前数字a就是b右边最近的比吧大的数,b弹出之后栈顶的数字就是b左边满足要求的数</li>
+<li>碰到一样大的数字将下标放在一起<img src="/2018/07/08/左程云算法课进阶班/单调栈.png" title="单调栈">
 </li>
 </ol>
+</li>
+</ol>
+<h2 id="单调栈的应用"><a href="#单调栈的应用" class="headerlink" title="单调栈的应用"></a>单调栈的应用</h2><h3 id="烽火台"><a href="#烽火台" class="headerlink" title="烽火台"></a>烽火台</h3><img src="/2018/07/08/左程云算法课进阶班/烽火台.png" title="烽火台">
+<h3 id="求最大子矩阵的大小"><a href="#求最大子矩阵的大小" class="headerlink" title="求最大子矩阵的大小"></a>求最大子矩阵的大小</h3><img src="/2018/07/08/左程云算法课进阶班/求最大子矩阵的大小.png" title="求最大子矩阵的大小">
+<img src="/2018/07/08/左程云算法课进阶班/求最大子矩阵的大小解法.png" title="求最大子矩阵的大小解法">
+<h3 id="构造数组的maxTree"><a href="#构造数组的maxTree" class="headerlink" title="构造数组的maxTree"></a>构造数组的maxTree</h3><img src="/2018/07/08/左程云算法课进阶班/构造数组的maxTree.png" title="构造数组的maxTree">
 <h2 id="窗口结构"><a href="#窗口结构" class="headerlink" title="窗口结构"></a>窗口结构</h2><ol>
 <li>窗口滑过数组,返回每次窗口中的最大值(窗口最大值更新结构)<ol>
 <li>准备一个双端队列,</li>
@@ -192,7 +204,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/07/08/左程云算法课进阶班/" data-id="cjjc93e3a0001iat9z00sd74j" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/07/08/左程云算法课进阶班/" data-id="cjjhawyaj000jhxt9pygy85a9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
