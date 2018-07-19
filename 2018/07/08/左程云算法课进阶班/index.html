@@ -15,7 +15,10 @@
 <meta property="og:site_name" content="Just Try It">
 <meta property="og:description" content="左程云算法课进阶班 代码地址:https://gitee.com/ninghuang/swordTOOffer/tree/master/src/cn/hn/algoriththm">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2018/07/08/左程云算法课进阶班/大楼轮廓题目.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/08/左程云算法课进阶班/大楼轮廓.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/08/左程云算法课进阶班/累加和为aim的最长子数组.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/08/左程云算法课进阶班/数组异或和.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/08/左程云算法课进阶班/Morris遍历标准1.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/08/左程云算法课进阶班/Morris遍历实现.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/08/左程云算法课进阶班/单调栈.png">
@@ -29,11 +32,11 @@
 <meta property="og:image" content="http://yoursite.com/2018/07/08/左程云算法课进阶班/窗口结构应用.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/08/左程云算法课进阶班/bfprt算法主体.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/08/左程云算法课进阶班/最长回文可能性.png">
-<meta property="og:updated_time" content="2018-07-17T16:08:03.000Z">
+<meta property="og:updated_time" content="2018-07-19T15:15:49.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="左程云算法课进阶班">
 <meta name="twitter:description" content="左程云算法课进阶班 代码地址:https://gitee.com/ninghuang/swordTOOffer/tree/master/src/cn/hn/algoriththm">
-<meta name="twitter:image" content="http://yoursite.com/2018/07/08/左程云算法课进阶班/大楼轮廓.png">
+<meta name="twitter:image" content="http://yoursite.com/2018/07/08/左程云算法课进阶班/大楼轮廓题目.png">
   
     <link rel="alternate" href="/atom.xml" title="Just Try It" type="application/atom+xml">
   
@@ -113,7 +116,7 @@
         
 <div id="toc">
   <strong class="toc-title">文章目录</strong>
-  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#二叉平衡搜索树"><span class="toc-text">二叉平衡搜索树</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二叉平衡搜索树应用"><span class="toc-text">二叉平衡搜索树应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#大楼轮廓"><span class="toc-text">大楼轮廓</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Morris遍历"><span class="toc-text">Morris遍历</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#单调栈结构"><span class="toc-text">单调栈结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#单调栈的应用"><span class="toc-text">单调栈的应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#烽火台"><span class="toc-text">烽火台</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#求最大子矩阵的大小"><span class="toc-text">求最大子矩阵的大小</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#构造数组的maxTree"><span class="toc-text">构造数组的maxTree</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#窗口结构"><span class="toc-text">窗口结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#窗口结构的应用"><span class="toc-text">窗口结构的应用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BFPRT算法"><span class="toc-text">BFPRT算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#KMP"><span class="toc-text">KMP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#KMP算法应用"><span class="toc-text">KMP算法应用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#求一棵树是否是另一棵树的子树"><span class="toc-text">求一棵树是否是另一棵树的子树</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Manacher算法"><span class="toc-text">Manacher算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#manacher应用"><span class="toc-text">manacher应用</span></a></li></ol></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#二叉平衡搜索树"><span class="toc-text">二叉平衡搜索树</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二叉平衡搜索树应用"><span class="toc-text">二叉平衡搜索树应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#大楼轮廓"><span class="toc-text">大楼轮廓</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#累加和为aim的最长子数组"><span class="toc-text">累加和为aim的最长子数组</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#变形"><span class="toc-text">变形</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Morris遍历"><span class="toc-text">Morris遍历</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#单调栈结构"><span class="toc-text">单调栈结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#单调栈的应用"><span class="toc-text">单调栈的应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#烽火台"><span class="toc-text">烽火台</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#求最大子矩阵的大小"><span class="toc-text">求最大子矩阵的大小</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#构造数组的maxTree"><span class="toc-text">构造数组的maxTree</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#窗口结构"><span class="toc-text">窗口结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#窗口结构的应用"><span class="toc-text">窗口结构的应用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BFPRT算法"><span class="toc-text">BFPRT算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#KMP"><span class="toc-text">KMP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#KMP算法应用"><span class="toc-text">KMP算法应用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#求一棵树是否是另一棵树的子树"><span class="toc-text">求一棵树是否是另一棵树的子树</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Manacher算法"><span class="toc-text">Manacher算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#manacher应用"><span class="toc-text">manacher应用</span></a></li></ol></li></ol>
 </div>
 
         <p> 左程云算法课进阶班<br> 代码地址:<a href="https://gitee.com/ninghuang/swordTOOffer/tree/master/src/cn/hn/algoriththm" target="_blank" rel="noopener">https://gitee.com/ninghuang/swordTOOffer/tree/master/src/cn/hn/algoriththm</a><br> <a id="more"></a></p>
@@ -137,7 +140,14 @@
 </ol>
 </li>
 </ol>
-<h2 id="二叉平衡搜索树应用"><a href="#二叉平衡搜索树应用" class="headerlink" title="二叉平衡搜索树应用"></a>二叉平衡搜索树应用</h2><h3 id="大楼轮廓"><a href="#大楼轮廓" class="headerlink" title="大楼轮廓"></a>大楼轮廓</h3><img src="/2018/07/08/左程云算法课进阶班/大楼轮廓.png" title="大楼轮廓">
+<h2 id="二叉平衡搜索树应用"><a href="#二叉平衡搜索树应用" class="headerlink" title="二叉平衡搜索树应用"></a>二叉平衡搜索树应用</h2><h3 id="大楼轮廓"><a href="#大楼轮廓" class="headerlink" title="大楼轮廓"></a>大楼轮廓</h3><img src="/2018/07/08/左程云算法课进阶班/大楼轮廓题目.png" title="大楼轮廓">
+<img src="/2018/07/08/左程云算法课进阶班/大楼轮廓.png" title="大楼轮廓">
+<h3 id="累加和为aim的最长子数组"><a href="#累加和为aim的最长子数组" class="headerlink" title="累加和为aim的最长子数组"></a>累加和为aim的最长子数组</h3><p>(HashMap就行)<br><img src="/2018/07/08/左程云算法课进阶班/累加和为aim的最长子数组.png" title="累加和为aim的最长子数组"></p>
+<h4 id="变形"><a href="#变形" class="headerlink" title="变形"></a>变形</h4><ol>
+<li>一个数组中有奇数和偶数,求奇数和偶数数量相等的最长子数组</li>
+<li>数组异或和<img src="/2018/07/08/左程云算法课进阶班/数组异或和.png" title="数组异或和">
+</li>
+</ol>
 <h2 id="Morris遍历"><a href="#Morris遍历" class="headerlink" title="Morris遍历"></a>Morris遍历</h2><ul>
 <li>遍历二叉树的时间复杂度为还是O(N),但是额外空间复杂度为O(1)<img src="/2018/07/08/左程云算法课进阶班/Morris遍历标准1.png" title="Morris遍历标准1">
 <img src="/2018/07/08/左程云算法课进阶班/Morris遍历实现.png" title="Morris遍历实现">
@@ -233,7 +243,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/07/08/左程云算法课进阶班/" data-id="cjjpwcuwf000nu6t9q0iqvsxk" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/07/08/左程云算法课进阶班/" data-id="cjjsp76ot000ifzt99a50popy" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
@@ -292,7 +302,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/Java基础/" style="font-size: 10px;">Java基础</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIO/" style="font-size: 10px;">NIO</a> <a href="/tags/centos/" style="font-size: 10px;">centos</a> <a href="/tags/db2/" style="font-size: 10px;">db2</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/ibase4j/" style="font-size: 10px;">ibase4j</a> <a href="/tags/javaweb/" style="font-size: 10px;">javaweb</a> <a href="/tags/kafka/" style="font-size: 10px;">kafka</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/socket/" style="font-size: 10px;">socket</a> <a href="/tags/spring/" style="font-size: 15px;">spring</a> <a href="/tags/springMVC/" style="font-size: 10px;">springMVC</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/实践/" style="font-size: 10px;">实践</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/思维题/" style="font-size: 10px;">思维题</a> <a href="/tags/效率/" style="font-size: 10px;">效率</a> <a href="/tags/教程/" style="font-size: 10px;">教程</a> <a href="/tags/数据库/" style="font-size: 20px;">数据库</a> <a href="/tags/目录/" style="font-size: 10px;">目录</a> <a href="/tags/知识框架/" style="font-size: 10px;">知识框架</a> <a href="/tags/算法/" style="font-size: 20px;">算法</a> <a href="/tags/线程安全/" style="font-size: 10px;">线程安全</a> <a href="/tags/虚拟机/" style="font-size: 10px;">虚拟机</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a>
+      <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/Java基础/" style="font-size: 10px;">Java基础</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIO/" style="font-size: 10px;">NIO</a> <a href="/tags/centos/" style="font-size: 10px;">centos</a> <a href="/tags/db2/" style="font-size: 10px;">db2</a> <a href="/tags/git/" style="font-size: 15px;">git</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/ibase4j/" style="font-size: 10px;">ibase4j</a> <a href="/tags/javaweb/" style="font-size: 10px;">javaweb</a> <a href="/tags/kafka/" style="font-size: 10px;">kafka</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/socket/" style="font-size: 10px;">socket</a> <a href="/tags/spring/" style="font-size: 15px;">spring</a> <a href="/tags/springMVC/" style="font-size: 10px;">springMVC</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/实践/" style="font-size: 10px;">实践</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/思维题/" style="font-size: 10px;">思维题</a> <a href="/tags/效率/" style="font-size: 10px;">效率</a> <a href="/tags/教程/" style="font-size: 10px;">教程</a> <a href="/tags/数据库/" style="font-size: 20px;">数据库</a> <a href="/tags/目录/" style="font-size: 10px;">目录</a> <a href="/tags/知识框架/" style="font-size: 10px;">知识框架</a> <a href="/tags/算法/" style="font-size: 20px;">算法</a> <a href="/tags/线程安全/" style="font-size: 10px;">线程安全</a> <a href="/tags/虚拟机/" style="font-size: 10px;">虚拟机</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a>
     </div>
   </div>
 
