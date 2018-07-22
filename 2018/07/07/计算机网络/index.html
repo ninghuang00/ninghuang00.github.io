@@ -15,10 +15,15 @@
 <meta property="og:site_name" content="Just Try It">
 <meta property="og:description" content="计算机网络相关知识">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-09T14:25:46.000Z">
+<meta property="og:image" content="http://yoursite.com/2018/07/07/计算机网络/网络层级结构图.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/07/计算机网络/滑动窗口控制流量.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/07/07/计算机网络/慢开始和拥塞避免.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/07/07/计算机网络/快重传和快恢复.jpg">
+<meta property="og:updated_time" content="2018-07-21T10:56:15.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="计算机网络">
 <meta name="twitter:description" content="计算机网络相关知识">
+<meta name="twitter:image" content="http://yoursite.com/2018/07/07/计算机网络/网络层级结构图.png">
   
     <link rel="alternate" href="/atom.xml" title="Just Try It" type="application/atom+xml">
   
@@ -98,7 +103,7 @@
         
 <div id="toc">
   <strong class="toc-title">文章目录</strong>
-  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#tcp和udp"><span class="toc-text">tcp和udp</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#aes与sra加密"><span class="toc-text">aes与sra加密</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#拥塞控制"><span class="toc-text">拥塞控制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#超时重传"><span class="toc-text">超时重传</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#滑动窗口"><span class="toc-text">滑动窗口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常见协议端口号"><span class="toc-text">常见协议端口号</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTPS-握手机制："><span class="toc-text">HTTPS 握手机制：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#跨站请求伪造"><span class="toc-text">跨站请求伪造</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#防御CSRF攻击"><span class="toc-text">防御CSRF攻击</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DHCP"><span class="toc-text">DHCP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cookie和session"><span class="toc-text">cookie和session</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Cookie"><span class="toc-text">Cookie</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#session"><span class="toc-text">session</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#过滤器filter"><span class="toc-text">过滤器filter</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CrossFilter"><span class="toc-text">CrossFilter</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HtmlFilter"><span class="toc-text">HtmlFilter</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CharactorFilter"><span class="toc-text">CharactorFilter</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SSL证书"><span class="toc-text">SSL证书</span></a></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#tcp和udp"><span class="toc-text">tcp和udp</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#aes与sra加密"><span class="toc-text">aes与sra加密</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#拥塞控制"><span class="toc-text">拥塞控制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#超时重传"><span class="toc-text">超时重传</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#滑动窗口"><span class="toc-text">滑动窗口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常见协议"><span class="toc-text">常见协议</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#http协议"><span class="toc-text">http协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tcp协议"><span class="toc-text">tcp协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#udp协议"><span class="toc-text">udp协议</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常见http协议端口号"><span class="toc-text">常见http协议端口号</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTPS-握手机制："><span class="toc-text">HTTPS 握手机制：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#跨站请求伪造"><span class="toc-text">跨站请求伪造</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#防御CSRF攻击"><span class="toc-text">防御CSRF攻击</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DHCP"><span class="toc-text">DHCP</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#网络编程"><span class="toc-text">网络编程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#阻塞和非阻塞"><span class="toc-text">阻塞和非阻塞</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cookie和session"><span class="toc-text">cookie和session</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Cookie"><span class="toc-text">Cookie</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#session"><span class="toc-text">session</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#过滤器filter"><span class="toc-text">过滤器filter</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CrossFilter"><span class="toc-text">CrossFilter</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HtmlFilter"><span class="toc-text">HtmlFilter</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CharactorFilter"><span class="toc-text">CharactorFilter</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SSL证书"><span class="toc-text">SSL证书</span></a></li></ol>
 </div>
 
         <p> 计算机网络相关知识<br> <a id="more"></a></p>
@@ -112,7 +117,37 @@
 <li>sra是非对称加密,分为公钥和私钥,公钥在网络中传输,私钥安全保存,<br>优点是网络传输更安全,<br>缺点是加密速度相对较慢</li>
 <li>结合两者:<br>将公钥给对方,让对方用公钥加密aes的秘钥,然后发回给自己,自己通过私钥解密获得aes秘钥后加密数据发给对方,对方就能用公用的aes秘钥解密,<br>这样既能保证加密速度,又能保证秘钥传输安全</li>
 </ol>
-<h2 id="拥塞控制"><a href="#拥塞控制" class="headerlink" title="拥塞控制"></a>拥塞控制</h2><h2 id="超时重传"><a href="#超时重传" class="headerlink" title="超时重传"></a>超时重传</h2><h2 id="滑动窗口"><a href="#滑动窗口" class="headerlink" title="滑动窗口"></a>滑动窗口</h2><h2 id="常见协议端口号"><a href="#常见协议端口号" class="headerlink" title="常见协议端口号"></a>常见协议端口号</h2><h2 id="HTTPS-握手机制："><a href="#HTTPS-握手机制：" class="headerlink" title="HTTPS 握手机制："></a>HTTPS 握手机制：</h2><ol>
+<h2 id="拥塞控制"><a href="#拥塞控制" class="headerlink" title="拥塞控制"></a>拥塞控制</h2><h2 id="超时重传"><a href="#超时重传" class="headerlink" title="超时重传"></a>超时重传</h2><h2 id="滑动窗口"><a href="#滑动窗口" class="headerlink" title="滑动窗口"></a>滑动窗口</h2><h2 id="常见协议"><a href="#常见协议" class="headerlink" title="常见协议"></a>常见协议</h2><p>TCP/IP协议族</p>
+<h3 id="http协议"><a href="#http协议" class="headerlink" title="http协议"></a>http协议</h3><ol>
+<li>在向下的过程中，需要添加下层协议所需要的首部或者尾部</li>
+<li>在向上的过程中不断拆开首部和尾部<img src="/2018/07/07/计算机网络/网络层级结构图.png" title="网络层级结构">
+</li>
+</ol>
+<h3 id="tcp协议"><a href="#tcp协议" class="headerlink" title="tcp协议"></a>tcp协议</h3><ol>
+<li>TCP支持的应用协议主要有：Telnet、FTP、SMTP,http,pop3等； </li>
+<li><p>流量控制<br>参考地址:<a href="https://blog.csdn.net/yechaodechuntian/article/details/25429143" target="_blank" rel="noopener">https://blog.csdn.net/yechaodechuntian/article/details/25429143</a><br>使用滑动窗口来控制流量,限制发送端可以发送的数据量</p>
+<img src="/2018/07/07/计算机网络/滑动窗口控制流量.jpg" title="滑动窗口控制流量">
+</li>
+<li><p>拥塞控制<br>发送方控制拥塞窗口的原则是：只要网络没有出现拥塞，拥塞窗口就再增大一些，以便把更多的分组发送出去。但只要网络出现拥塞，拥塞窗口就减小一些，以减少注入到网络中的分组数。</p>
+<ol>
+<li><p>慢开始和拥塞避免</p>
+<ol>
+<li>当 cwnd &lt; ssthresh 时，使用上述的慢开始算法。</li>
+<li>当 cwnd &gt; ssthresh 时，停止使用慢开始算法而改用拥塞避免算法。</li>
+<li>当 cwnd = ssthresh 时，既可使用慢开始算法，也可使用拥塞控制避免算法。<img src="/2018/07/07/计算机网络/慢开始和拥塞避免.jpg" title="慢开始和拥塞避免">
+</li>
+</ol>
+</li>
+<li><p>快重传和快恢复</p>
+<img src="/2018/07/07/计算机网络/快重传和快恢复.jpg" title="快重传和快恢复">
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="udp协议"><a href="#udp协议" class="headerlink" title="udp协议"></a>udp协议</h3><ol>
+<li>UDP支持的应用层协议主要有：NFS（网络文件系统）、SNMP（简单网络管理协议）、DNS（主域名称系统）、TFTP（通用文件传输协议）等。<h2 id="常见http协议端口号"><a href="#常见http协议端口号" class="headerlink" title="常见http协议端口号"></a>常见http协议端口号</h2></li>
+</ol>
+<h2 id="HTTPS-握手机制："><a href="#HTTPS-握手机制：" class="headerlink" title="HTTPS 握手机制："></a>HTTPS 握手机制：</h2><ol>
 <li>客户端 向服务器发起请求。</li>
 <li>服务端 取出公有密钥及证书并发送给客户端。</li>
 <li>客户端判断公有密钥是否有效，无效则显示警告。有效则生成一个随机数串，并以此生成客户端的共享密钥。</li>
@@ -136,9 +171,12 @@
 <li>数据包格式</li>
 <li>原理</li>
 </ol>
-<h2 id="cookie和session"><a href="#cookie和session" class="headerlink" title="cookie和session"></a>cookie和session</h2><h3 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h3><p>用cookie写一个历史浏览记录</p>
-<h3 id="session"><a href="#session" class="headerlink" title="session"></a>session</h3><p><em>用session实现购物记录</em></p>
-<ol>
+<h1 id="网络编程"><a href="#网络编程" class="headerlink" title="网络编程"></a>网络编程</h1><h2 id="阻塞和非阻塞"><a href="#阻塞和非阻塞" class="headerlink" title="阻塞和非阻塞"></a>阻塞和非阻塞</h2><ol>
+<li>Java服务器网络开发时， 请说明通讯中阻塞（blocking）/非阻塞（non-blocking 与 同步/异步IO的区别。<ol>
+<li>同步／异步主要针对客户端：<br> 同步：就是当客户端发出一个功能调用时，在没有得到结果之前，该调用就不返回。也就是说必须一件一件的事情去做，等一件做完了才能去做下一件。<br> 异步：就是当客户端发出一个功能调用时，调用者不用等接收方发出响应。实际处理这个调用的部件在完成后，会通过状态，通知和回调来通知调用者。客户端可以接着去做 后面的事情。<br> 虽然主要是针对客户端，但是服务器端不是完全没有关系的，同步／异步必须配合服务器端才能实现。同步／异步是由客户端自己控制，但是服务器端是否阻塞/非阻塞，客户端完全不需要关心。</li>
+<li>阻塞／非阻塞主要是针对服务器端：<br> 阻塞：阻塞调用是指服务器端被调用者调用结果返回之前，当前线程会被挂起。调用线程只有在得到结果之后才会返回。<br> 非阻塞：指在不能立即得到结果之前，该调用不会阻塞当前线程。<h2 id="cookie和session"><a href="#cookie和session" class="headerlink" title="cookie和session"></a>cookie和session</h2><h3 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h3>用cookie写一个历史浏览记录<h3 id="session"><a href="#session" class="headerlink" title="session"></a>session</h3><em>用session实现购物记录</em></li>
+</ol>
+</li>
 <li>session的原理 </li>
 <li>设置session的有效期 </li>
 <li>浏览器禁用Cookie后servlet共享数据导致的问题:url重写<br><em>session的常见应用</em></li>
@@ -158,7 +196,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/07/07/计算机网络/" data-id="cjjspufxx001dh2t9fqurbcjx" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/07/07/计算机网络/" data-id="cjjx0ik2f001hixt9yv6x8sj3" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/http/">http</a></li></ul>

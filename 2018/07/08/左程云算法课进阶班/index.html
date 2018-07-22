@@ -15,6 +15,7 @@
 <meta property="og:site_name" content="Just Try It">
 <meta property="og:description" content="左程云算法课进阶班 代码地址:https://gitee.com/ninghuang/swordTOOffer/tree/master/src/cn/hn/algoriththm">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2018/07/08/左程云算法课进阶班/二叉搜索树的可能性分析.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/08/左程云算法课进阶班/大楼轮廓题目.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/08/左程云算法课进阶班/大楼轮廓.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/08/左程云算法课进阶班/累加和为aim的最长子数组.png">
@@ -33,11 +34,11 @@
 <meta property="og:image" content="http://yoursite.com/2018/07/08/左程云算法课进阶班/窗口结构应用.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/08/左程云算法课进阶班/bfprt算法主体.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/08/左程云算法课进阶班/最长回文可能性.png">
-<meta property="og:updated_time" content="2018-07-19T15:34:00.000Z">
+<meta property="og:updated_time" content="2018-07-21T14:35:24.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="左程云算法课进阶班">
 <meta name="twitter:description" content="左程云算法课进阶班 代码地址:https://gitee.com/ninghuang/swordTOOffer/tree/master/src/cn/hn/algoriththm">
-<meta name="twitter:image" content="http://yoursite.com/2018/07/08/左程云算法课进阶班/大楼轮廓题目.png">
+<meta name="twitter:image" content="http://yoursite.com/2018/07/08/左程云算法课进阶班/二叉搜索树的可能性分析.png">
   
     <link rel="alternate" href="/atom.xml" title="Just Try It" type="application/atom+xml">
   
@@ -117,10 +118,22 @@
         
 <div id="toc">
   <strong class="toc-title">文章目录</strong>
-  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#二叉平衡搜索树"><span class="toc-text">二叉平衡搜索树</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二叉平衡搜索树应用"><span class="toc-text">二叉平衡搜索树应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#大楼轮廓"><span class="toc-text">大楼轮廓</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#累加和为aim的最长子数组"><span class="toc-text">累加和为aim的最长子数组</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#变形"><span class="toc-text">变形</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Morris遍历"><span class="toc-text">Morris遍历</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#单调栈结构"><span class="toc-text">单调栈结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#单调栈的应用"><span class="toc-text">单调栈的应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#烽火台"><span class="toc-text">烽火台</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#求最大子矩阵的大小"><span class="toc-text">求最大子矩阵的大小</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#构造数组的maxTree"><span class="toc-text">构造数组的maxTree</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#窗口结构"><span class="toc-text">窗口结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#窗口结构的应用"><span class="toc-text">窗口结构的应用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BFPRT算法"><span class="toc-text">BFPRT算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#KMP"><span class="toc-text">KMP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#KMP算法应用"><span class="toc-text">KMP算法应用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#求一棵树是否是另一棵树的子树"><span class="toc-text">求一棵树是否是另一棵树的子树</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Manacher算法"><span class="toc-text">Manacher算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#manacher应用"><span class="toc-text">manacher应用</span></a></li></ol></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#二叉搜索树套路"><span class="toc-text">二叉搜索树套路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二叉平衡搜索树"><span class="toc-text">二叉平衡搜索树</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二叉平衡搜索树应用"><span class="toc-text">二叉平衡搜索树应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#大楼轮廓"><span class="toc-text">大楼轮廓</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#累加和为aim的最长子数组"><span class="toc-text">累加和为aim的最长子数组</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#变形"><span class="toc-text">变形</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Morris遍历"><span class="toc-text">Morris遍历</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#单调栈结构"><span class="toc-text">单调栈结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#单调栈的应用"><span class="toc-text">单调栈的应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#烽火台"><span class="toc-text">烽火台</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#求最大子矩阵的大小"><span class="toc-text">求最大子矩阵的大小</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#构造数组的maxTree"><span class="toc-text">构造数组的maxTree</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#窗口结构"><span class="toc-text">窗口结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#窗口结构的应用"><span class="toc-text">窗口结构的应用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BFPRT算法"><span class="toc-text">BFPRT算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#KMP"><span class="toc-text">KMP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#KMP算法应用"><span class="toc-text">KMP算法应用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#求一棵树是否是另一棵树的子树"><span class="toc-text">求一棵树是否是另一棵树的子树</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Manacher算法"><span class="toc-text">Manacher算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#manacher应用"><span class="toc-text">manacher应用</span></a></li></ol></li></ol>
 </div>
 
         <p> 左程云算法课进阶班<br> 代码地址:<a href="https://gitee.com/ninghuang/swordTOOffer/tree/master/src/cn/hn/algoriththm" target="_blank" rel="noopener">https://gitee.com/ninghuang/swordTOOffer/tree/master/src/cn/hn/algoriththm</a><br> <a id="more"></a></p>
+<h2 id="二叉搜索树套路"><a href="#二叉搜索树套路" class="headerlink" title="二叉搜索树套路"></a>二叉搜索树套路</h2><img src="/2018/07/08/左程云算法课进阶班/二叉搜索树的可能性分析.png" title="二叉搜索树的可能性分析">
+<ul>
+<li>选择一个节点进行可能性分析:<ol>
+<li>最大子树来自左子树中</li>
+<li>最大子树来自右子树中</li>
+<li>这个节点就是二叉搜索树(判断信息需要左右子树中的最大二叉搜索树的头结点,左最大值,右最小值)</li>
+</ol>
+</li>
+</ul>
+<ol>
+<li>查找一棵树中的最大二叉搜索子树</li>
+</ol>
 <h2 id="二叉平衡搜索树"><a href="#二叉平衡搜索树" class="headerlink" title="二叉平衡搜索树"></a>二叉平衡搜索树</h2><p>所谓二叉搜索树就是树中每一个节点的左子树都比自己小,右子树都比自己大<br>平衡性指的是左右子树的规模差不多</p>
 <ol>
 <li>搜索节点</li>
@@ -245,7 +258,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/07/08/左程云算法课进阶班/" data-id="cjjspufwz000nh2t9og630vvs" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/07/08/左程云算法课进阶班/" data-id="cjjx0ik1h000oixt992vteppo" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
