@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="Just Try It">
 <meta property="og:description" content="JVM相关知识">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-14T12:54:22.000Z">
+<meta property="og:updated_time" content="2018-07-23T14:09:21.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java虚拟机">
 <meta name="twitter:description" content="JVM相关知识">
@@ -173,7 +173,7 @@
 <li>ParNew收集器</li>
 </ol>
 <h2 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h2><h3 id="volatile的使用-有两种语义"><a href="#volatile的使用-有两种语义" class="headerlink" title="volatile的使用(有两种语义)"></a>volatile的使用(有两种语义)</h3><ol>
-<li>能够保证修饰的变量对所有线程的可见性,当一条线层修改了了这个变量,其他线程可以马上得知.线程A修改了普通变量的值之后需要先回写到主内存之后,新的变量值才能被线程B读取到.但是并不能保证基于volatile变量的运算在并发下是安全的.<br> 使用volatile进行安全的并发运算的规则<ol>
+<li>能够保证修饰的变量对所有线程的可见性,当一条线程修改了了这个变量,其他线程可以马上得知.线程A修改了普通变量的值之后需要先回写到主内存之后,新的变量值才能被线程B读取到.但是并不能保证基于volatile变量的运算在并发下是安全的.<br> 使用volatile进行安全的并发运算的规则<ol>
 <li>运算结果不依赖变量的当前值,或者确保只有单一线程修改变量的值</li>
 <li>变量不需要与其他状态变量共同参与不变约束<br>比如多线程的累加是不安全的,因为累加不是原子操作;<br>比如布尔值的判断可以是安全的,多个线程判断一个flag是true还是false是可以线程安全的.</li>
 </ol>
@@ -252,7 +252,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/07/08/Java虚拟机/" data-id="cjjyci6cp000dtxt9yj6s9x2o" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/07/08/Java虚拟机/" data-id="cjjyg7fnv000cxnt9u1pvll39" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/">JVM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/线程安全/">线程安全</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/虚拟机/">虚拟机</a></li></ul>
