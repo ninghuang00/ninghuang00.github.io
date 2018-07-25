@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>JDK8新特性 | Just Try It</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="这是摘要">
+<meta name="keywords" content="JDK8,lambda表达式,stream,函数式编程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JDK8新特性">
+<meta property="og:url" content="http://yoursite.com/2018/07/25/JDK8新特性/index.html">
+<meta property="og:site_name" content="Just Try It">
+<meta property="og:description" content="这是摘要">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-07-25T12:47:32.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JDK8新特性">
+<meta name="twitter:description" content="这是摘要">
+  
+    <link rel="alternate" href="/atom.xml" title="Just Try It" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Just Try It</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories">categories</a>
+        
+          <a class="main-nav-link" href="/tags">tags</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-JDK8新特性" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/07/25/JDK8新特性/" class="article-date">
+  <time datetime="2018-07-25T12:12:49.000Z" itemprop="datePublished">2018-07-25</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/笔记/">笔记</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JDK8新特性
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+<div id="toc">
+  <strong class="toc-title">文章目录</strong>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#lambda表达式"><span class="toc-text">lambda表达式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数式接口"><span class="toc-text">函数式接口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数式编程"><span class="toc-text">函数式编程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#stream"><span class="toc-text">stream</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#常用方法"><span class="toc-text">常用方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FP"><span class="toc-text">FP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#接口默认方法"><span class="toc-text">接口默认方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#新的日期API"><span class="toc-text">新的日期API</span></a></li></ol>
+</div>
+
+        <p> 这是摘要<br> <a id="more"></a></p>
+<h2 id="lambda表达式"><a href="#lambda表达式" class="headerlink" title="lambda表达式"></a>lambda表达式</h2><p>将函数作为一个方法的参数进行传递,其实就是原来的用匿名内部类实现接口作为参数传递,换了一种写法.</p>
+<h2 id="函数式接口"><a href="#函数式接口" class="headerlink" title="函数式接口"></a>函数式接口</h2><p>函数式接口(Functional Interface)就是一个有且仅有一个抽象方法，但是可以有多个非抽象方法的接口。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Hello</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">sayHi</span><span class="params">(String name)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">default</span> <span class="keyword">void</span> <span class="title">sayBye</span><span class="params">(String name,String word)</span></span>&#123;</span><br><span class="line">        System.out.println(name + word);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>函数式接口可以被隐式转换为lambda表达式。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String name = <span class="string">"Jack"</span>;</span><br><span class="line">Hello hello = name1 -&gt; System.out.println(<span class="string">"hi "</span> + name1);</span><br><span class="line">hello.sayHi(name);</span><br></pre></td></tr></table></figure></p>
+<h2 id="函数式编程"><a href="#函数式编程" class="headerlink" title="函数式编程"></a>函数式编程</h2><h2 id="stream"><a href="#stream" class="headerlink" title="stream"></a>stream</h2><h3 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h3><ol>
+<li><p>map</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Integer&gt; numbers = Arrays.asList(<span class="number">3</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">7</span>, <span class="number">3</span>, <span class="number">5</span>);</span><br><span class="line"><span class="comment">// 获取对应的平方数</span></span><br><span class="line">List&lt;Integer&gt; squaresList = numbers.stream().map( i -&gt; i*i).distinct().collect(Collectors.toList());</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>filter</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; strings = Arrays.asList(<span class="string">"abc"</span>, <span class="string">""</span>, <span class="string">"bc"</span>, <span class="string">"efg"</span>, <span class="string">"abcd"</span>,<span class="string">""</span>, <span class="string">"jkl"</span>);</span><br><span class="line">List&lt;String&gt; filtered = strings.stream().filter(string -&gt; !string.isEmpty()).collect(Collectors.toList());</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>forEach</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Random random = <span class="keyword">new</span> Random();</span><br><span class="line"><span class="comment">//limit 方法用于获取指定数量的流</span></span><br><span class="line">random.ints().limit(<span class="number">10</span>).forEach(System.out::println);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>sorted</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Random random = <span class="keyword">new</span> Random();</span><br><span class="line">random.ints().limit(<span class="number">10</span>).sorted().forEach(System.out::println);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>转并行</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; strings = Arrays.asList(<span class="string">"abc"</span>, <span class="string">""</span>, <span class="string">"bc"</span>, <span class="string">"efg"</span>, <span class="string">"abcd"</span>,<span class="string">""</span>, <span class="string">"jkl"</span>);</span><br><span class="line"><span class="comment">// 获取空字符串的数量</span></span><br><span class="line"><span class="keyword">int</span> count = strings.parallelStream().filter(string -&gt; string.isEmpty()).count();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Collectors</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt;strings = Arrays.asList(<span class="string">"abc"</span>, <span class="string">""</span>, <span class="string">"bc"</span>, <span class="string">"efg"</span>, <span class="string">"abcd"</span>,<span class="string">""</span>, <span class="string">"jkl"</span>);</span><br><span class="line">List&lt;String&gt; filtered = strings.stream().filter(string -&gt; !string.isEmpty()).collect(Collectors.toList());</span><br><span class="line"> </span><br><span class="line">System.out.println(<span class="string">"筛选列表: "</span> + filtered);</span><br><span class="line">String mergedString = strings.stream().filter(string -&gt; !string.isEmpty()).collect(Collectors.joining(<span class="string">", "</span>));</span><br><span class="line">System.out.println(<span class="string">"合并字符串: "</span> + mergedString);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>统计</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Integer&gt; numbers = Arrays.asList(<span class="number">3</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">7</span>, <span class="number">3</span>, <span class="number">5</span>);</span><br><span class="line">IntSummaryStatistics stats = integers.stream().mapToInt((x) -&gt; x).summaryStatistics();</span><br><span class="line">System.out.println(<span class="string">"列表中最大的数 : "</span> + stats.getMax());</span><br><span class="line">System.out.println(<span class="string">"列表中最小的数 : "</span> + stats.getMin());</span><br><span class="line">System.out.println(<span class="string">"所有数之和 : "</span> + stats.getSum());</span><br><span class="line">System.out.println(<span class="string">"平均数 : "</span> + stats.getAverage());</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="FP"><a href="#FP" class="headerlink" title="FP"></a>FP</h2><h2 id="接口默认方法"><a href="#接口默认方法" class="headerlink" title="接口默认方法"></a>接口默认方法</h2><p>首先，之前的接口是个双刃剑，好处是面向抽象而不是面向具体编程，<strong>缺陷是，当需要修改接口时候，需要修改全部实现该接口的类</strong>，目前的java 8之前的集合框架没有foreach方法，通常能想到的解决办法是在JDK里给相关的接口添加新的方法及实现。然而，对于已经发布的版本，是没法在给接口添加新方法的同时不影响已有的实现。所以引进的默认方法。他们的目的是为了解决接口的修改与现有的实现不兼容的问题。</p>
+<h2 id="新的日期API"><a href="#新的日期API" class="headerlink" title="新的日期API"></a>新的日期API</h2><ol>
+<li><p>本地化日期API</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.time.LocalDate;</span><br><span class="line"><span class="keyword">import</span> java.time.LocalTime;</span><br><span class="line"><span class="keyword">import</span> java.time.LocalDateTime;</span><br><span class="line"><span class="keyword">import</span> java.time.Month;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Java8Tester</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span></span>&#123;</span><br><span class="line">      Java8Tester java8tester = <span class="keyword">new</span> Java8Tester();</span><br><span class="line">      java8tester.testLocalDateTime();</span><br><span class="line">   &#125;</span><br><span class="line">    </span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testLocalDateTime</span><span class="params">()</span></span>&#123;</span><br><span class="line">    </span><br><span class="line">      <span class="comment">// 获取当前的日期时间</span></span><br><span class="line">      LocalDateTime currentTime = LocalDateTime.now();</span><br><span class="line">      System.out.println(<span class="string">"当前时间: "</span> + currentTime);		<span class="comment">//当前时间: 2016-04-15T16:55:48.668</span></span><br><span class="line">        </span><br><span class="line">      LocalDate date1 = currentTime.toLocalDate();</span><br><span class="line">      System.out.println(<span class="string">"date1: "</span> + date1);			<span class="comment">//date1: 2016-04-15</span></span><br><span class="line">        </span><br><span class="line">      Month month = currentTime.getMonth();</span><br><span class="line">      <span class="keyword">int</span> day = currentTime.getDayOfMonth();</span><br><span class="line">      <span class="keyword">int</span> seconds = currentTime.getSecond();</span><br><span class="line">        </span><br><span class="line">      System.out.println(<span class="string">"月: "</span> + month +<span class="string">", 日: "</span> + day +<span class="string">", 秒: "</span> + seconds);<span class="comment">//月: APRIL, 日: 15, 秒: 48</span></span><br><span class="line">        </span><br><span class="line">      LocalDateTime date2 = currentTime.withDayOfMonth(<span class="number">10</span>).withYear(<span class="number">2012</span>);</span><br><span class="line">      System.out.println(<span class="string">"date2: "</span> + date2);			<span class="comment">//date2: 2012-04-10T16:55:48.668</span></span><br><span class="line">        </span><br><span class="line">      <span class="comment">// 12 december 2014</span></span><br><span class="line">      LocalDate date3 = LocalDate.of(<span class="number">2014</span>, Month.DECEMBER, <span class="number">12</span>);</span><br><span class="line">      System.out.println(<span class="string">"date3: "</span> + date3);			<span class="comment">//date3: 2014-12-12</span></span><br><span class="line">        </span><br><span class="line">      <span class="comment">// 22 小时 15 分钟</span></span><br><span class="line">      LocalTime date4 = LocalTime.of(<span class="number">22</span>, <span class="number">15</span>);</span><br><span class="line">      System.out.println(<span class="string">"date4: "</span> + date4);			<span class="comment">//date4: 22:15</span></span><br><span class="line">        </span><br><span class="line">      <span class="comment">// 解析字符串</span></span><br><span class="line">      LocalTime date5 = LocalTime.parse(<span class="string">"20:15:30"</span>);</span><br><span class="line">      System.out.println(<span class="string">"date5: "</span> + date5);			<span class="comment">//date5: 20:15:30</span></span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用时区的日期API</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.time.ZonedDateTime;</span><br><span class="line"><span class="keyword">import</span> java.time.ZoneId;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Java8Tester</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span></span>&#123;</span><br><span class="line">      Java8Tester java8tester = <span class="keyword">new</span> Java8Tester();</span><br><span class="line">      java8tester.testZonedDateTime();</span><br><span class="line">   &#125;</span><br><span class="line">    </span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testZonedDateTime</span><span class="params">()</span></span>&#123;</span><br><span class="line">    </span><br><span class="line">      <span class="comment">// 获取当前时间日期</span></span><br><span class="line">      ZonedDateTime date1 = ZonedDateTime.parse(<span class="string">"2015-12-03T10:15:30+05:30[Asia/Shanghai]"</span>);</span><br><span class="line">      System.out.println(<span class="string">"date1: "</span> + date1);	<span class="comment">//date1: 2015-12-03T10:15:30+08:00[Asia/Shanghai]</span></span><br><span class="line">        </span><br><span class="line">      ZoneId id = ZoneId.of(<span class="string">"Europe/Paris"</span>);</span><br><span class="line">      System.out.println(<span class="string">"ZoneId: "</span> + id);		<span class="comment">//ZoneId: Europe/Paris</span></span><br><span class="line">        </span><br><span class="line">      ZoneId currentZone = ZoneId.systemDefault();</span><br><span class="line">      System.out.println(<span class="string">"当期时区: "</span> + currentZone);		<span class="comment">//当期时区: Asia/Shanghai</span></span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/07/25/JDK8新特性/" data-id="cjk1ab2ly0000slt9s02so768" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JDK8/">JDK8</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/lambda表达式/">lambda表达式</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/stream/">stream</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/函数式编程/">函数式编程</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2118/07/07/Java开发知识框架/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Java开发知识框架
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/07/24/JVM类加载机制/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">JVM类加载机制</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/大纲/">大纲</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/教程/">教程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/框架/">框架</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/笔记/">笔记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ArrayList/">ArrayList</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HashMap/">HashMap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HashSet/">HashSet</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HashTable/">HashTable</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JDK8/">JDK8</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java基础/">Java基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LinkedList/">LinkedList</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NIO/">NIO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vector/">Vector</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos/">centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/db2/">db2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ibase4j/">ibase4j</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaweb/">javaweb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk原生线程池/">jdk原生线程池</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kafka/">kafka</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lambda表达式/">lambda表达式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket/">socket</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springMVC/">springMVC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/stream/">stream</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zookeeper/">zookeeper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/函数式编程/">函数式编程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/实践/">实践</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/平衡树/">平衡树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/快捷键/">快捷键</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/思维题/">思维题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/效率/">效率</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/教程/">教程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库事务/">数据库事务</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/目录/">目录</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/知识框架/">知识框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/磁盘存储/">磁盘存储</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/类加载机制/">类加载机制</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/索引/">索引</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/线程/">线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/线程安全/">线程安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/线程池/">线程池</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/虚拟机/">虚拟机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/进程/">进程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/集合/">集合</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ArrayList/" style="font-size: 10px;">ArrayList</a> <a href="/tags/HashMap/" style="font-size: 10px;">HashMap</a> <a href="/tags/HashSet/" style="font-size: 10px;">HashSet</a> <a href="/tags/HashTable/" style="font-size: 10px;">HashTable</a> <a href="/tags/JDK8/" style="font-size: 10px;">JDK8</a> <a href="/tags/JVM/" style="font-size: 13.33px;">JVM</a> <a href="/tags/Java/" style="font-size: 13.33px;">Java</a> <a href="/tags/Java基础/" style="font-size: 10px;">Java基础</a> <a href="/tags/LinkedList/" style="font-size: 10px;">LinkedList</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/NIO/" style="font-size: 10px;">NIO</a> <a href="/tags/Vector/" style="font-size: 10px;">Vector</a> <a href="/tags/centos/" style="font-size: 10px;">centos</a> <a href="/tags/db2/" style="font-size: 10px;">db2</a> <a href="/tags/git/" style="font-size: 13.33px;">git</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/ibase4j/" style="font-size: 10px;">ibase4j</a> <a href="/tags/javaweb/" style="font-size: 10px;">javaweb</a> <a href="/tags/jdk原生线程池/" style="font-size: 10px;">jdk原生线程池</a> <a href="/tags/kafka/" style="font-size: 10px;">kafka</a> <a href="/tags/lambda表达式/" style="font-size: 10px;">lambda表达式</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/socket/" style="font-size: 10px;">socket</a> <a href="/tags/spring/" style="font-size: 13.33px;">spring</a> <a href="/tags/springMVC/" style="font-size: 10px;">springMVC</a> <a href="/tags/stream/" style="font-size: 10px;">stream</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/函数式编程/" style="font-size: 10px;">函数式编程</a> <a href="/tags/实践/" style="font-size: 10px;">实践</a> <a href="/tags/平衡树/" style="font-size: 10px;">平衡树</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/思维题/" style="font-size: 10px;">思维题</a> <a href="/tags/效率/" style="font-size: 10px;">效率</a> <a href="/tags/教程/" style="font-size: 10px;">教程</a> <a href="/tags/数据库/" style="font-size: 20px;">数据库</a> <a href="/tags/数据库事务/" style="font-size: 10px;">数据库事务</a> <a href="/tags/目录/" style="font-size: 10px;">目录</a> <a href="/tags/知识框架/" style="font-size: 10px;">知识框架</a> <a href="/tags/磁盘存储/" style="font-size: 10px;">磁盘存储</a> <a href="/tags/算法/" style="font-size: 16.67px;">算法</a> <a href="/tags/类加载机制/" style="font-size: 10px;">类加载机制</a> <a href="/tags/索引/" style="font-size: 10px;">索引</a> <a href="/tags/线程/" style="font-size: 10px;">线程</a> <a href="/tags/线程安全/" style="font-size: 10px;">线程安全</a> <a href="/tags/线程池/" style="font-size: 10px;">线程池</a> <a href="/tags/虚拟机/" style="font-size: 10px;">虚拟机</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/进程/" style="font-size: 10px;">进程</a> <a href="/tags/集合/" style="font-size: 10px;">集合</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2118/07/">July 2118</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2118/07/07/Java开发知识框架/">Java开发知识框架</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/25/JDK8新特性/">JDK8新特性</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/24/JVM类加载机制/">JVM类加载机制</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/23/常用集合类/">常用集合类</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/23/线程池的使用/">线程池的使用</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 ninghuang<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">tags</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
