@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>5层网络模型 | Just Try It</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="这是摘要">
+<meta name="keywords" content="IP地址,MAC地址">
+<meta property="og:type" content="article">
+<meta property="og:title" content="5层网络模型">
+<meta property="og:url" content="http://yoursite.com/2018/07/28/5层网络模型/index.html">
+<meta property="og:site_name" content="Just Try It">
+<meta property="og:description" content="这是摘要">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2018/07/28/5层网络模型/网络层级结构图.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/28/5层网络模型/DHCP数据包.png">
+<meta property="og:updated_time" content="2018-07-28T11:39:23.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="5层网络模型">
+<meta name="twitter:description" content="这是摘要">
+<meta name="twitter:image" content="http://yoursite.com/2018/07/28/5层网络模型/网络层级结构图.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Just Try It" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Just Try It</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories">categories</a>
+        
+          <a class="main-nav-link" href="/tags">tags</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-5层网络模型" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/07/28/5层网络模型/" class="article-date">
+  <time datetime="2018-07-28T08:44:03.000Z" itemprop="datePublished">2018-07-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/网络/">网络</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      5层网络模型
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+<div id="toc">
+  <strong class="toc-title">文章目录</strong>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#五层网络模型"><span class="toc-text">五层网络模型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#设计者角度"><span class="toc-text">设计者角度</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#物理层"><span class="toc-text">物理层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数据链路层-MAC地址"><span class="toc-text">数据链路层(MAC地址)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#网络层-IP地址"><span class="toc-text">网络层(IP地址)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#传输层-端口号"><span class="toc-text">传输层(端口号)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#应用层-http协议"><span class="toc-text">应用层(http协议)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#用户角度"><span class="toc-text">用户角度</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#电脑是如何上网的"><span class="toc-text">电脑是如何上网的</span></a></li></ol></li></ol></li></ol>
+</div>
+
+        <p> 这是摘要<br> <a id="more"></a></p>
+<h1 id="五层网络模型"><a href="#五层网络模型" class="headerlink" title="五层网络模型"></a>五层网络模型</h1><ol>
+<li>在向下的过程中，需要添加下层协议所需要的首部或者尾部</li>
+<li>中间经过路由器的时候为了读取MAC地址和IP地址会拆包,拆到网络层</li>
+<li>在向上的过程中不断拆开首部和尾部<img src="/2018/07/28/5层网络模型/网络层级结构图.png" title="网络层级结构">
+</li>
+</ol>
+<h2 id="设计者角度"><a href="#设计者角度" class="headerlink" title="设计者角度"></a>设计者角度</h2><p>参考地址:<a href="http://www.ruanyifeng.com/blog/2012/05/internet_protocol_suite_part_i.html" target="_blank" rel="noopener">http://www.ruanyifeng.com/blog/2012/05/internet_protocol_suite_part_i.html</a></p>
+<h3 id="物理层"><a href="#物理层" class="headerlink" title="物理层"></a>物理层</h3><p>电缆连接计算机,传输电信号,</p>
+<h3 id="数据链路层-MAC地址"><a href="#数据链路层-MAC地址" class="headerlink" title="数据链路层(MAC地址)"></a>数据链路层(MAC地址)</h3><ol>
+<li>以太网协议(Ethernet):定义01信号的意义</li>
+<li>MAC地址:前6个十六进制数是厂商编号，后6个是该厂商的网卡流水号。有了MAC地址，就可以定位网卡和数据包的路径了。</li>
+<li>广播:子网中进行广播</li>
+</ol>
+<h3 id="网络层-IP地址"><a href="#网络层-IP地址" class="headerlink" title="网络层(IP地址)"></a>网络层(IP地址)</h3><p>简历主机到主机之间的通信</p>
+<ol>
+<li>由于一台电脑不可能接受世界上所有电脑的数据包,所以全世界广播是不可能的,需要新的寻址方法</li>
+<li>“网络层”出现以后，每台计算机有了两种地址，一种是MAC地址，另一种是网络地址。两种地址之间没有任何联系，MAC地址是绑定在网卡上的，网络地址则是管理员分配的，它们只是随机组合在一起。</li>
+<li>网络层使用IP协议,根据IP协议找到子网络,在子网络中通过MAC地址找到具体的计算机<ol>
+<li>互联网上的每一台计算机，都会分配到一个IP地址。这个地址分成两个部分，前一部分代表网络，后一部分代表主机。比如，IP地址172.16.254.1，这是一个32位的地址，假定它的网络部分是前24位（172.16.254），那么主机部分就是后8位（最后的那个1）。</li>
+<li>通过IP地址和子网掩码来确定网段<br>比如，已知IP地址172.16.254.1和172.16.254.233的子网掩码都是255.255.255.0，请问它们是否在同一个子网络？两者与子网掩码分别进行AND运算，结果都是172.16.254.0，因此它们在同一个子网络。</li>
+</ol>
+</li>
+<li>如何获取目标IP地址主机的MAC地址<ol>
+<li>如果不在同一个子网,那么只能通过网关(gateway)处理</li>
+<li>如果在同一个子网则通过ARP(Address Resolution Protocol)协议,也是通过广播询问对方(某个IP地址)的MAC地址</li>
+</ol>
+</li>
+</ol>
+<h3 id="传输层-端口号"><a href="#传输层-端口号" class="headerlink" title="传输层(端口号)"></a>传输层(端口号)</h3><p>“传输层”的功能，就是建立”端口到端口”的通信。只要确定主机和端口，我们就能实现程序之间的交流。</p>
+<ol>
+<li>UDP协议和TCP协议</li>
+</ol>
+<h3 id="应用层-http协议"><a href="#应用层-http协议" class="headerlink" title="应用层(http协议)"></a>应用层(http协议)</h3><p>应用程序收到”传输层”的数据，接下来就要进行解读。由于互联网是开放架构，数据来源五花八门，必须事先规定好格式，否则根本无法解读。<br><strong>“应用层”的作用，就是规定应用程序的数据格式。</strong><br></p>
+<h2 id="用户角度"><a href="#用户角度" class="headerlink" title="用户角度"></a>用户角度</h2><p>参考地址:<a href="http://www.ruanyifeng.com/blog/2012/06/internet_protocol_suite_part_ii.html" target="_blank" rel="noopener">http://www.ruanyifeng.com/blog/2012/06/internet_protocol_suite_part_ii.html</a></p>
+<h3 id="电脑是如何上网的"><a href="#电脑是如何上网的" class="headerlink" title="电脑是如何上网的"></a>电脑是如何上网的</h3><ol>
+<li>设置静态IP<br>也就是手动设置固定的:<ol>
+<li>IP地址</li>
+<li>子网掩码</li>
+<li>网关的IP地址</li>
+<li>还有DNS的IP地址</li>
+</ol>
+</li>
+<li>设置动态IP(DHCP协议)<br>这个协议规定，每一个子网络中，有一台计算机负责管理本网络的所有IP地址，它叫做”DHCP服务器”。新的计算机加入网络，必须向”DHCP服务器”发送一个”DHCP请求”数据包，申请IP地址和相关的网络参数。<img src="/2018/07/28/5层网络模型/DHCP数据包.png" title="DHCP数据包">
+<ol>
+<li>数据包格式<ol>
+<li>最前面的”以太网标头”，设置发出方（本机）的MAC地址和接收方（DHCP服务器）的MAC地址。前者就是本机网卡的MAC地址，后者这时不知道，就填入一个广播地址：FF-FF-FF-FF-FF-FF。</li>
+<li>后面的”IP标头”，设置发出方的IP地址和接收方的IP地址。这时，对于这两者，本机都不知道。于是，发出方的IP地址就设为0.0.0.0，接收方的IP地址设为255.255.255.255。然后广播的时候DHCP服务器就知道这个数据包是发给自己的</li>
+<li>最后的”UDP标头”，设置发出方的端口和接收方的端口。这一部分是DHCP协议规定好的，发出方是68端口，接收方是67端口。</li>
+</ol>
+</li>
+<li>原理<br>这个数据包构造完成后，就可以发出了。以太网是广播发送，同一个子网络的每台计算机都收到了这个包。因为接收方的MAC地址是FF-FF-FF-FF-FF-FF，看不出是发给谁的，所以每台收到这个包的计算机，还必须分析这个包的IP地址，才能确定是不是发给自己的。当看到发出方IP地址是0.0.0.0，接收方是255.255.255.255，于是DHCP服务器知道”这个包是发给我的”，而其他计算机就可以丢弃这个包。<br>接下来，DHCP服务器读出这个包的数据内容，分配好IP地址，发送回去一个”DHCP响应”数据包。这个响应包的结构也是类似的，以太网标头的MAC地址是双方的网卡地址，IP标头的IP地址是DHCP服务器的IP地址（发出方）和255.255.255.255（接收方），UDP标头的端口是67（发出方）和68（接收方），分配给请求端的IP地址和本网络的具体参数则包含在Data部分。</li>
+</ol>
+</li>
+<li>DNS(domain name service)协议<br>IP 8.8.8.8  端口 53<br>获取域名对应的IP地址,现在开始,假设要浏览器要访问Google:<ol>
+<li>首先会通过DNS得到Google服务器的IP地址</li>
+<li>判断得到不是同一个网段,所以请求需要通过网关转发处理</li>
+<li>于是确定是数据包的目的IP地址为Google服务器的IP地址,目的MAC地址为同网关的MAC地址,目的端口号80</li>
+</ol>
+</li>
+<li>走5层网络模型<ol>
+<li>应用层<br>浏览器根据http协议,打包数据</li>
+<li>传输层<br>按照TCP协议,打包数据,加入端口号</li>
+<li>网络层<br>按照IP协议打包数据,加入IP地址</li>
+<li>数据链路层<br>按照以太网协议打包数据,加入MAC地址</li>
+<li>物理层<br>传输电信号<br>因为以太网协议的数据包最大长度为1500字节,所有请求可能会被分为几个数据包来发送</li>
+</ol>
+</li>
+<li>Google服务器收到请求<br>将收到的数据包按照IP头标号顺序拼接,读取最终的数据后,进行处理并返回response</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/07/28/5层网络模型/" data-id="cjk5i2a2h0000lbnfc50jkhlk" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IP地址/">IP地址</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MAC地址/">MAC地址</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/07/28/http协议/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          http协议
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/07/25/JDK8新特性/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">JDK8新特性</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/大纲/">大纲</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/教程/">教程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/框架/">框架</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/笔记/">笔记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络/">网络</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ArrayList/">ArrayList</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSRF/">CSRF</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HashMap/">HashMap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HashSet/">HashSet</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HashTable/">HashTable</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IP地址/">IP地址</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JDK8/">JDK8</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java基础/">Java基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LinkedList/">LinkedList</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MAC地址/">MAC地址</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NIO/">NIO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vector/">Vector</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos/">centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/db2/">db2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/https/">https</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ibase4j/">ibase4j</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaweb/">javaweb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk原生线程池/">jdk原生线程池</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kafka/">kafka</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lambda表达式/">lambda表达式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket/">socket</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springMVC/">springMVC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/stream/">stream</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tcp/">tcp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/udp/">udp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zookeeper/">zookeeper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/函数式编程/">函数式编程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/实践/">实践</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/平衡树/">平衡树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/快捷键/">快捷键</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/思维题/">思维题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/效率/">效率</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/教程/">教程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库事务/">数据库事务</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/流量控制/">流量控制</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/目录/">目录</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/知识框架/">知识框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/磁盘存储/">磁盘存储</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/类加载机制/">类加载机制</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/索引/">索引</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/线程/">线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/线程安全/">线程安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/线程池/">线程池</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/虚拟机/">虚拟机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/进程/">进程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/集合/">集合</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ArrayList/" style="font-size: 10px;">ArrayList</a> <a href="/tags/CSRF/" style="font-size: 10px;">CSRF</a> <a href="/tags/HashMap/" style="font-size: 10px;">HashMap</a> <a href="/tags/HashSet/" style="font-size: 10px;">HashSet</a> <a href="/tags/HashTable/" style="font-size: 10px;">HashTable</a> <a href="/tags/IP地址/" style="font-size: 10px;">IP地址</a> <a href="/tags/JDK8/" style="font-size: 10px;">JDK8</a> <a href="/tags/JVM/" style="font-size: 13.33px;">JVM</a> <a href="/tags/Java/" style="font-size: 13.33px;">Java</a> <a href="/tags/Java基础/" style="font-size: 10px;">Java基础</a> <a href="/tags/LinkedList/" style="font-size: 10px;">LinkedList</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MAC地址/" style="font-size: 10px;">MAC地址</a> <a href="/tags/NIO/" style="font-size: 10px;">NIO</a> <a href="/tags/Vector/" style="font-size: 10px;">Vector</a> <a href="/tags/centos/" style="font-size: 10px;">centos</a> <a href="/tags/db2/" style="font-size: 10px;">db2</a> <a href="/tags/git/" style="font-size: 13.33px;">git</a> <a href="/tags/http/" style="font-size: 13.33px;">http</a> <a href="/tags/https/" style="font-size: 10px;">https</a> <a href="/tags/ibase4j/" style="font-size: 10px;">ibase4j</a> <a href="/tags/javaweb/" style="font-size: 10px;">javaweb</a> <a href="/tags/jdk原生线程池/" style="font-size: 10px;">jdk原生线程池</a> <a href="/tags/kafka/" style="font-size: 10px;">kafka</a> <a href="/tags/lambda表达式/" style="font-size: 10px;">lambda表达式</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/socket/" style="font-size: 10px;">socket</a> <a href="/tags/spring/" style="font-size: 13.33px;">spring</a> <a href="/tags/springMVC/" style="font-size: 10px;">springMVC</a> <a href="/tags/stream/" style="font-size: 10px;">stream</a> <a href="/tags/tcp/" style="font-size: 10px;">tcp</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/udp/" style="font-size: 10px;">udp</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/函数式编程/" style="font-size: 10px;">函数式编程</a> <a href="/tags/实践/" style="font-size: 10px;">实践</a> <a href="/tags/平衡树/" style="font-size: 10px;">平衡树</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/思维题/" style="font-size: 10px;">思维题</a> <a href="/tags/效率/" style="font-size: 10px;">效率</a> <a href="/tags/教程/" style="font-size: 10px;">教程</a> <a href="/tags/数据库/" style="font-size: 20px;">数据库</a> <a href="/tags/数据库事务/" style="font-size: 10px;">数据库事务</a> <a href="/tags/流量控制/" style="font-size: 10px;">流量控制</a> <a href="/tags/目录/" style="font-size: 10px;">目录</a> <a href="/tags/知识框架/" style="font-size: 10px;">知识框架</a> <a href="/tags/磁盘存储/" style="font-size: 10px;">磁盘存储</a> <a href="/tags/算法/" style="font-size: 16.67px;">算法</a> <a href="/tags/类加载机制/" style="font-size: 10px;">类加载机制</a> <a href="/tags/索引/" style="font-size: 10px;">索引</a> <a href="/tags/线程/" style="font-size: 10px;">线程</a> <a href="/tags/线程安全/" style="font-size: 10px;">线程安全</a> <a href="/tags/线程池/" style="font-size: 10px;">线程池</a> <a href="/tags/虚拟机/" style="font-size: 10px;">虚拟机</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/进程/" style="font-size: 10px;">进程</a> <a href="/tags/集合/" style="font-size: 10px;">集合</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2118/07/">July 2118</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2118/07/07/Java开发知识框架/">Java开发知识框架</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/28/tcp和udp/">tcp和udp</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/28/http协议/">http协议</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/28/5层网络模型/">5层网络模型</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/25/JDK8新特性/">JDK8新特性</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 ninghuang<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">tags</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

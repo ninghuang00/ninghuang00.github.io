@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>http协议 | Just Try It</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="这是摘要">
+<meta name="keywords" content="http,https,CSRF">
+<meta property="og:type" content="article">
+<meta property="og:title" content="http协议">
+<meta property="og:url" content="http://yoursite.com/2018/07/28/http协议/index.html">
+<meta property="og:site_name" content="Just Try It">
+<meta property="og:description" content="这是摘要">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-07-28T12:48:29.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="http协议">
+<meta name="twitter:description" content="这是摘要">
+  
+    <link rel="alternate" href="/atom.xml" title="Just Try It" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Just Try It</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories">categories</a>
+        
+          <a class="main-nav-link" href="/tags">tags</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-http协议" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/07/28/http协议/" class="article-date">
+  <time datetime="2018-07-28T09:03:53.000Z" itemprop="datePublished">2018-07-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/网络/">网络</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      http协议
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+<div id="toc">
+  <strong class="toc-title">文章目录</strong>
+  <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#http协议"><span class="toc-text">http协议</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#http请求方法"><span class="toc-text">http请求方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#关于GET-POST-PUT的区别"><span class="toc-text">关于GET,POST,PUT的区别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#请求和响应"><span class="toc-text">请求和响应</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常见http协议状态码"><span class="toc-text">常见http协议状态码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTPS-握手机制："><span class="toc-text">HTTPS 握手机制：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#跨站请求伪造"><span class="toc-text">跨站请求伪造</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#防御CSRF攻击"><span class="toc-text">防御CSRF攻击</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SSL证书"><span class="toc-text">SSL证书</span></a>
+</div>
+
+        <p> 这是摘要<br> <a id="more"></a></p>
+<h3 id="http协议"><a href="#http协议" class="headerlink" title="http协议"></a>http协议</h3><h4 id="http请求方法"><a href="#http请求方法" class="headerlink" title="http请求方法"></a>http请求方法</h4><ol>
+<li>GET(幂等,无副作用,不能带Request Body)<br>获取资源</li>
+<li><p>POST(非幂等,有副作用,能带Request Body)<br>新建或者更新资源<br>RFC文档例举的使用场景:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">- Annotation of existing resources;</span><br><span class="line">- Posting a message to a bulletin board, newsgroup, mailing list, or   </span><br><span class="line">  similar group of articles;</span><br><span class="line">- Providing a block of data, such as the result of submitting a</span><br><span class="line">  form, to a data-handling process;</span><br><span class="line">- Extending a database through an append operation.</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>PUT(幂等,有副作用,能带Request Body)<br>更新资源,如修改帖子,同一个修改不管提交几次都是一样的结果</p>
+</li>
+<li>DELETE(幂等,有副作用,不能带Request Body)<br>删除资源</li>
+<li>PATCH()<br>更新资源的一部分</li>
+<li>HEAD<br>HEAD方法跟GET方法相同，只不过服务器响应时不会返回消息体。一个HEAD请求的响应中，HTTP头中包含的元信息应该和一个GET请求的响应消息相同。这种方法可以用来获取请求中隐含的元信息，而不用传输实体本身。也经常用来测试超链接的有效性、可用性和最近的修改。</li>
+</ol>
+<h4 id="关于GET-POST-PUT的区别"><a href="#关于GET-POST-PUT的区别" class="headerlink" title="关于GET,POST,PUT的区别"></a>关于GET,POST,PUT的区别</h4><ol>
+<li>很多浏览器对GET请求的URI长度有限制</li>
+<li>GET请求是安全的(对服务器而言),因为不会改变什么</li>
+<li></li>
+</ol>
+<h4 id="请求和响应"><a href="#请求和响应" class="headerlink" title="请求和响应"></a>请求和响应</h4><p>http1.0规定请求头或者响应头的数据格式必须是ASCII码,后面的数据可以是任意类型</p>
+<ol>
+<li><p>请求</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">GET / HTTP/<span class="number">1.1</span>		<span class="comment">//第一行指定请求方法和协议版本号,后面的都是描述客户端情况</span></span><br><span class="line">Transfer-Encoding: chunked</span><br><span class="line">Accept-Encoding: gzip, deflate 		<span class="comment">//指定可以接受的压缩类型</span></span><br><span class="line">Accept-Language: zh-CN,zh;q=<span class="number">0.8</span></span><br><span class="line">Accept-Charset: GBK,utf-<span class="number">8</span>;q=<span class="number">0.7</span>,*;q=<span class="number">0.3</span></span><br><span class="line">Connection: close	<span class="comment">//明确要求服务器关闭tcp连接,在http1.0还只有短连接的时候请求头中需要声明keep-alive来保持连接</span></span><br><span class="line">Accept: *<span class="comment">/*	 		//指定客户端可以接收的数据类型</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>响应</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">HTTP/<span class="number">1.1</span> <span class="number">200</span> OK 第一行是协议版本和状态码</span><br><span class="line">Content-Type: text/plain	<span class="comment">//说明response-body中的数据格式</span></span><br><span class="line">Content-Length: <span class="number">137582</span>		<span class="comment">//本次回应的数据长度,1.1中一个tcp连接可以回应多个请求</span></span><br><span class="line">Transfer-Encoding: chunked	<span class="comment">//分块传输,返回数据长度不定</span></span><br><span class="line">Server: Apache <span class="number">0.84</span>			<span class="comment">//服务器类型</span></span><br><span class="line">Content-Encoding: gzip		<span class="comment">//说明数据的压缩类型</span></span><br><span class="line"></span><br><span class="line">&lt;html&gt;</span><br><span class="line">  &lt;body&gt;Hello World&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="常见http协议状态码"><a href="#常见http协议状态码" class="headerlink" title="常见http协议状态码"></a>常见http协议状态码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">200</span> OK - [GET]：服务器成功返回用户请求的数据，该操作是幂等的（Idempotent）。</span><br><span class="line"><span class="number">201</span> CREATED - [POST/PUT/PATCH]：用户新建或修改数据成功。</span><br><span class="line"><span class="number">202</span> Accepted - [*]：表示一个请求已经进入后台排队（异步任务）</span><br><span class="line"><span class="number">204</span> NO CONTENT - [DELETE]：用户删除数据成功。</span><br><span class="line"><span class="number">400</span> INVALID REQUEST - [POST/PUT/PATCH]：用户发出的请求有错误，服务器没有进行新建或修改数据的操作，该操作是幂等的。</span><br><span class="line"><span class="number">401</span> Unauthorized - [*]：表示用户没有权限（令牌、用户名、密码错误）。</span><br><span class="line"><span class="number">403</span> Forbidden - [*] 表示用户得到授权（与<span class="number">401</span>错误相对），但是访问是被禁止的。</span><br><span class="line"><span class="number">404</span> NOT FOUND - [*]：用户发出的请求针对的是不存在的记录，服务器没有进行操作，该操作是幂等的。</span><br><span class="line"><span class="number">406</span> Not Acceptable - [GET]：用户请求的格式不可得（比如用户请求JSON格式，但是只有XML格式）。</span><br><span class="line"><span class="number">410</span> Gone -[GET]：用户请求的资源被永久删除，且不会再得到的。</span><br><span class="line"><span class="number">422</span> Unprocesable entity - [POST/PUT/PATCH] 当创建一个对象时，发生一个验证错误。</span><br><span class="line"><span class="number">500</span> INTERNAL SERVER ERROR - [*]：服务器发生错误，用户将无法判断发出的请求是否成功。</span><br></pre></td></tr></table></figure>
+<h2 id="HTTPS-握手机制："><a href="#HTTPS-握手机制：" class="headerlink" title="HTTPS 握手机制："></a>HTTPS 握手机制：</h2><ol>
+<li>客户端 向服务器发起请求。</li>
+<li>服务端 取出公有密钥及证书并发送给客户端。</li>
+<li>客户端判断公有密钥是否有效，无效则显示警告。有效则生成一个随机数串，并以此生成客户端的共享密钥。</li>
+<li>用步骤 2 到的公有密钥对该随机数串加密，发送到服务器。</li>
+<li>服务器得到加密报文，用私有密钥解密报文，得到随机数串，并以此生成服务器端的共享密钥。此时客户端和服务端拥有相同的共享密钥，可以用该共享密钥进行安全通信。</li>
+<li>服务器对响应进行加密，客户端对报文进行解密。</li>
+</ol>
+<h2 id="跨站请求伪造"><a href="#跨站请求伪造" class="headerlink" title="跨站请求伪造"></a>跨站请求伪造</h2><p>CSRF:Cross—Site Request Forgery<br>参考地址:<a href="http://blog.csdn.net/stpeace/article/details/53512283" target="_blank" rel="noopener">http://blog.csdn.net/stpeace/article/details/53512283</a><br>过程:</p>
+<ol>
+<li>me登录网易邮箱</li>
+<li>hack制作了钓鱼网站</li>
+<li>me在没有登出邮箱的时候访问了钓鱼网站</li>
+<li>于是钓鱼网站通过me的浏览器访问了网易邮箱,带着me的cookie(此时me的浏览器与网易邮箱网站服务器之间的session尚未过期)进行了一些操作</li>
+</ol>
+<h3 id="防御CSRF攻击"><a href="#防御CSRF攻击" class="headerlink" title="防御CSRF攻击"></a>防御CSRF攻击</h3><ol>
+<li>验证HTTP referer字段<br>HTTP referer指向前一个网页的URL,而hack要发起跨站请求伪造的话只能通过他的钓鱼网站发起,合法的HTTP referer一般都是网易邮箱的页面的URL.但是这种方法依赖于浏览器的安全性和设置,浏览器可以设置成不带上referer值</li>
+<li>在请求地址中添加token并验证<br>服务器生成token发给客户端,然后客户端发起请求的时候带上token<br>GET将token放在URL后面<br>POST则将请求放在form标签最后加上<code>&lt;input type=&quot;hidden&quot; name=&quot;token&quot; value=&quot;tokenValue&quot;&gt;</code><br>但是一些论坛网站中token很难保证安全,以为用户可以自己发帖子,然后帖子中的链接就会带上token</li>
+<li>在HTTP头中增加自定义属性并验证</li>
+</ol>
+<h2 id="SSL证书"><a href="#SSL证书" class="headerlink" title="SSL证书"></a>SSL证书</h2><ol>
+<li>域名型SSL证书(DVSSL Domain Validation SSL)<br> 审核内容:域名 管理权限<br> 证书详情:使用者身份只显示某某域名<br> 一般用途:个人站点 IOS应用分发下载 登录等纯HTTPS加密需求的链接</li>
+<li>企业型SSL(OVSSL Organization Validation SSL)<br> 审核内容:域名管理权限 企业名称,地址,电话等信息的真实性<br> 证书详情:使用证身份显示公司名称<br> 一般用途:企业站点</li>
+<li>增强型SSL(EVSSL extend Validation SSL)<br> 审核内容:域名管理权限 企业名称地址电话等信息的真实性 第三方数据库的审查,例如邓白氏,114查号台,律师证明等<br> 证书详情:显示使用者显示公司名称<br> 一般用途:企业官网,电商,P2P等互联网金融网站</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/07/28/http协议/" data-id="cjk5i2a4q000nlbnfo2o84vv0" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSRF/">CSRF</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/http/">http</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/https/">https</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/07/28/tcp和udp/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          tcp和udp
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/07/28/5层网络模型/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">5层网络模型</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/大纲/">大纲</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/教程/">教程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/框架/">框架</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/笔记/">笔记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络/">网络</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ArrayList/">ArrayList</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSRF/">CSRF</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HashMap/">HashMap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HashSet/">HashSet</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HashTable/">HashTable</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IP地址/">IP地址</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JDK8/">JDK8</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java基础/">Java基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LinkedList/">LinkedList</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MAC地址/">MAC地址</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NIO/">NIO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vector/">Vector</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos/">centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/db2/">db2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/https/">https</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ibase4j/">ibase4j</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaweb/">javaweb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk原生线程池/">jdk原生线程池</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kafka/">kafka</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lambda表达式/">lambda表达式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket/">socket</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springMVC/">springMVC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/stream/">stream</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tcp/">tcp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/udp/">udp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zookeeper/">zookeeper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/函数式编程/">函数式编程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/实践/">实践</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/平衡树/">平衡树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/快捷键/">快捷键</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/思维题/">思维题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/效率/">效率</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/教程/">教程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库事务/">数据库事务</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/流量控制/">流量控制</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/目录/">目录</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/知识框架/">知识框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/磁盘存储/">磁盘存储</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/类加载机制/">类加载机制</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/索引/">索引</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/线程/">线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/线程安全/">线程安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/线程池/">线程池</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/虚拟机/">虚拟机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/进程/">进程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/集合/">集合</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ArrayList/" style="font-size: 10px;">ArrayList</a> <a href="/tags/CSRF/" style="font-size: 10px;">CSRF</a> <a href="/tags/HashMap/" style="font-size: 10px;">HashMap</a> <a href="/tags/HashSet/" style="font-size: 10px;">HashSet</a> <a href="/tags/HashTable/" style="font-size: 10px;">HashTable</a> <a href="/tags/IP地址/" style="font-size: 10px;">IP地址</a> <a href="/tags/JDK8/" style="font-size: 10px;">JDK8</a> <a href="/tags/JVM/" style="font-size: 13.33px;">JVM</a> <a href="/tags/Java/" style="font-size: 13.33px;">Java</a> <a href="/tags/Java基础/" style="font-size: 10px;">Java基础</a> <a href="/tags/LinkedList/" style="font-size: 10px;">LinkedList</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MAC地址/" style="font-size: 10px;">MAC地址</a> <a href="/tags/NIO/" style="font-size: 10px;">NIO</a> <a href="/tags/Vector/" style="font-size: 10px;">Vector</a> <a href="/tags/centos/" style="font-size: 10px;">centos</a> <a href="/tags/db2/" style="font-size: 10px;">db2</a> <a href="/tags/git/" style="font-size: 13.33px;">git</a> <a href="/tags/http/" style="font-size: 13.33px;">http</a> <a href="/tags/https/" style="font-size: 10px;">https</a> <a href="/tags/ibase4j/" style="font-size: 10px;">ibase4j</a> <a href="/tags/javaweb/" style="font-size: 10px;">javaweb</a> <a href="/tags/jdk原生线程池/" style="font-size: 10px;">jdk原生线程池</a> <a href="/tags/kafka/" style="font-size: 10px;">kafka</a> <a href="/tags/lambda表达式/" style="font-size: 10px;">lambda表达式</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/socket/" style="font-size: 10px;">socket</a> <a href="/tags/spring/" style="font-size: 13.33px;">spring</a> <a href="/tags/springMVC/" style="font-size: 10px;">springMVC</a> <a href="/tags/stream/" style="font-size: 10px;">stream</a> <a href="/tags/tcp/" style="font-size: 10px;">tcp</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/udp/" style="font-size: 10px;">udp</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/函数式编程/" style="font-size: 10px;">函数式编程</a> <a href="/tags/实践/" style="font-size: 10px;">实践</a> <a href="/tags/平衡树/" style="font-size: 10px;">平衡树</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/思维题/" style="font-size: 10px;">思维题</a> <a href="/tags/效率/" style="font-size: 10px;">效率</a> <a href="/tags/教程/" style="font-size: 10px;">教程</a> <a href="/tags/数据库/" style="font-size: 20px;">数据库</a> <a href="/tags/数据库事务/" style="font-size: 10px;">数据库事务</a> <a href="/tags/流量控制/" style="font-size: 10px;">流量控制</a> <a href="/tags/目录/" style="font-size: 10px;">目录</a> <a href="/tags/知识框架/" style="font-size: 10px;">知识框架</a> <a href="/tags/磁盘存储/" style="font-size: 10px;">磁盘存储</a> <a href="/tags/算法/" style="font-size: 16.67px;">算法</a> <a href="/tags/类加载机制/" style="font-size: 10px;">类加载机制</a> <a href="/tags/索引/" style="font-size: 10px;">索引</a> <a href="/tags/线程/" style="font-size: 10px;">线程</a> <a href="/tags/线程安全/" style="font-size: 10px;">线程安全</a> <a href="/tags/线程池/" style="font-size: 10px;">线程池</a> <a href="/tags/虚拟机/" style="font-size: 10px;">虚拟机</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/进程/" style="font-size: 10px;">进程</a> <a href="/tags/集合/" style="font-size: 10px;">集合</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2118/07/">July 2118</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2118/07/07/Java开发知识框架/">Java开发知识框架</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/28/tcp和udp/">tcp和udp</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/28/http协议/">http协议</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/28/5层网络模型/">5层网络模型</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/25/JDK8新特性/">JDK8新特性</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 ninghuang<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">tags</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
