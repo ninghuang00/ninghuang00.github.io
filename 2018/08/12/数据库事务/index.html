@@ -15,10 +15,15 @@
 <meta property="og:site_name" content="Just Try It">
 <meta property="og:description" content="参考地址:http://www.hollischuang.com/archives/898">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-12T16:20:17.000Z">
+<meta property="og:image" content="http://yoursite.com/2018/08/12/数据库事务/脏读.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/08/12/数据库事务/不可重复读.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/08/12/数据库事务/幻读.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/08/12/数据库事务/死锁的发生.jpg">
+<meta property="og:updated_time" content="2018-08-13T16:15:27.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据库事务">
 <meta name="twitter:description" content="参考地址:http://www.hollischuang.com/archives/898">
+<meta name="twitter:image" content="http://yoursite.com/2018/08/12/数据库事务/脏读.jpg">
   
     <link rel="alternate" href="/atom.xml" title="Just Try It" type="application/atom+xml">
   
@@ -98,11 +103,15 @@
         
 <div id="toc">
   <strong class="toc-title">文章目录</strong>
-  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#锁"><span class="toc-text">锁</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事务概念"><span class="toc-text">事务概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事务特性-ACID"><span class="toc-text">事务特性(ACID)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事务的隔离级别"><span class="toc-text">事务的隔离级别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#由于低级别隔离性产生的问题"><span class="toc-text">由于低级别隔离性产生的问题:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#mysql常用存储引擎"><span class="toc-text">mysql常用存储引擎</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#产生死锁的可能"><span class="toc-text">产生死锁的可能:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#避免死锁的方式"><span class="toc-text">避免死锁的方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#并发控制机制"><span class="toc-text">并发控制机制</span></a></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#命令行"><span class="toc-text">命令行</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#锁"><span class="toc-text">锁</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#锁算法"><span class="toc-text">锁算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事务概念"><span class="toc-text">事务概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事务特性-ACID"><span class="toc-text">事务特性(ACID)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事务的隔离级别"><span class="toc-text">事务的隔离级别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#由于低级别隔离性产生的问题"><span class="toc-text">由于低级别隔离性产生的问题:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#mysql常用存储引擎"><span class="toc-text">mysql常用存储引擎</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#产生死锁的可能"><span class="toc-text">产生死锁的可能:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#避免死锁的方式"><span class="toc-text">避免死锁的方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#并发控制机制"><span class="toc-text">并发控制机制</span></a></li></ol>
 </div>
 
         <p> 参考地址:<a href="http://www.hollischuang.com/archives/898" target="_blank" rel="noopener">http://www.hollischuang.com/archives/898</a></p>
  <a id="more"></a>
+<h2 id="命令行"><a href="#命令行" class="headerlink" title="命令行"></a>命令行</h2><ol>
+<li>查看隔离级别<br><code>SELECT @@tx_isolation;</code></li>
+<li>查看存储引擎<br><code>show variables like &#39;%storage_engine%&#39;;</code></li>
+</ol>
 <h2 id="锁"><a href="#锁" class="headerlink" title="锁"></a>锁</h2><ol>
 <li><p>行级锁<br>行级锁是Mysql中锁定粒度最细的一种锁，表示只针对当前操作的行进行加锁。<br>开销大，加锁慢；会出现死锁；锁定粒度最小，发生锁冲突的概率最低，并发度也最高。</p>
 <ol>
@@ -114,9 +123,19 @@
 <ol>
 <li>表共享读锁(共享锁)</li>
 <li>表独占写锁(排他锁)</li>
+<li>意向共享锁(IS)</li>
+<li>意向互斥锁(IX)<blockquote>
+<p>有的人可能会对意向锁(intention lock)的目的并不是完全的理解，我们在这里可以举一个例子：如果没有意向锁，当已经有人使用行锁对表中的某一行进行修改时，如果另外一个请求要对全表进行修改，那么就需要对所有的行是否被锁定进行扫描，在这种情况下，效率是非常低的；不过，在引入意向锁之后，当有人使用行锁对表中的某一行进行修改之前，会先为表添加意向互斥锁（IX），再为行记录添加互斥锁（X），在这时如果有人尝试对全表进行修改就不需要判断表中的每一行数据是否被加锁了，只需要通过等待意向互斥锁被释放就可以了。</p>
+</blockquote>
+</li>
 </ol>
 </li>
 <li>页级锁<br>页级锁是MySQL中锁定粒度介于行级锁和表级锁中间的一种锁。一次锁定相邻的一组记录。BDB支持页级锁</li>
+</ol>
+<h2 id="锁算法"><a href="#锁算法" class="headerlink" title="锁算法"></a>锁算法</h2><ol>
+<li>记录锁<br>记录锁（Record Lock）是加到索引记录上的锁,如果我们使用 id 或者 last_name 作为 SQL 中 WHERE 语句的过滤条件，那么 InnoDB 就可以通过索引建立的 B+ 树找到行记录并添加索引，但是如果使用 first_name 作为过滤条件时，由于 InnoDB 不知道待修改的记录具体存放的位置，也无法对将要修改哪条记录提前做出判断就会锁定整个表。</li>
+<li>间隙锁<br>间隙锁是对索引记录中的一段连续区域的锁；当使用类似 <code>SELECT * FROM users WHERE id BETWEEN 10 AND 20 FOR UPDATE;</code> 的 SQL 语句时，就会阻止其他事务向表中插入 <code>id = 15</code>的记录，因为整个范围都被间隙锁锁定了。</li>
+<li>next-key锁(解决幻读)<br>当我们更新一条记录，比如 <code>SELECT * FROM users WHERE age = 30 FOR UPDATE;</code>，InnoDB 不仅会在范围 (21, 30] 上加 Next-Key 锁，还会在这条记录后面的范围 (30, 40] 加间隙锁，所以插入 (21, 40] 范围内的记录都会被锁定。</li>
 </ol>
 <h2 id="事务概念"><a href="#事务概念" class="headerlink" title="事务概念"></a>事务概念</h2><p>一个数据库事务通常包含对数据库的读或写的一个操作序列,它存在的目的如下:</p>
 <ol>
@@ -135,23 +154,23 @@
 <li>未提交读(read Uncommited)<ul>
 <li>概念<br>一个事务可以读取另一个事务未提交的数据</li>
 <li>实现<br>事务读取数据的时候不加锁<br>事务修改数据的时候加行级共享锁</li>
-<li>可能现象<br>可能出现各种读</li>
+<li>可能现象<br>出现脏读</li>
 </ul>
 </li>
 <li>提交读(read committed) <ul>
-<li>概念<br>在一个事务修改数据过程中，如果事务还没提交，其他事务不能读该数据。</li>
+<li>概念<br>在一个事务修改数据过程中，如果事务还没提交，其他事务不能读该数据。解决脏读</li>
 <li>实现<br>事务对当前被读取的数据加 行级共享锁（当读到时才加锁），一旦读完该行，立即释放该行级共享锁；<br>事务在更新某数据的瞬间（就是发生更新的瞬间），必须先对其加 行级排他锁，直到事务结束才释放。</li>
 <li>可能现象<br>不可重复读:对于同一数据项,前面读取的数据和后来读取的数据可能不一样<br>可能出现不可重复读和幻读</li>
 </ul>
 </li>
 <li>可重复读(repeated read) <ul>
-<li>概念<br>可重复读,只有在事务一提交之后，事务二才能更改该行数据。所以，只要在事务一从开始到结束的这段时间内，无论他读取该行数据多少次，结果都是一样的。</li>
-<li>实现<br>事务在读取某数据的瞬间（就是开始读取的瞬间），必须先对其加 行级共享锁，直到事务结束才释放；<br>事务在更新某数据的瞬间（就是发生更新的瞬间），必须先对其加 行级排他锁，直到事务结束才释放。</li>
+<li>概念<br>可重复读,只有在事务一提交之后，事务二才能更改该行数据。所以，只要在事务一从开始到结束的这段时间内，无论他读取该行数据多少次，结果都是一样的。解决不可重复读</li>
+<li>实现<br>事务在读取某数据的瞬间（就是开始读取的瞬间），必须先对其加 行级共享锁，直到事务结束才释放；<br>事务在更新某数据的瞬间（就是发生更新的瞬间），必须先对其加 行级排他锁，直到事务结束才释放。<br>innodb中使用快照技术,即晚于当前事务的其他的事务的更新对本事务不可见</li>
 <li>可能现象<br>数据库进行读事务的时候就会禁止其他的写事务,进行写事务的时候就会禁止其他任何事务写操作<br>可能出现幻读,因为其他事务虽然不能修改该行数据,但是可以新增数据行,</li>
 </ul>
 </li>
 <li>可序列化(serializable) <ul>
-<li>概念<br>可序列化:最高级别,事务串行</li>
+<li>概念<br>可序列化:最高级别,事务串行,解决幻读</li>
 <li>实现<br>事务在读取数据时，必须先对其加 表级共享锁 ，直到事务结束才释放；<br>事务在更新数据时，必须先对其加 表级排他锁 ，直到事务结束才释放。</li>
 <li>可能现象<br>虽然可序列化解决了脏读、不可重复读、幻读等读现象。但是序列化事务会产生以下效果：<ol>
 <li>无法读取其它事务已修改但未提交的记录。</li>
@@ -163,9 +182,12 @@
 </li>
 </ol>
 <h2 id="由于低级别隔离性产生的问题"><a href="#由于低级别隔离性产生的问题" class="headerlink" title="由于低级别隔离性产生的问题:"></a>由于低级别隔离性产生的问题:</h2><ol>
-<li>脏读:事务1删除了表中唯一数据a,但是没有提交,此时事务2查询表返回为空,这就是脏读,然后准备插入数据a,这时候事务1发生回滚,表中又有了数据a,事务2插入错误</li>
-<li>幻读:重点在插入了新数据,事务1查询返回结果为空表,此时事务2插入新数据a并提交,然后事务1也插入数据a,此时报错,刚刚明明是空表,现在却提示数据冲突.</li>
-<li>不可重复读:重点在于修改了数据,事务1读取到数据a,此时事务2将数据a修改成数据b,然后事务1再次读取数据a时就变成了数据b</li>
+<li>脏读:session1查询test为空,此时session2插入数据不提交,然后session再次查询test就有数据了<img src="/2018/08/12/数据库事务/脏读.jpg" title="脏读">
+提交读解决脏读的方法在于,当session2插入数据的时候加了排他行锁,直到session2提交才能被访问到</li>
+<li>不可重复读:session1查询id=3的地方v=2,此时session2把v改成3并且提交,session1再次查询id=2的地方v变成了3,同一事务前后访问不一致,重点在同一条记录<img src="/2018/08/12/数据库事务/不可重复读.jpg" title="不可重复读">
+可重复读解决不可重复读的方法在于,当session1读取数据的时候加了共享行锁,知道session1结束才释放,所以session2无法修改数据</li>
+<li>幻读:重点在插入了新数据,session1查询返回结果为空表,此时session2插入新数据1并提交,(图中有误,第二次查询应去掉)然后事务1也插入数据1,此时报错,刚刚明明是空表,现在却提示数据冲突.<img src="/2018/08/12/数据库事务/幻读.jpg" title="幻读">
+出现幻读的原因是可重复读虽然加了行锁,但是无法阻止数据的插入,解决的办法就是加表锁,还有乐观锁机制?</li>
 </ol>
 <h2 id="mysql常用存储引擎"><a href="#mysql常用存储引擎" class="headerlink" title="mysql常用存储引擎"></a>mysql常用存储引擎</h2><ol>
 <li>MyISAM和MEMORY采用表级锁(table-level locking)<ol>
@@ -179,7 +201,8 @@
 </ol>
 </li>
 </ol>
-<h2 id="产生死锁的可能"><a href="#产生死锁的可能" class="headerlink" title="产生死锁的可能:"></a>产生死锁的可能:</h2><ol>
+<h2 id="产生死锁的可能"><a href="#产生死锁的可能" class="headerlink" title="产生死锁的可能:"></a>产生死锁的可能:</h2><img src="/2018/08/12/数据库事务/死锁的发生.jpg" title="死锁的发生">
+<ol>
 <li>事务1获取数据a的锁,想要访问数据b,但是此时数据b被事务2锁定,而事务2希望访问数据a,陷入相互等待的局面.<br>解决的方式就是从根源上避免这种情况的出现,就是修改程序逻辑,避免出现环,可以一开始就将所有要用到的资源锁定<br>还有就是采用抢占和回滚机制,根据时间戳来判断事务应该回滚还是等待</li>
 </ol>
 <h2 id="避免死锁的方式"><a href="#避免死锁的方式" class="headerlink" title="避免死锁的方式"></a>避免死锁的方式</h2><ol>
@@ -189,15 +212,18 @@
 </ol>
 <h2 id="并发控制机制"><a href="#并发控制机制" class="headerlink" title="并发控制机制"></a>并发控制机制</h2><p>参考地址:<a href="http://www.hollischuang.com/archives/934" target="_blank" rel="noopener">http://www.hollischuang.com/archives/934</a></p>
 <ol>
-<li>悲观锁<br>就是之前的共享锁和互斥锁(排它锁)</li>
-<li>乐观锁(其实是一种并发控制思想,基于时间戳)</li>
-<li>多版本并发控制(MVCC)<br>就是为数据的每一个写操作创建版本,在进行读操作的时候就会在有限多的版本中选择最合适的返回</li>
+<li>悲观锁(是真正的锁)<br>就是之前的共享锁和互斥锁(排它锁),就是不管如何,想要修改数据之前先加锁,可能会产生死锁</li>
+<li>乐观锁(其实是一种并发控制思想,基于时间戳或者版本号)<br>这种思想假设数据操作的时候一般不会产生冲突,只有在最后要写回数据的时候检测数据是否发生了变化,发生冲突的话进行重试或者返回错误信息让用户决定怎么处理,否则就可以正常写回<br>在整个执行过程中实际上并没有加任何锁,在要求响应速度和高并发的场景下适合,不会产生死锁,但是在高冲突频率重试成本的情况下还是建议使用悲观锁<ol>
+<li>版本控制:就是为数据的每一个写操作创建版本,在进行读操作的时候就会在有限多的版本中选择最合适的返回<br>通常是在数据表中增加一列version,然后写回数据的时候比对version</li>
+<li>基于时间戳</li>
+</ol>
+</li>
 </ol>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/08/12/数据库事务/" data-id="cjkrit1az0028x8t9nsj2dnco" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/08/12/数据库事务/" data-id="cjkshcgn90029dxt92kvjmkg6" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/事务/">事务</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
