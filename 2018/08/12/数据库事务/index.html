@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>数据库事务 | Just Try It</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="参考地址:http://www.hollischuang.com/archives/898">
+<meta name="keywords" content="数据库,事务">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据库事务">
+<meta property="og:url" content="http://yoursite.com/2018/08/12/数据库事务/index.html">
+<meta property="og:site_name" content="Just Try It">
+<meta property="og:description" content="参考地址:http://www.hollischuang.com/archives/898">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-08-12T16:20:17.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据库事务">
+<meta name="twitter:description" content="参考地址:http://www.hollischuang.com/archives/898">
+  
+    <link rel="alternate" href="/atom.xml" title="Just Try It" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Just Try It</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories">categories</a>
+        
+          <a class="main-nav-link" href="/tags">tags</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-数据库事务" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/08/12/数据库事务/" class="article-date">
+  <time datetime="2018-08-12T13:17:25.000Z" itemprop="datePublished">2018-08-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/笔记/">笔记</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      数据库事务
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+<div id="toc">
+  <strong class="toc-title">文章目录</strong>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#锁"><span class="toc-text">锁</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事务概念"><span class="toc-text">事务概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事务特性-ACID"><span class="toc-text">事务特性(ACID)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事务的隔离级别"><span class="toc-text">事务的隔离级别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#由于低级别隔离性产生的问题"><span class="toc-text">由于低级别隔离性产生的问题:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#mysql常用存储引擎"><span class="toc-text">mysql常用存储引擎</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#产生死锁的可能"><span class="toc-text">产生死锁的可能:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#避免死锁的方式"><span class="toc-text">避免死锁的方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#并发控制机制"><span class="toc-text">并发控制机制</span></a></li></ol>
+</div>
+
+        <p> 参考地址:<a href="http://www.hollischuang.com/archives/898" target="_blank" rel="noopener">http://www.hollischuang.com/archives/898</a></p>
+ <a id="more"></a>
+<h2 id="锁"><a href="#锁" class="headerlink" title="锁"></a>锁</h2><ol>
+<li><p>行级锁<br>行级锁是Mysql中锁定粒度最细的一种锁，表示只针对当前操作的行进行加锁。<br>开销大，加锁慢；会出现死锁；锁定粒度最小，发生锁冲突的概率最低，并发度也最高。</p>
+<ol>
+<li>排它锁(写锁)<br><code>SELECT ... FOR UPDATE;</code><br>排他锁又称写锁，如果事务T对数据A加上排他锁后，则其他事务不能再对A加任任何类型的封锁。获准排他锁的事务既能读数据，又能修改数据。</li>
+<li>共享锁(读锁)<br><code>SELECT ... LOCK IN SHARE MODE;</code><br>如果事务T对数据A加上共享锁后，则其他事务只能对A再加共享锁，不能加排他锁。获准共享锁的事务只能读数据，不能修改数据。</li>
+</ol>
+</li>
+<li><p>表级锁<br>表级锁是MySQL中锁定粒度最大的一种锁，表示对当前操作的整张表加锁，它实现简单，资源消耗较少，被大部分MySQL引擎支持。最常使用的MYISAM与INNODB都支持表级锁定。<br>开销小，加锁快；不会出现死锁；锁定粒度大，发出锁冲突的概率最高，并发度最低。</p>
+<ol>
+<li>表共享读锁(共享锁)</li>
+<li>表独占写锁(排他锁)</li>
+</ol>
+</li>
+<li>页级锁<br>页级锁是MySQL中锁定粒度介于行级锁和表级锁中间的一种锁。一次锁定相邻的一组记录。BDB支持页级锁</li>
+</ol>
+<h2 id="事务概念"><a href="#事务概念" class="headerlink" title="事务概念"></a>事务概念</h2><p>一个数据库事务通常包含对数据库的读或写的一个操作序列,它存在的目的如下:</p>
+<ol>
+<li>为数据库操作提供一个从失败状态恢复到正常状态的方法,同时提供了数据库即使在异常状态也能保持一致性的方法</li>
+<li>当多个应用程序并发访问数据库时,提供隔离这些操作的方法,避免操作之间相互干扰</li>
+</ol>
+<h2 id="事务特性-ACID"><a href="#事务特性-ACID" class="headerlink" title="事务特性(ACID)"></a>事务特性(ACID)</h2><p>数据库事务:银行转账的例子</p>
+<ol>
+<li>原子性(atomicity)<br>事务中对数据库的一系列操作要么全部被执行,要么都不执行</li>
+<li>一致性(consistent)<br>从一个一致性状态变到另一个一致性状态,满足数据库的完整性约束</li>
+<li>隔离性(isolation)<br>多个事务并发执行的时候,一个事务不会影响到另一个事务</li>
+<li>持久性(Durability)<br>事务一旦提交成功,对数据库的修改将永久保存在数据库中</li>
+</ol>
+<h2 id="事务的隔离级别"><a href="#事务的隔离级别" class="headerlink" title="事务的隔离级别"></a>事务的隔离级别</h2><p>参考地址:<a href="http://www.hollischuang.com/archives/943" target="_blank" rel="noopener">http://www.hollischuang.com/archives/943</a></p>
+<ol>
+<li>未提交读(read Uncommited)<ul>
+<li>概念<br>一个事务可以读取另一个事务未提交的数据</li>
+<li>实现<br>事务读取数据的时候不加锁<br>事务修改数据的时候加行级共享锁</li>
+<li>可能现象<br>可能出现各种读</li>
+</ul>
+</li>
+<li>提交读(read committed) <ul>
+<li>概念<br>在一个事务修改数据过程中，如果事务还没提交，其他事务不能读该数据。</li>
+<li>实现<br>事务对当前被读取的数据加 行级共享锁（当读到时才加锁），一旦读完该行，立即释放该行级共享锁；<br>事务在更新某数据的瞬间（就是发生更新的瞬间），必须先对其加 行级排他锁，直到事务结束才释放。</li>
+<li>可能现象<br>不可重复读:对于同一数据项,前面读取的数据和后来读取的数据可能不一样<br>可能出现不可重复读和幻读</li>
+</ul>
+</li>
+<li>可重复读(repeated read) <ul>
+<li>概念<br>可重复读,只有在事务一提交之后，事务二才能更改该行数据。所以，只要在事务一从开始到结束的这段时间内，无论他读取该行数据多少次，结果都是一样的。</li>
+<li>实现<br>事务在读取某数据的瞬间（就是开始读取的瞬间），必须先对其加 行级共享锁，直到事务结束才释放；<br>事务在更新某数据的瞬间（就是发生更新的瞬间），必须先对其加 行级排他锁，直到事务结束才释放。</li>
+<li>可能现象<br>数据库进行读事务的时候就会禁止其他的写事务,进行写事务的时候就会禁止其他任何事务写操作<br>可能出现幻读,因为其他事务虽然不能修改该行数据,但是可以新增数据行,</li>
+</ul>
+</li>
+<li>可序列化(serializable) <ul>
+<li>概念<br>可序列化:最高级别,事务串行</li>
+<li>实现<br>事务在读取数据时，必须先对其加 表级共享锁 ，直到事务结束才释放；<br>事务在更新数据时，必须先对其加 表级排他锁 ，直到事务结束才释放。</li>
+<li>可能现象<br>虽然可序列化解决了脏读、不可重复读、幻读等读现象。但是序列化事务会产生以下效果：<ol>
+<li>无法读取其它事务已修改但未提交的记录。</li>
+<li>在当前事务完成之前，其它事务不能修改目前事务已读取的记录。</li>
+<li>在当前事务完成之前，其它事务所插入的新记录，其索引键值不能在当前事务的任何语句所读取的索引键范围中。</li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="由于低级别隔离性产生的问题"><a href="#由于低级别隔离性产生的问题" class="headerlink" title="由于低级别隔离性产生的问题:"></a>由于低级别隔离性产生的问题:</h2><ol>
+<li>脏读:事务1删除了表中唯一数据a,但是没有提交,此时事务2查询表返回为空,这就是脏读,然后准备插入数据a,这时候事务1发生回滚,表中又有了数据a,事务2插入错误</li>
+<li>幻读:重点在插入了新数据,事务1查询返回结果为空表,此时事务2插入新数据a并提交,然后事务1也插入数据a,此时报错,刚刚明明是空表,现在却提示数据冲突.</li>
+<li>不可重复读:重点在于修改了数据,事务1读取到数据a,此时事务2将数据a修改成数据b,然后事务1再次读取数据a时就变成了数据b</li>
+</ol>
+<h2 id="mysql常用存储引擎"><a href="#mysql常用存储引擎" class="headerlink" title="mysql常用存储引擎"></a>mysql常用存储引擎</h2><ol>
+<li>MyISAM和MEMORY采用表级锁(table-level locking)<ol>
+<li>在myisam中是不会出现死锁的,因为一次性获取所有需要的锁要么全部满足,要么全部等待</li>
+</ol>
+</li>
+<li>BDB采用页面锁(page-level locking)或表级锁，默认为页面锁</li>
+<li>InnoDB支持行级锁(row-level locking)和表级锁,默认为行级锁<br>innodb中的行锁实现原理是在索引中的索引项上加锁,所以只有通过索引条件检索数据InnoDB才会使用行锁,否则使用的是表锁<br> 实际应用:<ol>
+<li>因为MySQL行锁是针对索引,而不是记录,所以使用相同的索引键,即使是访问不同的行也会产生锁冲突</li>
+<li>如果一张表使用多个索引,那么可以根据不同的索引键访问不同的行<br>在MySQL中，行级锁并不是直接锁记录，而是锁索引。索引分为主键索引和非主键索引两种，如果一条sql语句操作了主键索引，MySQL就会锁定这条主键索引；如果一条语句操作了非主键索引，MySQL会先锁定该非主键索引，再锁定相关的主键索引。 在UPDATE、DELETE操作时，MySQL不仅锁定WHERE条件扫描过的所有索引记录，而且会锁定相邻的键值，即所谓的next-key locking。<br>当两个事务同时执行，一个锁住了主键索引，在等待其他相关索引。另一个锁定了非主键索引，在等待主键索引。这样就会发生死锁。<br>发生死锁后，InnoDB一般都可以检测到，并使一个事务释放锁回退，另一个获取锁完成事务。<br>参考地址:<a href="https://draveness.me/mysql-innodb" target="_blank" rel="noopener">https://draveness.me/mysql-innodb</a></li>
+</ol>
+</li>
+</ol>
+<h2 id="产生死锁的可能"><a href="#产生死锁的可能" class="headerlink" title="产生死锁的可能:"></a>产生死锁的可能:</h2><ol>
+<li>事务1获取数据a的锁,想要访问数据b,但是此时数据b被事务2锁定,而事务2希望访问数据a,陷入相互等待的局面.<br>解决的方式就是从根源上避免这种情况的出现,就是修改程序逻辑,避免出现环,可以一开始就将所有要用到的资源锁定<br>还有就是采用抢占和回滚机制,根据时间戳来判断事务应该回滚还是等待</li>
+</ol>
+<h2 id="避免死锁的方式"><a href="#避免死锁的方式" class="headerlink" title="避免死锁的方式"></a>避免死锁的方式</h2><ol>
+<li>如果不同程序会并发存取多个表，尽量约定以相同的顺序访问表，可以大大降低死锁机会。</li>
+<li>在同一个事务中，尽可能做到一次锁定所需要的所有资源，减少死锁产生概率；</li>
+<li>对于非常容易产生死锁的业务部分，可以尝试使用升级锁定颗粒度，通过表级锁定来减少死锁产生的概率；</li>
+</ol>
+<h2 id="并发控制机制"><a href="#并发控制机制" class="headerlink" title="并发控制机制"></a>并发控制机制</h2><p>参考地址:<a href="http://www.hollischuang.com/archives/934" target="_blank" rel="noopener">http://www.hollischuang.com/archives/934</a></p>
+<ol>
+<li>悲观锁<br>就是之前的共享锁和互斥锁(排它锁)</li>
+<li>乐观锁(其实是一种并发控制思想,基于时间戳)</li>
+<li>多版本并发控制(MVCC)<br>就是为数据的每一个写操作创建版本,在进行读操作的时候就会在有限多的版本中选择最合适的返回</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/08/12/数据库事务/" data-id="cjkrit1az0028x8t9nsj2dnco" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/事务/">事务</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2118/07/07/Java开发知识框架/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Java开发知识框架
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/08/11/mpv快捷键/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">mpv快捷键</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/大纲/">大纲</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/教程/">教程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/框架/">框架</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活方式/">生活方式</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/笔记/">笔记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络/">网络</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ArrayList/">ArrayList</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSRF/">CSRF</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HashMap/">HashMap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HashSet/">HashSet</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HashTable/">HashTable</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IP地址/">IP地址</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JDK8/">JDK8</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java基础/">Java基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LinkedList/">LinkedList</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MAC地址/">MAC地址</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NIO/">NIO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringMVC/">SpringMVC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vector/">Vector</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos/">centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/db2/">db2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/https/">https</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ibase4j/">ibase4j</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaweb/">javaweb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk原生线程池/">jdk原生线程池</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kafka/">kafka</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lambda表达式/">lambda表达式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mpv/">mpv</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket/">socket</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springMVC/">springMVC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/stream/">stream</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tcp/">tcp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/udp/">udp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zookeeper/">zookeeper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事务/">事务</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/代理模式/">代理模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/函数式编程/">函数式编程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/单例模式/">单例模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/反向代理/">反向代理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/实践/">实践</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/平衡树/">平衡树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/开源框架/">开源框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/快捷键/">快捷键</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/思维题/">思维题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/效率/">效率</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/教程/">教程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库事务/">数据库事务</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/枚举/">枚举</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正向代理/">正向代理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/流量控制/">流量控制</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/目录/">目录</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/知识框架/">知识框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/磁盘存储/">磁盘存储</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/类加载机制/">类加载机制</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/索引/">索引</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/线程/">线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/线程安全/">线程安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/线程池/">线程池</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网易/">网易</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/虚拟机/">虚拟机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/进程/">进程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/集合/">集合</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ArrayList/" style="font-size: 10px;">ArrayList</a> <a href="/tags/CSRF/" style="font-size: 10px;">CSRF</a> <a href="/tags/HashMap/" style="font-size: 10px;">HashMap</a> <a href="/tags/HashSet/" style="font-size: 10px;">HashSet</a> <a href="/tags/HashTable/" style="font-size: 10px;">HashTable</a> <a href="/tags/IP地址/" style="font-size: 10px;">IP地址</a> <a href="/tags/JDK8/" style="font-size: 10px;">JDK8</a> <a href="/tags/JVM/" style="font-size: 13.33px;">JVM</a> <a href="/tags/Java/" style="font-size: 13.33px;">Java</a> <a href="/tags/Java基础/" style="font-size: 10px;">Java基础</a> <a href="/tags/LinkedList/" style="font-size: 10px;">LinkedList</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MAC地址/" style="font-size: 10px;">MAC地址</a> <a href="/tags/NIO/" style="font-size: 10px;">NIO</a> <a href="/tags/SpringMVC/" style="font-size: 10px;">SpringMVC</a> <a href="/tags/Vector/" style="font-size: 10px;">Vector</a> <a href="/tags/centos/" style="font-size: 10px;">centos</a> <a href="/tags/db2/" style="font-size: 10px;">db2</a> <a href="/tags/git/" style="font-size: 13.33px;">git</a> <a href="/tags/http/" style="font-size: 13.33px;">http</a> <a href="/tags/https/" style="font-size: 10px;">https</a> <a href="/tags/ibase4j/" style="font-size: 10px;">ibase4j</a> <a href="/tags/javaweb/" style="font-size: 10px;">javaweb</a> <a href="/tags/jdk原生线程池/" style="font-size: 10px;">jdk原生线程池</a> <a href="/tags/kafka/" style="font-size: 10px;">kafka</a> <a href="/tags/lambda表达式/" style="font-size: 10px;">lambda表达式</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mpv/" style="font-size: 10px;">mpv</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/socket/" style="font-size: 10px;">socket</a> <a href="/tags/spring/" style="font-size: 13.33px;">spring</a> <a href="/tags/springMVC/" style="font-size: 10px;">springMVC</a> <a href="/tags/stream/" style="font-size: 10px;">stream</a> <a href="/tags/tcp/" style="font-size: 10px;">tcp</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/udp/" style="font-size: 10px;">udp</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/事务/" style="font-size: 10px;">事务</a> <a href="/tags/代理模式/" style="font-size: 10px;">代理模式</a> <a href="/tags/函数式编程/" style="font-size: 10px;">函数式编程</a> <a href="/tags/单例模式/" style="font-size: 10px;">单例模式</a> <a href="/tags/反向代理/" style="font-size: 10px;">反向代理</a> <a href="/tags/实践/" style="font-size: 10px;">实践</a> <a href="/tags/平衡树/" style="font-size: 10px;">平衡树</a> <a href="/tags/开源框架/" style="font-size: 10px;">开源框架</a> <a href="/tags/快捷键/" style="font-size: 13.33px;">快捷键</a> <a href="/tags/思维题/" style="font-size: 10px;">思维题</a> <a href="/tags/效率/" style="font-size: 10px;">效率</a> <a href="/tags/教程/" style="font-size: 10px;">教程</a> <a href="/tags/数据库/" style="font-size: 20px;">数据库</a> <a href="/tags/数据库事务/" style="font-size: 10px;">数据库事务</a> <a href="/tags/枚举/" style="font-size: 10px;">枚举</a> <a href="/tags/正向代理/" style="font-size: 10px;">正向代理</a> <a href="/tags/流量控制/" style="font-size: 10px;">流量控制</a> <a href="/tags/目录/" style="font-size: 10px;">目录</a> <a href="/tags/知识框架/" style="font-size: 10px;">知识框架</a> <a href="/tags/磁盘存储/" style="font-size: 10px;">磁盘存储</a> <a href="/tags/算法/" style="font-size: 16.67px;">算法</a> <a href="/tags/类加载机制/" style="font-size: 10px;">类加载机制</a> <a href="/tags/索引/" style="font-size: 10px;">索引</a> <a href="/tags/线程/" style="font-size: 10px;">线程</a> <a href="/tags/线程安全/" style="font-size: 10px;">线程安全</a> <a href="/tags/线程池/" style="font-size: 10px;">线程池</a> <a href="/tags/网易/" style="font-size: 10px;">网易</a> <a href="/tags/虚拟机/" style="font-size: 10px;">虚拟机</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/进程/" style="font-size: 10px;">进程</a> <a href="/tags/集合/" style="font-size: 10px;">集合</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2118/07/">July 2118</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2118/07/07/Java开发知识框架/">Java开发知识框架</a>
+          </li>
+        
+          <li>
+            <a href="/2018/08/12/数据库事务/">数据库事务</a>
+          </li>
+        
+          <li>
+            <a href="/2018/08/11/mpv快捷键/">mpv快捷键</a>
+          </li>
+        
+          <li>
+            <a href="/2018/08/07/SpringMVC/">SpringMVC</a>
+          </li>
+        
+          <li>
+            <a href="/2018/08/04/java枚举类/">java枚举类</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 ninghuang<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">tags</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
