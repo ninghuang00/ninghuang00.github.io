@@ -5,15 +5,20 @@
   
 
   
-  <title>Archives: 2018/8 | Just Try It</title>
+  <title>分布式 | Just Try It</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Just Try It">
-<meta property="og:url" content="http://yoursite.com/archives/2018/08/index.html">
+  <meta name="description" content="参考地址:http://www.hollischuang.com/archives/1716 目前几乎很多大型网站及应用都是分布式部署的，分布式场景中的数据一致性问题一直是一个比较重要的话题。分布式的CAP理论告诉我们“任何一个分布式系统都无法同时满足一致性（Consistency）、可用性（Availability）和分区容错性（Partition tolerance），最多只能同时满足两项。">
+<meta name="keywords" content="分布式锁">
+<meta property="og:type" content="article">
+<meta property="og:title" content="分布式">
+<meta property="og:url" content="http://yoursite.com/2018/08/14/分布式/index.html">
 <meta property="og:site_name" content="Just Try It">
+<meta property="og:description" content="参考地址:http://www.hollischuang.com/archives/1716 目前几乎很多大型网站及应用都是分布式部署的，分布式场景中的数据一致性问题一直是一个比较重要的话题。分布式的CAP理论告诉我们“任何一个分布式系统都无法同时满足一致性（Consistency）、可用性（Availability）和分区容错性（Partition tolerance），最多只能同时满足两项。">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-08-14T16:06:52.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Just Try It">
+<meta name="twitter:title" content="分布式">
+<meta name="twitter:description" content="参考地址:http://www.hollischuang.com/archives/1716 目前几乎很多大型网站及应用都是分布式部署的，分布式场景中的数据一致性问题一直是一个比较重要的话题。分布式的CAP理论告诉我们“任何一个分布式系统都无法同时满足一致性（Consistency）、可用性（Availability）和分区容错性（Partition tolerance），最多只能同时满足两项。">
   
     <link rel="alternate" href="/atom.xml" title="Just Try It" type="application/atom+xml">
   
@@ -64,154 +69,85 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/08/14/分布式/" class="archive-article-date">
-  <time datetime="2018-08-14T15:53:05.000Z" itemprop="datePublished">Aug 14</time>
+        <section id="main"><article id="post-分布式" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/08/14/分布式/" class="article-date">
+  <time datetime="2018-08-14T15:53:05.000Z" itemprop="datePublished">2018-08-14</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/笔记/">笔记</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/14/分布式/">分布式</a>
+    <h1 class="article-title" itemprop="name">
+      分布式
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/08/12/数据库事务/" class="archive-article-date">
-  <time datetime="2018-08-12T13:17:25.000Z" itemprop="datePublished">Aug 12</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/12/数据库事务/">数据库事务</a>
-    </h1>
-  
+        
+<div id="toc">
+  <strong class="toc-title">文章目录</strong>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#分布式锁的实现方法"><span class="toc-text">分布式锁的实现方法</span></a></li></ol>
+</div>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/08/11/mpv快捷键/" class="archive-article-date">
-  <time datetime="2018-08-11T10:07:18.000Z" itemprop="datePublished">Aug 11</time>
-</a>
+        <p> 参考地址:<a href="http://www.hollischuang.com/archives/1716" target="_blank" rel="noopener">http://www.hollischuang.com/archives/1716</a><br> 目前几乎很多大型网站及应用都是分布式部署的，分布式场景中的数据一致性问题一直是一个比较重要的话题。分布式的CAP理论告诉我们“任何一个分布式系统都无法同时满足一致性（Consistency）、可用性（Availability）和分区容错性（Partition tolerance），最多只能同时满足两项。”所以，很多系统在设计之初就要对这三者做出取舍。在互联网领域的绝大多数的场景中，都需要牺牲强一致性来换取系统的高可用性，系统往往只需要保证“最终一致性”，只要这个最终时间是在用户可以接受的范围内即可。<br> <a id="more"></a></p>
+<h2 id="分布式锁的实现方法"><a href="#分布式锁的实现方法" class="headerlink" title="分布式锁的实现方法"></a>分布式锁的实现方法</h2><ol>
+<li><p>基于数据库实现分布式锁 </p>
+<ol>
+<li>基于数据库记录来获取分布式锁</li>
+<li>基于数据库的排他锁来获取分布式锁</li>
+</ol>
+</li>
+<li><p>基于缓存（redis，memcached，tair）实现分布式锁 </p>
+</li>
+<li><p>基于Zookeeper实现分布式锁</p>
+</li>
+</ol>
+
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/11/mpv快捷键/">mpv快捷键</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/08/07/SpringMVC/" class="archive-article-date">
-  <time datetime="2018-08-07T15:35:40.000Z" itemprop="datePublished">Aug 7</time>
-</a>
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/08/14/分布式/" data-id="cjktx3sfc001dumt9u2s7jdd9" class="article-share-link">Share</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/07/SpringMVC/">SpringMVC</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/08/04/java枚举类/" class="archive-article-date">
-  <time datetime="2018-08-04T08:25:17.000Z" itemprop="datePublished">Aug 4</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/04/java枚举类/">java枚举类</a>
-    </h1>
-  
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/分布式锁/">分布式锁</a></li></ul>
 
-    </header>
+    </footer>
   </div>
-</article>
   
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/08/04/单例模式/" class="archive-article-date">
-  <time datetime="2018-08-04T07:42:53.000Z" itemprop="datePublished">Aug 4</time>
-</a>
-      
+<nav id="article-nav">
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/04/单例模式/">单例模式</a>
-    </h1>
+    <a href="/2118/07/07/Java开发知识框架/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Java开发知识框架
+        
+      </div>
+    </a>
   
+  
+    <a href="/2018/08/12/数据库事务/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">数据库事务</div>
+    </a>
+  
+</nav>
 
-    </header>
-  </div>
+  
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/08/04/代理模式/" class="archive-article-date">
-  <time datetime="2018-08-04T07:03:50.000Z" itemprop="datePublished">Aug 4</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/04/代理模式/">代理模式</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
 
 </section>
         
