@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>git原理与使用 | Just Try It</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="这是摘要">
+<meta name="keywords" content="git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git原理与使用">
+<meta property="og:url" content="http://yoursite.com/2018/08/18/git原理与使用/index.html">
+<meta property="og:site_name" content="Just Try It">
+<meta property="og:description" content="这是摘要">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2018/08/18/git原理与使用/其他版本系统.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/18/git原理与使用/git版本系统.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/18/git原理与使用/工作区和版本库.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/18/git原理与使用/目录结构.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/18/git原理与使用/merge的原理.png">
+<meta property="og:updated_time" content="2018-08-18T06:41:17.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="git原理与使用">
+<meta name="twitter:description" content="这是摘要">
+<meta name="twitter:image" content="http://yoursite.com/2018/08/18/git原理与使用/其他版本系统.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Just Try It" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Just Try It</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories">categories</a>
+        
+          <a class="main-nav-link" href="/tags">tags</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-git原理与使用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/08/18/git原理与使用/" class="article-date">
+  <time datetime="2018-08-18T01:46:59.000Z" itemprop="datePublished">2018-08-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/笔记/">笔记</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      git原理与使用
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+<div id="toc">
+  <strong class="toc-title">文章目录</strong>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#git使用"><span class="toc-text">git使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#提交"><span class="toc-text">提交</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#回退"><span class="toc-text">回退</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#撤销操作"><span class="toc-text">撤销操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分支管理"><span class="toc-text">分支管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#暂时保存工作进度"><span class="toc-text">暂时保存工作进度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查看记录"><span class="toc-text">查看记录</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git原理"><span class="toc-text">git原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#工作区和版本库"><span class="toc-text">工作区和版本库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git目录结构"><span class="toc-text">.git目录结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#merge的过程"><span class="toc-text">merge的过程</span></a></li></ol></li></ol>
+</div>
+
+        <p> 这是摘要<br> <a id="more"></a></p>
+<p>#git</p>
+<h2 id="git使用"><a href="#git使用" class="headerlink" title="git使用"></a>git使用</h2><h3 id="提交"><a href="#提交" class="headerlink" title="提交"></a>提交</h3><ol>
+<li>合并add和commit<br><code>git commit -am &quot;message&quot;</code><br>以上命令可以直接将tracked状态的文件提交</li>
+<li>追加提交<br><code>git commit --amend</code></li>
+<li>commit和merge技巧<br>建议一个commit只修改一个问题,这样如果想在多个分支之间同步一个修改,<br>只需要用<code>git cherry-pick commitId</code>就可以完成</li>
+</ol>
+<h3 id="回退"><a href="#回退" class="headerlink" title="回退"></a>回退</h3><ol>
+<li>回退单个文件<br><code>git reset head filename</code><br>以上命令可以将暂存区的文件回退到工作区,也就是将add过的文件变回add之前的状态<br><code>git reset head</code><br>这个命令就是将所有暂存区的文件回退到工作区</li>
+<li>回退版本<br><code>git reset --hard head^</code><br>以上命令可以将代码回退到当前最新的commit<br><code>git reset --hard commit_id</code><br>将代码回退到指定commit</li>
+<li>撤销commit<br><code>git revert head</code><br>还原已经提交的修改,是提交一个新的版本，将需要revert的版本的内容再反向修改回去，版本会递增，不影响之前提交的内容。<br>此次操作之前和之后的commit和history都会保留，并且把这次撤销作为一次最新的提交<br><code>git revert HEAD</code><br>撤销前一次 commit<br><code>git revert HEAD^</code><br>撤销前前一次 commit<br><code>git revert commit-id</code><br>撤销指定的版本，撤销也会作为一次提交进行保存</li>
+</ol>
+<h3 id="撤销操作"><a href="#撤销操作" class="headerlink" title="撤销操作"></a>撤销操作</h3><ol>
+<li><code>git revert &lt;SHA&gt;</code><br>场景: 你已经执行了 git push, 把你的修改发送到了 GitHub，现在你意识到这些 commit 的其中一个是有问题的，你需要撤销那一个 commit.<br>原理: git revert 会产生一个新的 commit，它和指定 SHA 对应的 commit 是相反的（或者说是反转的）。任何从原先的 commit 里删除的内容会在新的 commit 里被加回去，任何在原先的 commit 里加入的内容会在新的 commit  里被删除。此操作是安全的,因为产生了新的commit,历史记录还在</li>
+<li><code>git commit --amend</code><br>场景: 你在最后一条 commit 消息里有个笔误，已经执行了 git commit -m “Fxies bug #42”，但在 git push 之前你意识到消息应该是 “Fixes bug #42″<br>原理: git commit –amend 会用一个新的 commit 更新并替换最近的 commit ，这个新的 commit 会把任何修改内容和上一个 commit 的内容结合起来。如果当前没有提出任何修改，这个操作就只会把上次的 commit 消息重写一遍。</li>
+<li><code>git checkout -- &lt;bad filename&gt;</code><br>场景: 一只猫从键盘上走过，无意中保存了修改，然后破坏了编辑器。不过，你还没有 commit 这些修改。你想要恢复被修改文件里的所有内容 — 就像上次 commit 的时候一模一样。<br>原理: git checkout 会把工作目录里的文件修改到 Git 之前记录的某个状态。你可以提供一个你想返回的分支名或特定 SHA ，或者在缺省情况下，Git 会认为你希望 checkout 的是 HEAD，当前 checkout 分支的最后一次 commit。<br>记住：你用这种方法“撤销”的任何修改真的会完全消失。因为它们从来没有被提交过，所以之后 Git 也无法帮助我们恢复它们。你要确保自己了解你在这个操作里扔掉的东西是什么！（也许可以先利用 git diff 确认一下）</li>
+<li><code>git reset &lt;last good SHA&gt; 或 git reset --hard &lt;last good SHA&gt;</code><br>场景: 你在本地提交了一些东西（还没有 push），但是所有这些东西都很糟糕，你希望撤销前面的三次提交 — 就像它们从来没有发生过一样。<br>原理: git reset 会把你的代码库历史返回到指定的 SHA 状态。 这样就像是这些提交从来没有发生过。<ol>
+<li>–soft,工作区和暂存区都不动,只是撤销了commit<br>Does not touch the index file or the working tree at all.</li>
+<li>缺省情况下(–mixed)， <strong>git reset 会保留工作目录。</strong>这样，提交是没有了，但是修改内容还在磁盘上。这是一种安全的选择，<br>Resets the index but not the working tree.</li>
+<li>但通常我们会希望一步就“撤销”提交以及修改内容 ,这就是 –hard 选项的功能。<br>Resets the index and working tree. </li>
+</ol>
+</li>
+<li>利用分支的另一种做法<br>场景: 你进行了一些提交，然后意识到你开始 check out 的是 master 分支。你希望这些提交进到另一个特性（feature）分支里。<br>方法: <code>git branch feature, git reset --hard origin/master, and git checkout feature</code><br>原理: 你可能习惯了用 <code>git checkout -b &lt;name&gt;</code>创建新的分支 — 这是创建新分支并马上 check out 的流行捷径 — 但是你不希望马上切换分支。这里，<code>git branch feature</code> 创建一个叫做 feature 的新分支并指向你最近的 commit，但还是让你 check out 在 master 分支上。<br>下一步，在提交任何新的 commit 之前，用 <code>git reset --hard</code> 把 master 分支倒回 origin/master 。不过别担心，那些 commit 还在 feature 分支里。<br>最后，用 git checkout 切换到新的 feature 分支，并且让你最近所有的工作成果都完好无损。</li>
+<li><code>git rm --cached application.log</code><br>场景: 你偶然把 application.log 加到代码库里了，现在每次你运行应用，Git 都会报告在 application.log 里有未提交的修改。你把 <code>*.login</code>放到了 .gitignore 文件里，可文件还是在代码库里 — 你怎么才能告诉 Git “撤销” 对这个文件的追踪呢？<br>原理: 虽然 .gitignore 会阻止 Git 追踪文件的修改，甚至不关注文件是否存在，但这只是针对那些以前从来没有追踪过的文件。一旦有个文件被加入并提交了，Git 就会持续关注该文件的改变。类似地，如果你利用<code>git add -f</code> 来强制或覆盖了 .gitignore， Git 还会持续追踪改变的情况。之后你就不必用-f  来添加这个文件了。<br>如果你希望从 Git 的追踪对象中删除那个本应忽略的文件， <code>git rm --cached</code>会从追踪对象中删除它，但让文件在磁盘上保持原封不动。因为现在它已经被忽略了，你在  git status 里就不会再看见这个文件，也不会再偶然提交该文件的修改了。</li>
+</ol>
+<h3 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h3><ol>
+<li><p>查看当前分支基于那个分支</p>
+</li>
+<li><p>将主线代码合并到自己的分支</p>
+<ol>
+<li>切换到master分支<br>　　<code>git checkout master</code></li>
+<li>将remote master同步到local master<br>　　<code>git pull origin master</code></li>
+<li>切换到的local开发分支<br>　　<code>git checkout dev-mine</code></li>
+<li>合并 local master 到 local的开发分支<br>  <code>git merge master</code></li>
+<li>推送更新到gitlab，使gitlab同步更新显示<br>　 <code>git push origin dev-minw</code></li>
+</ol>
+</li>
+<li>创建分支<ol>
+<li>基于远程分支创建本地分支<br><code>git checkout -b dev-local origin/dev-remote</code><br>这样创建的分支是有关联的,然后基于这个分支再拉一个分支做开发,开发完之后push到远程,发起pull request(github)或者merge request(gitlab)</li>
+<li>建立本地分支和远程分支的关联<br><code>git branch --set-upstream-to origin/dev-remote</code></li>
+<li>基于当前分支创建分支(假设是master)<br><code>git checkout -b dev-basedon-master</code><br>或者是<br><code>git checkout -b dev-basedon-master master</code></li>
+<li>重命名本地分支<br><code>git branch -m dev-old dev-new</code></li>
+<li>删除远程分支<br><code>git push origin :dev-remote</code></li>
+<li>查看分支<br><code>git branch</code><br>查看本地分支<br><code>git branch -r</code><br>查看远程分支<br><code>git branch -vv</code><br>查看本地分支和远程分支的关联</li>
+<li>删除本地分支<br><code>git branch -d branch-name</code><br>-D是强制删除</li>
+</ol>
+</li>
+</ol>
+<h3 id="暂时保存工作进度"><a href="#暂时保存工作进度" class="headerlink" title="暂时保存工作进度"></a>暂时保存工作进度</h3><p><code>[]</code>方括号中内容为可选，<code>[&lt;stash&gt;]</code>里面的stash代表进度的编号形如：<code>stash@{0}</code>, <code>&lt;&gt;</code>尖括号内的必填<br><code>git stash</code>  对当前的暂存区和工作区状态进行保存。<br><code>git stash save &quot;work about something on branch-xxx&quot;</code>最好写个记录<br><code>git stash list</code>  列出所有保存的进度列表。<br><code>git stash pop [--index] [&lt;stash&gt;]</code> 恢复工作进度<br>如：以下命令恢复编号为0的进度的工作区和暂存区<br><code>git stash pop --index stash@{0}</code><br><code>git stash apply [--index] [&lt;stash&gt;]</code> 不删除已恢复的进度，其他同git stash pop<br><code>git stash drop [&lt;stash&gt;]</code> 删除某一个进度，默认删除最新进度<br><code>git stash clear</code> 删除所有进度<br><code>git stash branch &lt;branchname&gt; &lt;stash&gt;</code> 基于进度创建分支</p>
+<h3 id="查看记录"><a href="#查看记录" class="headerlink" title="查看记录"></a>查看记录</h3><ol>
+<li>查看某次commit的所有文件改动内容<br><code>git show commit_id</code> </li>
+<li>查看历史commit<br><code>git log [--pretty=oneline]</code></li>
+</ol>
+<h2 id="git原理"><a href="#git原理" class="headerlink" title="git原理"></a>git原理</h2><p>参考地址:<a href="https://www.jianshu.com/p/619122f8747b" target="_blank" rel="noopener">https://www.jianshu.com/p/619122f8747b</a><br>从根本上来讲，Git是一个内容寻址文件系统,Git 和其他版本控制系统的主要差别在于，Git 只关心文件数据的整体是否发生变化，而大多数其他系统则只关心文件内容的具体差异。这类系统（CVS，Subversion，Perforce，Bazaar 等等）每次记录有哪些文件作了更新，以及都更新了哪些行的什么内容：<br><img src="/2018/08/18/git原理与使用/其他版本系统.png" title="其他版本系统"><br>Git 并不保存这些前后变化的差异数据。实际上，Git 更像是把变化的文件作快照后，记录在一个微型的文件系统中。每次提交更新时，它会纵览一遍所有文件的指纹信息并对文件作一快照，然后保存一个指向这次快照的索引。为提高性能，若文件没有变化，Git 不会再次保存，而只对上次保存的快照作一链接。Git 的工作方式就如下图所示。<br><img src="/2018/08/18/git原理与使用/git版本系统.png" title="git版本系统"></p>
+<h3 id="工作区和版本库"><a href="#工作区和版本库" class="headerlink" title="工作区和版本库"></a>工作区和版本库</h3><img src="/2018/08/18/git原理与使用/工作区和版本库.png" title="工作区和版本库">
+<ol>
+<li>修改了工作区的文件</li>
+<li>对修改的文件进行快照,然后存到版本库的暂存区(index目录)</li>
+<li>提交更新后,将暂存区的文件快照永久保存到objects目录</li>
+</ol>
+<h3 id="git目录结构"><a href="#git目录结构" class="headerlink" title=".git目录结构"></a><code>.git</code>目录结构</h3><img src="/2018/08/18/git原理与使用/目录结构.png" title="目录结构">
+<p>description文件：仅供GitWeb程序使用<br>config文件：包含项目特有的配置选项<br>info目录：包含一个全局性排除(global exclude)文件，用以放置那些不希望被记录在 .gitignore文件中的忽略模式(ignored patterns)<br>hooks目录：包含客户端或服务端的钩子脚本(hook scripts)<br>HEAD文件：指示目前被检出的分支<br>index文件：保存暂存区信息<br>objects目录：存储所有数据内容<br>refs 目录：存储指向数据（分支）的提交对象的指针</p>
+<h3 id="merge的过程"><a href="#merge的过程" class="headerlink" title="merge的过程"></a>merge的过程</h3><img src="/2018/08/18/git原理与使用/merge的原理.png" title="merge">
+<p>想要merge master分支和other分支,会将master分支当前节点,other当前节点,以及两个分支的公共祖先节点,三者进行比较合并</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/08/18/git原理与使用/" data-id="cjkza2qqb000yj7t9lb7pe2gs" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/08/18/java中的锁/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          java中的锁
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/08/16/信号量/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/大纲/">大纲</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/教程/">教程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/框架/">框架</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活方式/">生活方式</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/笔记/">笔记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络/">网络</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ArrayList/">ArrayList</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSRF/">CSRF</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HashMap/">HashMap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HashSet/">HashSet</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HashTable/">HashTable</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IP地址/">IP地址</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JDK8/">JDK8</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java基础/">Java基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LinkedList/">LinkedList</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MAC地址/">MAC地址</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NIO/">NIO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringMVC/">SpringMVC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/String/">String</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vector/">Vector</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/db2/">db2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/https/">https</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ibase4j/">ibase4j</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaweb/">javaweb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk原生线程池/">jdk原生线程池</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kafka/">kafka</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lambda表达式/">lambda表达式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mpv/">mpv</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket/">socket</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springMVC/">springMVC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/stream/">stream</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tcp/">tcp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/udp/">udp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zookeeper/">zookeeper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事务/">事务</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/代理模式/">代理模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/函数式编程/">函数式编程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分布式锁/">分布式锁</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/单例模式/">单例模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/反向代理/">反向代理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/反射/">反射</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/实践/">实践</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/常量池/">常量池</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/平衡树/">平衡树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/开源框架/">开源框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/快捷键/">快捷键</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/思维题/">思维题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/效率/">效率</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/教程/">教程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库事务/">数据库事务</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/枚举/">枚举</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正向代理/">正向代理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/注解/">注解</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/流量控制/">流量控制</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/目录/">目录</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/知识框架/">知识框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/磁盘存储/">磁盘存储</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/类加载机制/">类加载机制</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/索引/">索引</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/线程/">线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/线程安全/">线程安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/线程池/">线程池</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网易/">网易</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/虚拟机/">虚拟机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/进程/">进程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/锁/">锁</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/集合/">集合</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ArrayList/" style="font-size: 10px;">ArrayList</a> <a href="/tags/CSRF/" style="font-size: 10px;">CSRF</a> <a href="/tags/HashMap/" style="font-size: 10px;">HashMap</a> <a href="/tags/HashSet/" style="font-size: 10px;">HashSet</a> <a href="/tags/HashTable/" style="font-size: 10px;">HashTable</a> <a href="/tags/IP地址/" style="font-size: 10px;">IP地址</a> <a href="/tags/JDK8/" style="font-size: 10px;">JDK8</a> <a href="/tags/JVM/" style="font-size: 12.5px;">JVM</a> <a href="/tags/Java/" style="font-size: 12.5px;">Java</a> <a href="/tags/Java基础/" style="font-size: 10px;">Java基础</a> <a href="/tags/LinkedList/" style="font-size: 10px;">LinkedList</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MAC地址/" style="font-size: 10px;">MAC地址</a> <a href="/tags/NIO/" style="font-size: 10px;">NIO</a> <a href="/tags/SpringMVC/" style="font-size: 10px;">SpringMVC</a> <a href="/tags/String/" style="font-size: 10px;">String</a> <a href="/tags/Vector/" style="font-size: 10px;">Vector</a> <a href="/tags/db2/" style="font-size: 10px;">db2</a> <a href="/tags/git/" style="font-size: 12.5px;">git</a> <a href="/tags/http/" style="font-size: 12.5px;">http</a> <a href="/tags/https/" style="font-size: 10px;">https</a> <a href="/tags/ibase4j/" style="font-size: 10px;">ibase4j</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/javaweb/" style="font-size: 10px;">javaweb</a> <a href="/tags/jdk原生线程池/" style="font-size: 10px;">jdk原生线程池</a> <a href="/tags/kafka/" style="font-size: 10px;">kafka</a> <a href="/tags/lambda表达式/" style="font-size: 10px;">lambda表达式</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mpv/" style="font-size: 10px;">mpv</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/socket/" style="font-size: 10px;">socket</a> <a href="/tags/spring/" style="font-size: 15px;">spring</a> <a href="/tags/springMVC/" style="font-size: 10px;">springMVC</a> <a href="/tags/stream/" style="font-size: 10px;">stream</a> <a href="/tags/tcp/" style="font-size: 10px;">tcp</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/udp/" style="font-size: 10px;">udp</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/事务/" style="font-size: 10px;">事务</a> <a href="/tags/代理模式/" style="font-size: 10px;">代理模式</a> <a href="/tags/函数式编程/" style="font-size: 10px;">函数式编程</a> <a href="/tags/分布式锁/" style="font-size: 10px;">分布式锁</a> <a href="/tags/单例模式/" style="font-size: 10px;">单例模式</a> <a href="/tags/反向代理/" style="font-size: 10px;">反向代理</a> <a href="/tags/反射/" style="font-size: 10px;">反射</a> <a href="/tags/实践/" style="font-size: 10px;">实践</a> <a href="/tags/常量池/" style="font-size: 10px;">常量池</a> <a href="/tags/平衡树/" style="font-size: 10px;">平衡树</a> <a href="/tags/开源框架/" style="font-size: 10px;">开源框架</a> <a href="/tags/快捷键/" style="font-size: 12.5px;">快捷键</a> <a href="/tags/思维题/" style="font-size: 10px;">思维题</a> <a href="/tags/效率/" style="font-size: 10px;">效率</a> <a href="/tags/教程/" style="font-size: 10px;">教程</a> <a href="/tags/数据库/" style="font-size: 20px;">数据库</a> <a href="/tags/数据库事务/" style="font-size: 10px;">数据库事务</a> <a href="/tags/枚举/" style="font-size: 10px;">枚举</a> <a href="/tags/正向代理/" style="font-size: 10px;">正向代理</a> <a href="/tags/注解/" style="font-size: 10px;">注解</a> <a href="/tags/流量控制/" style="font-size: 10px;">流量控制</a> <a href="/tags/目录/" style="font-size: 10px;">目录</a> <a href="/tags/知识框架/" style="font-size: 10px;">知识框架</a> <a href="/tags/磁盘存储/" style="font-size: 10px;">磁盘存储</a> <a href="/tags/算法/" style="font-size: 17.5px;">算法</a> <a href="/tags/类加载机制/" style="font-size: 10px;">类加载机制</a> <a href="/tags/索引/" style="font-size: 10px;">索引</a> <a href="/tags/线程/" style="font-size: 10px;">线程</a> <a href="/tags/线程安全/" style="font-size: 10px;">线程安全</a> <a href="/tags/线程池/" style="font-size: 10px;">线程池</a> <a href="/tags/网易/" style="font-size: 10px;">网易</a> <a href="/tags/虚拟机/" style="font-size: 10px;">虚拟机</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/进程/" style="font-size: 10px;">进程</a> <a href="/tags/锁/" style="font-size: 10px;">锁</a> <a href="/tags/集合/" style="font-size: 10px;">集合</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2118/07/">July 2118</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2118/07/07/Java开发知识框架/">Java开发知识框架</a>
+          </li>
+        
+          <li>
+            <a href="/2018/08/18/java中的String和常量池/">java中的String和常量池</a>
+          </li>
+        
+          <li>
+            <a href="/2018/08/18/java中的锁/">java中的锁</a>
+          </li>
+        
+          <li>
+            <a href="/2018/08/18/git原理与使用/">git原理与使用</a>
+          </li>
+        
+          <li>
+            <a href="/2018/08/16/信号量/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 ninghuang<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">tags</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
