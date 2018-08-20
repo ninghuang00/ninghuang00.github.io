@@ -15,10 +15,13 @@
 <meta property="og:site_name" content="Just Try It">
 <meta property="og:description" content="开发自己的SpringMVC参考地址:https://mp.weixin.qq.com/s/Fo3ZN64qm7e2bWEKEIfBFA">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2018/08/07/SpringMVC/springMVC基本工作流程图.jpeg">
+<meta property="og:image" content="http://yoursite.com/2018/08/07/SpringMVC/SpringMVC中HTTP请求处理流程时序图.jpeg">
 <meta property="og:updated_time" content="2018-08-19T02:46:44.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SpringMVC">
 <meta name="twitter:description" content="开发自己的SpringMVC参考地址:https://mp.weixin.qq.com/s/Fo3ZN64qm7e2bWEKEIfBFA">
+<meta name="twitter:image" content="http://yoursite.com/2018/08/07/SpringMVC/springMVC基本工作流程图.jpeg">
   
     <link rel="alternate" href="/atom.xml" title="Just Try It" type="application/atom+xml">
   
@@ -140,8 +143,8 @@
 </li>
 <li>前后端分离的方式<br>就是浏览器发送AJAX请求,然后收到JSON数据返回,然后浏览器来渲染页面</li>
 </ol>
-<h2 id="SpringMVC-HTTP请求响应的过程"><a href="#SpringMVC-HTTP请求响应的过程" class="headerlink" title="SpringMVC HTTP请求响应的过程"></a>SpringMVC HTTP请求响应的过程</h2>
-
+<h2 id="SpringMVC-HTTP请求响应的过程"><a href="#SpringMVC-HTTP请求响应的过程" class="headerlink" title="SpringMVC HTTP请求响应的过程"></a>SpringMVC HTTP请求响应的过程</h2><img src="/2018/08/07/SpringMVC/springMVC基本工作流程图.jpeg" title="springMVC基本工作流程图">
+<img src="/2018/08/07/SpringMVC/SpringMVC中HTTP请求处理流程时序图.jpeg" title="SpringMVC中HTTP请求处理流程时序图">
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">1.用户发起请求到前端控制器。</span><br><span class="line">2.前端控制器通过处理器映射器查找handler。</span><br><span class="line">3.处理器映射器返回执行链。</span><br><span class="line">	a)handler对象</span><br><span class="line">	b)拦截器（集合）</span><br><span class="line">4.前端控制器通处理器适配器包装，执行handler对象。思考：为什么要通过适配器来执行？</span><br><span class="line">5.通过模型handler处理业务逻辑。</span><br><span class="line">6.处理业务完成后，返回ModeAndView对象，其中有视图名称，模型数据。</span><br><span class="line">7.将视图名称和模型数据返回到前端控制器。</span><br><span class="line">8.前端控制器通过视图解释器查找视图对象。</span><br><span class="line">9.视图解释器返回真正的视图。</span><br><span class="line">10.前端控制器通过返回的视图和数据进行渲染。</span><br><span class="line">11.返回渲染完成的视图。</span><br><span class="line">12.将最终的视图返回给用户，产生响应。</span><br></pre></td></tr></table></figure>
 <h2 id="九大组件"><a href="#九大组件" class="headerlink" title="九大组件"></a>九大组件</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">initStrategies</span><span class="params">(ApplicationContext context)</span> </span>&#123;  </span><br><span class="line"><span class="comment">//用于处理上传请求。处理方法是将普通的request包装成            </span></span><br><span class="line"><span class="comment">//MultipartHttpServletRequest，后者可以直接调用getFile方法获取File.</span></span><br><span class="line"> initMultipartResolver(context);  </span><br><span class="line"><span class="comment">//SpringMVC主要有两个地方用到了Locale：</span></span><br><span class="line"> <span class="comment">//一是ViewResolver视图解析的时候；</span></span><br><span class="line"> <span class="comment">//二是用到国际化资源或者主题的时候。</span></span><br><span class="line"> initLocaleResolver(context); </span><br><span class="line"><span class="comment">//用于解析主题。SpringMVC中一个主题对应 一个properties文件，里面存放着跟当前主题相关的所有资源、</span></span><br><span class="line"><span class="comment">//如图片、css样式等。SpringMVC的主题也支持国际化， </span></span><br><span class="line"> initThemeResolver(context);  </span><br><span class="line"><span class="comment">//用来查找Handler的。</span></span><br><span class="line"> initHandlerMappings(context);  </span><br><span class="line"><span class="comment">//从名字上看，它就是一个适配器。Servlet需要的处理方法的结构却是固定的，都是以request和response为参数的方法。</span></span><br><span class="line"><span class="comment">//如何让固定的Servlet处理方法调用灵活的Handler来进行处理呢？这就是HandlerAdapter要做的事情</span></span><br><span class="line"> initHandlerAdapters(context);  </span><br><span class="line"><span class="comment">//其它组件都是用来干活的。在干活的过程中难免会出现问题，出问题后怎么办呢？</span></span><br><span class="line"><span class="comment">//这就需要有一个专门的角色对异常情况进行处理，在SpringMVC中就是HandlerExceptionResolver。</span></span><br><span class="line"> initHandlerExceptionResolvers(context);  </span><br><span class="line"><span class="comment">//有的Handler处理完后并没有设置View也没有设置ViewName，这时就需要从request获取ViewName了，</span></span><br><span class="line"><span class="comment">//如何从request中获取ViewName就是RequestToViewNameTranslator要做的事情了。</span></span><br><span class="line"> initRequestToViewNameTranslator(context);</span><br><span class="line"><span class="comment">//ViewResolver用来将String类型的视图名和Locale解析为View类型的视图。</span></span><br><span class="line"><span class="comment">//View是用来渲染页面的，也就是将程序返回的参数填入模板里，生成html（也可能是其它类型）文件。</span></span><br><span class="line"> initViewResolvers(context);  </span><br><span class="line"><span class="comment">//用来管理FlashMap的，FlashMap主要用在redirect重定向中传递参数。</span></span><br><span class="line"> initFlashMapManager(context); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>##Json问题</p>
@@ -156,7 +159,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/08/07/SpringMVC/" data-id="cjl0o8tgp000phqt9gygritm2" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/08/07/SpringMVC/" data-id="cjl2f9jlk000odvt9qcatfq44" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringMVC/">SpringMVC</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spring/">spring</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/开源框架/">开源框架</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/注解/">注解</a></li></ul>
@@ -241,19 +244,19 @@
           </li>
         
           <li>
+            <a href="/2018/08/20/重点复习目录/">重点复习目录</a>
+          </li>
+        
+          <li>
+            <a href="/2018/08/20/分库分表/">分库分表</a>
+          </li>
+        
+          <li>
             <a href="/2018/08/19/concurrent包常用类/">concurrent包常用类</a>
           </li>
         
           <li>
             <a href="/2018/08/19/简单的设计模式/">简单的设计模式</a>
-          </li>
-        
-          <li>
-            <a href="/2018/08/18/java中的String和常量池/">java中的String和常量池</a>
-          </li>
-        
-          <li>
-            <a href="/2018/08/18/java中的锁/">java中的锁</a>
           </li>
         
       </ul>
