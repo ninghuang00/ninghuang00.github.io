@@ -16,7 +16,10 @@
 <meta property="og:description" content="这是摘要">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2018/07/28/tcp和udp/tcp和udp比较.png">
-<meta property="og:updated_time" content="2018-09-01T03:11:00.000Z">
+<meta property="og:image" content="http://yoursite.com/2018/07/28/tcp和udp/滑动窗口控制流量.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/07/28/tcp和udp/慢开始和拥塞避免.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/07/28/tcp和udp/快重传和快恢复.jpg">
+<meta property="og:updated_time" content="2018-09-01T03:30:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="tcp和udp">
 <meta name="twitter:description" content="这是摘要">
@@ -108,7 +111,7 @@
 <h3 id="tcp协议"><a href="#tcp协议" class="headerlink" title="tcp协议"></a>tcp协议</h3><ol>
 <li>TCP支持的应用协议主要有：Telnet、FTP、SMTP,http,pop3等； </li>
 <li><p>流量控制<br>参考地址:<a href="https://blog.csdn.net/yechaodechuntian/article/details/25429143" target="_blank" rel="noopener">https://blog.csdn.net/yechaodechuntian/article/details/25429143</a><br>使用滑动窗口来控制流量,限制发送端可以发送的数据量</p>
-
+<img src="/2018/07/28/tcp和udp/滑动窗口控制流量.jpg" title="滑动窗口控制流量">
 </li>
 <li><p>拥塞控制<br>发送方控制拥塞窗口的原则是：只要网络没有出现拥塞，拥塞窗口就再增大一些，以便把更多的分组发送出去。但只要网络出现拥塞，拥塞窗口就减小一些，以减少注入到网络中的分组数。</p>
 <ol>
@@ -116,12 +119,12 @@
 <ol>
 <li>当 cwnd &lt; ssthresh 时，使用上述的慢开始算法。</li>
 <li>当 cwnd &gt; ssthresh 时，停止使用慢开始算法而改用拥塞避免算法。</li>
-<li>当 cwnd = ssthresh 时，既可使用慢开始算法，也可使用拥塞控制避免算法。
+<li>当 cwnd = ssthresh 时，既可使用慢开始算法，也可使用拥塞控制避免算法。<img src="/2018/07/28/tcp和udp/慢开始和拥塞避免.jpg" title="慢开始和拥塞避免">
 </li>
 </ol>
 </li>
 <li><p>快重传和快恢复</p>
-
+<img src="/2018/07/28/tcp和udp/快重传和快恢复.jpg" title="快重传和快恢复">
 </li>
 </ol>
 </li>
