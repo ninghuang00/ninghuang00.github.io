@@ -18,7 +18,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/09/09/redis入门/redis实现会话缓存.png">
 <meta property="og:image" content="http://yoursite.com/2018/09/09/redis入门/数据模型.png">
 <meta property="og:image" content="http://yoursite.com/2018/09/09/redis入门/hashtable结构.png">
-<meta property="og:updated_time" content="2018-09-19T01:16:55.000Z">
+<meta property="og:updated_time" content="2018-09-19T01:32:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="redis入门">
 <meta name="twitter:description" content="这是摘要">
@@ -169,7 +169,7 @@
 <li>简介<br>集合（set）与列表类似，都是用来保存多个字符串，但集合与列表有两点不同：集合中的元素是无序的，因此不能通过索引来操作元素；集合中的元素不能有重复。一个集合中最多可以存储2^32-1个元素，除了支持常规的增删改查，Redis还支持多个集合取交集、并集、差集。</li>
 <li>内部编码<ol>
 <li>哈希表</li>
-<li>整数集合<br>整数集合适用于集合所有元素都是整数且集合元素数量较小的时候，与哈希表相比，整数集合的优势在于集中存储，节省空间；同时，虽然对于元素的操作复杂度也由O(n)变为了O(1)，但由于集合数量较少，因此操作的时间并没有明显劣势。<br>只有集合中元素数量小于512且都为整数值时使用<br>结构定义:<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">intset</span>&#123;</span></span><br><span class="line">    <span class="keyword">uint32_t</span> encoding; <span class="comment">//决定contents数组中的元素的类型</span></span><br><span class="line">    <span class="keyword">uint32_t</span> length; <span class="comment">//元素个数</span></span><br><span class="line">    <span class="keyword">int8_t</span> contents[];</span><br><span class="line">&#125; intset;</span><br></pre></td></tr></table></figure>
+<li>整数集合<br>整数集合适用于集合所有元素都是整数且集合元素数量较小的时候，与哈希表相比，整数集合的优势在于集中存储，节省空间；同时，虽然对于元素的操作复杂度也由O(n)变为了O(1)，但由于集合数量较少，因此操作的时间并没有明显劣势。<br>只有集合中元素数量小于512且都为整数值时使用<br>结构定义:        <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">intset</span>&#123;</span></span><br><span class="line">    <span class="keyword">uint32_t</span> encoding; <span class="comment">//决定contents数组中的元素的类型</span></span><br><span class="line">    <span class="keyword">uint32_t</span> length; <span class="comment">//元素个数</span></span><br><span class="line">    <span class="keyword">int8_t</span> contents[];</span><br><span class="line">&#125; intset;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 </li>
