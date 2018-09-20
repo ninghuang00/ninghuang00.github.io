@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="Just Try It">
 <meta property="og:description" content="日常琐碎的小问题">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-17T08:47:53.000Z">
+<meta property="og:updated_time" content="2018-09-20T08:07:42.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="日常小坑记录">
 <meta name="twitter:description" content="日常琐碎的小问题">
@@ -98,10 +98,13 @@
         
 <div id="toc">
   <strong class="toc-title">文章目录</strong>
-  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#spring配置"><span class="toc-text">spring配置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#整合Mybatis"><span class="toc-text">整合Mybatis</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#mac终端git中文显示的问题"><span class="toc-text">mac终端git中文显示的问题</span></a></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#docker"><span class="toc-text">docker</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#docker部署redis"><span class="toc-text">docker部署redis</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#spring配置"><span class="toc-text">spring配置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#整合Mybatis"><span class="toc-text">整合Mybatis</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#mac终端git中文显示的问题"><span class="toc-text">mac终端git中文显示的问题</span></a></li></ol>
 </div>
 
         <p> 日常琐碎的小问题<br> <a id="more"></a></p>
+<h1 id="docker"><a href="#docker" class="headerlink" title="docker"></a>docker</h1><h2 id="docker部署redis"><a href="#docker部署redis" class="headerlink" title="docker部署redis"></a>docker部署redis</h2><ol>
+<li>使用自定义配置文件启动redis容器,立马就关闭,原因是参数中的daemonize设置成了yes</li>
+</ol>
 <h1 id="spring配置"><a href="#spring配置" class="headerlink" title="spring配置"></a>spring配置</h1><h2 id="整合Mybatis"><a href="#整合Mybatis" class="headerlink" title="整合Mybatis"></a>整合Mybatis</h2><ol>
 <li>配置通用Mapper插件的时候,父类Mapper要放在启动类扫面不到的地方,即不在<code>@MapperScan(basePackages = &quot;com.hn.mapper&quot;)</code>所在路径下<br>报错:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Field userDao in com.hn.service.impl.UserServiceImpl required a bean of type &apos;com.hn.dao.UserDao&apos; that could not be found.</span><br></pre></td></tr></table></figure>
 </li>
