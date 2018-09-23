@@ -18,7 +18,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/08/19/concurrent包常用类/ConcurrentHashMap1.8.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/19/concurrent包常用类/ConcurrentHashMap1.7.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/19/concurrent包常用类/cas原理.png">
-<meta property="og:updated_time" content="2018-09-22T06:33:53.000Z">
+<meta property="og:updated_time" content="2018-09-23T06:49:22.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="concurrent包常用类">
 <meta name="twitter:description" content="参考地址:https://my.oschina.net/yu120/blog/689204">
@@ -110,29 +110,23 @@
 <ol>
 <li>1.8中的实现<img src="/2018/08/19/concurrent包常用类/ConcurrentHashMap1.8.png" title="ConcurrentHashMap1.8">
 使用Node+CAS+synchronized实现<br>sizeCtl是控制标识符，不同的值表示不同的意义。<blockquote>
-<p>负数代表正在进行初始化或扩容操作 ,其中-1代表正在初始化 ,-N 表示有N-1个线程正在进行扩容操作<br>正数或0代表hash表还没有被初始化，这个数值表示初始化或下一次进行扩容的大小，类似于扩容阈值。它的值始终是当前ConcurrentHashMap容量的0.75倍，这与loadfactor是对应的。实际容量&gt;=sizeCtl，则扩容。</p>
-<ol>
-<li>put的实现大致流程<ol>
-<li>检查key/value是否为空，如果为空，则抛异常，否则进行2</li>
-<li>进入for死循环，进行3</li>
-<li>检查table是否初始化了，如果没有，则调用initTable()进行初始化然后进行 2，否则进行4</li>
-<li>根据key的hash值计算出其应该在table中储存的位置i，取出table[i]的节点用f表示。<br>根据f的不同有如下三种情况：<ol>
-<li>如果table[i]==null(即该位置的节点为空，没有发生碰撞)，则利用CAS操作直接存储在该位置，如果CAS操作成功则退出死循环。</li>
-<li>如果table[i]!=null(即该位置已经有其它节点，发生碰撞)，碰撞处理也有两种情况<ol>
-<li>检查table[i]的节点的hash是否等于MOVED，如果等于，则检测到正在扩容，则帮助其扩容</li>
-<li>说明table[i]的节点的hash值不等于MOVED，如果table[i]为链表节点，则将此节点插入链表中即可如果table[i]为树节点，则将此节点插入树中即可。插入成功后，进行 5</li>
-</ol>
-</li>
-</ol>
-</li>
-<li>如果table[i]的节点是链表节点，则检查table的第i个位置的链表是否需要转化为数，如果需要则调用treeifyBin函数进行转化</li>
-</ol>
-</li>
-</ol>
+<p>负数代表正在进行初始化或扩容操作 ,其中-1代表正在初始化 ,-N 表示有N-1个线程正在进行扩容操作</p>
 </blockquote>
 </li>
 </ol>
-<ol start="2">
+<p>正数或0代表hash表还没有被初始化，这个数值表示初始化或下一次进行扩容的大小，类似于扩容阈值。它的值始终是当前ConcurrentHashMap容量的0.75倍，这与loadfactor是对应的。实际容量&gt;=sizeCtl，则扩容。</p>
+<pre><code>1. put的实现大致流程
+    1. 检查key/value是否为空，如果为空，则抛异常，否则进行2
+    2. 进入for死循环，进行3
+    3. 检查table是否初始化了，如果没有，则调用initTable()进行初始化然后进行 2，否则进行4
+    4. 根据key的hash值计算出其应该在table中储存的位置i，取出table[i]的节点用f表示。
+    根据f的不同有如下三种情况：
+        1. 如果table[i]==null(即该位置的节点为空，没有发生碰撞)，则利用CAS操作直接存储在该位置，如果CAS操作成功则退出死循环。
+        2. 如果table[i]!=null(即该位置已经有其它节点，发生碰撞)，碰撞处理也有两种情况
+            1. 检查table[i]的节点的hash是否等于MOVED，如果等于，则检测到正在扩容，则帮助其扩容
+            2. 说明table[i]的节点的hash值不等于MOVED，如果table[i]为链表节点，则将此节点插入链表中即可如果table[i]为树节点，则将此节点插入树中即可。插入成功后，进行 5
+    5. 如果table[i]的节点是链表节点，则检查table的第i个位置的链表是否需要转化为数，如果需要则调用treeifyBin函数进行转化
+</code></pre><ol start="2">
 <li>1.7中的实现<br>使用HashEntry和Segment(继承ReentrantLock)实现<img src="/2018/08/19/concurrent包常用类/ConcurrentHashMap1.7.png" title="ConcurrentHashMap1.7">
 </li>
 </ol>
