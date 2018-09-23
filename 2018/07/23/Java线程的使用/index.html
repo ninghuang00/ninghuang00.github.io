@@ -16,8 +16,8 @@
 <meta property="og:description" content="这是摘要">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2018/07/23/Java线程的使用/多进程多线程的对比.png">
-<meta property="og:image" content="http://yoursite.com/2018/07/23/Java线程的使用/线程的状态.jpg">
-<meta property="og:updated_time" content="2018-09-23T05:52:18.000Z">
+<meta property="og:image" content="http://yoursite.com/2018/07/23/Java线程的使用/线程的状态.png">
+<meta property="og:updated_time" content="2018-09-23T08:41:40.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java线程的使用">
 <meta name="twitter:description" content="这是摘要">
@@ -131,7 +131,7 @@ java中的多线程是一种抢占机制而不是分时机制,抢占机制指的
 <li>-Xss()单个线程堆栈</li>
 </ol>
 </li>
-<li>线程的状态<img src="/2018/07/23/Java线程的使用/线程的状态.jpg" title="线程的状态">
+<li>线程的状态<img src="/2018/07/23/Java线程的使用/线程的状态.png" title="线程的状态">
 <ol>
 <li>新生状态（New）：<br>当一个线程的实例被创建即使用new关键字和Thread类或其子类创建一个线程对象后，此时该线程处于新生(new)状态，处于新生状态的线程有自己的内存空间，但该线程并没有运行，此时线程还不是活着的（not alive）；</li>
 <li>就绪状态（Runnable）：<br>通过调用线程实例的start()方法来启动线程使线程进入就绪状态(runnable)；处于就绪状态的线程已经具备了运行条件，但还没有被分配到CPU即不一定会被立即执行，此时处于线程就绪队列，等待系统为其分配CPU，等待状态并不是执行状态； 此时线程是活着的（alive）；</li>

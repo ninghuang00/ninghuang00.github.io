@@ -18,7 +18,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/08/19/concurrent包常用类/ConcurrentHashMap1.8.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/19/concurrent包常用类/ConcurrentHashMap1.7.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/19/concurrent包常用类/cas原理.png">
-<meta property="og:updated_time" content="2018-09-23T06:49:22.000Z">
+<meta property="og:updated_time" content="2018-09-23T07:54:36.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="concurrent包常用类">
 <meta name="twitter:description" content="参考地址:https://my.oschina.net/yu120/blog/689204">
@@ -115,23 +115,34 @@
 </li>
 </ol>
 <p>正数或0代表hash表还没有被初始化，这个数值表示初始化或下一次进行扩容的大小，类似于扩容阈值。它的值始终是当前ConcurrentHashMap容量的0.75倍，这与loadfactor是对应的。实际容量&gt;=sizeCtl，则扩容。</p>
-<pre><code>1. put的实现大致流程
-    1. 检查key/value是否为空，如果为空，则抛异常，否则进行2
-    2. 进入for死循环，进行3
-    3. 检查table是否初始化了，如果没有，则调用initTable()进行初始化然后进行 2，否则进行4
-    4. 根据key的hash值计算出其应该在table中储存的位置i，取出table[i]的节点用f表示。
-    根据f的不同有如下三种情况：
-        1. 如果table[i]==null(即该位置的节点为空，没有发生碰撞)，则利用CAS操作直接存储在该位置，如果CAS操作成功则退出死循环。
-        2. 如果table[i]!=null(即该位置已经有其它节点，发生碰撞)，碰撞处理也有两种情况
-            1. 检查table[i]的节点的hash是否等于MOVED，如果等于，则检测到正在扩容，则帮助其扩容
-            2. 说明table[i]的节点的hash值不等于MOVED，如果table[i]为链表节点，则将此节点插入链表中即可如果table[i]为树节点，则将此节点插入树中即可。插入成功后，进行 5
-    5. 如果table[i]的节点是链表节点，则检查table的第i个位置的链表是否需要转化为数，如果需要则调用treeifyBin函数进行转化
-</code></pre><ol start="2">
+<ol start="2">
+<li>put的实现大致流程<ol>
+<li>检查key/value是否为空，如果为空，则抛异常，否则进行2</li>
+<li>进入for死循环，进行3</li>
+<li>检查table是否初始化了，如果没有，则调用initTable()进行初始化然后进行 2，否则进行4</li>
+<li>根据key的hash值计算出其应该在table中储存的位置i，取出table[i]的节点用f表示。<br>根据f的不同有如下三种情况：<ol>
+<li>如果table[i]==null(即该位置的节点为空，没有发生碰撞)，则利用CAS操作直接存储在该位置，如果CAS操作成功则退出死循环。</li>
+<li>如果table[i]!=null(即该位置已经有其它节点，发生碰撞)，碰撞处理也有两种情况<ol>
+<li>检查table[i]的节点的hash是否等于MOVED，如果等于，则检测到正在扩容，则帮助其扩容</li>
+<li>说明table[i]的节点的hash值不等于MOVED，如果table[i]为链表节点，则将此节点插入链表中即可如果table[i]为树节点，则将此节点插入树中即可。插入成功后，进行 5</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>如果table[i]的节点是链表节点，则检查table的第i个位置的链表是否需要转化为数，如果需要则调用treeifyBin函数进行转化</li>
+</ol>
+</li>
+</ol>
+<ol start="2">
 <li>1.7中的实现<br>使用HashEntry和Segment(继承ReentrantLock)实现<img src="/2018/08/19/concurrent包常用类/ConcurrentHashMap1.7.png" title="ConcurrentHashMap1.7">
 </li>
 </ol>
 <h2 id="ReentrantLock"><a href="#ReentrantLock" class="headerlink" title="ReentrantLock"></a>ReentrantLock</h2><ol>
-<li>锁的实现:<br>ReentrantLock是JDK实现的,synchronized是依赖于JVM实现的</li>
+<li>锁的实现:<br>参考地址:<a href="https://www.jianshu.com/p/fe027772e156" target="_blank" rel="noopener">https://www.jianshu.com/p/fe027772e156</a><br>ReentrantLock基于<code>volatile int state</code>和cas实现,尝试获得锁的时候会判断state的值,<ol>
+<li>如果是0的话,使用cas算法修改state加1</li>
+<li>不是0的话说明锁已经被占用,使用cas加1,进入等待队列<br>ReentrantLock是JDK实现的,synchronized是依赖于JVM实现的</li>
+</ol>
+</li>
 <li>性能的区别:<br>JDK1.6之后(synchronized引入了偏向锁,轻量级锁(自旋锁)之后)synchronized优化的与ReentrantLock性能差不多,在两种方法都可以使用的情况下官方建议使用synchronized,都是试图在用户态就将加锁问题解决,避免进入内核态</li>
 <li>功能的区别:<br>synchronized的使用比较简洁,由编译器保证加锁和施放锁,而ReentrantLock需要手工声明加锁和施放锁,但是ReentrantLock在锁的细粒度和灵活性方面更强<ol>
 <li>ReentrantLock可以指定公平锁(FIFO)和非公平锁(默认是这个),synchronized只能是非公平锁(一个线程想要获得锁,会先尝试插队)</li>
@@ -161,11 +172,14 @@
 </ol>
 </li>
 </ol>
-<h2 id="Executors工具类"><a href="#Executors工具类" class="headerlink" title="Executors工具类"></a>Executors工具类</h2><ol>
-<li><p>重载实现的newFixedThreadPool()<br>创建一个可重用固定线程数的线程池，超出的线程会在队列中等待。</p>
+<h2 id="Executors工具类"><a href="#Executors工具类" class="headerlink" title="Executors工具类"></a>Executors工具类</h2><blockquote>
+<p>参考地址:<a href="https://zhuanlan.zhihu.com/p/32867181" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/32867181</a></p>
+</blockquote>
+<ol>
+<li><p>重载实现的newFixedThreadPool()<br>创建一个可重用固定线程数的线程池，超出的线程会在队列中等待。因为阻塞队列无界,要慎用,避免OOM</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ExecutorService <span class="title">newFixedThreadPool</span><span class="params">(<span class="keyword">int</span> nThreads)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ThreadPoolExecutor(nThreads, nThreads,</span><br><span class="line">                                      <span class="number">0L</span>, TimeUnit.MILLISECONDS,</span><br><span class="line">                                      <span class="comment">//基于链表的先进先出队列，如果创建时没有指定此队列大小，则默认为Integer.MAX_VALUE</span></span><br><span class="line">                                      <span class="keyword">new</span> LinkedBlockingQueue&lt;Runnable&gt;());</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>重载实现的newCachedThreadPool()<br>创建一个可缓存线程池，如果执行新任务时没有空闲的线程，新建线程执行任务；否则调用空闲线程执行新任务。对于执行很多短期异步任务的程序而言，这些线程池通常可提高程序性能。</p>
+<li><p>重载实现的newCachedThreadPool()<br>创建一个可缓存线程池，如果执行新任务时没有空闲的线程，新建线程执行任务；否则调用空闲线程执行新任务。对于执行很多短期异步任务的程序而言，比较合适任务的提交速度小于任务的处理速度的场景,不然很容易OOM</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ExecutorService <span class="title">newCachedThreadPool</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> ThreadPoolExecutor(<span class="number">0</span>, Integer.MAX_VALUE,</span><br><span class="line">                                  <span class="number">60L</span>, TimeUnit.SECONDS,</span><br><span class="line">                                  <span class="comment">//这个队列比较特殊，它不会保存提交的任务，而是将直接新建一个线程来执行新来的任务</span></span><br><span class="line">                                  <span class="keyword">new</span> SynchronousQueue&lt;Runnable&gt;());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>重载实现的newSingleThreadExecutor()<br>创建一个使用单个 worker 线程的 Executor，以无界队列方式来运行该线程，它只会用唯一的工作线程来执行任务，保证所有任务按照指定顺序(FIFO, LIFO, 优先级)执行。</p>

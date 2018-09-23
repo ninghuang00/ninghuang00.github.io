@@ -15,10 +15,12 @@
 <meta property="og:site_name" content="Just Try It">
 <meta property="og:description" content="这是摘要">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-22T03:27:06.000Z">
+<meta property="og:image" content="http://yoursite.com/2018/08/18/java中的锁/对象头.png">
+<meta property="og:updated_time" content="2018-09-23T08:46:43.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java中的锁">
 <meta name="twitter:description" content="这是摘要">
+<meta name="twitter:image" content="http://yoursite.com/2018/08/18/java中的锁/对象头.png">
   
     <link rel="alternate" href="/atom.xml" title="Just Try It" type="application/atom+xml">
   
@@ -98,7 +100,7 @@
         
 <div id="toc">
   <strong class="toc-title">文章目录</strong>
-  <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#锁"><span class="toc-text">锁</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ReentrantLock和synchronized"><span class="toc-text">ReentrantLock和synchronized</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#锁优化"><span class="toc-text">锁优化</span></a></li></ol></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#锁"><span class="toc-text">锁</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ReentrantLock和synchronized"><span class="toc-text">ReentrantLock和synchronized</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#对象头"><span class="toc-text">对象头</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#锁优化"><span class="toc-text">锁优化</span></a></li></ol></li></ol>
 </div>
 
         <p> 这是摘要<br> <a id="more"></a></p>
@@ -116,15 +118,26 @@
 </ol>
 </li>
 </ol>
-<h4 id="锁优化"><a href="#锁优化" class="headerlink" title="锁优化"></a>锁优化</h4><ol>
-<li>重量级锁<br>同步方法和同步代码块中解释的就是重量级锁。</li>
-<li>偏向锁<br>是一种编译解释锁,及时JVM编译时如果发现不会有多线程争抢加了同步代码的资源,那就会自动放弃同步代码的结果<ol start="2">
-<li>锁消除(虚拟机优化)<br>虚拟机即时编译器在运行的时候会对一些代码上要求同步但是实际上不会发生数据共享竞争的锁进行消除,根据逃逸分析的数据支持,如果堆上的数据不会逃逸出去从而被其他线程访问到,就可以把他们当做是栈上的数据对待,认为他们是线程私有的,同步加锁自然无需进行,比如说StringBuilder.append()方法.</li>
+<h3 id="对象头"><a href="#对象头" class="headerlink" title="对象头"></a>对象头</h3><blockquote>
+<p>参考:<a href="http://www.hollischuang.com/archives/1953" target="_blank" rel="noopener">http://www.hollischuang.com/archives/1953</a></p>
+</blockquote>
+<img src="/2018/08/18/java中的锁/对象头.png" title="对象头">
+<h4 id="锁优化"><a href="#锁优化" class="headerlink" title="锁优化"></a>锁优化</h4><blockquote>
+<p>参考地址:<a href="https://blog.csdn.net/sted_zxz/article/details/76854371" target="_blank" rel="noopener">https://blog.csdn.net/sted_zxz/article/details/76854371</a></p>
+</blockquote>
+<ol>
+<li>偏向锁<br>第一个获得锁的线程,如果在接下来的执行过程中，只要该锁没有被其他的线程获取，则持有偏向锁的线程将就不需要再进行同步。</li>
+<li>轻量级锁<br>当发现会有2个线程争抢资源的时候,升级偏向锁,优先使用轻量级锁,同时使用自旋等待锁释放</li>
+<li><p>重量级锁<br>当2个以上的线程竞争锁,升级为重量级锁同步方法和同步代码块中解释的就是重量级锁。</p>
+</li>
+<li><p>自旋锁和自适应自旋锁</p>
+<ol>
+<li>就是当后一个线程请求锁的时候,不要一请求不到就马上挂起,而是等待一下(    前提是物理机器有一个以上的处理器),但不放弃处理器的执行时间,看看持有锁的线程是否会很快释放锁,为了让线程等待,只需要让线程执行一个忙循环(自旋)</li>
+<li>自适应意味着自旋的时间不再固定了，而是由前一次在同一个锁上的自旋时间及锁的拥有者的状态来决定。 </li>
 </ol>
 </li>
-<li>轻量级锁<br>当发现会有多线程争抢资源的时候,升级偏向锁,优先使用轻量级锁</li>
-<li>自旋锁和自适应自旋锁<br>就是当后一个线程请求锁的时候,不要一请求不到就马上挂起,而是等待一下(前提是物理机器有一个以上的处理器),但不放弃处理器的执行时间,看看持有锁的线程是否会很快释放锁,为了让线程等待,只需要让线程执行一个忙循环(自旋)</li>
 <li>锁粗化<br>就是一串连续的零碎操作都对同一个对象加锁,那么就会将加锁同步的范围扩大</li>
+<li>锁消除(虚拟机优化)<br>虚拟机即时编译器在运行的时候会对一些代码上要求同步但是实际上不会发生数据共享竞争的锁进行消除,根据逃逸分析的数据支持,如果堆上的数据不会逃逸出去从而被其他线程访问到,就可以把他们当做是栈上的数据对待,认为他们是线程私有的,同步加锁自然无需进行,比如说StringBuilder.append()方法.</li>
 </ol>
 
       

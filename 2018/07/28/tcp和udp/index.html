@@ -21,7 +21,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/07/28/tcp和udp/快重传和快恢复.jpg">
 <meta property="og:image" content="http://yoursite.com/2018/07/28/tcp和udp/tcp3次握手.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/28/tcp和udp/tcp4次挥手.png">
-<meta property="og:updated_time" content="2018-09-23T03:23:14.000Z">
+<meta property="og:updated_time" content="2018-09-23T09:37:52.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="tcp和udp">
 <meta name="twitter:description" content="这是摘要">
@@ -117,21 +117,25 @@
 </li>
 <li><p>拥塞控制<br>发送方控制拥塞窗口的原则是：只要网络没有出现拥塞，拥塞窗口就再增大一些，以便把更多的分组发送出去。但只要网络出现拥塞，拥塞窗口就减小一些，以减少注入到网络中的分组数。</p>
 <ol>
-<li><p>慢开始和拥塞避免</p>
-<ol>
+<li>慢开始和拥塞避免<ol>
 <li>当 cwnd &lt; ssthresh 时，使用上述的慢开始算法。</li>
 <li>当 cwnd &gt; ssthresh 时，停止使用慢开始算法而改用拥塞避免算法。</li>
-<li>当 cwnd = ssthresh 时，既可使用慢开始算法，也可使用拥塞控制避免算法。<img src="/2018/07/28/tcp和udp/慢开始和拥塞避免.jpg" title="慢开始和拥塞避免">
-</li>
+<li>当 cwnd = ssthresh 时，既可使用慢开始算法，也可使用拥塞控制避免算法。</li>
+<li>当网络出现拥塞的时候,将ssthresh设置成当前cwnd的一半(但是不能小于2),重新执行慢开始算法</li>
 </ol>
+</li>
+<li>慢开始算法<br>一开始将cwnd设置为1,每经过一个传输轮次，拥塞窗口 cwnd 就加倍。</li>
+<li><p>拥塞避免算法<br>让拥塞窗口cwnd缓慢地增大，即每经过一个往返时间RTT就把发送方的拥塞窗口cwnd加1，而不是加倍。这样拥塞窗口cwnd按线性规律缓慢增长，比慢开始算法的拥塞窗口增长速率缓慢得多。</p>
+<img src="/2018/07/28/tcp和udp/慢开始和拥塞避免.jpg" title="慢开始和拥塞避免">
 </li>
 <li><p>快重传和快恢复</p>
-<img src="/2018/07/28/tcp和udp/快重传和快恢复.jpg" title="快重传和快恢复">
 </li>
 </ol>
 </li>
-<li><p>应用场景<br>优点:可靠稳定,通过三次握手建立连接,有流量控制,差错控制等机制(握手 确认 窗口 拥塞控制 重传等)<br>缺点:传输速度慢,效率低,占用系统资源高,容易被攻击(DOS,DDOS,CC,通过大量建立无效连接来耗光服务器资源)</p>
-<ol>
+</ol>
+<img src="/2018/07/28/tcp和udp/快重传和快恢复.jpg" title="快重传和快恢复">
+<ol start="4">
+<li>应用场景<br>优点:可靠稳定,通过三次握手建立连接,有流量控制,差错控制等机制(握手 确认 窗口 拥塞控制 重传等)<br>缺点:传输速度慢,效率低,占用系统资源高,容易被攻击(DOS,DDOS,CC,通过大量建立无效连接来耗光服务器资源)<ol>
 <li>文件传输:FTP</li>
 <li>邮件:SMTP</li>
 <li>putty:ssh,TELNET</li>
