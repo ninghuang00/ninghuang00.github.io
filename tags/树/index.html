@@ -5,22 +5,15 @@
   
 
   
-  <title>异常处理 | Just Try It</title>
+  <title>Tag: 树 | Just Try It</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="参考地址:http://www.hollischuang.com/archives/430">
-<meta name="keywords" content="异常,exception">
-<meta property="og:type" content="article">
-<meta property="og:title" content="异常处理">
-<meta property="og:url" content="http://yoursite.com/2018/08/22/异常处理/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Just Try It">
+<meta property="og:url" content="http://yoursite.com/tags/树/index.html">
 <meta property="og:site_name" content="Just Try It">
-<meta property="og:description" content="参考地址:http://www.hollischuang.com/archives/430">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2018/08/22/异常处理/异常类继承结构.png">
-<meta property="og:updated_time" content="2018-09-02T02:21:21.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="异常处理">
-<meta name="twitter:description" content="参考地址:http://www.hollischuang.com/archives/430">
-<meta name="twitter:image" content="http://yoursite.com/2018/08/22/异常处理/异常类继承结构.png">
+<meta name="twitter:title" content="Just Try It">
   
     <link rel="alternate" href="/atom.xml" title="Just Try It" type="application/atom+xml">
   
@@ -71,117 +64,40 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-异常处理" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/08/22/异常处理/" class="article-date">
-  <time datetime="2018-08-22T09:21:42.000Z" itemprop="datePublished">2018-08-22</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/笔记/">笔记</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
+        <section id="main">
   
-    <h1 class="article-title" itemprop="name">
-      异常处理
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2018" class="archive-year">2018</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2018/07/08/左程云算法课进阶班/" class="archive-article-date">
+  <time datetime="2018-07-08T03:00:50.000Z" itemprop="datePublished">Jul 8</time>
+</a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2018/07/08/左程云算法课进阶班/">左程云算法课进阶班</a>
     </h1>
   
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-<div id="toc">
-  <strong class="toc-title">文章目录</strong>
-  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#异常类型"><span class="toc-text">异常类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#异常使用的原则"><span class="toc-text">异常使用的原则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在finally中return"><span class="toc-text">在finally中return</span></a></li></ol>
-</div>
-
-        <p> 参考地址:<a href="http://www.hollischuang.com/archives/430" target="_blank" rel="noopener">http://www.hollischuang.com/archives/430</a><br> <a id="more"></a></p>
-<h2 id="异常类型"><a href="#异常类型" class="headerlink" title="异常类型"></a>异常类型</h2><ol>
-<li>Checked exception<br>必须捕获处理,不然编译无法通过,如IOException,SQLException这类无法保证一定不会抛出的异常</li>
-<li>Unchecked exception<br>这类异常都是RuntimeException的子类,在运行期间可能会抛出的但是完全可以避免的异常,不捕获编译也能通过,因此应该从代码上避免此类异常<br>如NullPointerException,IndexOutOfBoundException</li>
-<li>Error<br>无法处理的异常,如OutOfMemoryError,StackOverflowError等<img src="/2018/08/22/异常处理/异常类继承结构.png" title="异常类继承结构">
-</li>
-</ol>
-<h2 id="异常使用的原则"><a href="#异常使用的原则" class="headerlink" title="异常使用的原则"></a>异常使用的原则</h2><blockquote>
-<p>参考地址:<a href="https://www.cnblogs.com/skywang12345/p/3544287.html" target="_blank" rel="noopener">https://www.cnblogs.com/skywang12345/p/3544287.html</a></p>
-</blockquote>
-<ol>
-<li>只针对不正常的情况才使用异常<br>比如不要使用捕获异常来结束数组的遍历<ol>
-<li>异常机制的初衷是为了针对不正常的情况,JVM很少对异常捕获进行优化,异常的创建,抛出和捕获的开销很大</li>
-<li>把代码放在try-catch中返回阻止了JVM实现本来可能要执行的某些特定的优化。(?)</li>
-<li>对数组进行遍历的标准模式并不会导致冗余的检查，有些现代的JVM实现会将它们优化掉。(?)</li>
-</ol>
-</li>
-<li>对于可恢复的条件使用checked exception,对于程序错误使用runtime exception<ol>
-<li>受检异常可以通过处理使得程序恢复正常运行</li>
-<li>程序错误应该通过修改程序代码来避免错误的发生,而不是通过开销很大的异常机制</li>
-</ol>
-</li>
-<li>避免不必要的使用checked exception<br>虽然受检异常能够提高程序的可靠性,但是过分使用被检查异常会使API用起来非常不方便。如果一个方法抛出一个或多个被检查的异常，那么调用该方法的代码则必须在一个或多个catch语句块中处理这些异常，或者必须通过throws声明抛出这些异常。 无论是通过catch处理，还是通过throws声明抛出，都给程序员添加了不可忽略的负担。<br>适用于”被检查的异常”必须同时满足两个条件：<ol>
-<li>即使正确使用API并不能阻止异常条件的发生。</li>
-<li>一旦产生了异常，使用API的程序员可以采取有用的动作对程序进行处理。</li>
-</ol>
-</li>
-<li>尽量使用标准异常<ol>
-<li>这符合代码复用的原则</li>
-<li>异常类越少，意味着内存占用越小，并且转载这些类的时间开销也越小。</li>
-</ol>
-</li>
-<li>抛出的异常要适合于相应的抽象<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> E <span class="title">get</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> listIterator(index).next();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (NoSuchElementException exc) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> IndexOutOfBoundsException(<span class="string">"Index: "</span>+index);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>listIterator(index)会返回ListIterator对象，调用该对象的next()方法可能会抛出NoSuchElementException异常。而在get()方法中，抛出NoSuchElementException异常会让人感到困惑。所以，get()对NoSuchElementException进行了捕获，并抛出了IndexOutOfBoundsException异常。即，相当于将NoSuchElementException转译成了IndexOutOfBoundsException异常。</p>
-<ol start="6">
-<li>努力使失败保持原子性<br>一般而言，一个失败的方法调用应该保持使对象保持在”它在被调用之前的状态”。因为调用者通常期望从被检查的异常中恢复过来。</li>
-<li>不要忽略异常</li>
-</ol>
-<h2 id="在finally中return"><a href="#在finally中return" class="headerlink" title="在finally中return"></a>在finally中return</h2><ol>
-<li>千万不要在finally块中使用return，因为finally中的return会覆盖已有的返回值。</li>
-<li>如果在finally中有return语句,那么即使在catch中throw异常,上一级也捕获不到抛出的异常</li>
-<li>在catch中,return和throw只能使用其中一个</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/08/22/异常处理/" data-id="cjm98vayf003tsrnfk2edvzt5" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/exception/">exception</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/异常/">异常</a></li></ul>
-
-    </footer>
+    </header>
   </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2018/08/26/kafka入门/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          kafka入门
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2018/08/20/重点复习目录/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">重点复习目录</div>
-    </a>
-  
-</nav>
-
-  
 </article>
+  
+  
+    </div></section>
+  
+
 
 </section>
         
