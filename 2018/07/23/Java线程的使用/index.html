@@ -17,7 +17,7 @@
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2018/07/23/Java线程的使用/多进程多线程的对比.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/23/Java线程的使用/线程的状态.jpg">
-<meta property="og:updated_time" content="2018-09-22T03:58:58.000Z">
+<meta property="og:updated_time" content="2018-09-23T05:52:18.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java线程的使用">
 <meta name="twitter:description" content="这是摘要">
@@ -237,7 +237,7 @@ java中的多线程是一种抢占机制而不是分时机制,抢占机制指的
 <ol>
 <li><p>对象锁</p>
 <ul>
-<li><p>同步方法<br>当多个线程访问同一个对象的同步方法时,需要同步执行,但是可以访问该对象的其他方法</p>
+<li><p>同步方法<br>当多个线程访问同一个对象的同步方法时,需要同步执行,但是可以访问该对象的其他非同步方法</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">synchronized</span> T <span class="title">methodName</span><span class="params">()</span></span>&#123;</span><br><span class="line"><span class="comment">//do smoething</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>锁定临界对象<br>锁定的是object对象</p>

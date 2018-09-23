@@ -19,7 +19,9 @@
 <meta property="og:image" content="http://yoursite.com/2018/07/28/tcp和udp/滑动窗口控制流量.jpg">
 <meta property="og:image" content="http://yoursite.com/2018/07/28/tcp和udp/慢开始和拥塞避免.jpg">
 <meta property="og:image" content="http://yoursite.com/2018/07/28/tcp和udp/快重传和快恢复.jpg">
-<meta property="og:updated_time" content="2018-09-01T03:30:10.000Z">
+<meta property="og:image" content="http://yoursite.com/2018/07/28/tcp和udp/tcp3次握手.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/28/tcp和udp/tcp4次挥手.png">
+<meta property="og:updated_time" content="2018-09-23T03:23:14.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="tcp和udp">
 <meta name="twitter:description" content="这是摘要">
@@ -136,14 +138,24 @@
 <li>浏览器:http<br>DOS攻击:denial of service<br>DDOS攻击:distributed denial of service<br>参考地址:<a href="https://www.jianshu.com/p/dff5a0d537d8" target="_blank" rel="noopener">https://www.jianshu.com/p/dff5a0d537d8</a></li>
 </ol>
 </li>
-<li><p>建立连接过程(3次握手)</p>
+<li>建立连接过程(3次握手)<img src="/2018/07/28/tcp和udp/tcp3次握手.png">
 <ol>
-<li>C发送一个请求连接的位码SYN和一个随机产生的序列号给Seq，然后S收到了这些数据。</li>
+<li>C发送一个请求连接的位码SYN和一个随机产生的序列号给Seq，然后S收到了这些数据。<ol start="2">
 <li>S收到了这个请求连接的位码，啊呀，有人向我发出请求了么，那我要不要接受他的请求，得实现确认一下，于是，发送了一个确认码 ACN（seq+1），和SYN，Seq给C，然后C收到了，这个是第二次连接。</li>
-<li>C收到了确认的码和之前发送的SYN一比较，偶哟，对上了么，于是他又发送了一个ACN（SEQ+1）给S，S收到以后就确定建立连接，至此，TCP连接建立完成。</li>
+<li>C收到了确认的码和之前发送的SYN一比较，偶哟，对上了么，于是他又发送了一个ACN（SEQ+1）给S，S收到以后就确定建立连接，至此，TCP连接建立完成。<br>为什么要3次:<br>一端(client)A发出去的第一个连接请求报文并没有丢失，而是因为某些未知的原因在某个网络节点上发生滞留，导致延迟到连接释放以后的某个时间才到达另一端(server)B。<br>本来这是一个早已失效的报文段，但是B收到此失效的报文之后，会误认为是A再次发出的一个新的连接请求，于是B端就向A又发出确认报文，表示同意建立连接。如果不采用“三次握手”，那么只要B端发出确认报文就会认为新的连接已经建立了，但是A端并没有发出建立连接的请求，因此不会去向B端发送数据，B端没有收到数据就会一直等待，这样B端就会白白浪费掉很多资源。<br>如果采用“三次握手”的话就不会出现这种情况，B端收到一个过时失效的报文段之后，向A端发出确认，此时A并没有要求建立连接，所以就不会向B端发送确认，这个时候B端也能够知道连接没有建立。</li>
 </ol>
 </li>
-<li><p>断开连接过程(4次挥手)</p>
+</ol>
+</li>
+<li>断开连接过程(4次挥手)<img src="/2018/07/28/tcp和udp/tcp4次挥手.png">
+<ol>
+<li>客户端进程发出连接释放报文，并且停止发送数据。释放数据报文首部，FIN=1，其序列号为seq=u（等于前面已经传送过来的数据的最后一个字节的序号加1），此时，客户端进入FIN-WAIT-1（终止等待1）状态。 TCP规定，FIN报文段即使不携带数据，也要消耗一个序号。</li>
+<li>服务器收到连接释放报文，发出确认报文，ACK=1，ack=u+1，并且带上自己的序列号seq=v，此时，服务端就进入了CLOSE-WAIT（关闭等待）状态。TCP服务器通知高层的应用进程，客户端向服务器的方向就释放了，这时候处于半关闭状态，即客户端已经没有数据要发送了，但是服务器若发送数据，客户端依然要接受。这个状态还要持续一段时间，也就是整个CLOSE-WAIT状态持续的时间。</li>
+<li>客户端收到服务器的确认请求后，此时，客户端就进入FIN-WAIT-2（终止等待2）状态，等待服务器发送连接释放报文（在这之前还需要接受服务器发送的最后的数据）。</li>
+<li>服务器将最后的数据发送完毕后，就向客户端发送连接释放报文，FIN=1，ack=u+1，由于在半关闭状态，服务器很可能又发送了一些数据，假定此时的序列号为seq=w，此时，服务器就进入了LAST-ACK（最后确认）状态，等待客户端的确认。</li>
+<li>客户端收到服务器的连接释放报文后，必须发出确认，ACK=1，ack=w+1，而自己的序列号是seq=u+1，此时，客户端就进入了TIME-WAIT（时间等待）状态。注意此时TCP连接还没有释放，必须经过2∗∗MSL（最长报文段寿命）的时间后，当客户端撤销相应的TCB后，才进入CLOSED状态。</li>
+<li>服务器只要收到了客户端发出的确认，立即进入CLOSED状态。同样，撤销TCB后，就结束了这次的TCP连接。可以看到，服务器结束TCP连接的时间要比客户端早一些。<br>为了确保数据能够完成传输。<br>关闭连接时，当收到对方的FIN报文通知时，它仅仅表示对方没有数据发送给你了；但未必你所有的数据都全部发送给对方了，所以你可以未必会马上会关闭SOCKET,也即你可能还需要发送一些数据给对方之后，再发送FIN报文给对方来表示你同意现在可以关闭连接了，所以它这里的ACK报文和FIN报文多数情况下都是分开发送的。</li>
+</ol>
 </li>
 </ol>
 <h3 id="udp协议"><a href="#udp协议" class="headerlink" title="udp协议"></a>udp协议</h3><ol>
