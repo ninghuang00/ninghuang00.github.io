@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Just Try It">
 <meta property="og:description" content="日常琐碎的小问题">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-20T08:07:42.000Z">
+<meta property="og:updated_time" content="2018-10-02T07:06:47.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="日常小坑记录">
 <meta name="twitter:description" content="日常琐碎的小问题">
@@ -357,8 +357,18 @@
 
       
         <p> 日常琐碎的小问题<br> <a id="more"></a></p>
-<h1 id="docker"><a href="#docker" class="headerlink" title="docker"></a>docker</h1><h2 id="docker部署redis"><a href="#docker部署redis" class="headerlink" title="docker部署redis"></a>docker部署redis</h2><ol>
-<li>使用自定义配置文件启动redis容器,立马就关闭,原因是参数中的daemonize设置成了yes</li>
+<h1 id="SpringMVC"><a href="#SpringMVC" class="headerlink" title="SpringMVC"></a>SpringMVC</h1><p>报错:<br><code>Spring Boot RestController Error: “No converter found for return value of type”</code><br>可能原因:</p>
+<ol>
+<li>返回的类没有getter()方法</li>
+</ol>
+<h1 id="Mybatis"><a href="#Mybatis" class="headerlink" title="Mybatis"></a>Mybatis</h1><p>报错:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">org.apache.ibatis.binding.BindingException: Invalid bound statement (not found):</span><br></pre></td></tr></table></figure></p>
+<p>可能原因:</p>
+<ol>
+<li>mapper.xml文件没有复制到classpath,或者是扫描路劲配置错误<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mybatis:</span><br><span class="line">  type-aliases-package: com.hn.model</span><br><span class="line">  mapper-locations: classpath:com/hn/mapper/dao/*.xml</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="docker"><a href="#docker" class="headerlink" title="docker"></a>docker</h1><h2 id="容器启动成功后马上退出"><a href="#容器启动成功后马上退出" class="headerlink" title="容器启动成功后马上退出"></a>容器启动成功后马上退出</h2><ol>
+<li>docker部署redis,使用自定义配置文件启动redis容器,立马就关闭,原因是参数中的daemonize设置成了yes</li>
 </ol>
 <h1 id="spring配置"><a href="#spring配置" class="headerlink" title="spring配置"></a>spring配置</h1><h2 id="整合Mybatis"><a href="#整合Mybatis" class="headerlink" title="整合Mybatis"></a>整合Mybatis</h2><ol>
 <li>配置通用Mapper插件的时候,父类Mapper要放在启动类扫面不到的地方,即不在<code>@MapperScan(basePackages = &quot;com.hn.mapper&quot;)</code>所在路径下<br>报错:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Field userDao in com.hn.service.impl.UserServiceImpl required a bean of type &apos;com.hn.dao.UserDao&apos; that could not be found.</span><br></pre></td></tr></table></figure>
@@ -498,7 +508,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">66</span>
+                  <span class="site-state-item-count">69</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -520,7 +530,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">103</span>
+                  <span class="site-state-item-count">105</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -553,7 +563,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#docker"><span class="nav-number">1.</span> <span class="nav-text">docker</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#docker部署redis"><span class="nav-number">1.1.</span> <span class="nav-text">docker部署redis</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#spring配置"><span class="nav-number">2.</span> <span class="nav-text">spring配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#整合Mybatis"><span class="nav-number">2.1.</span> <span class="nav-text">整合Mybatis</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mac终端git中文显示的问题"><span class="nav-number">3.</span> <span class="nav-text">mac终端git中文显示的问题</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#SpringMVC"><span class="nav-number">1.</span> <span class="nav-text">SpringMVC</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Mybatis"><span class="nav-number">2.</span> <span class="nav-text">Mybatis</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#docker"><span class="nav-number">3.</span> <span class="nav-text">docker</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#容器启动成功后马上退出"><span class="nav-number">3.1.</span> <span class="nav-text">容器启动成功后马上退出</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#spring配置"><span class="nav-number">4.</span> <span class="nav-text">spring配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#整合Mybatis"><span class="nav-number">4.1.</span> <span class="nav-text">整合Mybatis</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mac终端git中文显示的问题"><span class="nav-number">5.</span> <span class="nav-text">mac终端git中文显示的问题</span></a></li></ol></div>
             
 
           </div>

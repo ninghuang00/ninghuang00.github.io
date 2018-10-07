@@ -90,9 +90,11 @@
 <meta property="og:image" content="http://yoursite.com/2018/08/18/git原理与使用/其他版本系统.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/18/git原理与使用/git版本系统.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/18/git原理与使用/工作区和版本库.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/18/git原理与使用/git工作区域.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/18/git原理与使用/git文件生命周期.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/18/git原理与使用/目录结构.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/18/git原理与使用/merge的原理.png">
-<meta property="og:updated_time" content="2018-09-01T01:21:42.000Z">
+<meta property="og:updated_time" content="2018-10-07T08:17:38.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git原理与使用">
 <meta name="twitter:description" content="这是摘要">
@@ -422,6 +424,11 @@
 <li>对修改的文件进行快照,然后存到版本库的暂存区(index目录)</li>
 <li>提交更新后,将暂存区的文件快照永久保存到objects目录</li>
 </ol>
+<blockquote>
+<p>参考地址:<a href="https://juejin.im/post/5af26c4d5188256728605809" target="_blank" rel="noopener">https://juejin.im/post/5af26c4d5188256728605809</a></p>
+</blockquote>
+<img src="/2018/08/18/git原理与使用/git工作区域.png">
+<img src="/2018/08/18/git原理与使用/git文件生命周期.png">
 <h3 id="git目录结构"><a href="#git目录结构" class="headerlink" title=".git目录结构"></a><code>.git</code>目录结构</h3><img src="/2018/08/18/git原理与使用/目录结构.png" title="目录结构">
 <p>description文件：仅供GitWeb程序使用<br>config文件：包含项目特有的配置选项<br>info目录：包含一个全局性排除(global exclude)文件，用以放置那些不希望被记录在 .gitignore文件中的忽略模式(ignored patterns)<br>hooks目录：包含客户端或服务端的钩子脚本(hook scripts)<br>HEAD文件：指示目前被检出的分支<br>index文件：保存暂存区信息<br>objects目录：存储所有数据内容<br>refs 目录：存储指向数据（分支）的提交对象的指针</p>
 <h3 id="merge的过程"><a href="#merge的过程" class="headerlink" title="merge的过程"></a>merge的过程</h3><img src="/2018/08/18/git原理与使用/merge的原理.png" title="merge">
@@ -554,7 +561,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">66</span>
+                  <span class="site-state-item-count">69</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -576,7 +583,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">103</span>
+                  <span class="site-state-item-count">105</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
