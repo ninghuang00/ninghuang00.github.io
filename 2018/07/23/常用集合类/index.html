@@ -87,10 +87,12 @@
 <meta property="og:site_name" content="Just Try It">
 <meta property="og:description" content="这是摘要">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-22T07:45:16.000Z">
+<meta property="og:image" content="http://yoursite.com/2018/07/23/常用集合类/HashMap的put方法.png">
+<meta property="og:updated_time" content="2018-10-09T02:52:20.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="常用集合类">
 <meta name="twitter:description" content="这是摘要">
+<meta name="twitter:image" content="http://yoursite.com/2018/07/23/常用集合类/HashMap的put方法.png">
 
 
 
@@ -358,7 +360,12 @@
       
         <p> 这是摘要<br> <a id="more"></a></p>
 <h3 id="线程安全的定义"><a href="#线程安全的定义" class="headerlink" title="线程安全的定义"></a>线程安全的定义</h3><p>当多个线程访问某个类时，不管运行时环境采用何种调度方式或者这些线程将如何交替进行，并且在主调代码中不需要任何额外的同步或协同，这个类都能表现出正确的行为，那么称这个类是线程安全的</p>
-<h3 id="线程安全的集合"><a href="#线程安全的集合" class="headerlink" title="线程安全的集合"></a>线程<em>安全</em>的集合</h3><h4 id="Vector"><a href="#Vector" class="headerlink" title="Vector(+)"></a>Vector(+)</h4><ol>
+<h3 id="线程安全的集合"><a href="#线程安全的集合" class="headerlink" title="线程安全的集合"></a>线程<em>安全</em>的集合</h3><h4 id="CopyOnWriteArrayList"><a href="#CopyOnWriteArrayList" class="headerlink" title="CopyOnWriteArrayList"></a>CopyOnWriteArrayList</h4><p>基于数组和ReentrantLock实现,线程安全的ArrayList,适合读多写少的场景</p>
+<ol>
+<li>每次add(),加锁,数组长度加1,拷贝原来的数组</li>
+<li>读的时候不加锁</li>
+</ol>
+<h4 id="Vector"><a href="#Vector" class="headerlink" title="Vector(+)"></a>Vector(+)</h4><ol>
 <li>基于数组实现,默认初始化10个</li>
 <li><p>同步方法,Vector的方法和ArrayList基本一样,就是一些方法都加上了synchronize关键字</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Appends the specified element to the end of this Vector.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">boolean</span> <span class="title">add</span><span class="params">(E e)</span> </span>&#123;</span><br><span class="line">    modCount++;</span><br><span class="line">    ensureCapacityHelper(elementCount + <span class="number">1</span>);</span><br><span class="line">    elementData[elementCount++] = e;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -390,12 +397,46 @@
 </ol>
 <h4 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap(+)"></a>HashMap(+)</h4><p>参考地址:<a href="http://www.importnew.com/22011.html" target="_blank" rel="noopener">http://www.importnew.com/22011.html</a><br>参考地址:<a href="http://www.hollischuang.com/archives/2091" target="_blank" rel="noopener">http://www.hollischuang.com/archives/2091</a><br>HashMap的底层实现原理</p>
 <ul>
+<li><p>put的实现步骤</p>
+<ol>
+<li>调用putVal()方法(如果key是null,怎hash值为0,也就是会被放到第一个桶中)</li>
+<li>判断table[]数组是不是null,或者长度是否为0,是的话处理一下</li>
+<li>根据key的hash,找到对应的桶,判断是不是已经有元素<ol>
+<li>没有,创建新的Node,直接插入</li>
+<li>有,遍历链表,看一下有没有相同的key,<ol>
+<li>有,更新value,返回旧的value</li>
+<li>没有,创建新的Node插到末尾</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>++modCount,判断是不是要resize()</li>
+</ol>
+</li>
+<li><p>resize()的思路</p>
+</li>
+</ul>
+<ol>
+<li>判断table[]数组是不是null<ol>
+<li>是,开辟默认大小空间</li>
+<li>否,取出旧的容量</li>
+</ol>
+</li>
+<li>创建一个原来数组2倍大小的数组,将就数组的数据拷贝到新数组(细节:将旧的数组元素拷贝到新数组后,将oldTab[i]=null)<ol>
+<li>oldTab[i]只有一个节点,根据hash找桶位置</li>
+<li>oldTab[i]是一个TreeNode,进行分割</li>
+<li>按照<code>hash &amp; oldCap</code>是否是0,分成两串,放到新的数组中</li>
+</ol>
+</li>
+</ol>
+<ul>
 <li>HashMap的结构:是一个Node&lt;K,V&gt;[]的数组,Node实现了Map.Entry,初始容量16(代码中是<code>1&lt;&lt;4</code>),最大是2^30,当检查到插入数据时容量超出<code>capacity*loadFactor</code>,就要增大Hash表的尺寸,</li>
 <li>放入规则:计算A的键的hash值,然后%数组长度就是index,放在数组的index位置,如果后面put进来B的键的hash值和A相等的,那就是<code>B.next=A,Node[index]=B</code></li>
 <li>为什么capacity的值是2的次幂:因为<code>index = hash &amp; (length - 1)</code>,相当于取余,这样length-1的二进制就是1,和hash进行&amp;操作之后不容易产生相同的结果,也就是尽量减少在同一个index放置多个元素,这样不但空间利用率最高,同时为了利用数组查找元素速度,我们当然是希望每一个位置只有一个元素,这样就不用遍历链表去比对key了.</li>
 <li>resize()死循环的问题:当HashMap进行扩容的时候,原来的链表就要进行重排,这个时候如果并发操作,由于transfer()函数,就可能形成环,然后下次get元素的时候就可能进入死循环,<br>jdk1.8好像解决了这个问题,进行优化之后省去了重新计算hash值的时间,而是通过<code>if ((e.hash &amp; oldCap) == 0)</code>判断元素hash的高位(即oldCap的最高位对应的)是1还是0(0则是原位置,1则是原位置+oldCap),均匀地将之前冲突的节点分散到新的桶上,</li>
 <li>支持NULL键和NULL值,而且null值的key总是放在数组第一个位置</li>
-<li>遍历的方法,取出keySet().iterator(),遍历iterator,即Map.entry,从entry中取key和value比较高效.</li>
+<li>遍历的方法,取出keySet().iterator(),遍历iterator,即Map.entry,从entry中取key和value比较高效.<img src="/2018/07/23/常用集合类/HashMap的put方法.png">
+</li>
 </ul>
 <h4 id="TreeMap"><a href="#TreeMap" class="headerlink" title="TreeMap"></a>TreeMap</h4><p>参考地址:<a href="https://blog.csdn.net/myblog_dhy/article/details/44618775" target="_blank" rel="noopener">https://blog.csdn.net/myblog_dhy/article/details/44618775</a></p>
 <ol>
@@ -549,7 +590,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">69</span>
+                  <span class="site-state-item-count">70</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -571,7 +612,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">105</span>
+                  <span class="site-state-item-count">106</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -604,7 +645,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#线程安全的定义"><span class="nav-number">1.</span> <span class="nav-text">线程安全的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程安全的集合"><span class="nav-number">2.</span> <span class="nav-text">线程安全的集合</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Vector"><span class="nav-number">2.1.</span> <span class="nav-text">Vector(+)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HashTable"><span class="nav-number">2.2.</span> <span class="nav-text">HashTable</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程不安全的集合"><span class="nav-number">3.</span> <span class="nav-text">线程不安全的集合</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#HashSet"><span class="nav-number">3.1.</span> <span class="nav-text">HashSet</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LinkedList"><span class="nav-number">3.2.</span> <span class="nav-text">LinkedList(+)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ArrayList"><span class="nav-number">3.3.</span> <span class="nav-text">ArrayList(+)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HashMap"><span class="nav-number">3.4.</span> <span class="nav-text">HashMap(+)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TreeMap"><span class="nav-number">3.5.</span> <span class="nav-text">TreeMap</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ConcurrentHashMap"><span class="nav-number">3.6.</span> <span class="nav-text">ConcurrentHashMap</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#线程安全的定义"><span class="nav-number">1.</span> <span class="nav-text">线程安全的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程安全的集合"><span class="nav-number">2.</span> <span class="nav-text">线程安全的集合</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#CopyOnWriteArrayList"><span class="nav-number">2.1.</span> <span class="nav-text">CopyOnWriteArrayList</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Vector"><span class="nav-number">2.2.</span> <span class="nav-text">Vector(+)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HashTable"><span class="nav-number">2.3.</span> <span class="nav-text">HashTable</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程不安全的集合"><span class="nav-number">3.</span> <span class="nav-text">线程不安全的集合</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#HashSet"><span class="nav-number">3.1.</span> <span class="nav-text">HashSet</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LinkedList"><span class="nav-number">3.2.</span> <span class="nav-text">LinkedList(+)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ArrayList"><span class="nav-number">3.3.</span> <span class="nav-text">ArrayList(+)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HashMap"><span class="nav-number">3.4.</span> <span class="nav-text">HashMap(+)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TreeMap"><span class="nav-number">3.5.</span> <span class="nav-text">TreeMap</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ConcurrentHashMap"><span class="nav-number">3.6.</span> <span class="nav-text">ConcurrentHashMap</span></a></li></ol></li></ol></div>
             
 
           </div>

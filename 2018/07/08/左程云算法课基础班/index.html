@@ -104,7 +104,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/07/08/左程云算法课基础班/二叉树先序遍历序列化.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/08/左程云算法课基础班/二叉树的遍历过程.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/08/左程云算法课基础班/单向链表环问题.png">
-<meta property="og:updated_time" content="2018-09-28T07:42:02.000Z">
+<meta property="og:updated_time" content="2018-10-08T12:36:13.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="左程云算法课基础班">
 <meta name="twitter:description" content="左程云算法课程基础班笔记.">
@@ -501,7 +501,10 @@
 <li>不用并行处理的解法:遍历,碰到1后,count++,之后进入递归,将当前的1和相邻的所有1都变成2,<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">countIslands</span><span class="params">(<span class="keyword">int</span>[][] m)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (m == <span class="keyword">null</span> || m[<span class="number">0</span>] == <span class="keyword">null</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> N = m.length;</span><br><span class="line">	<span class="keyword">int</span> M = m[<span class="number">0</span>].length;</span><br><span class="line">	<span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++) &#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; M; j++) &#123;</span><br><span class="line">			<span class="keyword">if</span> (m[i][j] == <span class="number">1</span>) &#123;</span><br><span class="line">				res++;</span><br><span class="line">				infect(m, i, j, N, M);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">infect</span><span class="params">(<span class="keyword">int</span>[][] m, <span class="keyword">int</span> i, <span class="keyword">int</span> j, <span class="keyword">int</span> N, <span class="keyword">int</span> M)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (i &lt; <span class="number">0</span> || i &gt;= N || j &lt; <span class="number">0</span> || j &gt;= M || m[i][j] != <span class="number">1</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	m[i][j] = <span class="number">2</span>;</span><br><span class="line">	infect(m, i + <span class="number">1</span>, j, N, M);</span><br><span class="line">	infect(m, i - <span class="number">1</span>, j, N, M);</span><br><span class="line">	infect(m, i, j + <span class="number">1</span>, N, M);</span><br><span class="line">	infect(m, i, j - <span class="number">1</span>, N, M);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h2 id="一致性哈希"><a href="#一致性哈希" class="headerlink" title="一致性哈希"></a>一致性哈希</h2><ol>
+<h2 id="一致性哈希"><a href="#一致性哈希" class="headerlink" title="一致性哈希"></a>一致性哈希</h2><blockquote>
+<p>参考地址:<a href="https://blog.csdn.net/v_july_v/article/details/6879101" target="_blank" rel="noopener">https://blog.csdn.net/v_july_v/article/details/6879101</a></p>
+</blockquote>
+<ol>
 <li>经典服务器抗压处理<ol>
 <li>后台有m台机器,前端请求输入参数key,查询对应的value,</li>
 <li>存(key,value)的时候计算key哈希值,然后模m,决定放在那一台后台机器上,</li>
@@ -942,7 +945,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">69</span>
+                  <span class="site-state-item-count">70</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -964,7 +967,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">105</span>
+                  <span class="site-state-item-count">106</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
