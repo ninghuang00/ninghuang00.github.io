@@ -89,7 +89,7 @@
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2018/07/23/Java线程的使用/多进程多线程的对比.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/23/Java线程的使用/线程的状态.png">
-<meta property="og:updated_time" content="2018-09-23T08:41:40.000Z">
+<meta property="og:updated_time" content="2018-10-10T09:20:46.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java线程的使用">
 <meta name="twitter:description" content="这是摘要">
@@ -525,8 +525,24 @@ java中的多线程是一种抢占机制而不是分时机制,抢占机制指的
 </li>
 </ol>
 <h3 id="线程安全是相对的"><a href="#线程安全是相对的" class="headerlink" title="线程安全是相对的"></a>线程安全是相对的</h3><p>(深入理解Java虚拟机P390)<br>比如说Vector是一个线程安全的集合容器,因为它的add(),get(),size(),remove()方法都是被synchronized修饰过的,但是并不意味着调用这些方法就永远不需要额外的同步手段了,一下代码就有可能会出现ArrayIndexOutOfBoundsException.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">VectorDemo</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Vector&lt;Integer&gt; vector = <span class="keyword">new</span> Vector();</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i&lt;<span class="number">10</span>;i++) &#123;</span><br><span class="line">                vector.add(i);</span><br><span class="line">            &#125;</span><br><span class="line">            Thread removeTask = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">                <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; <span class="number">10</span>; i ++) &#123;</span><br><span class="line">                        vector.remove(i);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">            Thread printTask = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">                <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; <span class="number">10</span>; i ++) &#123;</span><br><span class="line">                        System.out.println(vector.get(i));</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">            removeTask.start();</span><br><span class="line">            printTask.start();</span><br><span class="line">            <span class="comment">//防止线程过多</span></span><br><span class="line">            <span class="keyword">while</span> (Thread.activeCount() &gt; <span class="number">20</span>) ;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="线程进程之间的访问"><a href="#线程进程之间的访问" class="headerlink" title="线程进程之间的访问"></a>线程进程之间的访问</h2><ol>
-<li>临界区(Critical Section)<br>适合一个进程内的多线程访问公共区域或代码段时使用。</li>
+<h1 id="通信"><a href="#通信" class="headerlink" title="通信"></a>通信</h1><blockquote>
+<p>参考地址:<a href="https://blog.csdn.net/mine_song/article/details/70231830" target="_blank" rel="noopener">https://blog.csdn.net/mine_song/article/details/70231830</a></p>
+</blockquote>
+<h2 id="进程间通信"><a href="#进程间通信" class="headerlink" title="进程间通信"></a>进程间通信</h2><ol>
+<li>管道(pipe)<br>允许一个两个具有公共祖先进程的进程之间进行通信</li>
+<li>命名管道(named pipe)<br>克服了管道没有名字的限制,并且允许没有亲缘关系的管道之间进行通信,在文件系统中有对应的文件名</li>
+<li>信号量(semophore)<br>主要作为不同进程,或者是统一进程不同线程之间的同步手段</li>
+<li>消息队列(message)<br>有权限的进程可以往队列中写数据,有读取权限的进程可以从队列中读数据,克服了管道只能承载无格式字节流,信息量小,缓冲区大小受限的问题</li>
+<li>信号 (signal)<br>用于通知进程某个事件的发生</li>
+<li>共享内存<br>多进程访问同一块共享内存</li>
+<li>套接字(socket)<br>可用于不同机器之间的进程通信</li>
+</ol>
+<h2 id="线程间通信"><a href="#线程间通信" class="headerlink" title="线程间通信"></a>线程间通信</h2><ol>
+<li>共享变量</li>
+<li><p>管道流(PipeOutputStream等)</p>
+</li>
+<li><p>临界区(Critical Section)<br>适合一个进程内的多线程访问公共区域或代码段时使用。</p>
+</li>
 <li>互斥量(Mutex)<br>适合不同进程内多线程访问公共区域或代码段时使用，与临界区相似。</li>
 <li>事件(Event)<br>通过线程间触发事件实现同步互斥。</li>
 <li>信号量(Semaphore)<br>与临界区和互斥量不同，可以实现多个线程同时访问公共区域数据，原理与操作系统中PV操作类似，先设置一个访问公共区域的线程最大连接数，每有一个线程访问共享区资源数就减一，直到资源数小于等于零</li>
@@ -709,7 +725,7 @@ java中的多线程是一种抢占机制而不是分时机制,抢占机制指的
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#线程"><span class="nav-number">1.</span> <span class="nav-text">线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程安全"><span class="nav-number">2.</span> <span class="nav-text">线程安全</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#volatile的使用-有两种语义"><span class="nav-number">2.1.</span> <span class="nav-text">volatile的使用(有两种语义)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程安全的实现方法"><span class="nav-number">2.2.</span> <span class="nav-text">线程安全的实现方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程安全是相对的"><span class="nav-number">2.3.</span> <span class="nav-text">线程安全是相对的</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程进程之间的访问"><span class="nav-number">3.</span> <span class="nav-text">线程进程之间的访问</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#线程"><span class="nav-number">1.</span> <span class="nav-text">线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程安全"><span class="nav-number">2.</span> <span class="nav-text">线程安全</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#volatile的使用-有两种语义"><span class="nav-number">2.1.</span> <span class="nav-text">volatile的使用(有两种语义)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程安全的实现方法"><span class="nav-number">2.2.</span> <span class="nav-text">线程安全的实现方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程安全是相对的"><span class="nav-number">2.3.</span> <span class="nav-text">线程安全是相对的</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#通信"><span class="nav-number"></span> <span class="nav-text">通信</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#进程间通信"><span class="nav-number">1.</span> <span class="nav-text">进程间通信</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程间通信"><span class="nav-number">2.</span> <span class="nav-text">线程间通信</span></a></li></ol></div>
             
 
           </div>

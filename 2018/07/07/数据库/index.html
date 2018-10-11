@@ -88,7 +88,7 @@
 <meta property="og:description" content="数据库相关知识">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2018/07/07/数据库/读写分离.png">
-<meta property="og:updated_time" content="2018-09-02T06:34:41.000Z">
+<meta property="og:updated_time" content="2018-10-11T01:57:39.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据库">
 <meta name="twitter:description" content="数据库相关知识">
@@ -379,7 +379,31 @@
 <li>分摊读取。假如我们有1主3从，不考虑上述1中提到的从库单方面设置，假设现在1分钟内有10条写入，150条读取。那么，1主3从相当于共计40条写入，而读取总数没变，因此平均下来每台服务器承担了10条写入和50条读取（主库不承担读取操作）。因此，虽然写入没变，但是读取大大分摊了，提高了系统性能。另外，当读取被分摊后，又间接提高了写入的性能。所以，总体性能提高了，说白了就是拿机器和带宽换性能。MySQL官方文档中有相关演算公式：官方文档 见6.9FAQ之“MySQL复制能够何时和多大程度提高系统性能”</li>
 <li>MySQL复制另外一大功能是增加冗余，提高可用性，当一台数据库服务器宕机后能通过调整另外一台从库来以最快的速度恢复服务，因此不能光看性能，也就是说1主1从也是可以的。</li>
 </ol>
-<h1 id="Mysql主从同步方案"><a href="#Mysql主从同步方案" class="headerlink" title="Mysql主从同步方案"></a>Mysql主从同步方案</h1><h1 id="慢查询优化"><a href="#慢查询优化" class="headerlink" title="慢查询优化:"></a>慢查询优化:</h1><h2 id="分析sql方法"><a href="#分析sql方法" class="headerlink" title="分析sql方法"></a>分析sql方法</h2><p>参考地址:<a href="https://blog.csdn.net/u012990533/article/details/45643509" target="_blank" rel="noopener">https://blog.csdn.net/u012990533/article/details/45643509</a><br><code>explain select * from table where table.id = 1</code><br>运行上面的sql语句后你会看到，下面的表头信息：<br><code>table | type | possible_keys | key | key_len | ref | rows | Extra</code></p>
+<h1 id="Mysql主从同步方案-实现读写分离"><a href="#Mysql主从同步方案-实现读写分离" class="headerlink" title="Mysql主从同步方案(实现读写分离)"></a>Mysql主从同步方案(实现读写分离)</h1><blockquote>
+<p>参考地址: <a href="https://www.jianshu.com/p/ab704b437ebd" target="_blank" rel="noopener">https://www.jianshu.com/p/ab704b437ebd</a></p>
+</blockquote>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>基于binlog实现</p>
+<blockquote>
+<p>参考地址:<a href="https://jaminzhang.github.io/mysql/MySQL-Master-Slave-Replication-Principle/" target="_blank" rel="noopener">https://jaminzhang.github.io/mysql/MySQL-Master-Slave-Replication-Principle/</a></p>
+</blockquote>
+<h2 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h2><ol>
+<li>master要开启binlog功能</li>
+<li>slave上执行<code>start slave</code>,然后slave的IO线程会向master请求其binlog中指定位置之后的内容</li>
+<li>master上的IO线程收到请求之后会将binlog中指定位置之后的日志信息返回,同时包含新的binlog文件名和下一个指定的更新位置</li>
+<li>slave的IO线程接受到日志数据之后,将数据添加到本地的中继日志(relay log)的末端,并记录新的binlog文件名和下一个更新位置,</li>
+<li>当slave的SQL线程检测到中继日志中有新内容的时候,将日志内容解析成SQL执行
+</li>
+</ol>
+<h2 id="主从切换的注意点"><a href="#主从切换的注意点" class="headerlink" title="主从切换的注意点"></a>主从切换的注意点</h2><p>master故障是binlog没有及时传给slave,各个slave数据不一致</p>
+<ol>
+<li>确保binlog全部传到slave<ol>
+<li>半同步,事务提交之后只有binlog传到slave之后才算结束,影响性能</li>
+<li>通过os层文件系统将binlog保存到备用机</li>
+</ol>
+</li>
+<li>如果允许数据丢失<br>在salve中选择一个binlog最新的变成master,原master恢复后,将数据回退</li>
+</ol>
+<h1 id="慢查询优化"><a href="#慢查询优化" class="headerlink" title="慢查询优化:"></a>慢查询优化:</h1><h2 id="分析sql方法"><a href="#分析sql方法" class="headerlink" title="分析sql方法"></a>分析sql方法</h2><p>参考地址:<a href="https://blog.csdn.net/u012990533/article/details/45643509" target="_blank" rel="noopener">https://blog.csdn.net/u012990533/article/details/45643509</a><br><code>explain select * from table where table.id = 1</code><br>运行上面的sql语句后你会看到，下面的表头信息：<br><code>table | type | possible_keys | key | key_len | ref | rows | Extra</code></p>
 <ol>
 <li>table<br>显示这一行的数据是关于哪张表的</li>
 <li>type<br>这是重要的列，显示连接使用了何种类型。从最好到最差的连接类型为const、eq_reg、ref、range、indexhe和ALL<br>说明：不同连接类型的解释（按照效率高低的顺序排序）<ul>
@@ -597,7 +621,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#分库分表"><span class="nav-number">1.</span> <span class="nav-text">分库分表</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#读写分离"><span class="nav-number">2.</span> <span class="nav-text">读写分离</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#概念"><span class="nav-number">2.1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#提高性能的原因"><span class="nav-number">2.2.</span> <span class="nav-text">提高性能的原因</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Mysql主从同步方案"><span class="nav-number">3.</span> <span class="nav-text">Mysql主从同步方案</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#慢查询优化"><span class="nav-number">4.</span> <span class="nav-text">慢查询优化:</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#分析sql方法"><span class="nav-number">4.1.</span> <span class="nav-text">分析sql方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优化方法"><span class="nav-number">4.2.</span> <span class="nav-text">优化方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#完整的对象访问名称"><span class="nav-number">5.</span> <span class="nav-text">完整的对象访问名称</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Oracle"><span class="nav-number">5.1.</span> <span class="nav-text">Oracle</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#分库分表"><span class="nav-number">1.</span> <span class="nav-text">分库分表</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#读写分离"><span class="nav-number">2.</span> <span class="nav-text">读写分离</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#概念"><span class="nav-number">2.1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#提高性能的原因"><span class="nav-number">2.2.</span> <span class="nav-text">提高性能的原因</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Mysql主从同步方案-实现读写分离"><span class="nav-number">3.</span> <span class="nav-text">Mysql主从同步方案(实现读写分离)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#实现"><span class="nav-number">3.1.</span> <span class="nav-text">实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#流程"><span class="nav-number">3.2.</span> <span class="nav-text">流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主从切换的注意点"><span class="nav-number">3.3.</span> <span class="nav-text">主从切换的注意点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#慢查询优化"><span class="nav-number">4.</span> <span class="nav-text">慢查询优化:</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#分析sql方法"><span class="nav-number">4.1.</span> <span class="nav-text">分析sql方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优化方法"><span class="nav-number">4.2.</span> <span class="nav-text">优化方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#完整的对象访问名称"><span class="nav-number">5.</span> <span class="nav-text">完整的对象访问名称</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Oracle"><span class="nav-number">5.1.</span> <span class="nav-text">Oracle</span></a></li></ol></li></ol></div>
             
 
           </div>
