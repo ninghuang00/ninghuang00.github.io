@@ -97,7 +97,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/07/08/Java虚拟机/G1回收器的内存划分.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/08/Java虚拟机/G1收集器流程.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/08/Java虚拟机/垃圾收集器总结.png">
-<meta property="og:updated_time" content="2018-09-23T02:28:52.000Z">
+<meta property="og:updated_time" content="2018-10-15T15:12:30.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java虚拟机">
 <meta name="twitter:description" content="JVM相关知识">
@@ -597,6 +597,10 @@ ParNew收集器除了使用多线程收集外，其他与Serial收集器相比�
 </li>
 </ul>
 <h2 id="逃逸分析"><a href="#逃逸分析" class="headerlink" title="逃逸分析"></a>逃逸分析</h2><p>参考地址:<a href="http://www.hollischuang.com/archives/2398" target="_blank" rel="noopener">http://www.hollischuang.com/archives/2398</a><br>类实例和数组不一定都是分配在堆上了</p>
+<ol>
+<li>方法逃逸<br>在方法中创建对象,作为返回值</li>
+<li>线程逃逸<br>在方法中生成对象赋值给类变量,就可能被其他线程访问</li>
+</ol>
 <h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>逃逸分析的基本行为就是分析对象动态作用域：当一个对象在方法中被定义后，它可能被外部方法所引用，例如作为调用参数传递到其他地方中，称为方法逃逸。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> StringBuffer <span class="title">craeteStringBuffer</span><span class="params">(String s1, String s2)</span> </span>&#123;</span><br><span class="line">    StringBuffer sb = <span class="keyword">new</span> StringBuffer();</span><br><span class="line">    sb.append(s1);</span><br><span class="line">    sb.append(s2);</span><br><span class="line">    <span class="keyword">return</span> sb;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>StringBuffer sb是一个方法内部变量，上述代码中直接将sb返回，这样这个StringBuffer有可能被其他方法所改变，这样它的作用域就不只是在方法内部，虽然它是一个局部变量，称其逃逸到了方法外部。甚至还有可能被外部线程访问到，譬如赋值给类变量或可以在其他线程中访问的实例变量，称为线程逃逸。<br>使用逃逸分析，编译器可以对代码做如下优化：</p>
 <ol>
@@ -739,7 +743,7 @@ ParNew收集器除了使用多线程收集外，其他与Serial收集器相比�
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">70</span>
+                  <span class="site-state-item-count">71</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -761,7 +765,7 @@ ParNew收集器除了使用多线程收集外，其他与Serial收集器相比�
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">106</span>
+                  <span class="site-state-item-count">107</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

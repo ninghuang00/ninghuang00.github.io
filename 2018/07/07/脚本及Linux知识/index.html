@@ -91,7 +91,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/07/07/脚本及Linux知识/source命令.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/07/脚本及Linux知识/替换文本文件.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/07/脚本及Linux知识/换行格式.png">
-<meta property="og:updated_time" content="2018-09-01T05:41:51.000Z">
+<meta property="og:updated_time" content="2018-10-15T07:38:01.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="脚本及Linux知识">
 <meta name="twitter:description" content="这是摘要">
@@ -372,7 +372,7 @@
 <h2 id="换行符格式"><a href="#换行符格式" class="headerlink" title="换行符格式"></a>换行符格式</h2><img src="/2018/07/07/脚本及Linux知识/换行格式.png" title="换行格式">
 <h2 id="管道"><a href="#管道" class="headerlink" title="管道"></a>管道</h2><p>那么，一种思路就是把你tail输出的东西再做一次包装处理，这个很符合linux管道处理的思想。以高亮Log中的ERROR为例，你可以这样：<br><code>tail -f xxx.log | perl -pe &#39;s/(ERROR)/\e[1;31m$1\e[0m/g&#39;</code><br>其中，xxx.log是你要跟踪的文件。这里假设了你的Linux的PATH中有perl。perl在这里干的事情，<br>就是通过命令行的方式进行动态的替换ERROR字符串的操作，替换过程中，主要使用了Linux的console_codes的语法结构。<br>（具体关于console_codes的细节，可以通过man console_codes进行了解）这里，\e主要进行转移说明。</p>
 <h1 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h1><h2 id="匹配数字"><a href="#匹配数字" class="headerlink" title="匹配数字"></a>匹配数字</h2><ol>
-<li>匹配<code>1~1000</code><br><code>^([1-9][0-9]{0,4}|1000)$</code></li>
+<li>匹配<code>1~1000</code><br><code>^([1-9][0-9]{0,3}|1000)$</code></li>
 </ol>
 <h1 id="centos常用命令"><a href="#centos常用命令" class="headerlink" title="centos常用命令"></a>centos常用命令</h1><h2 id="查找文件"><a href="#查找文件" class="headerlink" title="查找文件"></a>查找文件</h2><h3 id="whereis："><a href="#whereis：" class="headerlink" title="whereis："></a>whereis：</h3><p>whereis命令用来定位指令的二进制程序、源代码文件和man手册页等相关文件的路径。<br>whereis命令只能用于程序名的搜索，而且只搜索二进制文件（参数-b）、man说明文件（参数-m）和源代码文件（参数-s）。如果省略参数，则返回所有信息。</p>
 <h3 id="locate："><a href="#locate：" class="headerlink" title="locate："></a>locate：</h3><p>locate命令和slocate命令都用来查找文件或目录。<br>locate命令其实是find -name的另一种写法，但是要比后者快得多，原因在于它不搜索具体目录，而是搜索一个数据库/var/lib/locatedb，这个数据库中含有本地所有文件信息。Linux系统自动创建这个数据库，并且每天自动更新一次，所以使用locate命令查不到最新变动过的文件。为了避免这种情况，可以在使用locate之前，先使用updatedb命令，手动更新数据库。</p>
@@ -591,7 +591,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">70</span>
+                  <span class="site-state-item-count">71</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -613,7 +613,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">106</span>
+                  <span class="site-state-item-count">107</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
