@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Just Try It">
 <meta property="og:description" content="这是摘要">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-10-10T09:01:28.000Z">
+<meta property="og:updated_time" content="2018-10-20T11:18:03.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="http协议">
 <meta name="twitter:description" content="这是摘要">
@@ -404,6 +404,11 @@
 <li>sra是非对称加密,分为公钥和私钥,公钥在网络中传输,私钥安全保存,<br>优点是网络传输更安全,<br>缺点是加密速度相对较慢</li>
 <li>结合两者:<br>将公钥给对方,让对方用公钥加密aes的秘钥,然后发回给自己,自己通过私钥解密获得aes秘钥后加密数据发给对方,对方就能用公用的aes秘钥解密,<br>这样既能保证加密速度,又能保证秘钥传输安全</li>
 </ol>
+<h2 id="非对称加密"><a href="#非对称加密" class="headerlink" title="非对称加密"></a>非对称加密</h2><ol>
+<li>公钥加密,私钥解密</li>
+<li>私钥签名,公钥认证</li>
+<li>其实公钥私钥可以相互解密</li>
+</ol>
 <h2 id="SSL层"><a href="#SSL层" class="headerlink" title="SSL层"></a>SSL层</h2><p>实现安全连接</p>
 <h2 id="Socket通信"><a href="#Socket通信" class="headerlink" title="Socket通信"></a>Socket通信</h2><ol>
 <li>java封装类</li>
@@ -565,7 +570,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-count">72</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -587,7 +592,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">107</span>
+                  <span class="site-state-item-count">108</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -620,7 +625,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#特点"><span class="nav-number">1.</span> <span class="nav-text">特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#http协议"><span class="nav-number">2.</span> <span class="nav-text">http协议</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#http请求方法"><span class="nav-number">2.1.</span> <span class="nav-text">http请求方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关于GET-POST-PUT的区别"><span class="nav-number">2.2.</span> <span class="nav-text">关于GET,POST,PUT的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#请求和响应"><span class="nav-number">2.3.</span> <span class="nav-text">请求和响应</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见http协议状态码"><span class="nav-number"></span> <span class="nav-text">常见http协议状态码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#会话跟踪"><span class="nav-number"></span> <span class="nav-text">会话跟踪</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Https"><span class="nav-number"></span> <span class="nav-text">Https</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#aes与sra加密"><span class="nav-number"></span> <span class="nav-text">aes与sra加密</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SSL层"><span class="nav-number"></span> <span class="nav-text">SSL层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Socket通信"><span class="nav-number"></span> <span class="nav-text">Socket通信</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTPS-握手机制："><span class="nav-number"></span> <span class="nav-text">HTTPS 握手机制：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#跨站请求伪造"><span class="nav-number"></span> <span class="nav-text">跨站请求伪造</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#防御CSRF攻击"><span class="nav-number">1.</span> <span class="nav-text">防御CSRF攻击</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SSL证书"><span class="nav-number"></span> <span class="nav-text">SSL证书</span></a></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#特点"><span class="nav-number">1.</span> <span class="nav-text">特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#http协议"><span class="nav-number">2.</span> <span class="nav-text">http协议</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#http请求方法"><span class="nav-number">2.1.</span> <span class="nav-text">http请求方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关于GET-POST-PUT的区别"><span class="nav-number">2.2.</span> <span class="nav-text">关于GET,POST,PUT的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#请求和响应"><span class="nav-number">2.3.</span> <span class="nav-text">请求和响应</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见http协议状态码"><span class="nav-number"></span> <span class="nav-text">常见http协议状态码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#会话跟踪"><span class="nav-number"></span> <span class="nav-text">会话跟踪</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Https"><span class="nav-number"></span> <span class="nav-text">Https</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#aes与sra加密"><span class="nav-number"></span> <span class="nav-text">aes与sra加密</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#非对称加密"><span class="nav-number"></span> <span class="nav-text">非对称加密</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SSL层"><span class="nav-number"></span> <span class="nav-text">SSL层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Socket通信"><span class="nav-number"></span> <span class="nav-text">Socket通信</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTPS-握手机制："><span class="nav-number"></span> <span class="nav-text">HTTPS 握手机制：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#跨站请求伪造"><span class="nav-number"></span> <span class="nav-text">跨站请求伪造</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#防御CSRF攻击"><span class="nav-number">1.</span> <span class="nav-text">防御CSRF攻击</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SSL证书"><span class="nav-number"></span> <span class="nav-text">SSL证书</span></a></div>
             
 
           </div>
