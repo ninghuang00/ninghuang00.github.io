@@ -91,7 +91,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/08/26/kafka入门/kafka零拷贝1.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/26/kafka入门/kafka零拷贝2.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/26/kafka入门/文件分段.png">
-<meta property="og:updated_time" content="2018-10-07T08:06:32.000Z">
+<meta property="og:updated_time" content="2018-10-24T15:23:28.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="kafka入门">
 <meta name="twitter:description" content="这是摘要">
@@ -362,6 +362,50 @@
 
       
         <p> 这是摘要<br> <a id="more"></a></p>
+<h2 id="kafka相关操作"><a href="#kafka相关操作" class="headerlink" title="kafka相关操作"></a>kafka相关操作</h2><blockquote>
+<p>参考地址:<a href="https://kafka.apache.org/quickstart" target="_blank" rel="noopener">https://kafka.apache.org/quickstart</a></p>
+</blockquote>
+<ol>
+<li><p>启动zookeeper,kafka压缩包中自带的<br><code>bin/zookeeper-server-start.sh config/zookeeper.properties</code></p>
+</li>
+<li><p>启动kafka server,可以在配置文件中适当修改JVM的启动参数<br><code>bin/kafka-server-start.sh config/server.properties</code></p>
+</li>
+<li><p>创建一个topic<br><code>bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test</code><br>查看创建的topic<br><code>bin/kafka-topics.sh --list --zookeeper localhost:2181</code></p>
+</li>
+<li><p>启动一个producer,发送消息<br><code>bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test</code></p>
+</li>
+<li><p>启动一个consumer消费消息<br><code>bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test --from-beginning</code></p>
+</li>
+<li><p>使用集群</p>
+<ol>
+<li>复制server.properties到server-1.properties和server-2.properties </li>
+<li><p>修改参数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">broker.id=1</span><br><span class="line">listeners=PLAINTEXT://:9093</span><br><span class="line">log.dirs=/tmp/kafka-logs-1</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用新的配置启动</p>
+</li>
+<li>创建replication-factor为3的topic<br><code>bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 3 --partitions 1 --topic my-replicated-topic</code></li>
+<li>查看topic的描述<br><code>bin/kafka-topics.sh --describe --zookeeper localhost:2181 --topic my-replicated-topic</code></li>
+<li>kill leader的进程之后,会切换新的leader,原来打开的producer和consumer可以继续使用</li>
+</ol>
+</li>
+</ol>
+<h2 id="zookeeper为kafka提供的服务"><a href="#zookeeper为kafka提供的服务" class="headerlink" title="zookeeper为kafka提供的服务"></a>zookeeper为kafka提供的服务</h2><h3 id="配置同步"><a href="#配置同步" class="headerlink" title="配置同步"></a>配置同步</h3><ol>
+<li>kafka使用zookeeper来保存一些meta信息,并利用zookeeper的watch机制来监视meta信息的变更并作出相应的动作</li>
+<li>broker node registry:当kafka的broker启动之后,会向zookeeper注册自己的节点信息(临时节点znode),在broker和zookeeper断开的时候删除znode</li>
+<li>broker topic register:当broker启动后,会向zookeeper注册自己的topic和partition</li>
+<li>consumer和consumer group:保证一个consumer group中consumer可以交错的消费同一个topic中所有partitions,并且为了性能,将partitions尽量均衡地分散到每个consumer上</li>
+</ol>
+<h3 id="状态同步"><a href="#状态同步" class="headerlink" title="状态同步"></a>状态同步</h3><ol>
+<li>consumer保存消费信息的offset在zookeeper上</li>
+<li>partition的leader(host:port)注册在zookeeper中,producer作为zookeeper的client,注册了watch来监视partition leader的变更事件</li>
+<li>zookeeper支持kafka的partition的leader和follower的协同与选举,保证partition中只要leader和follower中有一个正常,服务就不会中断</li>
+</ol>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ol>
+<li>producer端使用zookeeper来”发现”broker列表,以及和topic下的每个partition leader建立socket连接并发送消息</li>
+<li>broker端使用zookeeper来注册broker信息,以及检测partition leader的存活性</li>
+<li>consumer端使用zookeeper来注册consumer信息,其中包括consumer消费的partition列表等,同时也用来发现broker列表,并和partition leader建立连接,来获取消息</li>
+</ol>
 <h2 id="入门教程"><a href="#入门教程" class="headerlink" title="入门教程"></a>入门教程</h2><p>入门搭建使用参考地址:<a href="https://blog.csdn.net/csolo/article/details/52389646" target="_blank" rel="noopener">https://blog.csdn.net/csolo/article/details/52389646</a></p>
 <h2 id="一些抽象概念"><a href="#一些抽象概念" class="headerlink" title="一些抽象概念"></a>一些抽象概念</h2><ol>
 <li>topic,partition,offset<img src="/2018/08/26/kafka入门/topic.png" title="topic">
@@ -524,7 +568,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">72</span>
+                  <span class="site-state-item-count">73</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -546,7 +590,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">108</span>
+                  <span class="site-state-item-count">110</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -579,7 +623,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#入门教程"><span class="nav-number">1.</span> <span class="nav-text">入门教程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一些抽象概念"><span class="nav-number">2.</span> <span class="nav-text">一些抽象概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现高吞吐量原理"><span class="nav-number">3.</span> <span class="nav-text">实现高吞吐量原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker部署kafka"><span class="nav-number">4.</span> <span class="nav-text">docker部署kafka</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#kafka相关操作"><span class="nav-number">1.</span> <span class="nav-text">kafka相关操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zookeeper为kafka提供的服务"><span class="nav-number">2.</span> <span class="nav-text">zookeeper为kafka提供的服务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置同步"><span class="nav-number">2.1.</span> <span class="nav-text">配置同步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#状态同步"><span class="nav-number">2.2.</span> <span class="nav-text">状态同步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">2.3.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#入门教程"><span class="nav-number">3.</span> <span class="nav-text">入门教程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一些抽象概念"><span class="nav-number">4.</span> <span class="nav-text">一些抽象概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现高吞吐量原理"><span class="nav-number">5.</span> <span class="nav-text">实现高吞吐量原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker部署kafka"><span class="nav-number">6.</span> <span class="nav-text">docker部署kafka</span></a></li></ol></div>
             
 
           </div>
