@@ -93,7 +93,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/10/20/区块链入门/区块链产品经理技能点.png">
 <meta property="og:image" content="http://yoursite.com/2018/10/20/区块链入门/区块链产品经理知识储备.png">
 <meta property="og:image" content="http://yoursite.com/2018/10/20/区块链入门/区块链白皮书.png">
-<meta property="og:updated_time" content="2018-10-21T07:35:43.000Z">
+<meta property="og:updated_time" content="2018-10-29T15:41:26.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="区块链入门">
 <meta name="twitter:description" content="这是摘要">
@@ -456,22 +456,61 @@
 </ol>
 <h3 id="区块链产品特点"><a href="#区块链产品特点" class="headerlink" title="区块链产品特点"></a>区块链产品特点</h3><h2 id="如何打造一个区块链产品"><a href="#如何打造一个区块链产品" class="headerlink" title="如何打造一个区块链产品"></a>如何打造一个区块链产品</h2><h3 id="岗位需求分析"><a href="#岗位需求分析" class="headerlink" title="岗位需求分析"></a>岗位需求分析</h3><h3 id="区块链产品经理岗位解读"><a href="#区块链产品经理岗位解读" class="headerlink" title="区块链产品经理岗位解读"></a>区块链产品经理岗位解读</h3><ol>
 <li>区块链产品经理技能点<img src="/2018/10/20/区块链入门/区块链产品经理技能点.png"></li>
-<li>知识储备<img src="/2018/10/20/区块链入门/区块链产品经理知识储备.png">
+<li><p>知识储备</p>
+<img src="/2018/10/20/区块链入门/区块链产品经理知识储备.png">
 <ol>
-<li>基本概念<ul>
-<li>交易:</li>
-<li>区块:<br>就是一段时间内产生的交易进行打包形成区块,区块和区块之间通过hash值进行关联形成了链式存储结构</li>
-<li>节点:<br>可以理解成存储了全量账本信息的服务器</li>
-<li>打包:<br>将一定时间内产生的交易信息打包形成区块</li>
-<li>共识算法:<br>就是对交易进行验证,保证全网络的一致性</li>
-<li>智能合约:</li>
+<li><p>基本概念</p>
+<ul>
+<li>交易:<br>每次对账本进行操作,导致账本状态发生的一次变化,就死一次交易.交易内容包括源账户,目的账户,调用的方法信息,是否共识,合约类型等</li>
+<li>区块:<br>就是一段时间内产生的交易,状态结果等进行打包形成区块,区块和区块之间通过hash值进行关联形成了链式存储结构;<br>比如每500ms或者每500次交易生成一次区块;<br>一个区块包括区块编号,区块hash,父区块hsah,交易数量,写入时间等</li>
+<li>链:<br>就是将区块按照生成顺序连接在一起形成的链式结构,账本状态变化的日志;<br>分为私有链,公有链和联盟链</li>
+<li><p>打包:<br>将一定时间内产生的交易信息打包形成区块</p>
+</li>
+<li><p>公钥私钥</p>
+</li>
+<li>许可证书(LICENSE)<br>平台授予的,使用平台区块链的证书</li>
+<li><p>证书</p>
+<ul>
+<li><p>根证书(RootCA) 所有Hyperchain发布的证书的根部证书</p>
+<ul>
+<li>准入证书(ECA) 由根证书颁布 用来颁布以下证书<ul>
+<li>SDK客户端准入证书(SDKCert) 由ECA颁布<br>在SDK首次连接平台的过程中验证SDKCert的安全性,通过则可以获取TCert</li>
+<li>节点准入证书(ECert)<br>用于控制区块链节点进入hyperchain<ul>
+<li>交易证书(TCert) 由ECert颁布<br>实现交易的相对匿名?</li>
 </ul>
 </li>
-<li>计算机专业知识</li>
+</ul>
+</li>
+<li>角色证书(RCA) 用来发布以下证书<ul>
+<li>节点角色证书(RCert)<br>用于区分VP(validate peer)和NVP(nonvalidate peer)<br>VP:就是区块链网络中参与共识验证的节点,可以读写<br>NVP:不参与共识的节点,只能读取</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>签名验签:            </p>
+</li>
+<li><p>共识算法:<br>共识机制确定谁有记账的权利;<br>就是对交易进行验证,保证全网络的一致性;<br>由于区块链中每一个节点都可以记账,因此可能会产生好几个版本的账本,所以需要通过共识算法保证账本一致性(怎么保证)</p>
+</li>
+<li><p>节点:<br>可以理解成存储了全量账本信息的服务器,</p>
+</li>
+<li>命名空间<br>每个节点都有配置命名空间,配置了同一个命名空间的节点都在一条链上;<br>不同的链是物理隔离的,命名空间也不一样,他们之间无法直接通信;</li>
+<li><p>增删节点<br>联盟链采用<code>3f+1</code>的共识机制,所以最少需要4个节点;<br>拜占庭问题,<code>3f+1</code>的意思是如果有<code>3f+1</code>个节点,可以容忍f个节点不可靠;</p>
+</li>
+<li><p>归档<br>就是将不会再在链上使用</p>
+</li>
+</ul>
+</li>
 </ol>
 </li>
 </ol>
-<h3 id="技巧"><a href="#技巧" class="headerlink" title="技巧"></a>技巧</h3><ol>
+<pre><code>    * 智能合约:
+
+
+
+2. 计算机专业知识
+</code></pre><h3 id="技巧"><a href="#技巧" class="headerlink" title="技巧"></a>技巧</h3><ol>
 <li>区块链白皮书<img src="/2018/10/20/区块链入门/区块链白皮书.png">
 </li>
 </ol>
@@ -625,7 +664,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">73</span>
+                  <span class="site-state-item-count">74</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -647,7 +686,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

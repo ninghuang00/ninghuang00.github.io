@@ -91,7 +91,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/08/26/kafka入门/kafka零拷贝1.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/26/kafka入门/kafka零拷贝2.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/26/kafka入门/文件分段.png">
-<meta property="og:updated_time" content="2018-10-24T15:23:28.000Z">
+<meta property="og:updated_time" content="2018-10-26T03:05:50.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="kafka入门">
 <meta name="twitter:description" content="这是摘要">
@@ -384,7 +384,7 @@
 </li>
 <li><p>使用新的配置启动</p>
 </li>
-<li>创建replication-factor为3的topic<br><code>bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 3 --partitions 1 --topic my-replicated-topic</code></li>
+<li>创建replication-factor为3的topic<br><code>bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 3 --partitions 1 --topic my-replicated-topic</code><br>参数解释:<br><code>--replication-factor 3</code>的意思是将任意一个broker的topic复制到另外两个broker上,<br><code>--partitions 1</code>的意思是每个topic下创建一个分区</li>
 <li>查看topic的描述<br><code>bin/kafka-topics.sh --describe --zookeeper localhost:2181 --topic my-replicated-topic</code></li>
 <li>kill leader的进程之后,会切换新的leader,原来打开的producer和consumer可以继续使用</li>
 </ol>
@@ -568,7 +568,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">73</span>
+                  <span class="site-state-item-count">74</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -590,7 +590,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
