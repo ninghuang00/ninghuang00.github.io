@@ -93,7 +93,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/10/20/区块链入门/区块链产品经理技能点.png">
 <meta property="og:image" content="http://yoursite.com/2018/10/20/区块链入门/区块链产品经理知识储备.png">
 <meta property="og:image" content="http://yoursite.com/2018/10/20/区块链入门/区块链白皮书.png">
-<meta property="og:updated_time" content="2018-10-29T15:41:26.000Z">
+<meta property="og:updated_time" content="2018-10-30T06:05:29.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="区块链入门">
 <meta name="twitter:description" content="这是摘要">
@@ -456,11 +456,10 @@
 </ol>
 <h3 id="区块链产品特点"><a href="#区块链产品特点" class="headerlink" title="区块链产品特点"></a>区块链产品特点</h3><h2 id="如何打造一个区块链产品"><a href="#如何打造一个区块链产品" class="headerlink" title="如何打造一个区块链产品"></a>如何打造一个区块链产品</h2><h3 id="岗位需求分析"><a href="#岗位需求分析" class="headerlink" title="岗位需求分析"></a>岗位需求分析</h3><h3 id="区块链产品经理岗位解读"><a href="#区块链产品经理岗位解读" class="headerlink" title="区块链产品经理岗位解读"></a>区块链产品经理岗位解读</h3><ol>
 <li>区块链产品经理技能点<img src="/2018/10/20/区块链入门/区块链产品经理技能点.png"></li>
-<li><p>知识储备</p>
-<img src="/2018/10/20/区块链入门/区块链产品经理知识储备.png">
-<ol>
-<li><p>基本概念</p>
-<ul>
+<li>知识储备(主要是名词概念)<img src="/2018/10/20/区块链入门/区块链产品经理知识储备.png">
+</li>
+</ol>
+<h4 id="区块链"><a href="#区块链" class="headerlink" title="区块链"></a>区块链</h4><ul>
 <li>交易:<br>每次对账本进行操作,导致账本状态发生的一次变化,就死一次交易.交易内容包括源账户,目的账户,调用的方法信息,是否共识,合约类型等</li>
 <li>区块:<br>就是一段时间内产生的交易,状态结果等进行打包形成区块,区块和区块之间通过hash值进行关联形成了链式存储结构;<br>比如每500ms或者每500次交易生成一次区块;<br>一个区块包括区块编号,区块hash,父区块hsah,交易数量,写入时间等</li>
 <li>链:<br>就是将区块按照生成顺序连接在一起形成的链式结构,账本状态变化的日志;<br>分为私有链,公有链和联盟链</li>
@@ -498,19 +497,34 @@
 <li>命名空间<br>每个节点都有配置命名空间,配置了同一个命名空间的节点都在一条链上;<br>不同的链是物理隔离的,命名空间也不一样,他们之间无法直接通信;</li>
 <li><p>增删节点<br>联盟链采用<code>3f+1</code>的共识机制,所以最少需要4个节点;<br>拜占庭问题,<code>3f+1</code>的意思是如果有<code>3f+1</code>个节点,可以容忍f个节点不可靠;</p>
 </li>
-<li><p>归档<br>就是将不会再在链上使用</p>
-</li>
+<li><p>归档<br>就是将不会再在链上使用数据区块从链上移除并保存到本地机器的物理存储介质中,改变区块链的头区块</p>
+<ul>
+<li>区块链数据归档</li>
+<li>智能合约归档</li>
 </ul>
 </li>
-</ol>
-</li>
-</ol>
-<pre><code>    * 智能合约:
-
-
-
-2. 计算机专业知识
-</code></pre><h3 id="技巧"><a href="#技巧" class="headerlink" title="技巧"></a>技巧</h3><ol>
+</ul>
+<h4 id="合约"><a href="#合约" class="headerlink" title="合约"></a>合约</h4><ul>
+<li>冻结/解冻/升级<br>冻结就是禁止使用合约,解冻就是恢复使用,升级合约的时候要替换原来的合约代码,以及对应的bin和abi</li>
+<li>bin/abi<br>bin就是对应合约的二进制文件,abi的内容是合约中每个方法和方法入参,出参的对应关系</li>
+</ul>
+<h4 id="开发"><a href="#开发" class="headerlink" title="开发"></a>开发</h4><ul>
+<li>sdk<br>封装了调用底层区块链操作api的开发工具包,</li>
+<li>esdk<br>对上面说的那个sdk进行进一步封装的开发工具包,对上述api返回参数进行解析并包装成相应的java对象</li>
+<li>archetype<br>基于maven的项目骨架,主要集成了一些通用的开发模块,可以加速开发效率</li>
+<li>hypermvc<br>趣链自主研发的自动生成智能合约,用于快速开发区块链项目的ORM工具,用来将结构化的数据和操作转化成智能合约代码,</li>
+</ul>
+<h4 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h4><ul>
+<li>数据库的作用<br>用来储存用户的私钥,</li>
+</ul>
+<h4 id="相关瓶颈"><a href="#相关瓶颈" class="headerlink" title="相关瓶颈"></a>相关瓶颈</h4><ul>
+<li>性能瓶颈<br>主要影响环节:广播通信,信息加密解密,共识机制,交易验证机制</li>
+<li>隐私保护<br>由于每一个节点上都保存了完整的账本信息,所以对用户的敏感信息要做好保护措施</li>
+<li>私钥安全<br>私钥是用户唯一的凭证,如何防止私钥被盗用或者恶意删除,以及丢失后的补救措施</li>
+<li>智能合约<br>如何有效检测智能合约的逻辑漏洞,实现可控的智能合约逻辑修正和升级</li>
+</ul>
+<h4 id="智能合约"><a href="#智能合约" class="headerlink" title="智能合约"></a>智能合约</h4><a href="/2018/10/30/智能合约入门/" title="智能合约入门">智能合约入门</a>
+<h3 id="技巧"><a href="#技巧" class="headerlink" title="技巧"></a>技巧</h3><ol>
 <li>区块链白皮书<img src="/2018/10/20/区块链入门/区块链白皮书.png">
 </li>
 </ol>
@@ -664,7 +678,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">74</span>
+                  <span class="site-state-item-count">75</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -686,7 +700,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">111</span>
+                  <span class="site-state-item-count">112</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -719,7 +733,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#区块链的技术体系"><span class="nav-number">1.</span> <span class="nav-text">区块链的技术体系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#技术的优点"><span class="nav-number">2.</span> <span class="nav-text">技术的优点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#去中心化"><span class="nav-number">2.1.</span> <span class="nav-text">去中心化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据公开"><span class="nav-number">2.2.</span> <span class="nav-text">数据公开</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可信"><span class="nav-number">2.3.</span> <span class="nav-text">可信</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#现阶段存在的问题"><span class="nav-number">3.</span> <span class="nav-text">现阶段存在的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#区块链产品形态剖析"><span class="nav-number">4.</span> <span class="nav-text">区块链产品形态剖析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#区块链产品概览"><span class="nav-number">4.1.</span> <span class="nav-text">区块链产品概览</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#区块链产品特点"><span class="nav-number">4.2.</span> <span class="nav-text">区块链产品特点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何打造一个区块链产品"><span class="nav-number">5.</span> <span class="nav-text">如何打造一个区块链产品</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#岗位需求分析"><span class="nav-number">5.1.</span> <span class="nav-text">岗位需求分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#区块链产品经理岗位解读"><span class="nav-number">5.2.</span> <span class="nav-text">区块链产品经理岗位解读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#技巧"><span class="nav-number">5.3.</span> <span class="nav-text">技巧</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#案例分析"><span class="nav-number">6.</span> <span class="nav-text">案例分析</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#区块链的技术体系"><span class="nav-number">1.</span> <span class="nav-text">区块链的技术体系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#技术的优点"><span class="nav-number">2.</span> <span class="nav-text">技术的优点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#去中心化"><span class="nav-number">2.1.</span> <span class="nav-text">去中心化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据公开"><span class="nav-number">2.2.</span> <span class="nav-text">数据公开</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可信"><span class="nav-number">2.3.</span> <span class="nav-text">可信</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#现阶段存在的问题"><span class="nav-number">3.</span> <span class="nav-text">现阶段存在的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#区块链产品形态剖析"><span class="nav-number">4.</span> <span class="nav-text">区块链产品形态剖析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#区块链产品概览"><span class="nav-number">4.1.</span> <span class="nav-text">区块链产品概览</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#区块链产品特点"><span class="nav-number">4.2.</span> <span class="nav-text">区块链产品特点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何打造一个区块链产品"><span class="nav-number">5.</span> <span class="nav-text">如何打造一个区块链产品</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#岗位需求分析"><span class="nav-number">5.1.</span> <span class="nav-text">岗位需求分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#区块链产品经理岗位解读"><span class="nav-number">5.2.</span> <span class="nav-text">区块链产品经理岗位解读</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#区块链"><span class="nav-number">5.2.1.</span> <span class="nav-text">区块链</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#合约"><span class="nav-number">5.2.2.</span> <span class="nav-text">合约</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#开发"><span class="nav-number">5.2.3.</span> <span class="nav-text">开发</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据库"><span class="nav-number">5.2.4.</span> <span class="nav-text">数据库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#相关瓶颈"><span class="nav-number">5.2.5.</span> <span class="nav-text">相关瓶颈</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#智能合约"><span class="nav-number">5.2.6.</span> <span class="nav-text">智能合约</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#技巧"><span class="nav-number">5.3.</span> <span class="nav-text">技巧</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#案例分析"><span class="nav-number">6.</span> <span class="nav-text">案例分析</span></a></li></ol></div>
             
 
           </div>
