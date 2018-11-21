@@ -93,7 +93,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/07/07/Java基础知识/同步非阻塞时序图.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/07/Java基础知识/异步非阻塞时序图.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/07/Java基础知识/servlet容器和webserver.png">
-<meta property="og:updated_time" content="2018-10-25T10:52:14.000Z">
+<meta property="og:updated_time" content="2018-11-08T03:12:34.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java基础知识">
 <meta name="twitter:description" content="Java基础知识">
@@ -435,7 +435,8 @@
 <li>method调用invoke()方法执行私有方法</li>
 </ol>
 <hr>
-<h2 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h2><h3 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h3><ol>
+<h2 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** 参数T</span></span><br><span class="line"><span class="comment"> * 第一个:占位符,表示这个T是一个泛型,提示编译器要注意</span></span><br><span class="line"><span class="comment"> * 第二个:表示要返回T类型的数据</span></span><br><span class="line"><span class="comment"> * 第三个:表示限制参数类型为T</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">private</span> &lt;T&gt; <span class="function">T <span class="title">getListFisrt</span><span class="params">(List&lt;T&gt; data)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (data == <span class="keyword">null</span> || data.size() == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> data.get(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h3><ol>
 <li>泛型方法和泛型类的&lt;&gt;互不相干</li>
 <li>泛型擦除如果泛型参数没有指定上限(如<t extends="" string="">),那类型擦除之后T就被替换成Object,否则就是上限,如String</t></li>
 <li>类型擦除也是为什么泛型类和泛型方法中不接受基本数据类型的原因</li>
@@ -608,7 +609,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">75</span>
+                  <span class="site-state-item-count">78</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -630,7 +631,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">112</span>
+                  <span class="site-state-item-count">116</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

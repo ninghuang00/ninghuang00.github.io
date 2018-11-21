@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Just Try It">
 <meta property="og:description" content="日常琐碎的小问题">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-10-15T07:05:49.000Z">
+<meta property="og:updated_time" content="2018-11-21T15:12:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="日常小坑记录">
 <meta name="twitter:description" content="日常琐碎的小问题">
@@ -357,6 +357,9 @@
 
       
         <p> 日常琐碎的小问题<br> <a id="more"></a></p>
+<h1 id="关于从HTTPServletRequest中获取请求体"><a href="#关于从HTTPServletRequest中获取请求体" class="headerlink" title="关于从HTTPServletRequest中获取请求体"></a>关于从HTTPServletRequest中获取请求体</h1><p><code>request.getInputStream()</code>,<code>request.getReader()</code>,<code>request.getParameter(“key”)</code>这三个函数中任何一个函数执行一次后（可正常读取body数据），之后再执行就无效了。<br>比如说<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DemoController</span></span>&#123;</span><br><span class="line">  <span class="meta">@Autowired</span></span><br><span class="line">  HttpServletRequest request;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@RequestMapping</span>(value = <span class="string">"/post"</span>, method = RequestMethod.POST)</span><br><span class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">addApples</span><span class="params">(@RequestBody String json)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//这里使用注解获取了RequestBody</span></span><br><span class="line">    <span class="comment">//那么之后从request.getInputStream()或者request.getReader()获取的流就是空的</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="postman使用"><a href="#postman使用" class="headerlink" title="postman使用"></a>postman使用</h1><p>抛出的异常:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">missingservletrequestparameterexception required string parameter &apos;username&apos; is not present</span><br></pre></td></tr></table></figure></p>
+<p>如果后台使用<code>@RequestBody</code>和<code>@RequestParam</code>注解接受参数的话,postman中需要使用<code>x-www-form-urlencoded</code>类型的请求体</p>
 <h1 id="SpringMVC"><a href="#SpringMVC" class="headerlink" title="SpringMVC"></a>SpringMVC</h1><p>报错:<br><code>Spring Boot RestController Error: “No converter found for return value of type”</code><br>可能原因:</p>
 <ol>
 <li>返回的类没有getter()方法</li>
@@ -508,7 +511,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">75</span>
+                  <span class="site-state-item-count">78</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -530,7 +533,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">112</span>
+                  <span class="site-state-item-count">116</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -563,7 +566,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#SpringMVC"><span class="nav-number">1.</span> <span class="nav-text">SpringMVC</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Mybatis"><span class="nav-number">2.</span> <span class="nav-text">Mybatis</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#docker"><span class="nav-number">3.</span> <span class="nav-text">docker</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#容器启动成功后马上退出"><span class="nav-number">3.1.</span> <span class="nav-text">容器启动成功后马上退出</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#spring配置"><span class="nav-number">4.</span> <span class="nav-text">spring配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#整合Mybatis"><span class="nav-number">4.1.</span> <span class="nav-text">整合Mybatis</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mac终端git中文显示的问题"><span class="nav-number">5.</span> <span class="nav-text">mac终端git中文显示的问题</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#关于从HTTPServletRequest中获取请求体"><span class="nav-number">1.</span> <span class="nav-text">关于从HTTPServletRequest中获取请求体</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#postman使用"><span class="nav-number">2.</span> <span class="nav-text">postman使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SpringMVC"><span class="nav-number">3.</span> <span class="nav-text">SpringMVC</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Mybatis"><span class="nav-number">4.</span> <span class="nav-text">Mybatis</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#docker"><span class="nav-number">5.</span> <span class="nav-text">docker</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#容器启动成功后马上退出"><span class="nav-number">5.1.</span> <span class="nav-text">容器启动成功后马上退出</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#spring配置"><span class="nav-number">6.</span> <span class="nav-text">spring配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#整合Mybatis"><span class="nav-number">6.1.</span> <span class="nav-text">整合Mybatis</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mac终端git中文显示的问题"><span class="nav-number">7.</span> <span class="nav-text">mac终端git中文显示的问题</span></a></li></ol></div>
             
 
           </div>

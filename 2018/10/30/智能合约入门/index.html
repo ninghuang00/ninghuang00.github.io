@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Just Try It">
 <meta property="og:description" content="参考地址: https://blog.hyperchain.cn/solidity-smart-contract/ http://www.tryblockchain.org/Solidity-Type-%E7%B1%BB%E5%9E%8B.html">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-10-30T15:44:23.000Z">
+<meta property="og:updated_time" content="2018-11-02T08:06:20.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="智能合约入门">
 <meta name="twitter:description" content="参考地址: https://blog.hyperchain.cn/solidity-smart-contract/ http://www.tryblockchain.org/Solidity-Type-%E7%B1%BB%E5%9E%8B.html">
@@ -358,6 +358,9 @@
       
         <p> 参考地址:<br> <a href="https://blog.hyperchain.cn/solidity-smart-contract/" target="_blank" rel="noopener">https://blog.hyperchain.cn/solidity-smart-contract/</a><br> <a href="http://www.tryblockchain.org/Solidity-Type-%E7%B1%BB%E5%9E%8B.html" target="_blank" rel="noopener">http://www.tryblockchain.org/Solidity-Type-%E7%B1%BB%E5%9E%8B.html</a><br> <a id="more"></a></p>
 <h2 id="简单模板"><a href="#简单模板" class="headerlink" title="简单模板"></a>简单模板</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">pragma solidity ^<span class="number">0.4</span><span class="number">.0</span>; </span><br><span class="line">contract Demo&#123;</span><br><span class="line">    uint constant demoConstant = <span class="number">1</span>;</span><br><span class="line">    uint demoPro;</span><br><span class="line">    </span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">demoStr</span>&#123;</span></span><br><span class="line">        uint num;</span><br><span class="line">        uint[] numArray;</span><br><span class="line">        mapping(uint =&gt; uint) demoMap;</span><br><span class="line">        bytes32 demoByte32;</span><br><span class="line">        address demoAddr;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    mapping(address =&gt; mapping(uint =&gt; bytes)) _addr2Map;</span><br><span class="line">    </span><br><span class="line">    <span class="function">function <span class="title">demoFunc</span><span class="params">(uint args, uint _)</span> <span class="keyword">public</span> <span class="title">returns</span> <span class="params">(uint,bytes outByt)</span></span>&#123;</span><br><span class="line">        <span class="comment">//...</span></span><br><span class="line">        <span class="keyword">return</span> (demoConstant,outByt);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="变量声明以及作用域"><a href="#变量声明以及作用域" class="headerlink" title="变量声明以及作用域"></a>变量声明以及作用域</h2><blockquote>
+<p>参考地址:<a href="http://me.tryblockchain.org/solidity-declare-initial-scope.html" target="_blank" rel="noopener">http://me.tryblockchain.org/solidity-declare-initial-scope.html</a></p>
+</blockquote>
 <h2 id="基本结构和关键字"><a href="#基本结构和关键字" class="headerlink" title="基本结构和关键字"></a>基本结构和关键字</h2><h3 id="基本结构"><a href="#基本结构" class="headerlink" title="基本结构"></a>基本结构</h3><ol>
 <li>版本声明</li>
 <li>导入声明</li>
@@ -414,7 +417,13 @@
 <h3 id="引用类型"><a href="#引用类型" class="headerlink" title="引用类型"></a>引用类型</h3><ul>
 <li>不定长字节数组（bytes）<br>动态字节数组</li>
 <li>字符串（string）<br>特殊的可变字节数组,string没有提供方法直接获取字节数组的长度</li>
-<li>数组（array）<br>可以定义成固定长度和不定长度</li>
+<li>数组（array）<br>可以定义成固定长度和不定长度<ul>
+<li>对于变长数组必须使用new初始化之后才能访问</li>
+<li>new 产生的是memory类型的，不能转换为局部的storage，所以可以看到在函数中下面的代码是会出编译错误的：</li>
+<li>对于storage的变长数组，可以通过给length赋值调整数组长度。还可以使用后面提到的push()方法，来隐式的调整数组长度</li>
+<li>对于memory的变长数组，不支持修改length属性，来调整数组大小。memory的变长数组虽然可以通过参数灵活指定大小，但一旦创建，大小不可调整</li>
+</ul>
+</li>
 </ul>
 <h2 id="存储结构"><a href="#存储结构" class="headerlink" title="存储结构"></a>存储结构</h2><ul>
 <li>结构体（struts）<br>见上</li>
@@ -476,8 +485,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2118/07/07/Java开发知识框架/" rel="prev" title="Java开发知识框架">
-                Java开发知识框架 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/11/06/swagger入门/" rel="prev" title="swagger入门">
+                swagger入门 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -555,7 +564,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">75</span>
+                  <span class="site-state-item-count">78</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -577,7 +586,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">112</span>
+                  <span class="site-state-item-count">116</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -610,7 +619,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简单模板"><span class="nav-number">1.</span> <span class="nav-text">简单模板</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本结构和关键字"><span class="nav-number">2.</span> <span class="nav-text">基本结构和关键字</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本结构"><span class="nav-number">2.1.</span> <span class="nav-text">基本结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关键字"><span class="nav-number">2.2.</span> <span class="nav-text">关键字</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本类型"><span class="nav-number">3.</span> <span class="nav-text">基本类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#值类型"><span class="nav-number">3.1.</span> <span class="nav-text">值类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#引用类型"><span class="nav-number">3.2.</span> <span class="nav-text">引用类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#存储结构"><span class="nav-number">4.</span> <span class="nav-text">存储结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#存储位置和类型转换"><span class="nav-number">5.</span> <span class="nav-text">存储位置和类型转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#特殊变量及函数"><span class="nav-number">6.</span> <span class="nav-text">特殊变量及函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数"><span class="nav-number">7.</span> <span class="nav-text">函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#出参和入参"><span class="nav-number">7.1.</span> <span class="nav-text">出参和入参</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简单模板"><span class="nav-number">1.</span> <span class="nav-text">简单模板</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变量声明以及作用域"><span class="nav-number">2.</span> <span class="nav-text">变量声明以及作用域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本结构和关键字"><span class="nav-number">3.</span> <span class="nav-text">基本结构和关键字</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本结构"><span class="nav-number">3.1.</span> <span class="nav-text">基本结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关键字"><span class="nav-number">3.2.</span> <span class="nav-text">关键字</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本类型"><span class="nav-number">4.</span> <span class="nav-text">基本类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#值类型"><span class="nav-number">4.1.</span> <span class="nav-text">值类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#引用类型"><span class="nav-number">4.2.</span> <span class="nav-text">引用类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#存储结构"><span class="nav-number">5.</span> <span class="nav-text">存储结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#存储位置和类型转换"><span class="nav-number">6.</span> <span class="nav-text">存储位置和类型转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#特殊变量及函数"><span class="nav-number">7.</span> <span class="nav-text">特殊变量及函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数"><span class="nav-number">8.</span> <span class="nav-text">函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#出参和入参"><span class="nav-number">8.1.</span> <span class="nav-text">出参和入参</span></a></li></ol></li></ol></div>
             
 
           </div>

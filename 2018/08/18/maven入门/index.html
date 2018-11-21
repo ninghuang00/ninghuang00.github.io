@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Just Try It">
 <meta property="og:description" content="这是摘要">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-01T01:21:42.000Z">
+<meta property="og:updated_time" content="2018-11-21T11:19:28.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="maven入门">
 <meta name="twitter:description" content="这是摘要">
@@ -363,7 +363,17 @@
 </blockquote>
 </li>
 </ol>
-
+<h2 id="maven打包命令"><a href="#maven打包命令" class="headerlink" title="maven打包命令"></a>maven打包命令</h2><h3 id="多模块打包-单独打包一个模块"><a href="#多模块打包-单独打包一个模块" class="headerlink" title="多模块打包,单独打包一个模块"></a>多模块打包,单独打包一个模块</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-pl, --projects</span><br><span class="line">        Build specified reactor projects instead of all projects</span><br><span class="line">-am, --also-make</span><br><span class="line">        If project list is specified, also build projects required by the list</span><br><span class="line">-amd, --also-make-dependents</span><br><span class="line">        If project list is specified, also build projects that depend on projects on the list</span><br></pre></td></tr></table></figure>
+<ol>
+<li>首先到根目录</li>
+<li><p>单独构建模块 connection，同时会构建 connection 模块依赖的其他模块<strong>注意点:这里使用的是模块在pom文件中的相对路径,而不仅仅是模块名</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn install -pl ../connection -am</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>单独构建模块 base，同时构建依赖模块 base 的其他模块</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn install -pl base -am -amd</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;properties&gt;</span><br><span class="line">	&lt;!-- 使用的时候 $&#123;swagger.version&#125; 就行 --&gt;</span><br><span class="line">	&lt;swagger.version&gt;2.2.2&lt;/swagger.version&gt;</span><br><span class="line">&lt;/properties&gt;</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -482,7 +492,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">75</span>
+                  <span class="site-state-item-count">78</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -504,7 +514,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">112</span>
+                  <span class="site-state-item-count">116</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -537,7 +547,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#maven插件"><span class="nav-number">1.</span> <span class="nav-text">maven插件</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#maven插件"><span class="nav-number">1.</span> <span class="nav-text">maven插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#maven打包命令"><span class="nav-number">2.</span> <span class="nav-text">maven打包命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#多模块打包-单独打包一个模块"><span class="nav-number">2.1.</span> <span class="nav-text">多模块打包,单独打包一个模块</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变量"><span class="nav-number">3.</span> <span class="nav-text">变量</span></a></li></ol></div>
             
 
           </div>

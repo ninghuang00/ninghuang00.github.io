@@ -90,7 +90,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/08/07/SpringMVC/事务属性.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/07/SpringMVC/springMVC基本工作流程图.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/07/SpringMVC/拦截器过滤器流程.png">
-<meta property="og:updated_time" content="2018-10-14T12:09:23.000Z">
+<meta property="og:updated_time" content="2018-11-06T06:09:03.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SpringMVC">
 <meta name="twitter:description" content="开发自己的SpringMVC参考地址:https://mp.weixin.qq.com/s/Fo3ZN64qm7e2bWEKEIfBFA参考地址:https://github.com/CFMystery/bfmvc/blob/master/bfmvc/src/main/java/cc/cleverfan/web/DispatherServlet.java">
@@ -361,6 +361,20 @@
 
       
         <p>开发自己的SpringMVC<br>参考地址:<a href="https://mp.weixin.qq.com/s/Fo3ZN64qm7e2bWEKEIfBFA" target="_blank" rel="noopener">https://mp.weixin.qq.com/s/Fo3ZN64qm7e2bWEKEIfBFA</a><br>参考地址:<a href="https://github.com/CFMystery/bfmvc/blob/master/bfmvc/src/main/java/cc/cleverfan/web/DispatherServlet.java" target="_blank" rel="noopener">https://github.com/CFMystery/bfmvc/blob/master/bfmvc/src/main/java/cc/cleverfan/web/DispatherServlet.java</a><br> <a id="more"></a></p>
+<h2 id="配置文件配置解析"><a href="#配置文件配置解析" class="headerlink" title="配置文件配置解析"></a>配置文件配置解析</h2><ul>
+<li><p><code>&lt;context:component-scan base-package=&quot;com.*&quot; &gt;</code><br>扫描相关包,以实现注解进行依赖注入</p>
+</li>
+<li><p><code>&lt;context:include-filter</code><br>可以配置新的注解,让spring也可以扫描到</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;context:component-scan base-package=&quot;com.fq&quot;&gt;</span><br><span class="line">    &lt;context:include-filter type=&quot;annotation&quot;</span><br><span class="line">        expression=&quot;org.springframework.stereotype.Controller&quot; /&gt;</span><br><span class="line">    &lt;context:exclude-filter type=&quot;annotation&quot;</span><br><span class="line">        expression=&quot;org.springframework.stereotype.Service&quot; /&gt;</span><br><span class="line">&lt;/context:component-scan&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>&lt;task:annotation-driven/&gt;</code><br>配置定时自动任务,配置之后可以使用<code>@Scheduled(cron = &quot;*/5 * * * * ?&quot;)//每隔5秒执行一次</code>配置定时任务</p>
+</li>
+<li><p><code>&lt;aop:aspectj-autoproxy/&gt;</code><br>声明自动为spring容器中那些配置@AspectJ切面的bean创建代理，织入切面。<br>有一个proxy-target-class属性，默认为false，表示使用jdk动态代理织入增强，当配为<code>&lt;aop:aspectj-autoproxy  
+poxy-target-class=&quot;true&quot;/&gt;</code>时，表示使用CGLib动态代理技术织入增强。不过即使proxy-target-class设置为false，如果目标类没有声明接口，则spring将自动使用CGLib动态代理。 </p>
+</li>
+<li><p><code>&lt;mvc:resources mapping=&quot;*.html&quot; location=&quot;/&quot; /&gt;</code><br>mapping:表示需要匹配的路径<br>location:映射到静态资源的位置</p>
+</li>
+</ul>
 <h2 id="spring框架的基本原理"><a href="#spring框架的基本原理" class="headerlink" title="spring框架的基本原理"></a>spring框架的基本原理</h2><blockquote>
 <p>基本原理其实就是通过反射(反射的原理)解析类及其类的各种信息，包括构造器、方法及其参数，属性。然后将其封装成bean定义信息类、constructor信息类、method信息类、property信息类，最终放在一个map里，也就是所谓的container，池等等，其实就是个map。。汗。。。。当你写好配置文件，启动项目后，框架会先按照你的配置文件找到那个要scan的包(一般是哪些包?)，然后解析包里面的所有类，找到所有含有@bean，@service等注解的类，利用反射解析它们，包括解析构造器，方法，属性等等，然后封装成各种信息类放到一个map里。<strong>每当你需要一个bean的时候，框架就会从container找是不是有这个类的定义啊？如果找到则通过构造器new出来（这就是控制反转，不用你new,框架帮你new）</strong>，再在这个类找是不是有要注入的属性或者方法，<strong>比如标有@autowired的属性，如果有则还是到container找对应的解析类，new出对象，并通过之前解析出来的信息类找到setter方法，然后用该方法注入对象（这就是依赖注入）</strong>。如果其中有一个类container里没找到，则抛出异常，比如常见的spring无法找到该类定义，无法wire的异常。还有就是嵌套bean则用了一下递归，container会放到servletcontext里面，每次reQuest从servletcontext找这个container即可，不用多次解析类定义。如果bean的scope是singleton，则会重用这个bean不再重新创建，将这个bean放到一个map里，每次用都先从这个map里面找。如果scope是session，则该bean会放到session里面。仅此而已，没必要花更多精力。</p>
 </blockquote>
@@ -427,36 +441,6 @@
 </ol>
 </li>
 <li><p><code>@Bean</code><br>使用在返回实例的方法上</p>
-</li>
-</ol>
-<h2 id="SpringBoot"><a href="#SpringBoot" class="headerlink" title="SpringBoot"></a>SpringBoot</h2><h3 id="常用配置"><a href="#常用配置" class="headerlink" title="常用配置"></a>常用配置</h3><ol>
-<li>默认扫描位置<ul>
-<li>springboot默认扫描<code>@SpringBootApplication</code>入口类所在路径,同级目录包及其子包</li>
-<li>也可以使用注解<code>@ComponentScan(basePackages={&quot;com.hn&quot;})</code>指定扫描路径</li>
-</ul>
-</li>
-<li>配置日志</li>
-</ol>
-<h3 id="配置优先级"><a href="#配置优先级" class="headerlink" title="配置优先级"></a>配置优先级</h3><p>Spring Boot 所提供的配置优先级顺序比较复杂。按照优先级从高到低的顺序:</p>
-<ol>
-<li>命令行参数。</li>
-<li>通过 System.getProperties() 获取的 Java 系统参数。</li>
-<li>操作系统环境变量。</li>
-<li>从 java:comp/env 得到的 JNDI 属性。</li>
-<li>通过 RandomValuePropertySource 生成的1random.*1属性。</li>
-<li>应用 Jar 文件之外的属性文件。</li>
-<li>应用 Jar 文件内部的属性文件。</li>
-<li>在应用配置 Java 类（包含@Configuration注解的 Java 类）中通过@PropertySource注解声明的属性文件。</li>
-<li>通过SpringApplication.setDefaultProperties声明的默认属性。<br>SpringBoot的这个配置优先级看似复杂，其实是很合理的。比如命令行参数的优先级被设置为最高。这样的好处是可以在测试或生产环境中快速地修改配置参数值，而不需要重新打包和部署应用。</li>
-</ol>
-<blockquote>
-<p>参考地址<a href="https://www.javazhiyin.com/16381.html" target="_blank" rel="noopener">https://www.javazhiyin.com/16381.html</a></p>
-</blockquote>
-<ol start="3">
-<li>配置mybatis<ol>
-<li>添加mybatis和mysql驱动依赖</li>
-<li>配置文件中添加数据库参数</li>
-</ol>
 </li>
 </ol>
 <h2 id="Bean的实例化过程"><a href="#Bean的实例化过程" class="headerlink" title="Bean的实例化过程"></a>Bean的实例化过程</h2><h2 id="spring事务"><a href="#spring事务" class="headerlink" title="spring事务"></a>spring事务</h2><img src="/2018/08/07/SpringMVC/事务属性.png" title="事务属性">
@@ -679,7 +663,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">75</span>
+                  <span class="site-state-item-count">78</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -701,7 +685,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">112</span>
+                  <span class="site-state-item-count">116</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -734,7 +718,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#spring框架的基本原理"><span class="nav-number">1.</span> <span class="nav-text">spring框架的基本原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#bean工厂"><span class="nav-number">1.1.</span> <span class="nav-text">bean工厂</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#依赖注入"><span class="nav-number">2.</span> <span class="nav-text">依赖注入()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#控制反转-IOC"><span class="nav-number">3.</span> <span class="nav-text">控制反转(IOC)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#切面编程-AOP"><span class="nav-number">4.</span> <span class="nav-text">切面编程(AOP)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#通知-Advice"><span class="nav-number">4.1.</span> <span class="nav-text">通知(Advice)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#切点-PointCut"><span class="nav-number">4.2.</span> <span class="nav-text">切点(PointCut)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子"><span class="nav-number">4.3.</span> <span class="nav-text">例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用场景"><span class="nav-number">4.4.</span> <span class="nav-text">使用场景:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注解"><span class="nav-number">5.</span> <span class="nav-text">注解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#注解的使用"><span class="nav-number">5.1.</span> <span class="nav-text">注解的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SpringMVC中的常用注解"><span class="nav-number">5.2.</span> <span class="nav-text">SpringMVC中的常用注解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SpringBoot"><span class="nav-number">6.</span> <span class="nav-text">SpringBoot</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#常用配置"><span class="nav-number">6.1.</span> <span class="nav-text">常用配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置优先级"><span class="nav-number">6.2.</span> <span class="nav-text">配置优先级</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Bean的实例化过程"><span class="nav-number">7.</span> <span class="nav-text">Bean的实例化过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#spring事务"><span class="nav-number">8.</span> <span class="nav-text">spring事务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#spring和springMVC"><span class="nav-number">9.</span> <span class="nav-text">spring和springMVC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#传统springMVC的不足"><span class="nav-number">10.</span> <span class="nav-text">传统springMVC的不足</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SpringMVC-HTTP请求响应的过程"><span class="nav-number">11.</span> <span class="nav-text">SpringMVC HTTP请求响应的过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#代码调用流程"><span class="nav-number">11.1.</span> <span class="nav-text">代码调用流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#拦截器和过滤器"><span class="nav-number">11.2.</span> <span class="nav-text">拦截器和过滤器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#九大组件"><span class="nav-number">12.</span> <span class="nav-text">九大组件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#返回json数据中文乱码的问题"><span class="nav-number">12.1.</span> <span class="nav-text">返回json数据中文乱码的问题</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#配置文件配置解析"><span class="nav-number">1.</span> <span class="nav-text">配置文件配置解析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#spring框架的基本原理"><span class="nav-number">2.</span> <span class="nav-text">spring框架的基本原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#bean工厂"><span class="nav-number">2.1.</span> <span class="nav-text">bean工厂</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#依赖注入"><span class="nav-number">3.</span> <span class="nav-text">依赖注入()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#控制反转-IOC"><span class="nav-number">4.</span> <span class="nav-text">控制反转(IOC)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#切面编程-AOP"><span class="nav-number">5.</span> <span class="nav-text">切面编程(AOP)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#通知-Advice"><span class="nav-number">5.1.</span> <span class="nav-text">通知(Advice)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#切点-PointCut"><span class="nav-number">5.2.</span> <span class="nav-text">切点(PointCut)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子"><span class="nav-number">5.3.</span> <span class="nav-text">例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用场景"><span class="nav-number">5.4.</span> <span class="nav-text">使用场景:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注解"><span class="nav-number">6.</span> <span class="nav-text">注解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#注解的使用"><span class="nav-number">6.1.</span> <span class="nav-text">注解的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SpringMVC中的常用注解"><span class="nav-number">6.2.</span> <span class="nav-text">SpringMVC中的常用注解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Bean的实例化过程"><span class="nav-number">7.</span> <span class="nav-text">Bean的实例化过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#spring事务"><span class="nav-number">8.</span> <span class="nav-text">spring事务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#spring和springMVC"><span class="nav-number">9.</span> <span class="nav-text">spring和springMVC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#传统springMVC的不足"><span class="nav-number">10.</span> <span class="nav-text">传统springMVC的不足</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SpringMVC-HTTP请求响应的过程"><span class="nav-number">11.</span> <span class="nav-text">SpringMVC HTTP请求响应的过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#代码调用流程"><span class="nav-number">11.1.</span> <span class="nav-text">代码调用流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#拦截器和过滤器"><span class="nav-number">11.2.</span> <span class="nav-text">拦截器和过滤器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#九大组件"><span class="nav-number">12.</span> <span class="nav-text">九大组件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#返回json数据中文乱码的问题"><span class="nav-number">12.1.</span> <span class="nav-text">返回json数据中文乱码的问题</span></a></li></ol></li></ol></div>
             
 
           </div>
