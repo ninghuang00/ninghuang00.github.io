@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Just Try It">
 <meta property="og:description" content="做过的项目,实际问题的解决思路">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-08T12:15:07.000Z">
+<meta property="og:updated_time" content="2018-12-02T03:55:43.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="项目实践积累">
 <meta name="twitter:description" content="做过的项目,实际问题的解决思路">
@@ -359,7 +359,17 @@
         <p> 做过的项目,实际问题的解决思路<br> <a id="more"></a></p>
 <h1 id="实际问题"><a href="#实际问题" class="headerlink" title="实际问题"></a>实际问题</h1><h2 id="订单异常检测"><a href="#订单异常检测" class="headerlink" title="订单异常检测"></a>订单异常检测</h2><p>电商平台每日订单异常检测,服务端代码思路</p>
 <h2 id="网易邮箱抽奖"><a href="#网易邮箱抽奖" class="headerlink" title="网易邮箱抽奖"></a>网易邮箱抽奖</h2><p>网易邮箱活动,3.4亿用户,只允许8千万人参加,最后在八千万人中产生一二三等奖,有一台物理机和一台数据库服务器,怎么设计</p>
-<p>## </p>
+<h2 id="异常统一处理"><a href="#异常统一处理" class="headerlink" title="异常统一处理"></a>异常统一处理</h2><ol>
+<li><p>自定义异常类<br>继承需要的异常类型</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.greenledger.major.business.exception;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TokenException</span> <span class="keyword">extends</span> <span class="title">RuntimeException</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">TokenException</span><span class="params">(String errorMsg)</span></span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(errorMsg);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>自定义异常处理器<br>添加完自定义的项目，在全局异常处理类GlobalExceptionHandlerAdvice类中实现自己异常的处理逻辑，因为该类添加了@RestControllerAdvice异常处理注解，自己添加一个方法并且添加注解@ExceptionHandler处理某一类异常，其中value属性就是自己定义的异常的类对象。在项目中返回值一律使用BaseResult进行封装，也需要添加注解@ResponseBody来转换返回体为配置的json格式，例如TokenException处理：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ExceptionHandler</span>(TokenException.class) <span class="comment">// 统一处理TokenException异常</span></span><br><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> BaseResult <span class="title">handleTokenException</span><span class="params">(TokenException e)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 打印错误信息</span></span><br><span class="line">    log.error(e.getMessage(), e);</span><br><span class="line">    <span class="comment">// 输出异常</span></span><br><span class="line">    e.printStackTrace();</span><br><span class="line">    <span class="comment">// 组装返回信息</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> BaseResult(Code.TOKEN_CRYPT_ERROR.getCode(), e.getMessage());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="日志处理"><a href="#日志处理" class="headerlink" title="日志处理"></a>日志处理</h2><ol>
+<li>springBoot中在如果继承了start包,那么默认使用logback框架,所以在application.properties中不需要指定配置,在resources中创建logback-spring.xml文件进行配置</li>
+</ol>
 
       
     </div>
@@ -390,8 +400,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/07/07/Java基础知识/" rel="next" title="Java基础知识">
-                <i class="fa fa-chevron-left"></i> Java基础知识
+              <a href="/2018/07/07/docker常用命令/" rel="next" title="docker常用命令">
+                <i class="fa fa-chevron-left"></i> docker常用命令
               </a>
             
           </div>
@@ -479,7 +489,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">78</span>
+                  <span class="site-state-item-count">79</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -501,7 +511,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">116</span>
+                  <span class="site-state-item-count">117</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -534,7 +544,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#实际问题"><span class="nav-number">1.</span> <span class="nav-text">实际问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#订单异常检测"><span class="nav-number">1.1.</span> <span class="nav-text">订单异常检测</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网易邮箱抽奖"><span class="nav-number">1.2.</span> <span class="nav-text">网易邮箱抽奖</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#实际问题"><span class="nav-number">1.</span> <span class="nav-text">实际问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#订单异常检测"><span class="nav-number">1.1.</span> <span class="nav-text">订单异常检测</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网易邮箱抽奖"><span class="nav-number">1.2.</span> <span class="nav-text">网易邮箱抽奖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异常统一处理"><span class="nav-number">1.3.</span> <span class="nav-text">异常统一处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#日志处理"><span class="nav-number">1.4.</span> <span class="nav-text">日志处理</span></a></li></ol></li></ol></div>
             
 
           </div>
