@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Just Try It">
 <meta property="og:description" content="这是摘要">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-25T14:05:45.000Z">
+<meta property="og:updated_time" content="2019-04-22T08:50:48.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="docker入门">
 <meta name="twitter:description" content="这是摘要">
@@ -357,9 +357,69 @@
 
       
         <p> 这是摘要<br> <a id="more"></a></p>
-<h1 id="docker和虚拟机的区别"><a href="#docker和虚拟机的区别" class="headerlink" title="docker和虚拟机的区别"></a>docker和虚拟机的区别</h1><blockquote>
+<h2 id="docker和虚拟机的区别"><a href="#docker和虚拟机的区别" class="headerlink" title="docker和虚拟机的区别"></a>docker和虚拟机的区别</h2><blockquote>
 <p>参考地址:<a href="https://www.cnblogs.com/pangguoping/articles/5515286.html" target="_blank" rel="noopener">https://www.cnblogs.com/pangguoping/articles/5515286.html</a></p>
 </blockquote>
+<h2 id="部署tomcat"><a href="#部署tomcat" class="headerlink" title="部署tomcat"></a>部署tomcat</h2><ol>
+<li>搜索tomcat镜像<br><code>docker search tomcat</code></li>
+<li>获取镜像<br><code>docker pull tomcat</code></li>
+<li>启动容器<br><code>docker run --name tomcat8091 -p 8092:8080 -v $PWD/temp:/usr/local/tomcat/temp -d docker.io/tomcat</code></li>
+<li>访问端口号对应的ip,验证服务是否启动</li>
+</ol>
+<h2 id="部署redis"><a href="#部署redis" class="headerlink" title="部署redis"></a>部署redis</h2><ol>
+<li>搜索拉取</li>
+<li>启动容器<br><code>docker run --name redis6380 -p 6380:6379 -v $PWD/data:/data -v $PWD/data/redis.config:/data/redis.config -d docker.io/redis redis-server /data/redis.config</code><br>参数说明:<br>redis-server redis.config:在容器执行redis-server启动命令，以redis.config为配置文件,最好通过自定义的配置文件启动,因为默认配置文件是找不到的,无法修改</li>
+<li>进入容器查看redis状态<br><code>docker exec -it redis redis-cli</code></li>
+</ol>
+<h2 id="关于容器的使用"><a href="#关于容器的使用" class="headerlink" title="关于容器的使用"></a>关于容器的使用</h2><h3 id="查看docker日志"><a href="#查看docker日志" class="headerlink" title="查看docker日志"></a>查看docker日志</h3><p><code>docker logs container_name</code></p>
+<h3 id="创建并启动容器"><a href="#创建并启动容器" class="headerlink" title="创建并启动容器"></a>创建并启动容器</h3><p><code>docker run --name tomcat_test -p 8090:8080 -v $PWD/webapps:/usr/local/tomcat/webapps -d tomcat</code><br>参数说明:<br>-name 为容器命名<br>-p 8090:8080：将宿主机的8090端口映射到容器的8080端口(冒号后面的是容器的端口)<br>-v $PWD/test:/usr/local/tomcat/webapps/test：将主机中当前目录下的test挂载到容器的/test</p>
+<h3 id="修改已经创建的容器的端口映射"><a href="#修改已经创建的容器的端口映射" class="headerlink" title="修改已经创建的容器的端口映射"></a>修改已经创建的容器的端口映射</h3><blockquote>
+<p>参考地址:<a href="https://blog.csdn.net/wesleyflagon/article/details/78961990" target="_blank" rel="noopener">https://blog.csdn.net/wesleyflagon/article/details/78961990</a></p>
+</blockquote>
+<h3 id="启动容器"><a href="#启动容器" class="headerlink" title="启动容器"></a>启动容器</h3><p><code>docker start containerID</code></p>
+<h3 id="停止所有容器"><a href="#停止所有容器" class="headerlink" title="停止所有容器"></a>停止所有容器</h3><p><code>docker stop $(docker ps -q)</code></p>
+<h3 id="删除容器"><a href="#删除容器" class="headerlink" title="删除容器"></a>删除容器</h3><p><code>docker rm determined_swanson</code></p>
+<h3 id="删除镜像-删除镜像之前要先删除镜像的容器"><a href="#删除镜像-删除镜像之前要先删除镜像的容器" class="headerlink" title="删除镜像(删除镜像之前要先删除镜像的容器)"></a>删除镜像(删除镜像之前要先删除镜像的容器)</h3><p><code>docker rmi image_name</code></p>
+<h3 id="通过push备份容器"><a href="#通过push备份容器" class="headerlink" title="通过push备份容器"></a>通过push备份容器</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker commit -p container_name container-backup</span><br><span class="line">docker login</span><br></pre></td></tr></table></figure>
+<blockquote>
+</blockquote>
+<p>username:mending</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker tag container_name mending/container-backup</span><br><span class="line">docker push mending/container-backup</span><br></pre></td></tr></table></figure>
+<h3 id="通过save保存到本地"><a href="#通过save保存到本地" class="headerlink" title="通过save保存到本地"></a>通过save保存到本地</h3><p><code>docker save -o ~/container-backup.tar container-backup</code></p>
+<h3 id="通过主机命令行进入master容器"><a href="#通过主机命令行进入master容器" class="headerlink" title="通过主机命令行进入master容器"></a>通过主机命令行进入master容器</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it mysql_test bash</span><br><span class="line">[root@bogon ~]# docker exec -it mysql-master bash</span><br><span class="line">root@1651d1cab219:/#</span><br></pre></td></tr></table></figure>
+<h3 id="容器开机自动启动方法"><a href="#容器开机自动启动方法" class="headerlink" title="容器开机自动启动方法"></a>容器开机自动启动方法</h3><ol>
+<li>如果容器没有创建<br><code>sudo docker run --restart=always .....</code></li>
+<li>如果容器已经创建<br><code>docker update --restart=always container_name</code><ul>
+<li>no – 容器退出时不要自动重启。这个是默认值。</li>
+<li>on-failure[:max-retries] – 只在容器以非0状态码退出时重启。可选的，可以退出docker daemon尝试重启容器的次数。</li>
+<li>always – 不管退出状态码是什么始终重启容器。当指定always时，docker daemon将无限次数地重启容器。容器也会在daemon启动时尝试重启，不管容器当时的状态如何。</li>
+<li>unless-stopped – 不管退出状态码是什么始终重启容器，不过当daemon启动时，如果容器之前已经为停止状态，不要尝试启动它。</li>
+</ul>
+</li>
+</ol>
+<h2 id="创建mysql容器"><a href="#创建mysql容器" class="headerlink" title="创建mysql容器"></a>创建mysql容器</h2><p><code>sudo docker run -d -p 3306:3306 --name mysql_test -e MYSQL_ROOT_PASSWORD=root -v /mysql/datadir:/var/lib/mysql -v /mysql/conf:/etc/mysql/conf.d  docker.io/mysql:latest</code><br>参数说明:</p>
+<blockquote>
+</blockquote>
+<p>-e MYSQL_ROOT_PASSWORD=password ：指定root密码<br>-v /mysql/datadir:/var/lib/mysql ：指定数据库本地存储路径，如果系统没有关闭SELinux，会启动失败，原因是本地目录不允许挂载到容器，需要先执行chcon -Rt svirt_sandbox_file_t /mysql/datadir<br>-v /mysql/conf:/etc/mysql/conf.d ：指定使用自定义的mysql配置文件启动数据库，比如在该路径下创建一个my-config.cnf  </p>
+<h2 id="docker中配置Oracle"><a href="#docker中配置Oracle" class="headerlink" title="docker中配置Oracle"></a>docker中配置Oracle</h2><ol>
+<li><p>创建Oracle容器<br><code>docker run --name oracle_test -d -p 49160:22 -p 49191:1521 -e ORACLE_ALLOW_REMOTE=true daocloud.io/ihypo/oracle-xe-11g</code></p>
+</li>
+<li><p>进入oracle容器<br><code>docker exec -it 806ebe7f5231  /bin/bash</code></p>
+</li>
+<li><p>ssh进入oracle容器<br><code>ssh root@localhost -p 49160</code></p>
+</li>
+<li><p>容器中登录Oracle数据库<br><code>su - oracle
+sqlplus system/oracle</code></p>
+</li>
+<li><p>创建用户<br><code>create user HZYXY_BI identified by HZYXY_BI;</code><br>说明:<br>by 后面是密码</p>
+</li>
+<li><p>授予权限<br><code>grant resource,connect to HZYXY_BI;</code></p>
+</li>
+<li><p>切换用户登录<br><code>conn HZYXY_BI/HZYXY_BI;</code></p>
+</li>
+<li><p>容器中存放数据库文件的目录<br>/u01/app/oracle/oradata/XE/<br>create user shyhex identified by shyhex default tablespace shyhex</p>
+</li>
+</ol>
 
       
     </div>
@@ -390,8 +450,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/09/19/redis默认配置文件/" rel="next" title="redis默认配置文件">
-                <i class="fa fa-chevron-left"></i> redis默认配置文件
+              <a href="/2018/09/19/使用redis实现tomcat会话缓存实验/" rel="next" title="使用redis实现tomcat会话缓存实验">
+                <i class="fa fa-chevron-left"></i> 使用redis实现tomcat会话缓存实验
               </a>
             
           </div>
@@ -400,8 +460,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/09/26/内存泄漏/" rel="prev" title="内存泄漏">
-                内存泄漏 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/09/30/Mybatis入门/" rel="prev" title="Mybatis入门">
+                Mybatis入门 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -479,7 +539,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-count">55</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -490,7 +550,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -501,7 +561,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">117</span>
+                  <span class="site-state-item-count">75</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -534,7 +594,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#docker和虚拟机的区别"><span class="nav-number">1.</span> <span class="nav-text">docker和虚拟机的区别</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#docker和虚拟机的区别"><span class="nav-number">1.</span> <span class="nav-text">docker和虚拟机的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部署tomcat"><span class="nav-number">2.</span> <span class="nav-text">部署tomcat</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部署redis"><span class="nav-number">3.</span> <span class="nav-text">部署redis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于容器的使用"><span class="nav-number">4.</span> <span class="nav-text">关于容器的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#查看docker日志"><span class="nav-number">4.1.</span> <span class="nav-text">查看docker日志</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建并启动容器"><span class="nav-number">4.2.</span> <span class="nav-text">创建并启动容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改已经创建的容器的端口映射"><span class="nav-number">4.3.</span> <span class="nav-text">修改已经创建的容器的端口映射</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动容器"><span class="nav-number">4.4.</span> <span class="nav-text">启动容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#停止所有容器"><span class="nav-number">4.5.</span> <span class="nav-text">停止所有容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除容器"><span class="nav-number">4.6.</span> <span class="nav-text">删除容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除镜像-删除镜像之前要先删除镜像的容器"><span class="nav-number">4.7.</span> <span class="nav-text">删除镜像(删除镜像之前要先删除镜像的容器)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过push备份容器"><span class="nav-number">4.8.</span> <span class="nav-text">通过push备份容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过save保存到本地"><span class="nav-number">4.9.</span> <span class="nav-text">通过save保存到本地</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过主机命令行进入master容器"><span class="nav-number">4.10.</span> <span class="nav-text">通过主机命令行进入master容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#容器开机自动启动方法"><span class="nav-number">4.11.</span> <span class="nav-text">容器开机自动启动方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建mysql容器"><span class="nav-number">5.</span> <span class="nav-text">创建mysql容器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker中配置Oracle"><span class="nav-number">6.</span> <span class="nav-text">docker中配置Oracle</span></a></li></ol></div>
             
 
           </div>
@@ -554,7 +614,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

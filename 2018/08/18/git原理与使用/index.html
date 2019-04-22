@@ -94,7 +94,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/08/18/git原理与使用/git文件生命周期.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/18/git原理与使用/目录结构.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/18/git原理与使用/merge的原理.png">
-<meta property="og:updated_time" content="2018-11-28T06:00:24.000Z">
+<meta property="og:updated_time" content="2019-04-22T11:00:26.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git原理与使用">
 <meta name="twitter:description" content="这是摘要">
@@ -373,7 +373,7 @@
 <li>使用https clone项目之后每次pull,push代码都要输入密码的解决办法(好像没用)<br><code>git config --global credential.helper store</code></li>
 </ol>
 <h3 id="回退"><a href="#回退" class="headerlink" title="回退"></a>回退</h3><ol>
-<li>回退单个文件<br><code>git reset head filename</code><br>以上命令可以将暂存区的文件回退到工作区,也就是将add过的文件变回add之前的状态<br><code>git reset head</code><br>这个命令就是将所有暂存区的文件回退到工作区</li>
+<li>回退单个文件<br><code>git reset head filename</code><br>以上命令可以将暂存区的文件回退到工作区,也就是将add过的文件变回add之前的状态,如果删除了filename文件,也可以先使用以上命令将文件找回,然后使用<code>git checkout -- filename</code>命令将文件恢复<br><code>git reset head</code><br>这个命令就是将所有暂存区的文件回退到工作区</li>
 <li>回退版本<br><code>git reset --hard head^</code><br>以上命令可以将代码回退到当前最新的commit<br><code>git reset --hard commit_id</code><br>将代码回退到指定commit</li>
 <li>撤销commit<br><code>git revert head</code><br>还原已经提交的修改,是提交一个新的版本，将需要revert的版本的内容再反向修改回去，版本会递增，不影响之前提交的内容。<br>此次操作之前和之后的commit和history都会保留，并且把这次撤销作为一次最新的提交<br><code>git revert HEAD</code><br>撤销前一次 commit<br><code>git revert HEAD^</code><br>撤销前前一次 commit<br><code>git revert commit-id</code><br>撤销指定的版本，撤销也会作为一次提交进行保存</li>
 </ol>
@@ -473,8 +473,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/08/16/Future/" rel="next" title="阻塞队列">
-                <i class="fa fa-chevron-left"></i> 阻塞队列
+              <a href="/2018/08/18/maven入门/" rel="next" title="maven入门">
+                <i class="fa fa-chevron-left"></i> maven入门
               </a>
             
           </div>
@@ -483,8 +483,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/08/18/maven入门/" rel="prev" title="maven入门">
-                maven入门 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/08/18/java中的锁/" rel="prev" title="java中的锁">
+                java中的锁 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -562,7 +562,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-count">55</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -573,7 +573,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -584,7 +584,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">117</span>
+                  <span class="site-state-item-count">75</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -637,7 +637,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

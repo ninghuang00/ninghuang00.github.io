@@ -90,7 +90,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/08/07/SpringMVC/事务属性.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/07/SpringMVC/springMVC基本工作流程图.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/07/SpringMVC/拦截器过滤器流程.png">
-<meta property="og:updated_time" content="2018-11-29T06:59:42.000Z">
+<meta property="og:updated_time" content="2019-04-16T08:54:37.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SpringMVC">
 <meta name="twitter:description" content="开发自己的SpringMVC参考地址:https://mp.weixin.qq.com/s/Fo3ZN64qm7e2bWEKEIfBFA参考地址:https://github.com/CFMystery/bfmvc/blob/master/bfmvc/src/main/java/cc/cleverfan/web/DispatherServlet.java">
@@ -381,7 +381,7 @@ poxy-target-class=&quot;true&quot;/&gt;</code>时，表示使用CGLib动态代�
 <h3 id="bean工厂"><a href="#bean工厂" class="headerlink" title="bean工厂"></a>bean工厂</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BeanFactory</span> </span>&#123;</span><br><span class="line">       <span class="keyword">private</span> Map&lt;String, Object&gt; beanMap = <span class="keyword">new</span> HashMap&lt;String, Object&gt;();</span><br><span class="line">       <span class="comment">/**</span></span><br><span class="line"><span class="comment">       * bean工厂的初始化.</span></span><br><span class="line"><span class="comment">       * <span class="doctag">@param</span> xml xml配置文件</span></span><br><span class="line"><span class="comment">       */</span></span><br><span class="line">       <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(String xml)</span> </span>&#123;</span><br><span class="line">              <span class="keyword">try</span> &#123;</span><br><span class="line">                     <span class="comment">//读取指定的配置文件</span></span><br><span class="line">                     SAXReader reader = <span class="keyword">new</span> SAXReader();</span><br><span class="line">                     ClassLoader classLoader = Thread.currentThread().getContextClassLoader();</span><br><span class="line">                     <span class="comment">//从class目录下获取指定的xml文件</span></span><br><span class="line">                     InputStream ins = classLoader.getResourceAsStream(xml);</span><br><span class="line">                     Document doc = reader.read(ins);</span><br><span class="line">                     Element root = doc.getRootElement();  </span><br><span class="line">                     Element foo;</span><br><span class="line">                    </span><br><span class="line">                     <span class="comment">//遍历bean</span></span><br><span class="line">                     <span class="keyword">for</span> (Iterator i = root.elementIterator(<span class="string">"bean"</span>); i.hasNext();) &#123;  </span><br><span class="line">                            foo = (Element) i.next();</span><br><span class="line">                            <span class="comment">//获取bean的属性id和class</span></span><br><span class="line">                            Attribute id = foo.attribute(<span class="string">"id"</span>);  </span><br><span class="line">                            Attribute cls = foo.attribute(<span class="string">"class"</span>);</span><br><span class="line">                           </span><br><span class="line">                            <span class="comment">//利用Java反射机制，通过class的名称获取Class对象</span></span><br><span class="line">                            Class bean = Class.forName(cls.getText());</span><br><span class="line">                           </span><br><span class="line">                            <span class="comment">//获取对应class的信息</span></span><br><span class="line">                            java.beans.BeanInfo info = java.beans.Introspector.getBeanInfo(bean);</span><br><span class="line">                            <span class="comment">//获取其属性描述</span></span><br><span class="line">                            java.beans.PropertyDescriptor pd[] = info.getPropertyDescriptors();</span><br><span class="line">                            <span class="comment">//设置值的方法</span></span><br><span class="line">                            Method mSet = <span class="keyword">null</span>;</span><br><span class="line">                            <span class="comment">//创建一个对象</span></span><br><span class="line">                            Object obj = bean.newInstance();</span><br><span class="line">                           </span><br><span class="line">                            <span class="comment">//遍历该bean的property属性</span></span><br><span class="line">                            <span class="keyword">for</span> (Iterator ite = foo.elementIterator(<span class="string">"property"</span>); ite.hasNext();) &#123;  </span><br><span class="line">                                   Element foo2 = (Element) ite.next();</span><br><span class="line">                                   <span class="comment">//获取该property的name属性</span></span><br><span class="line">                                   Attribute name = foo2.attribute(<span class="string">"name"</span>);</span><br><span class="line">                                   String value = <span class="keyword">null</span>;</span><br><span class="line">                                  </span><br><span class="line">                                   <span class="comment">//获取该property的子元素value的值</span></span><br><span class="line">                                   <span class="keyword">for</span>(Iterator ite1 = foo2.elementIterator(<span class="string">"value"</span>); ite1.hasNext();) &#123;</span><br><span class="line">                                          Element node = (Element) ite1.next();</span><br><span class="line">                                          value = node.getText();</span><br><span class="line">                                          <span class="keyword">break</span>;</span><br><span class="line">                                   &#125;</span><br><span class="line">                                  </span><br><span class="line">                                   <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; pd.length; k++) &#123;</span><br><span class="line">                                          <span class="keyword">if</span> (pd[k].getName().equalsIgnoreCase(name.getText())) &#123;</span><br><span class="line">                                                 mSet = pd[k].getWriteMethod();</span><br><span class="line">                                                 <span class="comment">//利用Java的反射机制调用对象的某个set方法，并将值设置进去</span></span><br><span class="line">                                                 mSet.invoke(obj, value);</span><br><span class="line">                                          &#125;</span><br><span class="line">                                   &#125;</span><br><span class="line">                            &#125;</span><br><span class="line">                           </span><br><span class="line">                            <span class="comment">//将对象放入beanMap中，其中key为id值，value为对象</span></span><br><span class="line">                            beanMap.put(id.getText(), obj);</span><br><span class="line">                     &#125;</span><br><span class="line">              &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                     System.out.println(e.toString());</span><br><span class="line">              &#125;</span><br><span class="line">       &#125;</span><br><span class="line">      </span><br><span class="line">       <span class="comment">//other codes</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="依赖注入"><a href="#依赖注入" class="headerlink" title="依赖注入()"></a>依赖注入()</h2><p>就是通过反射bean的setter方法,set成员bean的过程<br><a href="/2018/08/15/反射/" title="反射">反射</a></p>
 <h2 id="控制反转-IOC"><a href="#控制反转-IOC" class="headerlink" title="控制反转(IOC)"></a>控制反转(IOC)</h2><p>就是通过配置文件+反射生成bean</p>
-<h2 id="切面编程-AOP"><a href="#切面编程-AOP" class="headerlink" title="切面编程(AOP)"></a>切面编程(AOP)</h2><a href="/2018/08/04/代理模式/" title="代理模式">代理模式</a>
+<h2 id="切面编程-AOP"><a href="#切面编程-AOP" class="headerlink" title="切面编程(AOP)"></a>切面编程(AOP)</h2>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">      &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">      &lt;artifactId&gt;spring-boot-starter-aop&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
 <p>参考网址:    <a href="https://www.liaoxuefeng.com/article/0013738774263173c42eae58864423698dd40556af23bb5000" target="_blank" rel="noopener">https://www.liaoxuefeng.com/article/0013738774263173c42eae58864423698dd40556af23bb5000</a></p>
 <h3 id="通知-Advice"><a href="#通知-Advice" class="headerlink" title="通知(Advice)"></a>通知(Advice)</h3><p>定义切点何时工作,以工作内容</p>
@@ -591,8 +591,8 @@ poxy-target-class=&quot;true&quot;/&gt;</code>时，表示使用CGLib动态代�
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/08/04/java枚举类/" rel="next" title="java枚举类">
-                <i class="fa fa-chevron-left"></i> java枚举类
+              <a href="/2018/07/31/算法真题1/" rel="next" title="算法真题1">
+                <i class="fa fa-chevron-left"></i> 算法真题1
               </a>
             
           </div>
@@ -601,8 +601,8 @@ poxy-target-class=&quot;true&quot;/&gt;</code>时，表示使用CGLib动态代�
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/08/11/mpv快捷键/" rel="prev" title="mpv快捷键">
-                mpv快捷键 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/08/14/分布式/" rel="prev" title="分布式">
+                分布式 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -680,7 +680,7 @@ poxy-target-class=&quot;true&quot;/&gt;</code>时，表示使用CGLib动态代�
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-count">55</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -691,7 +691,7 @@ poxy-target-class=&quot;true&quot;/&gt;</code>时，表示使用CGLib动态代�
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -702,7 +702,7 @@ poxy-target-class=&quot;true&quot;/&gt;</code>时，表示使用CGLib动态代�
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">117</span>
+                  <span class="site-state-item-count">75</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -755,7 +755,7 @@ poxy-target-class=&quot;true&quot;/&gt;</code>时，表示使用CGLib动态代�
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

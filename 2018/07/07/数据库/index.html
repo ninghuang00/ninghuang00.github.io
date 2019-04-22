@@ -88,7 +88,14 @@
 <meta property="og:description" content="数据库相关知识">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2018/07/07/数据库/读写分离.png">
-<meta property="og:updated_time" content="2018-10-11T01:57:39.000Z">
+<meta property="og:image" content="http://yoursite.com/2018/07/07/数据库/脏读.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/07/07/数据库/不可重复读.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/07/07/数据库/幻读.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/07/07/数据库/死锁的发生.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/07/07/数据库/b树的结构.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/07/07/数据库/b树文件查找过程.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/07/07/数据库/b+树的文件查找结构.jpg">
+<meta property="og:updated_time" content="2019-04-22T11:03:16.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据库">
 <meta name="twitter:description" content="数据库相关知识">
@@ -359,7 +366,38 @@
 
       
         <p> 数据库相关知识<br> <a id="more"></a></p>
-<h1 id="分库分表"><a href="#分库分表" class="headerlink" title="分库分表"></a>分库分表</h1><a href="/2018/08/20/分库分表/" title="分库分表">分库分表</a>
+<h1 id="分库分表"><a href="#分库分表" class="headerlink" title="分库分表"></a>分库分表</h1><blockquote>
+<p>参考地址:<a href="http://www.infoq.com/cn/articles/key-steps-and-likely-problems-of-split-table" target="_blank" rel="noopener">http://www.infoq.com/cn/articles/key-steps-and-likely-problems-of-split-table</a></p>
+</blockquote>
+<h2 id="垂直分表"><a href="#垂直分表" class="headerlink" title="垂直分表"></a>垂直分表</h2><p>就是大表拆成小表,一张表字段过多可以考虑拆分成几张表,将不经常使用或者长度较大的字段拆分出去放到“扩展表”中</p>
+<ol>
+<li>优点<br>在字段很多的情况下，拆分开确实更便于开发和维护。某种意义上也能避免“跨页”的问题</li>
+<li>缺点<br>拆分字段的操作建议在数据库设计阶段就做好。如果是在发展过程中拆分，则需要改写以前的查询语句，会额外带来一定的成本和风险，建议谨慎。</li>
+</ol>
+<h2 id="垂直分库"><a href="#垂直分库" class="headerlink" title="垂直分库"></a>垂直分库</h2><p>基本的思路就是按照业务模块来划分出不同的数据库，而不是像早期一样将所有的数据表都放到同一个数据库中。</p>
+<ol>
+<li>优点<br>系统层面的“服务化”拆分操作，能够解决业务系统层面的耦合和性能瓶颈，有利于系统的扩展维护。而数据库层面的拆分，道理也是相通的。与服务的“治理”和“降级”机制类似，我们也能对不同业务类型的数据进行“分级”管理、维护、监控、扩展等。<br>数据库的连接资源比较宝贵且单机处理能力也有限，在高并发场景下，垂直分库一定程度上能够突破IO、连接数及单机硬件资源的瓶颈，是大型分布式系统中优化数据库架构的重要手段。</li>
+<li>缺点<br>跨库join，分布式事务等</li>
+<li>难点解决思路<ol>
+<li>垮库join<ul>
+<li>字段冗余:<br>可以不用去查询另一张表,空间换时间</li>
+<li>简单字段,系统层组装<br>在代码中调用不同模块的服务获取数据后进行组装</li>
+<li>复杂字段<br>尽量将数据通过条件过滤之后再返回进行组装</li>
+</ul>
+</li>
+<li>跨库事务（分布式事务）的问题 </li>
+</ol>
+</li>
+</ol>
+<h2 id="水平分表"><a href="#水平分表" class="headerlink" title="水平分表"></a>水平分表</h2><p>就是将表中不同的数据行按照一定规律分布到不同的数据库表中（这些表保存在同一个数据库中），这样来降低单表数据量，优化查询性能。最常见的方式就是通过主键或者时间等字段进行Hash和取模后拆分。</p>
+<ol>
+<li>优点<br>水平分表，能够降低单表的数据量，一定程度上可以缓解查询性能瓶颈。</li>
+<li>缺点<br>但本质上这些表还保存在同一个库中，所以库级别还是会有IO瓶颈。所以，一般不建议采用这种做法。</li>
+</ol>
+<h2 id="水平分库分表"><a href="#水平分库分表" class="headerlink" title="水平分库分表"></a>水平分库分表</h2><p>水平分库分表与上面讲到的水平分表的思想相同，唯一不同的就是将这些拆分出来的表保存在不同的数据库中。</p>
+<blockquote>
+<p>参考地址:<a href="http://www.infoq.com/cn/articles/key-steps-and-likely-problems-of-horizontal-split-table" target="_blank" rel="noopener">http://www.infoq.com/cn/articles/key-steps-and-likely-problems-of-horizontal-split-table</a></p>
+</blockquote>
 <h1 id="读写分离"><a href="#读写分离" class="headerlink" title="读写分离"></a>读写分离</h1><blockquote>
 <p>参考地址:<a href="https://blog.csdn.net/justdb/article/details/17331569" target="_blank" rel="noopener">https://blog.csdn.net/justdb/article/details/17331569</a></p>
 </blockquote>
@@ -443,7 +481,205 @@
 <li>观察结果，不符合预期继续从0分析</li>
 </ol>
 <h1 id="完整的对象访问名称"><a href="#完整的对象访问名称" class="headerlink" title="完整的对象访问名称"></a>完整的对象访问名称</h1><h2 id="Oracle"><a href="#Oracle" class="headerlink" title="Oracle"></a>Oracle</h2><p>参考地址:<a href="https://blog.csdn.net/KimSoft/article/details/4627520" target="_blank" rel="noopener">https://blog.csdn.net/KimSoft/article/details/4627520</a></p>
-
+<h1 id="数据库事务"><a href="#数据库事务" class="headerlink" title="数据库事务"></a>数据库事务</h1><blockquote>
+<p>参考地址:<a href="http://www.hollischuang.com/archives/898" target="_blank" rel="noopener">http://www.hollischuang.com/archives/898</a></p>
+</blockquote>
+<h2 id="命令行"><a href="#命令行" class="headerlink" title="命令行"></a>命令行</h2><ol>
+<li>查看隔离级别<br><code>SELECT @@tx_isolation;</code></li>
+<li>查看存储引擎<br><code>show variables like &#39;%storage_engine%&#39;;</code></li>
+</ol>
+<h2 id="锁"><a href="#锁" class="headerlink" title="锁"></a>锁</h2><ol>
+<li><p>行级锁<br>行级锁是Mysql中锁定粒度最细的一种锁，表示只针对当前操作的行进行加锁。<br>开销大，加锁慢；会出现死锁；锁定粒度最小，发生锁冲突的概率最低，并发度也最高。</p>
+<ol>
+<li>排它锁(写锁)<br><code>SELECT ... FOR UPDATE;</code><br>排他锁又称写锁，如果事务T对数据A加上排他锁后，则其他事务不能再对A加任任何类型的封锁。获准排他锁的事务既能读数据，又能修改数据。</li>
+<li>共享锁(读锁)<br><code>SELECT ... LOCK IN SHARE MODE;</code><br>如果事务T对数据A加上共享锁后，则其他事务只能对A再加共享锁，不能加排他锁。获准共享锁的事务只能读数据，不能修改数据。</li>
+</ol>
+</li>
+<li><p>表级锁<br>表级锁是MySQL中锁定粒度最大的一种锁，表示对当前操作的整张表加锁，它实现简单，资源消耗较少，被大部分MySQL引擎支持。最常使用的MYISAM与INNODB都支持表级锁定。<br>开销小，加锁快；不会出现死锁；锁定粒度大，发出锁冲突的概率最高，并发度最低。</p>
+<ol>
+<li>表共享读锁(共享锁)</li>
+<li>表独占写锁(排他锁)</li>
+<li>意向共享锁(IS)</li>
+<li>意向互斥锁(IX)<blockquote>
+<p>有的人可能会对意向锁(intention lock)的目的并不是完全的理解，我们在这里可以举一个例子：如果没有意向锁，当已经有人使用行锁对表中的某一行进行修改时，如果另外一个请求要对全表进行修改，那么就需要对所有的行是否被锁定进行扫描，在这种情况下，效率是非常低的；不过，在引入意向锁之后，当有人使用行锁对表中的某一行进行修改之前，会先为表添加意向互斥锁（IX），再为行记录添加互斥锁（X），在这时如果有人尝试对全表进行修改就不需要判断表中的每一行数据是否被加锁了，只需要通过等待意向互斥锁被释放就可以了。</p>
+</blockquote>
+</li>
+</ol>
+</li>
+<li>页级锁<br>页级锁是MySQL中锁定粒度介于行级锁和表级锁中间的一种锁。一次锁定相邻的一组记录。BDB支持页级锁</li>
+</ol>
+<h2 id="锁算法"><a href="#锁算法" class="headerlink" title="锁算法"></a>锁算法</h2><ol>
+<li>记录锁<br>记录锁（Record Lock）是加到索引记录上的锁,如果我们使用 id 或者 last_name 作为 SQL 中 WHERE 语句的过滤条件，那么 InnoDB 就可以通过索引建立的 B+ 树找到行记录并添加索引，但是如果使用 first_name 作为过滤条件时，由于 InnoDB 不知道待修改的记录具体存放的位置，也无法对将要修改哪条记录提前做出判断就会锁定整个表。</li>
+<li>间隙锁<br>间隙锁是对索引记录中的一段连续区域的锁；当使用类似 <code>SELECT * FROM users WHERE id BETWEEN 10 AND 20 FOR UPDATE;</code> 的 SQL 语句时，就会阻止其他事务向表中插入 <code>id = 15</code>的记录，因为整个范围都被间隙锁锁定了。</li>
+<li>next-key锁(解决幻读)<br>当我们更新一条记录，比如 <code>SELECT * FROM users WHERE age = 30 FOR UPDATE;</code>，InnoDB 不仅会在范围 (21, 30] 上加 Next-Key 锁，还会在这条记录后面的范围 (30, 40] 加间隙锁，所以插入 (21, 40] 范围内的记录都会被锁定。</li>
+</ol>
+<h2 id="事务概念"><a href="#事务概念" class="headerlink" title="事务概念"></a>事务概念</h2><p>一个数据库事务通常包含对数据库的读或写的一个操作序列,它存在的目的如下:</p>
+<ol>
+<li>为数据库操作提供一个从失败状态恢复到正常状态的方法,同时提供了数据库即使在异常状态也能保持一致性的方法</li>
+<li>当多个应用程序并发访问数据库时,提供隔离这些操作的方法,避免操作之间相互干扰</li>
+</ol>
+<h2 id="事务特性-ACID"><a href="#事务特性-ACID" class="headerlink" title="事务特性(ACID)"></a>事务特性(ACID)</h2><p>数据库事务:银行转账的例子</p>
+<ol>
+<li>原子性(atomicity)<br>事务中对数据库的一系列操作要么全部被执行,要么都不执行</li>
+<li>一致性(consistent)<br>从一个一致性状态变到另一个一致性状态,满足数据库的完整性约束</li>
+<li>隔离性(isolation)<br>多个事务并发执行的时候,一个事务不会影响到另一个事务</li>
+<li>持久性(Durability)<br>事务一旦提交成功,对数据库的修改将永久保存在数据库中</li>
+</ol>
+<h2 id="事务的隔离级别"><a href="#事务的隔离级别" class="headerlink" title="事务的隔离级别"></a>事务的隔离级别</h2><p>参考地址:<a href="http://www.hollischuang.com/archives/943" target="_blank" rel="noopener">http://www.hollischuang.com/archives/943</a></p>
+<ol>
+<li>未提交读(read Uncommited)<ul>
+<li>概念<br>一个事务可以读取另一个事务未提交的数据</li>
+<li>实现<br>事务读取数据的时候不加锁<br>事务修改数据的时候加行级共享锁</li>
+<li>可能现象<br>出现脏读</li>
+</ul>
+</li>
+<li>提交读(read committed) <ul>
+<li>概念<br>在一个事务修改数据过程中，如果事务还没提交，其他事务不能读该数据。解决脏读</li>
+<li>实现<br>事务对当前被读取的数据加 行级共享锁（当读到时才加锁），一旦读完该行，立即释放该行级共享锁；<br>事务在更新某数据的瞬间（就是发生更新的瞬间），必须先对其加 行级排他锁，直到事务结束才释放。</li>
+<li>可能现象<br>不可重复读:对于同一数据项,前面读取的数据和后来读取的数据可能不一样<br>可能出现不可重复读和幻读</li>
+</ul>
+</li>
+<li>可重复读(repeated read) <ul>
+<li>概念<br>可重复读,只有在事务一提交之后，事务二才能更改该行数据。所以，只要在事务一从开始到结束的这段时间内，无论他读取该行数据多少次，结果都是一样的。解决不可重复读</li>
+<li>实现<br>事务在读取某数据的瞬间（就是开始读取的瞬间），必须先对其加 行级共享锁，直到事务结束才释放；<br>事务在更新某数据的瞬间（就是发生更新的瞬间），必须先对其加 行级排他锁，直到事务结束才释放。<br>innodb中使用快照技术,即晚于当前事务的其他的事务的更新对本事务不可见</li>
+<li>可能现象<br>数据库进行读事务的时候就会禁止其他的写事务,进行写事务的时候就会禁止其他任何事务写操作<br>可能出现幻读,因为其他事务虽然不能修改该行数据,但是可以新增数据行,</li>
+</ul>
+</li>
+<li>可序列化(serializable) <ul>
+<li>概念<br>可序列化:最高级别,事务串行,解决幻读</li>
+<li>实现<br>事务在读取数据时，必须先对其加 表级共享锁 ，直到事务结束才释放；<br>事务在更新数据时，必须先对其加 表级排他锁 ，直到事务结束才释放。</li>
+<li>可能现象<br>虽然可序列化解决了脏读、不可重复读、幻读等读现象。但是序列化事务会产生以下效果：<ol>
+<li>无法读取其它事务已修改但未提交的记录。</li>
+<li>在当前事务完成之前，其它事务不能修改目前事务已读取的记录。</li>
+<li>在当前事务完成之前，其它事务所插入的新记录，其索引键值不能在当前事务的任何语句所读取的索引键范围中。</li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="由于低级别隔离性产生的问题"><a href="#由于低级别隔离性产生的问题" class="headerlink" title="由于低级别隔离性产生的问题:"></a>由于低级别隔离性产生的问题:</h2><ol>
+<li>脏读:session1查询test为空,此时session2插入数据不提交,然后session再次查询test就有数据了<img src="/2018/07/07/数据库/脏读.jpg" title="脏读">
+提交读解决脏读的方法在于,当session2插入数据的时候加了排他行锁,直到session2提交才能被访问到</li>
+<li>不可重复读:session1查询id=3的地方v=2,此时session2把v改成3并且提交,session1再次查询id=2的地方v变成了3,同一事务前后访问不一致,重点在同一条记录<img src="/2018/07/07/数据库/不可重复读.jpg" title="不可重复读">
+可重复读解决不可重复读的方法在于,当session1读取数据的时候加了共享行锁,知道session1结束才释放,所以session2无法修改数据</li>
+<li>幻读:重点在插入了新数据,session1查询返回结果为空表,此时session2插入新数据1并提交,(图中有误,第二次查询应去掉)然后事务1也插入数据1,此时报错,刚刚明明是空表,现在却提示数据冲突.<img src="/2018/07/07/数据库/幻读.jpg" title="幻读">
+出现幻读的原因是可重复读虽然加了行锁,但是无法阻止数据的插入,解决的办法就是加表锁,还有乐观锁机制?</li>
+</ol>
+<h2 id="mysql常用存储引擎"><a href="#mysql常用存储引擎" class="headerlink" title="mysql常用存储引擎"></a>mysql常用存储引擎</h2><ol>
+<li>MyISAM和MEMORY采用表级锁(table-level locking)<ol>
+<li>在myisam中是不会出现死锁的,因为一次性获取所有需要的锁要么全部满足,要么全部等待</li>
+</ol>
+</li>
+<li>BDB采用页面锁(page-level locking)或表级锁，默认为页面锁</li>
+<li>InnoDB支持行级锁(row-level locking)和表级锁,默认为行级锁<br>innodb中的行锁实现原理是在索引中的索引项上加锁,所以只有通过索引条件检索数据InnoDB才会使用行锁,否则使用的是表锁<br>实际应用:<ol>
+<li>因为MySQL行锁是针对索引,而不是记录,所以使用相同的索引键,即使是访问不同的行也会产生锁冲突</li>
+<li>如果一张表使用多个索引,那么可以根据不同的索引键访问不同的行<br>在MySQL中，行级锁并不是直接锁记录，而是锁索引。索引分为主键索引和非主键索引两种，如果一条sql语句操作了主键索引，MySQL就会锁定这条主键索引；如果一条语句操作了非主键索引，MySQL会先锁定该非主键索引，再锁定相关的主键索引。 在UPDATE、DELETE操作时，MySQL不仅锁定WHERE条件扫描过的所有索引记录，而且会锁定相邻的键值，即所谓的next-key locking。<br>当两个事务同时执行，一个锁住了主键索引，在等待其他相关索引。另一个锁定了非主键索引，在等待主键索引。这样就会发生死锁。<br>发生死锁后，InnoDB一般都可以检测到，并使一个事务释放锁回退，另一个获取锁完成事务。<br>参考地址:<a href="https://draveness.me/mysql-innodb" target="_blank" rel="noopener">https://draveness.me/mysql-innodb</a></li>
+</ol>
+</li>
+</ol>
+<h3 id="InnoDb和MyISAM的区别"><a href="#InnoDb和MyISAM的区别" class="headerlink" title="InnoDb和MyISAM的区别"></a>InnoDb和MyISAM的区别</h3><blockquote>
+<p>参考地址:<a href="https://juejin.im/post/5b02b105f265da0b7868d230" target="_blank" rel="noopener">https://juejin.im/post/5b02b105f265da0b7868d230</a></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>InnoDb</th>
+<th>MyISAM</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>I支持行级锁和表级锁;行级锁基于索引实现,只对where的主键有效</td>
+<td>M只支持表级锁</td>
+</tr>
+<tr>
+<td>提供事务支持</td>
+<td>M强调性能,不支持事务</td>
+</tr>
+<tr>
+<td>支持外键</td>
+<td>不支持外键</td>
+</tr>
+<tr>
+<td>适合大量的insert和update</td>
+<td>适合大量的select</td>
+</tr>
+<tr>
+<td>适合写多,字段更新频繁,高并发,安全可用性高</td>
+<td>读多写少,并发小,表数据量小,硬件资源有限</td>
+</tr>
+<tr>
+<td>数据文件,binlog,mysqldump</td>
+<td>数据以文件形式存储,数据转移方便</td>
+</tr>
+</tbody>
+</table>
+<h2 id="产生死锁的可能"><a href="#产生死锁的可能" class="headerlink" title="产生死锁的可能:"></a>产生死锁的可能:</h2><img src="/2018/07/07/数据库/死锁的发生.jpg" title="死锁的发生">
+<ol>
+<li>事务1获取数据a的锁,想要访问数据b,但是此时数据b被事务2锁定,而事务2希望访问数据a,陷入相互等待的局面.<br>解决的方式就是从根源上避免这种情况的出现,就是修改程序逻辑,避免出现环,可以一开始就将所有要用到的资源锁定<br>还有就是采用抢占和回滚机制,根据时间戳来判断事务应该回滚还是等待</li>
+</ol>
+<h2 id="避免死锁的方式"><a href="#避免死锁的方式" class="headerlink" title="避免死锁的方式"></a>避免死锁的方式</h2><ol>
+<li>如果不同程序会并发存取多个表，尽量约定以相同的顺序访问表，可以大大降低死锁机会。</li>
+<li>在同一个事务中，尽可能做到一次锁定所需要的所有资源，减少死锁产生概率；</li>
+<li>对于非常容易产生死锁的业务部分，可以尝试使用升级锁定颗粒度，通过表级锁定来减少死锁产生的概率；</li>
+</ol>
+<h2 id="并发控制机制"><a href="#并发控制机制" class="headerlink" title="并发控制机制"></a>并发控制机制</h2><p>参考地址:<a href="http://www.hollischuang.com/archives/934" target="_blank" rel="noopener">http://www.hollischuang.com/archives/934</a></p>
+<ol>
+<li>悲观锁(是真正的锁)<br>就是之前的共享锁和互斥锁(排它锁),就是不管如何,想要修改数据之前先加锁,可能会产生死锁</li>
+<li>乐观锁(其实是一种并发控制思想,基于时间戳或者版本号)<br>这种思想假设数据操作的时候一般不会产生冲突,只有在最后要写回数据的时候检测数据是否发生了变化,发生冲突的话进行重试或者返回错误信息让用户决定怎么处理,否则就可以正常写回<br>在整个执行过程中实际上并没有加任何锁,在要求响应速度和高并发的场景下适合,不会产生死锁,但是在高冲突频率重试成本的情况下还是建议使用悲观锁<ol>
+<li>版本控制:就是为数据的每一个写操作创建版本,在进行读操作的时候就会在有限多的版本中选择最合适的返回<br>通常是在数据表中增加一列version,然后写回数据的时候比对version</li>
+<li>基于时间戳</li>
+</ol>
+</li>
+</ol>
+<h1 id="数据库索引"><a href="#数据库索引" class="headerlink" title="数据库索引"></a>数据库索引</h1><h2 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h2><ol>
+<li>优点<ol>
+<li>大大加快数据的检索速度，这也是创建索引的最主要的原因；</li>
+<li>可以创建唯一性索引，保证数据库表中每一行数据的唯一性；</li>
+<li>可以将表的外键制作为索引，加速表和表之间的连接，特别是在实现数据的参考完整性方面特别有意义；</li>
+<li>将随机I/O变为顺序I/O，帮助服务器避免排序和临时表，在使用分组和排序子句进行数据检索时，可以显著减少查询中分组和排序的时间；</li>
+<li>通过使用索引，可以在查询的过程中，使用优化隐藏器，提高系统的性能。</li>
+</ol>
+</li>
+<li>缺点<ol>
+<li>创建索引和维护索引要耗费时间，这种时间随着数据量的增加而增加；</li>
+<li>索引需要占物理空间，除了数据表占数据空间之外，每一个索引还要占一定的物理空间；</li>
+<li>当对表中的数据进行增加、删除和修改的时候，索引也要动态的维护，这样就降低了数据的维护速度。</li>
+</ol>
+</li>
+<li>关于mysql索引:<ol>
+<li>BTree 索引是大多数 MySQL 存储引擎的默认索引类型</li>
+<li>在 MySQL 中只有 Memory 引擎显式支持哈希索引</li>
+<li>哈希索引只包含 哈希值和行指针，而不存储字段值</li>
+<li>索引将随机 I/O变为顺序 I/O</li>
+</ol>
+</li>
+</ol>
+<h2 id="innodb"><a href="#innodb" class="headerlink" title="innodb"></a>innodb</h2><h3 id="行锁原理"><a href="#行锁原理" class="headerlink" title="行锁原理"></a>行锁原理</h3><h3 id="与myisam的区别"><a href="#与myisam的区别" class="headerlink" title="与myisam的区别"></a>与myisam的区别</h3><p>见数据库事务</p>
+<h3 id="innodb中的索引知识小结"><a href="#innodb中的索引知识小结" class="headerlink" title="innodb中的索引知识小结"></a>innodb中的索引知识小结</h3><blockquote>
+<p>参考地址:<a href="http://www.hollischuang.com/archives/1712" target="_blank" rel="noopener">http://www.hollischuang.com/archives/1712</a></p>
+</blockquote>
+<h2 id="不同查询条件下的命中情况"><a href="#不同查询条件下的命中情况" class="headerlink" title="不同查询条件下的命中情况"></a>不同查询条件下的命中情况</h2><h2 id="聚集索引"><a href="#聚集索引" class="headerlink" title="聚集索引"></a>聚集索引</h2><h2 id="加速原理"><a href="#加速原理" class="headerlink" title="加速原理"></a>加速原理</h2><h3 id="磁盘读写原理和效率"><a href="#磁盘读写原理和效率" class="headerlink" title="磁盘读写原理和效率"></a>磁盘读写原理和效率</h3><blockquote>
+<p>参考地址:<a href="https://blog.csdn.net/v_july_v/article/details/6530142" target="_blank" rel="noopener">https://blog.csdn.net/v_july_v/article/details/6530142</a></p>
+</blockquote>
+<ol>
+<li>读写数据时间的组成<ul>
+<li>查找时间:就是磁头移动到需要的柱面上(一个圈就叫柱面),定位到指定磁道,时间代价最大,最大可达0.1s</li>
+<li>等待时间:盘片开始旋转,将指定的磁道段移动到磁头下,因为硬盘转速有7200转/分,所以转一圈的时间就0.0083s,很快</li>
+<li>传输时间:数据通过系统总线到内存的时间,传输一个byte0.02微秒(<code>2*10^-8</code>s)</li>
+</ul>
+</li>
+<li>提速手段<br> 硬盘读取数据的速度是以块(block)为基本单位的,而磁盘IO的时间代价主要花费在查找时间,因此一方面要将相关数据放在相近的区域(同一盘块,同一磁道,或者至少放在同一柱面或者相邻柱面),减少读/写数据时来回移动磁头的次数</li>
+</ol>
+<h3 id="B树-B-树"><a href="#B树-B-树" class="headerlink" title="B树(B-树)"></a>B树(B-树)</h3><p>也是一种多叉平衡查找树,一个节点内有x个关键字,那么这个节点就有x+1个子节点<br><img src="/2018/07/07/数据库/b树的结构.jpg" title="b树的结构"><br>如上图树查找字母R的路径<br><img src="/2018/07/07/数据库/b树文件查找过程.jpg" title="b树文件查找过程"><br>根节点中的17代表一个磁盘文件的文件名,<strong>红色方块代表17文件在硬盘中的存储位置(这就是和B+树的主要区别)</strong>,P1指向17的左子树.</p>
+<h3 id="B-树的介绍"><a href="#B-树的介绍" class="headerlink" title="B+树的介绍"></a>B+树的介绍</h3><blockquote>
+<p>参考地址:<a href="http://blog.csdn.net/guoziqing506/article/details/64122287" target="_blank" rel="noopener">http://blog.csdn.net/guoziqing506/article/details/64122287</a></p>
+</blockquote>
+<p>与b树相比较</p>
+<ol>
+<li>b+树的磁盘读写代价更低,因为b+树的内部节点<strong>并没有指向关键字的指针的具体信息</strong>,所以盘快内可以容纳更多的关键字,盘块读进内存后查找的范围更大,从而降低树的高度</li>
+<li>查询效率更加稳定,因为内部节点并不是指向最终文件内容的节点,而是指向关键字的节点,所以每一次查询都必须从根节点到叶子结点,长度相同</li>
+<li>b树在解决io效率的时候并没有解决元素遍历效率低下的问题,而b+树只需要遍历叶子节点就能解决对所有关键字的查询,对于数据库中经常使用的范围查询性能更高<br><img src="/2018/07/07/数据库/b+树的文件查找结构.jpg" title="b+树的文件查找结构}</li> </ol> <h3 id=红黑树><a href=#红黑树 class=headerlink title=红黑树></a>红黑树</h3><h3 id=创建索引的原则><a href=#创建索引的原则 class=headerlink title=创建索引的原则></a>创建索引的原则</h3><ol> <li>最左前缀匹配原则</li> <li>=和in可以乱序,mysql会自动优化</li> <li>尽量选择区分度高的列来做索引</li> <li>索引列不能参与计算</li> <li>尽量扩展索引而不是新建</li> </ol>"></li></ol>
       
     </div>
     
@@ -566,7 +802,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-count">55</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -577,7 +813,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -588,7 +824,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">117</span>
+                  <span class="site-state-item-count">75</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -621,7 +857,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#分库分表"><span class="nav-number">1.</span> <span class="nav-text">分库分表</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#读写分离"><span class="nav-number">2.</span> <span class="nav-text">读写分离</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#概念"><span class="nav-number">2.1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#提高性能的原因"><span class="nav-number">2.2.</span> <span class="nav-text">提高性能的原因</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Mysql主从同步方案-实现读写分离"><span class="nav-number">3.</span> <span class="nav-text">Mysql主从同步方案(实现读写分离)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#实现"><span class="nav-number">3.1.</span> <span class="nav-text">实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#流程"><span class="nav-number">3.2.</span> <span class="nav-text">流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主从切换的注意点"><span class="nav-number">3.3.</span> <span class="nav-text">主从切换的注意点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#慢查询优化"><span class="nav-number">4.</span> <span class="nav-text">慢查询优化:</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#分析sql方法"><span class="nav-number">4.1.</span> <span class="nav-text">分析sql方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优化方法"><span class="nav-number">4.2.</span> <span class="nav-text">优化方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#完整的对象访问名称"><span class="nav-number">5.</span> <span class="nav-text">完整的对象访问名称</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Oracle"><span class="nav-number">5.1.</span> <span class="nav-text">Oracle</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#分库分表"><span class="nav-number">1.</span> <span class="nav-text">分库分表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#垂直分表"><span class="nav-number">1.1.</span> <span class="nav-text">垂直分表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#垂直分库"><span class="nav-number">1.2.</span> <span class="nav-text">垂直分库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#水平分表"><span class="nav-number">1.3.</span> <span class="nav-text">水平分表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#水平分库分表"><span class="nav-number">1.4.</span> <span class="nav-text">水平分库分表</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#读写分离"><span class="nav-number">2.</span> <span class="nav-text">读写分离</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#概念"><span class="nav-number">2.1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#提高性能的原因"><span class="nav-number">2.2.</span> <span class="nav-text">提高性能的原因</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Mysql主从同步方案-实现读写分离"><span class="nav-number">3.</span> <span class="nav-text">Mysql主从同步方案(实现读写分离)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#实现"><span class="nav-number">3.1.</span> <span class="nav-text">实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#流程"><span class="nav-number">3.2.</span> <span class="nav-text">流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主从切换的注意点"><span class="nav-number">3.3.</span> <span class="nav-text">主从切换的注意点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#慢查询优化"><span class="nav-number">4.</span> <span class="nav-text">慢查询优化:</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#分析sql方法"><span class="nav-number">4.1.</span> <span class="nav-text">分析sql方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优化方法"><span class="nav-number">4.2.</span> <span class="nav-text">优化方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#完整的对象访问名称"><span class="nav-number">5.</span> <span class="nav-text">完整的对象访问名称</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Oracle"><span class="nav-number">5.1.</span> <span class="nav-text">Oracle</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据库事务"><span class="nav-number">6.</span> <span class="nav-text">数据库事务</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#命令行"><span class="nav-number">6.1.</span> <span class="nav-text">命令行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#锁"><span class="nav-number">6.2.</span> <span class="nav-text">锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#锁算法"><span class="nav-number">6.3.</span> <span class="nav-text">锁算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#事务概念"><span class="nav-number">6.4.</span> <span class="nav-text">事务概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#事务特性-ACID"><span class="nav-number">6.5.</span> <span class="nav-text">事务特性(ACID)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#事务的隔离级别"><span class="nav-number">6.6.</span> <span class="nav-text">事务的隔离级别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#由于低级别隔离性产生的问题"><span class="nav-number">6.7.</span> <span class="nav-text">由于低级别隔离性产生的问题:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mysql常用存储引擎"><span class="nav-number">6.8.</span> <span class="nav-text">mysql常用存储引擎</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#InnoDb和MyISAM的区别"><span class="nav-number">6.8.1.</span> <span class="nav-text">InnoDb和MyISAM的区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#产生死锁的可能"><span class="nav-number">6.9.</span> <span class="nav-text">产生死锁的可能:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#避免死锁的方式"><span class="nav-number">6.10.</span> <span class="nav-text">避免死锁的方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#并发控制机制"><span class="nav-number">6.11.</span> <span class="nav-text">并发控制机制</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据库索引"><span class="nav-number">7.</span> <span class="nav-text">数据库索引</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#优缺点"><span class="nav-number">7.1.</span> <span class="nav-text">优缺点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#innodb"><span class="nav-number">7.2.</span> <span class="nav-text">innodb</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#行锁原理"><span class="nav-number">7.2.1.</span> <span class="nav-text">行锁原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#与myisam的区别"><span class="nav-number">7.2.2.</span> <span class="nav-text">与myisam的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#innodb中的索引知识小结"><span class="nav-number">7.2.3.</span> <span class="nav-text">innodb中的索引知识小结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#不同查询条件下的命中情况"><span class="nav-number">7.3.</span> <span class="nav-text">不同查询条件下的命中情况</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#聚集索引"><span class="nav-number">7.4.</span> <span class="nav-text">聚集索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#加速原理"><span class="nav-number">7.5.</span> <span class="nav-text">加速原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#磁盘读写原理和效率"><span class="nav-number">7.5.1.</span> <span class="nav-text">磁盘读写原理和效率</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B树-B-树"><span class="nav-number">7.5.2.</span> <span class="nav-text">B树(B-树)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-树的介绍"><span class="nav-number">7.5.3.</span> <span class="nav-text">B+树的介绍</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -641,7 +877,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

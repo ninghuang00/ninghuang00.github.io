@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="springboot实战学习笔记,基于spring2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="spring-boot-in-action">
+<meta property="og:url" content="http://yoursite.com/2019/04/22/spring-boot-in-action/index.html">
+<meta property="og:site_name" content="Just Try It">
+<meta property="og:description" content="springboot实战学习笔记,基于spring2">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-04-22T10:15:52.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="spring-boot-in-action">
+<meta name="twitter:description" content="springboot实战学习笔记,基于spring2">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/04/22/spring-boot-in-action/"/>
+
+
+
+
+
+  <title>spring-boot-in-action | Just Try It</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Just Try It</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/22/spring-boot-in-action/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ninghuang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Just Try It">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">spring-boot-in-action</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-22T18:15:14+08:00">
+                2019-04-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p> springboot实战学习笔记,基于spring2<br> <a id="more"></a></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
+<li>springboot带来的好处<br>起步依赖和自动配置</li>
+</ol>
+<h2 id="第二章-开发第一个应用程序"><a href="#第二章-开发第一个应用程序" class="headerlink" title="第二章 开发第一个应用程序"></a>第二章 开发第一个应用程序</h2><h3 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">readinglist</span><br><span class="line">├── pom.xml</span><br><span class="line">└── src</span><br><span class="line">    ├── main</span><br><span class="line">    │   ├── java</span><br><span class="line">    │   │   └── com</span><br><span class="line">    │   │       └── hn</span><br><span class="line">    │   │           └── readinglist</span><br><span class="line">    │   │               └── ReadinglistApplication.java //应用程序的启动引导类,也是主要的配置类</span><br><span class="line">    │   └── resources</span><br><span class="line">    │       ├── application.properties //配置应用程序和springboot的属性</span><br><span class="line">    │       ├── static</span><br><span class="line">    │       │   └── style.css</span><br><span class="line">    │       └── templates</span><br><span class="line">    │           └── register.html</span><br><span class="line">    └── test</span><br><span class="line">        └── java</span><br><span class="line">            └── com</span><br><span class="line">                └── hn</span><br><span class="line">                    └── readinglist</span><br><span class="line">                        └── ReadinglistApplicationTests.java //基本的集成测试类</span><br></pre></td></tr></table></figure>
+<h3 id="启动引导类"><a href="#启动引导类" class="headerlink" title="启动引导类"></a>启动引导类</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@SpringBootApplication</span><br><span class="line">public class ReadinglistApplication &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        SpringApplication.run(ReadinglistApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其实注解<code>@SpringBootApplication</code>包含了三个重要的注解</p>
+<ol>
+<li>@Configuration<br>表示该类使用的是基于Java的配置</li>
+<li>@ComponentScan<br>启用自动组件扫描,让拥有Bean类型注解的类能够自动注册到Spring的Bean容器中</li>
+<li>@EnableAutoConfiguration<br>启动springboot的自动配置</li>
+</ol>
+<h3 id="测试springboot应用程序"><a href="#测试springboot应用程序" class="headerlink" title="测试springboot应用程序"></a>测试springboot应用程序</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@RunWith(SpringRunner.class)</span><br><span class="line">@SpringBootTest</span><br><span class="line">public class ReadinglistApplicationTests &#123;</span><br><span class="line">    @Autowired</span><br><span class="line">    ReaderRepository readerRepository;</span><br><span class="line">    @Test</span><br><span class="line">    public void contextLoads() &#123;</span><br><span class="line">        Reader reader = readerRepository.findByUsername(&quot;hn&quot;);</span><br><span class="line">        System.out.println(reader.getFullname());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="使用H2数据库和JPA"><a href="#使用H2数据库和JPA" class="headerlink" title="使用H2数据库和JPA"></a>使用H2数据库和JPA</h3><ol>
+<li><p>在pom文件中加入以下内容:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter-data-jpa&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.h2database&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;h2&lt;/artifactId&gt;</span><br><span class="line">    &lt;scope&gt;runtime&lt;/scope&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>定义领域模型(比如说Book.java)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">@Entity</span><br><span class="line">@Data</span><br><span class="line">public class Book &#123;</span><br><span class="line">    @Id</span><br><span class="line">    @GeneratedValue(strategy = GenerationType.AUTO)</span><br><span class="line">    private Long id;</span><br><span class="line">    private String reader;</span><br><span class="line">    private String title;</span><br><span class="line">    private String author;</span><br><span class="line">    private String description;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>定义仓库接口(比如BookRepository.java)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public interface BookRepository extends JpaRepository&lt;Book, String&gt; &#123;</span><br><span class="line">    Reader findByAuthorName(String username);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>然后就可以在Service中使用了</p>
+</li>
+<li><p>配置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># H2数据库相关信息</span><br><span class="line">spring.datasource.url=jdbc:h2:file:./db/demo01</span><br><span class="line">spring.datasource.username=root</span><br><span class="line">spring.datasource.password=root</span><br><span class="line">spring.datasource.platform=h2</span><br><span class="line"># 项目启动创建表格和数据</span><br><span class="line">spring.datasource.schema=classpath:db/schema.sql</span><br><span class="line">spring.datasource.data=classpath:db/data.sql</span><br><span class="line"># 使用web访问H2数据库</span><br><span class="line">spring.h2.console.settings.web-allow-others=true</span><br><span class="line">spring.h2.console.path=/h2-console</span><br><span class="line">spring.h2.console.enabled=true</span><br><span class="line"></span><br><span class="line"># stripped before adding them to the entity manager)</span><br><span class="line">spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.H2Dialect</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="在spring-boot中连接mysql数据库并使用JPA进行操作"><a href="#在spring-boot中连接mysql数据库并使用JPA进行操作" class="headerlink" title="在spring boot中连接mysql数据库并使用JPA进行操作"></a>在spring boot中连接mysql数据库并使用JPA进行操作</h3><ol>
+<li><p>在pom文件中加入以下依赖:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter-data-jpa&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;mysql&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在配置文件application.properties中加入 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># mysql数据库相关信息</span><br><span class="line">spring.datasource.url = jdbc:mysql://localhost:3306/webtest?useUnicode=true&amp;characterEncoding=utf8&amp;serverTimezone=GMT</span><br><span class="line">spring.datasource.username = root</span><br><span class="line">spring.datasource.password = 220316</span><br><span class="line">spring.datasource.driverClassName = com.mysql.jdbc.Driver</span><br><span class="line"># Specify the DBMS</span><br><span class="line">spring.jpa.database = MYSQL</span><br><span class="line"># Show or not log for each sql query</span><br><span class="line">spring.jpa.show-sql = true</span><br><span class="line"># Hibernate ddl auto (create, create-drop, update)</span><br><span class="line">spring.jpa.hibernate.ddl-auto = update</span><br><span class="line"># Naming strategy</span><br><span class="line">spring.jpa.hibernate.naming-strategy = org.hibernate.cfg.ImprovedNamingStrategy</span><br><span class="line"># stripped before adding them to the entity manager)</span><br><span class="line">spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.MySQL5Dialect</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>其余步骤和使用H2数据库一样</p>
+</li>
+</ol>
+<h3 id="自动配置原理"><a href="#自动配置原理" class="headerlink" title="自动配置原理"></a>自动配置原理</h3><p>在引入的library中有一个叫做spring-boot-autoconfigure的jar文件,其中包含了非常多的xxxConfiguration类,比如<code>DataSourceAutoConfiguration.class</code>,<code>JsonHttpMessageConvertersConfiguration.class</code>等,这些配置类都在应用程序的Classpath中,都有可能会被使用到.可以使用<code>@Conditional</code>(可以注解类和方法)注解来条件化使用这些配置类.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public class JdbcTemplateCondition implements Condition &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            context.getClassLoader().loadClass(&quot;org.springframework.jdbc.core.JdbcTemplate&quot;);</span><br><span class="line">            return true;</span><br><span class="line">        &#125; catch (Exception e) &#123;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>实现Condition接口中的matches()方法,用来设定使用条件,上面这个实现就是在Classpath中包含JdbcTemplate.class的时候才会返回以下这个Bean.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public class MyService &#123;</span><br><span class="line">	@Bean</span><br><span class="line">    @Conditional(JdbcTemplateCondition.class)</span><br><span class="line">    public Myservice getMyService() &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>比如在DataSourceAutoConfiguration配置类上就有注解<code>@ConditionalOnClass({DataSource.class, EmbeddedDatabaseType.class})</code>,只有在Classpath中包含这两个类的时候,DataSourceAutoConfiguration配置类提供的配置才会生效,不然会被忽略掉.</p>
+<h2 id="自定义配置"><a href="#自定义配置" class="headerlink" title="自定义配置"></a>自定义配置</h2><h3 id="覆盖springboot的自动配置"><a href="#覆盖springboot的自动配置" class="headerlink" title="覆盖springboot的自动配置"></a>覆盖springboot的自动配置</h3><ol>
+<li><p>直接编写java配置类代码覆盖<br>通常是自动配置类需要较大的改动的时候使用,<code>@ConditionalOnMissingBean</code>注解是自定义配置类能够替代自动化配置类的关键,通常情况下,在springboot自动化配置的时候,由于有这个注解,框架会判断Classpath中有没有缺少注解指定的bean,如果缺少就是用自动化配置类,如果没哟缺少就使用自定义配置类.</p>
+</li>
+<li><p>通过属性文件外置配置<br>如果只需要修改少量的配置,那么可以通过外置配置的方式进行微调.常用的方式有(优先级从高到低):</p>
+<ol>
+<li>命令行参数<br>使用命令行<code>java -jar readingList.jar --server.port 8000</code>,来制指定服务器监听的端口号</li>
+<li>java:comp/env中的JNDI属性</li>
+<li>JVM系统属性</li>
+<li>操作系统环境变量<br>比如使用<code>export spring_thymeleaf_cache=false</code>的环境变量来关闭模板缓存</li>
+<li>随机生成的带<code>random.*</code>前缀的属性(在设置其他属性的时候,可以引用他们,比如${random.long})</li>
+<li>应用程序之外的application.properties配置文件</li>
+<li>打包在应用程序中的application.properties</li>
+<li>通过@PropertySource标注的属性源</li>
+<li>默认属性<br>其中application.properties文件可以放置的位置有四个(优先级从高到低):</li>
+<li>外置,相对于应用程序运行目录的/config子目录里</li>
+<li>外置,在应用程序运行的目录里</li>
+<li>内置,在config包内</li>
+<li>内置,在Classpath根目录<br>如果是要修改日志输出的配置,可以在Classpath的根目录(src/main/resources)里创建logback.xml配置文件,如果不想使用logback.xml作为日志配置文件名,可以使用以下配置<code>logging.config.classpath:logging-config.xml</code><br>但是只是修改少量配置可以直接在application.properties文件中配置:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 配置日志文件输出路径</span><br><span class="line">logging.path = /var/logs/</span><br><span class="line"># 配置日之外文件名称</span><br><span class="line">logging.file = BookWorm.log </span><br><span class="line"># 根日志文件级别</span><br><span class="line">logging.level.root = WARN</span><br><span class="line"># spring security的日志级别</span><br><span class="line">logging.level.root.org.springframework.security = DEBUG</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="Bean的配置外置"><a href="#Bean的配置外置" class="headerlink" title="Bean的配置外置"></a>Bean的配置外置</h3><p>比如从配置文件中获取属性值,可以使用<code>@ConfigurationProperties(prefix=&quot;amazon&quot;)</code>注解来注入属性值.<br>也可以在属性上使用<code>@Value(&quot;${amazon.associateId}&quot;)</code><br>比如配置文件中配置了:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># bean属性配置</span><br><span class="line">amazon.associateId = helloAmazon</span><br></pre></td></tr></table></figure></p>
+<p>以下代码中AmazonProperties类中的associateId属性就是从配置文件中获取.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@Component</span><br><span class="line">@ConfigurationProperties(prefix = &quot;amazon&quot;)</span><br><span class="line">@Data</span><br><span class="line">public class AmazonProperties &#123;</span><br><span class="line">    private String associateId;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在使用的时候首先要通过spring框架自动注入bean<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@RunWith(SpringRunner.class)</span><br><span class="line">@SpringBootTest</span><br><span class="line">public class AmazonPropertiesTest &#123;</span><br><span class="line">    Logger logger = LoggerFactory.getLogger(AmazonPropertiesTest.class);</span><br><span class="line">    @Autowired</span><br><span class="line">    AmazonProperties amazonProperties;//注入bean的时候就会从配置文件中获取associateId属性</span><br><span class="line">    @Test</span><br><span class="line">    public void setAssociateId() &#123;</span><br><span class="line">        String associateId = amazonProperties.getAssociateId();</span><br><span class="line">        logger.info(&quot;associate id is &quot; + associateId);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="多环境配置文件-使用profile进行配置"><a href="#多环境配置文件-使用profile进行配置" class="headerlink" title="多环境配置文件,使用profile进行配置"></a>多环境配置文件,使用profile进行配置</h3><p>Profile是一种条件化配置,基于运行时激活的Profile,会使用或者忽略不同的Bean或配置类.比如在生产环境下和开发环境下使用不同的日志配置:<br><code>application.properties</code>文件 ,放置不区分环境的配置以及默认配置,并指定使还要用那个环境的配置.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 指定使用的profile,也可以使用命令行指定</span><br><span class="line">spring.profiles.active = development</span><br><span class="line">logging.path = /var/logs/</span><br><span class="line">logging.file = BookWorm.log </span><br><span class="line">logging.level.root = info</span><br><span class="line">logging.level.root.org.springframework.security = DEBUG</span><br></pre></td></tr></table></figure></p>
+<p><code>application-devlopment.properties</code>文件,放置开发环境下的配置.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">logging.level.root = DEBUG</span><br></pre></td></tr></table></figure></p>
+<p><code>application-production.properties</code>文件,放置生产环境下的配资.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">logging.path = /var/logs/</span><br><span class="line">logging.file = BookWorm.log </span><br><span class="line">logging.level.root = WARN</span><br></pre></td></tr></table></figure></p>
+<h2 id="测试Web应用程序"><a href="#测试Web应用程序" class="headerlink" title="测试Web应用程序"></a>测试Web应用程序</h2><h3 id="使用Spring-Mock-MVC框架"><a href="#使用Spring-Mock-MVC框架" class="headerlink" title="使用Spring Mock MVC框架"></a>使用Spring Mock MVC框架</h3><h3 id="直接跑tomcat或者Jetty容器"><a href="#直接跑tomcat或者Jetty容器" class="headerlink" title="直接跑tomcat或者Jetty容器"></a>直接跑tomcat或者Jetty容器</h3><h2 id="使用Groovy和Spring-Boot-CLI进行开发"><a href="#使用Groovy和Spring-Boot-CLI进行开发" class="headerlink" title="使用Groovy和Spring Boot CLI进行开发"></a>使用Groovy和Spring Boot CLI进行开发</h2><h3 id="groovy语法特点"><a href="#groovy语法特点" class="headerlink" title="groovy语法特点"></a>groovy语法特点</h3><ol>
+<li>不用import</li>
+<li>没有分号</li>
+</ol>
+<h3 id="groovy工程特点"><a href="#groovy工程特点" class="headerlink" title="groovy工程特点"></a>groovy工程特点</h3><ol>
+<li>没有spring配置文件(Bean怎么创建并组装?)</li>
+<li>没有构建文件(依赖库哪里来?)</li>
+<li>没有import文件(怎么解析具体使用的是哪个类)</li>
+<li>没有部署应用(Web服务器哪里来?)</li>
+</ol>
+<h2 id="在springboot中使用Grails"><a href="#在springboot中使用Grails" class="headerlink" title="在springboot中使用Grails"></a>在springboot中使用Grails</h2><p>也是构建与spring框架之上的一种框架,和springboot一样,旨在简化开发工作</p>
+<h2 id="深入Actuator"><a href="#深入Actuator" class="headerlink" title="深入Actuator"></a>深入Actuator</h2><p>可以用来监控springboot应用程序的运行状态,提供了众多的Web端点来获取springboot应用程序运行时的环境属性信息,运行时度量快照等,如果需要使用,只需要在依赖中添加<code>spring-boot-starter-actuator</code>即可,但是springboot2.x中默认只开发两个端点(info和health),可以在配置文件中打开,<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># 开发的web端点</span><br><span class="line">management.endpoints.web.exposure.include=*</span><br><span class="line"># 不开放的web端点</span><br><span class="line">management.endpoints.web.exposure.exclude=shutdown</span><br><span class="line"># web端点的根路径</span><br><span class="line">management.endpoints.web.base-path=monitor</span><br><span class="line"># 还要设置management.server.port才有效</span><br><span class="line">#management.server.servlet.context-path=/mgmt</span><br><span class="line"># 是否可以通过端点关闭应用程序</span><br><span class="line">management.endpoint.shutdown.enabled=true</span><br><span class="line"># 是不是总是显示详细的健康信息</span><br><span class="line">management.endpoint.health.show-details=always</span><br><span class="line"># info端点显示的内容</span><br><span class="line">info.app.name = readinglist</span><br><span class="line">info.app.version = 1.2.0</span><br></pre></td></tr></table></figure></p>
+<p>想要知道当前应用有哪些端点,可以访问<code>/monitor/mappings</code>全局搜索<code>monitor/</code><br>主要端点:</p>
+<ol>
+<li>beans<br>描述应用程序上下文中的所有bean,以及它们的关系</li>
+<li>configprops<br>描述配置属性如何注入bean</li>
+<li>mappings<br>描述所有的URI路径,以及它们和控制器之间的映射关系</li>
+<li>metrics<br>报告各种应用程序的度量信息,比如内存用量和http请求计数</li>
+<li>heapdump,threaddump</li>
+<li>scheduledtasks</li>
+<li>httptrace(本来是trace)<br>提供基本的http请求信息,如时间戳,http请求头等<br>这里跟踪信息都是保存在内存里的,可以通过实现TraceRepository接口将跟踪信息存放到其他地方,比如MongoDB</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">@Service</span><br><span class="line">public class MongoDBTraceRepository implements HttpTraceRepository &#123;</span><br><span class="line">    Logger logger = LoggerFactory.getLogger(MongoDBTraceRepository.class);</span><br><span class="line">    private MongoOperations mongoOperations;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    public MongoDBTraceRepository(MongoOperations mongoOperations) &#123;</span><br><span class="line">        this.mongoOperations = mongoOperations;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public List&lt;HttpTrace&gt; findAll() &#123;</span><br><span class="line">        //todo 取出的时候有问题,构造HttpTrace实例失败</span><br><span class="line">        logger.info(&quot;find all trace from mongodb&quot;);</span><br><span class="line">        return mongoOperations.findAll(HttpTrace.class);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void add(HttpTrace trace) &#123;</span><br><span class="line">        logger.info(&quot;add a trace to mongodb&quot;);</span><br><span class="line">        mongoOperations.save(trace);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="8">
+<li>conditions(本来是autoconfig)<br>提供一份自动配置报告,记录那些自动配置通过,那些没有</li>
+</ol>
+<h2 id="部署springboot应用程序"><a href="#部署springboot应用程序" class="headerlink" title="部署springboot应用程序"></a>部署springboot应用程序</h2><h3 id="部署应用的多种方式"><a href="#部署应用的多种方式" class="headerlink" title="部署应用的多种方式"></a>部署应用的多种方式</h3><ol>
+<li>通过IDE运行</li>
+<li>使用Maven中的spring-boot:run或者Gradle的bootRun,在命令行中运行</li>
+<li>使用Maven或者Gradle生成可运行的jar文件,然后在命令行中运行</li>
+<li>使用spring boot cli在命令行中运行Groovy脚本</li>
+<li>使用spring boot cli生成可运行的jar文件,然后在命令行中运行</li>
+</ol>
+<p>如果打包成war包发布的话,还需要对serverlet进行初始化,代码如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public class ReadingListServletInitializer extends SpringBootServletInitializer &#123;</span><br><span class="line">    @Override</span><br><span class="line">    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) &#123;</span><br><span class="line">        return builder.sources(ReadinglistApplication.class);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>然后在终端输入<code>mvn clean package -Dmaven.test.skip=true</code>打包项目,然后在/target路径下会生成war包,在/target路径下输入命令<code>java -jar xxx.war</code>即可运行</p>
+<h2 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h2><h3 id="springboot开发者工具"><a href="#springboot开发者工具" class="headerlink" title="springboot开发者工具"></a>springboot开发者工具</h3><h3 id="springboot起步依赖"><a href="#springboot起步依赖" class="headerlink" title="springboot起步依赖"></a>springboot起步依赖</h3><h3 id="配置属性"><a href="#配置属性" class="headerlink" title="配置属性"></a>配置属性</h3><h3 id="springboot依赖"><a href="#springboot依赖" class="headerlink" title="springboot依赖"></a>springboot依赖</h3><h2 id="常用注解配置"><a href="#常用注解配置" class="headerlink" title="常用注解配置"></a>常用注解配置</h2><h3 id="springboot"><a href="#springboot" class="headerlink" title="springboot"></a>springboot</h3><ul>
+<li><p>默认扫描位置</p>
+<ul>
+<li>springboot默认扫描<code>@SpringBootApplication</code>入口类所在路径,同级目录包及其子包</li>
+<li>也可以使用注解<code>@ComponentScan(basePackages={&quot;com.hn&quot;})</code>指定扫描路径</li>
+</ul>
+</li>
+<li><p><code>@EnableScheduling</code><br>在启动类配置该注解,之后可以使用<code>@Scheduled</code>注解定时任务</p>
+</li>
+<li><p>静态资源路径映射</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 默认值为 /**</span><br><span class="line">spring.mvc.static-path-pattern=</span><br><span class="line"># 默认值为 classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/ </span><br><span class="line">spring.resources.static-locations=这里设置要指向的路径，多个使用英文逗号隔开，</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>默认配置源码在<code>org.springframework.boot.autoconfigure.web包下ResourceProperties类</code>中<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">private static final String[] CLASSPATH_RESOURCE_LOCATIONS = &#123;</span><br><span class="line">            &quot;classpath:/META-INF/resources/&quot;, &quot;classpath:/resources/&quot;,</span><br><span class="line">            &quot;classpath:/static/&quot;, &quot;classpath:/public/&quot; &#125;;</span><br></pre></td></tr></table></figure></p>
+<pre><code>1. 类路径文件 
+把类路径下的`/static、/public、/resources和/META-INF/resources文件夹下`的静态文件直接映射为`/**`来提供访问。 
+2. webjar 
+把webjar的`/META-INF/resources/webjars`下的静态文件映射为/webjar`/**`。 
+</code></pre><blockquote>
+<p>参考地址<a href="https://www.javazhiyin.com/16381.html" target="_blank" rel="noopener">https://www.javazhiyin.com/16381.html</a></p>
+</blockquote>
+<h3 id="配置mybatis"><a href="#配置mybatis" class="headerlink" title="配置mybatis"></a>配置mybatis</h3><ol>
+<li>添加mybatis和mysql驱动依赖</li>
+<li>配置文件中添加数据库参数</li>
+</ol>
+<h2 id="单元测试"><a href="#单元测试" class="headerlink" title="单元测试"></a>单元测试</h2><blockquote>
+<p>参考地址:<a href="http://tengj.top/2017/12/28/springboot12/" target="_blank" rel="noopener">http://tengj.top/2017/12/28/springboot12/</a></p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RunWith</span>(SpringRunner.class)</span><br><span class="line"><span class="meta">@SpringBootTest</span></span><br></pre></td></tr></table></figure>
+<h3 id="Junit注解"><a href="#Junit注解" class="headerlink" title="Junit注解"></a>Junit注解</h3><ul>
+<li><p><code>@Before</code>,<code>@After</code><br>会在每个有<code>@Test</code>注解的方法运行之前/之后运行一遍(有几个测试方法就运行几遍)</p>
+</li>
+<li><p><code>@BeforeClass</code>,<code>@AfterClass</code><br>会在所有的测试方法运行前/后执行一遍(总共就一遍),使用该注解的方法应该是<code>public static void</code>并且无参</p>
+</li>
+<li><p><code>@Ignore</code></p>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/22/网络编程知识/" rel="next" title="网络编程知识">
+                <i class="fa fa-chevron-left"></i> 网络编程知识
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/22/线上问题分析/" rel="prev" title="线上问题分析">
+                线上问题分析 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">ninghuang</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">55</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">75</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">1.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第二章-开发第一个应用程序"><span class="nav-number">2.</span> <span class="nav-text">第二章 开发第一个应用程序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#目录结构"><span class="nav-number">2.1.</span> <span class="nav-text">目录结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动引导类"><span class="nav-number">2.2.</span> <span class="nav-text">启动引导类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试springboot应用程序"><span class="nav-number">2.3.</span> <span class="nav-text">测试springboot应用程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用H2数据库和JPA"><span class="nav-number">2.4.</span> <span class="nav-text">使用H2数据库和JPA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在spring-boot中连接mysql数据库并使用JPA进行操作"><span class="nav-number">2.5.</span> <span class="nav-text">在spring boot中连接mysql数据库并使用JPA进行操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自动配置原理"><span class="nav-number">2.6.</span> <span class="nav-text">自动配置原理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义配置"><span class="nav-number">3.</span> <span class="nav-text">自定义配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#覆盖springboot的自动配置"><span class="nav-number">3.1.</span> <span class="nav-text">覆盖springboot的自动配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bean的配置外置"><span class="nav-number">3.2.</span> <span class="nav-text">Bean的配置外置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多环境配置文件-使用profile进行配置"><span class="nav-number">3.3.</span> <span class="nav-text">多环境配置文件,使用profile进行配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试Web应用程序"><span class="nav-number">4.</span> <span class="nav-text">测试Web应用程序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用Spring-Mock-MVC框架"><span class="nav-number">4.1.</span> <span class="nav-text">使用Spring Mock MVC框架</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#直接跑tomcat或者Jetty容器"><span class="nav-number">4.2.</span> <span class="nav-text">直接跑tomcat或者Jetty容器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用Groovy和Spring-Boot-CLI进行开发"><span class="nav-number">5.</span> <span class="nav-text">使用Groovy和Spring Boot CLI进行开发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#groovy语法特点"><span class="nav-number">5.1.</span> <span class="nav-text">groovy语法特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#groovy工程特点"><span class="nav-number">5.2.</span> <span class="nav-text">groovy工程特点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在springboot中使用Grails"><span class="nav-number">6.</span> <span class="nav-text">在springboot中使用Grails</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#深入Actuator"><span class="nav-number">7.</span> <span class="nav-text">深入Actuator</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部署springboot应用程序"><span class="nav-number">8.</span> <span class="nav-text">部署springboot应用程序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#部署应用的多种方式"><span class="nav-number">8.1.</span> <span class="nav-text">部署应用的多种方式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#附录"><span class="nav-number">9.</span> <span class="nav-text">附录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#springboot开发者工具"><span class="nav-number">9.1.</span> <span class="nav-text">springboot开发者工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#springboot起步依赖"><span class="nav-number">9.2.</span> <span class="nav-text">springboot起步依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置属性"><span class="nav-number">9.3.</span> <span class="nav-text">配置属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#springboot依赖"><span class="nav-number">9.4.</span> <span class="nav-text">springboot依赖</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用注解配置"><span class="nav-number">10.</span> <span class="nav-text">常用注解配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#springboot"><span class="nav-number">10.1.</span> <span class="nav-text">springboot</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置mybatis"><span class="nav-number">10.2.</span> <span class="nav-text">配置mybatis</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单元测试"><span class="nav-number">11.</span> <span class="nav-text">单元测试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Junit注解"><span class="nav-number">11.1.</span> <span class="nav-text">Junit注解</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ninghuang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

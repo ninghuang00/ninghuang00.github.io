@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="这是摘要">
+<meta property="og:type" content="article">
+<meta property="og:title" content="spring-cloud-in-action">
+<meta property="og:url" content="http://yoursite.com/2019/04/11/spring-cloud-in-action/index.html">
+<meta property="og:site_name" content="Just Try It">
+<meta property="og:description" content="这是摘要">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2019/04/11/spring-cloud-in-action/eureka-server-peer1.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/11/spring-cloud-in-action/eureka-server-peer2.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/11/spring-cloud-in-action/eureka服务治理机制.png">
+<meta property="og:updated_time" content="2019-04-19T11:32:19.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="spring-cloud-in-action">
+<meta name="twitter:description" content="这是摘要">
+<meta name="twitter:image" content="http://yoursite.com/2019/04/11/spring-cloud-in-action/eureka-server-peer1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/04/11/spring-cloud-in-action/"/>
+
+
+
+
+
+  <title>spring-cloud-in-action | Just Try It</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Just Try It</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/11/spring-cloud-in-action/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ninghuang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Just Try It">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">spring-cloud-in-action</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-11T20:28:10+08:00">
+                2019-04-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p> 这是摘要<br> <a id="more"></a></p>
+<h2 id="碰到的问题"><a href="#碰到的问题" class="headerlink" title="碰到的问题"></a>碰到的问题</h2><ol>
+<li>UnknownHostException异常,服务消费者无法通过服务名消费服务<br>是因为spring-cloud和eureka以及ribbon的版本搭配不对,spring-cloud的Finchley版本应该使用spring-cloud-starter-netfilx-eureka-server,spring-cloud-starter-netfilx-eureka-client和spring-cloud-starter-netfilx-ribbon</li>
+</ol>
+<h2 id="版本对应关系"><a href="#版本对应关系" class="headerlink" title="版本对应关系"></a>版本对应关系</h2><h3 id="spring-boot和spring-cloud的版本关系"><a href="#spring-boot和spring-cloud的版本关系" class="headerlink" title="spring-boot和spring-cloud的版本关系"></a>spring-boot和spring-cloud的版本关系</h3><p><code>spring-boot-starter-parent</code>的版本和<code>spring-cloud-dependencies</code>的版本是对应的,不能随便搭配</p>
+<blockquote>
+<p>参考地址:<a href="https://spring.io/projects/spring-cloud#release-trains" target="_blank" rel="noopener">https://spring.io/projects/spring-cloud#release-trains</a></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Release Train</th>
+<th>Boot Version</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Greenwich</td>
+<td>2.1.x</td>
+</tr>
+<tr>
+<td>Finchley</td>
+<td>2.0.x</td>
+</tr>
+<tr>
+<td>Edgware</td>
+<td>1.5.x</td>
+</tr>
+<tr>
+<td>Dalston</td>
+<td>1.5.x</td>
+</tr>
+</tbody>
+</table>
+<h3 id="spring-cloud和eureka的版本关系"><a href="#spring-cloud和eureka的版本关系" class="headerlink" title="spring-cloud和eureka的版本关系"></a>spring-cloud和eureka的版本关系</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependencies&gt;</span><br><span class="line">	&lt;!--注册中心依赖--&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;spring-cloud-starter-netflix-eureka-server&lt;/artifactId&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">    &lt;!-- 服务提供者依赖 --&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;spring-cloud-starter-netflix-eureka-client&lt;/artifactId&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">    &lt;!-- 负载均衡,服务消费者依赖 --&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;spring-cloud-starter-netflix-ribbon&lt;/artifactId&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">&lt;/dependencies&gt;</span><br><span class="line">&lt;dependencyManagement&gt;</span><br><span class="line">    &lt;dependencies&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-cloud-dependencies&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;Finchley.RELEASE&lt;/version&gt;</span><br><span class="line">            &lt;type&gt;pom&lt;/type&gt;</span><br><span class="line">            &lt;scope&gt;import&lt;/scope&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">    &lt;/dependencies&gt;</span><br><span class="line">&lt;/dependencyManagement&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="启动java应用是配置内存限制"><a href="#启动java应用是配置内存限制" class="headerlink" title="启动java应用是配置内存限制"></a>启动java应用是配置内存限制</h2><p><code>nohup java -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=128m -Xms1024m -Xmx1024m -Xmn256m -Xss256k -XX:SurvivorRatio=8 -XX:+UseConcMarkSweepGC -jar /jar包路径</code><br> -XX:MetaspaceSize=128m: 元空间初始大小<br> -XX:MaxMetaspaceSize=128m: 元空间最大值<br> -Xms1024m :堆初始化<br> -Xmx1024m :堆最大值<br> -Xmn256m :新生代大小<br> -Xss256k :栈大小<br> -XX:SurvivorRatio=8 :新生代老年代比例<br> -XX:+UseConcMarkSweepGC :</p>
+<h2 id="eureka-server配置"><a href="#eureka-server配置" class="headerlink" title="eureka-server配置"></a>eureka-server配置</h2><ol>
+<li><p>依赖</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;parent&gt;</span><br><span class="line">	&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;</span><br><span class="line">	&lt;version&gt;2.0.4.RELEASE&lt;/version&gt; &lt;!-- lookup parent from repository --&gt;</span><br><span class="line">&lt;/parent&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--注册中心依赖--&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-cloud-starter-netflix-eureka-server&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">&lt;dependencyManagement&gt;</span><br><span class="line">    &lt;dependencies&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-cloud-dependencies&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;Finchley.RELEASE&lt;/version&gt;</span><br><span class="line">            &lt;type&gt;pom&lt;/type&gt;</span><br><span class="line">            &lt;scope&gt;import&lt;/scope&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">    &lt;/dependencies&gt;</span><br><span class="line">&lt;/dependencyManagement&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置文件<code>application.properties</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># eureka server 配置</span><br><span class="line">server.port=1111</span><br><span class="line">eureka.instance.hostname=localhost</span><br><span class="line"># 注册中心不需要注册自己</span><br><span class="line">eureka.client.register-with-eureka=false</span><br><span class="line"># 注册中心不需要检索服务,而是维护服务实例</span><br><span class="line">eureka.client.fetch-registry=false</span><br><span class="line">eureka.client.serviceUrl.defaultZone=http://$&#123;eureka.instance.hostname&#125;:$&#123;server.port&#125;/eureka/</span><br><span class="line"># 配置注册中心用户名和密码</span><br><span class="line"># eureka.client.serviceUrl.defaultZone=http://&lt;username&gt;:&lt;password&gt;@$&#123;eureka.instance.hostname&#125;:$&#123;server.port&#125;/eureka/</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果使用server高可用的话,可以再配置<code>application-peer1.properties</code>和<code>application-peer2.properties</code>文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">spring.application.name=eureka-server</span><br><span class="line"># 本注册中心的配置</span><br><span class="line">server.port=1111</span><br><span class="line">eureka.instance.hostname=peer1</span><br><span class="line"># 指向其他注册中心</span><br><span class="line">eurekaServerPort=1112</span><br><span class="line">eurekaServerHost=peer2</span><br><span class="line">eureka.client.serviceUrl.defaultZone=http://$&#123;eurekaServerHost&#125;:$&#123;eurekaServerPort&#125;/eureka/</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>并且将<code>application.properties</code>中的<code>eureka.client.register-with-eureka</code>和<code>eureka.client.fetch-registry</code>注释掉<br>启动应用的时候使用<code>java -jar eureka-server.jar --spring.profiles.active=peer1</code>启动,可以使用<code>-Xms256m -Xmx512m</code>参数限制一下内存使用</p>
+<h2 id="eureka-client配置"><a href="#eureka-client配置" class="headerlink" title="eureka-client配置"></a>eureka-client配置</h2><ol>
+<li>依赖<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 服务提供者依赖 --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-cloud-starter-netflix-eureka-client&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>spring-boot和spring-cloud-dependencies依赖同server</p>
+<ol start="2">
+<li><p>配置文件<code>application.properties</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># eureka client 配置</span><br><span class="line">spring.application.name=hello-service</span><br><span class="line"># 注册中心的端口</span><br><span class="line">eurekaServerPort1=1111</span><br><span class="line">eurekaServerPort2=1112</span><br><span class="line"># 注册中心的主机名</span><br><span class="line">eurekaServerHost1=peer1</span><br><span class="line">eurekaServerHost2=peer2</span><br><span class="line">eureka.client.serviceUrl.defaultZone=http://$&#123;eurekaServerHost1&#125;:$&#123;eurekaServerPort1&#125;/eureka/,http://$&#123;eurekaServerHost2&#125;:$&#123;eurekaServerPort2&#125;/eureka/</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果配置多个服务,可以再配置<code>application-service1.properties</code>和<code>application-service2.properties</code>文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 指定服务启动端口号</span><br><span class="line">server.port=8081</span><br><span class="line"># eureka client 配置</span><br><span class="line">spring.application.name=hello-service</span><br><span class="line">eurekaServerPort=1111</span><br><span class="line">eurekaServerHost=peer1</span><br><span class="line">eureka.client.serviceUrl.defaultZone=http://$&#123;eurekaServerHost&#125;:$&#123;eurekaServerPort&#125;/eureka/</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>如果注册中心使用高可用的方式,将服务注册分别到不同的节点,节点之间会自动将服务进行同步.</p>
+<ol start="4">
+<li>在一台机器上使用同一个服务启动多个实例<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">server.port=$&#123;random.int[10000,19999]&#125;</span><br><span class="line">eureka.instance.instanceId=$&#123;spring.application.name&#125;:$&#123;random.int&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="启动两个注册中心eureka-server和两个服务器提供者eureka-client之后的效果"><a href="#启动两个注册中心eureka-server和两个服务器提供者eureka-client之后的效果" class="headerlink" title="启动两个注册中心eureka-server和两个服务器提供者eureka-client之后的效果"></a>启动两个注册中心eureka-server和两个服务器提供者eureka-client之后的效果</h2><ol>
+<li>peer1<img src="/2019/04/11/spring-cloud-in-action/eureka-server-peer1.png"></li>
+<li>peer2<img src="/2019/04/11/spring-cloud-in-action/eureka-server-peer2.png">
+</li>
+</ol>
+<h2 id="服务消费者配置-这里使用的ribbon实现"><a href="#服务消费者配置-这里使用的ribbon实现" class="headerlink" title="服务消费者配置,这里使用的ribbon实现"></a>服务消费者配置,这里使用的ribbon实现</h2><ol>
+<li><p>依赖</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 服务提供者依赖 --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-cloud-starter-netflix-eureka-client&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;!-- 负载均衡,服务消费者依赖 --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-cloud-starter-netflix-ribbon&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置文件<code>application.properties</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 服务消费者 配置</span><br><span class="line">spring.application.name=ribbon-consumer</span><br><span class="line">eurekaServerPort=1111</span><br><span class="line">eurekaServerHost=peer1</span><br><span class="line">eureka.client.serviceUrl.defaultZone=http://$&#123;eurekaServerHost&#125;:$&#123;eurekaServerPort&#125;/eureka/</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>其实和服务提供一样,就是注册到服务中心</p>
+<h2 id="eureka服务治理机制"><a href="#eureka服务治理机制" class="headerlink" title="eureka服务治理机制"></a>eureka服务治理机制</h2><img src="/2019/04/11/spring-cloud-in-action/eureka服务治理机制.png">
+<h3 id="服务提供者"><a href="#服务提供者" class="headerlink" title="服务提供者"></a>服务提供者</h3><ol>
+<li>服务注册<br>eureka-client在启动的时候会通过REST请求将自己注册到服务注册中心,另外还会带上一些资自身服务的元数据信息.服务的元数据信息存储在一个双层结构中,第一层的key是服务名,第二层的key是服务的实例名.需要注意的是需要在配置文件中配置<code>eureka.client.register-with-eureka=true</code>属性,如果设置为false则不会进行注册操作</li>
+<li>服务同步<br>示例图中的两个服务是分别注册到两个不同的服务注册中心的,而这两个注册中心相互注册为replicate服务,最终所有注册中心的服务将会同步.服务注册时的请求会被注册中心转发到注册中心集群中,从而实现注册中心线之间的服务同步,服务消费者可以通过任意一台注册中心获取到所有服务的注册信息列表.</li>
+<li>服务续租<br>服务提供者注册完服务之后,会维护一个心跳用来持续告知eureka-server自己还活着,不要把我剔除,其中有两个重要的属性配置:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 指定调用服务续约时间</span><br><span class="line">eureka.instance.lease-renewal-interval-in-seconds=30</span><br><span class="line"># 指定服务失效时间</span><br><span class="line">eureka.instance.lease-expiration-duration-in-seconds=90</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="服务消费者"><a href="#服务消费者" class="headerlink" title="服务消费者"></a>服务消费者</h2><ol>
+<li><p>获取服务<br>eureka-server会维护一份只读的服务清单,服务消费者可以定时获取这份清单,以此来消费服务.可以通过以下属性配置服务消费者更新服务清单缓存的时间间隔:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">eureka.client.registry-fetch-interval-seconds=30</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>服务调用<br>根据服务清单可以获取服务的元数据信息,ribbon中默认采用轮询的方式请求服务.eureka中包含Region和Zone的概念,一个Region可以包含多个Zone,每个服务客户端会被注册到一个Zone中,所以每个客户端对应一个Region和一个Zone.在服务进行调用的时候会有限访问同一个Zone中的服务提供者,如果访问不到在寻找其他的Zone,可以配置的属性如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">eureka.clientregion=</span><br><span class="line">eureka.client.availability-zones=</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>服务下线<br>关闭服务实例的时候,会触发一个服务下线的REST请求给eureka-server,注册中心接收到请求后会将该服务实例的状态置为DOWN,并将改服务下线的消息广播出去.</p>
+</li>
+</ol>
+<h2 id="服务注册中心"><a href="#服务注册中心" class="headerlink" title="服务注册中心"></a>服务注册中心</h2><ol>
+<li>失效剔除<br>eureka-server启动的时候会创建一个定时任务,每隔60s的时间就会检查当前清单中超时(90s)没有续约服务实例,并从清单中剔除</li>
+<li>自我保护<br>eureka-server运行期间会统计15分钟内心跳失败的比例,如果低于85%,eureka-server会启动保护措施,将当前的实例注册信息保存起来,尽可能保护这些实例信息,让它们不会过期.但是如果在保护期间,部分实例真的出现了问题,那么服务消费者很容易请求到不可用的服务,出现调用失败的情况,这时候就需要客户端用容错机制,如请求重发,断路器等.可以通过一下属性关闭保护机制:<code>eureka.server.enable-self-preservation=false</code></li>
+</ol>
+<h2 id="eureka-server和eureka-client的配置类"><a href="#eureka-server和eureka-client的配置类" class="headerlink" title="eureka-server和eureka-client的配置类"></a>eureka-server和eureka-client的配置类</h2><p>更多详细的配置信息可以在<code>EurekaClientConfigBean.java</code>和<code>EurekaServerConfigBean.java</code>中查看</p>
+<h2 id="eureka-instance配置类"><a href="#eureka-instance配置类" class="headerlink" title="eureka-instance配置类"></a>eureka-instance配置类</h2><p>可以查看<code>EurekaInstanceConfigBean.java</code>,<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># spring-cloud-eureka中对同一主机启动多个相同的服务实例的默认命名规则</span><br><span class="line">$&#123;spring.cloud.client.hostname&#125;:$&#123;spring.application.name&#125;:&#123;spring.application.instance_id&#125;:$&#123;server.port&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="健康状态信息页面配置"><a href="#健康状态信息页面配置" class="headerlink" title="健康状态信息页面配置"></a>健康状态信息页面配置</h2><p>P69<br>spring-cloud中默认使用了spring-boot-actuator模块提供的/info和/health端点进行状态和健康监控.</p>
+<h3 id="端点配置"><a href="#端点配置" class="headerlink" title="端点配置"></a>端点配置</h3><ol>
+<li><p>如果配置了上下文路径</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">management.context-path=/hello</span><br><span class="line">eureka.instance.statusPageUrlPath=$&#123;management.context-path&#125;/info</span><br><span class="line">eureka.instance.healthCheckUrlPath=$&#123;management.context-path&#125;/health</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果修改了/info和/health的原始端点路径</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">endpoints.info.path=/appInfo</span><br><span class="line">endpoints.health.path=/checkHealth</span><br><span class="line"></span><br><span class="line">eureka.instance.statusPageUrlPath=$&#123;endpoints.info.path&#125;</span><br><span class="line">eureka.instance.healthCheckUrlPath=$&#123;endpoints.health.path&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果需要使用绝对路径,比如部署了Https</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">eureka.instance.statusPageUrl=https://$&#123;eureka.instance.hosthome&#125;/info</span><br><span class="line">eureka.instance.healthCheckUrl=https://$&#123;eureka.instance.hosthome&#125;/health</span><br><span class="line">eureka.instance.homePageUrl=https://$&#123;eureka.instance.hosthome&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="健康监测"><a href="#健康监测" class="headerlink" title="健康监测"></a>健康监测</h3><p>eureka注册中心判断服务实例健康状态的依据默认是使用客户端心跳来判断的,而不是使用spring-boot-actuator的/health,这样一般不能满足实际场景需求,修改如下:</p>
+<ol>
+<li>引入<code>spring-boot-starter-actuator</code>依赖</li>
+<li>配置文件中添加配置<code>eureka.client.healthcheck.enabled=true</code></li>
+<li>正确配置<code>eureka.instance.healthCheckUrlPath</code>的访问路径,让注册中心可以正确访问到/health</li>
+</ol>
+<h2 id="ribbon实现客户端负载均衡的原理"><a href="#ribbon实现客户端负载均衡的原理" class="headerlink" title="ribbon实现客户端负载均衡的原理"></a>ribbon实现客户端负载均衡的原理</h2><h3 id="RestTemplate介绍"><a href="#RestTemplate介绍" class="headerlink" title="RestTemplate介绍"></a>RestTemplate介绍</h3><ol>
+<li>get请求<br>主要是getForEntity()方法和getForObject()方法的使用</li>
+<li>post请求<br>主要是postForEntity()方法和postForObject()方法的使用</li>
+<li>put请求和delete请求<br>就是put()方法和delete()方法</li>
+</ol>
+<h3 id="负载均衡源码分析"><a href="#负载均衡源码分析" class="headerlink" title="负载均衡源码分析"></a>负载均衡源码分析</h3><ol>
+<li><code>@LoadBalanced</code>注解<br>该注解标记RestTemplate之后,负载均衡的客户端就可以配置RestTemplate了,ribbon中的客户端是LoadBalancerClient接口.</li>
+<li>LoadBalancerAutoConfiguration类<br>该类的使用有两个条件<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@ConditionalOnClass(RestTemplate.class)</span><br><span class="line">@ConditionalOnBean(LoadBalancerClient.class)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>自动化配置主要完成三个任务</p>
+<pre><code>1. 创建LoadBalancerInterceptor的Bean,拦截客户端发起的请求进行负载均衡
+2. 创建RestTemplateCustomizer的Bean,用来给RestTemplate增加拦截器LoadBalancerInterceptor
+3. 维护标记了@LoadBalanced注解的RestTemplate列表,并初始化,添加拦截器
+</code></pre><ol start="3">
+<li>拦截器LoadBalancerInterceptor类<br>该类中首先注入了LoadBalancerClient的实现(RibbonLoadBalancerClient),然后在intercept()方法中调用client的execute()方法对拦截到的请求进行处理,execute()方法的第一步就是根据传入的serviceId获取服务实例,</li>
+</ol>
+<h3 id="负载均衡的策略"><a href="#负载均衡的策略" class="headerlink" title="负载均衡的策略"></a>负载均衡的策略</h3><ol>
+<li>RandomRule<br>根据服务实例列表的大小,随机产生一个数字选取实例</li>
+<li>RoundRobinRule<br>线性循环使用服务实例</li>
+<li>RetryRule<br>可反复重试的策略,规定时间内如果一直获取不到可用的服务实例就返回null</li>
+<li>WeightedResponseTimeRule<ol>
+<li>首先会创建一个定时任务来计算每个服务实例的权重,每个实例的权重范围根据服务实例的平均响应时间计算</li>
+<li>生成随机数,在权重列表中中比较,选择服务实例</li>
+</ol>
+</li>
+<li>ClientConfigEnabledRoundRobinRule<br>实际实现和RoundRobinRule一样,一般不是直接使用,而是继承并扩展后定义高级策略</li>
+<li>BestAvailableRule<br>选择最空闲的服务实例</li>
+<li>PredicateBasedRule抽象策略<br>先根据子类中的Predicate逻辑对服务实例进行过滤,然后再进行轮询选取实例</li>
+<li>AvailabilityFilteringRule<br>继承了PredicateRule,过滤条件如下:<ol>
+<li>是否故障,断路器是否生效已断开</li>
+<li>实例的并发数是不是已超过阈值</li>
+</ol>
+</li>
+<li>ZoneAvoidanceRule<br>组合过滤<ol>
+<li>使用主过滤条件过滤</li>
+<li>按照顺序使用次过滤条件过滤</li>
+<li>每次过滤后判断以下两个条件:<ol>
+<li>过滤后的实例数量 &gt;= 最小过滤后实例数量(默认1)</li>
+<li>过滤后的实例比例 &gt; 最小过滤后百分比(默认0)</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/08/idea-crack-file-use-guide-md/" rel="next" title="idea-crack-file-use-guide.md">
+                <i class="fa fa-chevron-left"></i> idea-crack-file-use-guide.md
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/12/cloud-service-development-tech/" rel="prev" title="cloud-service-development-tech">
+                cloud-service-development-tech <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">ninghuang</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">55</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">75</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#碰到的问题"><span class="nav-number">1.</span> <span class="nav-text">碰到的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#版本对应关系"><span class="nav-number">2.</span> <span class="nav-text">版本对应关系</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#spring-boot和spring-cloud的版本关系"><span class="nav-number">2.1.</span> <span class="nav-text">spring-boot和spring-cloud的版本关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#spring-cloud和eureka的版本关系"><span class="nav-number">2.2.</span> <span class="nav-text">spring-cloud和eureka的版本关系</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动java应用是配置内存限制"><span class="nav-number">3.</span> <span class="nav-text">启动java应用是配置内存限制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#eureka-server配置"><span class="nav-number">4.</span> <span class="nav-text">eureka-server配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#eureka-client配置"><span class="nav-number">5.</span> <span class="nav-text">eureka-client配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动两个注册中心eureka-server和两个服务器提供者eureka-client之后的效果"><span class="nav-number">6.</span> <span class="nav-text">启动两个注册中心eureka-server和两个服务器提供者eureka-client之后的效果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务消费者配置-这里使用的ribbon实现"><span class="nav-number">7.</span> <span class="nav-text">服务消费者配置,这里使用的ribbon实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#eureka服务治理机制"><span class="nav-number">8.</span> <span class="nav-text">eureka服务治理机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#服务提供者"><span class="nav-number">8.1.</span> <span class="nav-text">服务提供者</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务消费者"><span class="nav-number">9.</span> <span class="nav-text">服务消费者</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务注册中心"><span class="nav-number">10.</span> <span class="nav-text">服务注册中心</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#eureka-server和eureka-client的配置类"><span class="nav-number">11.</span> <span class="nav-text">eureka-server和eureka-client的配置类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#eureka-instance配置类"><span class="nav-number">12.</span> <span class="nav-text">eureka-instance配置类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#健康状态信息页面配置"><span class="nav-number">13.</span> <span class="nav-text">健康状态信息页面配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#端点配置"><span class="nav-number">13.1.</span> <span class="nav-text">端点配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#健康监测"><span class="nav-number">13.2.</span> <span class="nav-text">健康监测</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ribbon实现客户端负载均衡的原理"><span class="nav-number">14.</span> <span class="nav-text">ribbon实现客户端负载均衡的原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RestTemplate介绍"><span class="nav-number">14.1.</span> <span class="nav-text">RestTemplate介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#负载均衡源码分析"><span class="nav-number">14.2.</span> <span class="nav-text">负载均衡源码分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#负载均衡的策略"><span class="nav-number">14.3.</span> <span class="nav-text">负载均衡的策略</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ninghuang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

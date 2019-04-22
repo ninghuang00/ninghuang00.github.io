@@ -1,0 +1,1380 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="这是摘要">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网络编程知识">
+<meta property="og:url" content="http://yoursite.com/2019/04/22/网络编程知识/index.html">
+<meta property="og:site_name" content="Just Try It">
+<meta property="og:description" content="这是摘要">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2019/04/22/网络编程知识/x层协议对比.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/22/网络编程知识/OSI七层网络协议.gif">
+<meta property="og:image" content="http://yoursite.com/2019/04/22/网络编程知识/网络层级结构图.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/22/网络编程知识/数据包传输过程.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/04/22/网络编程知识/DHCP数据包.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/22/网络编程知识/tcp3次握手.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/22/网络编程知识/tcp4次挥手.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/22/网络编程知识/滑动窗口控制流量.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/04/22/网络编程知识/慢开始和拥塞避免.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/04/22/网络编程知识/快重传和快恢复.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/04/22/网络编程知识/tcp和udp比较.png">
+<meta property="og:updated_time" content="2019-04-22T11:24:03.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="网络编程知识">
+<meta name="twitter:description" content="这是摘要">
+<meta name="twitter:image" content="http://yoursite.com/2019/04/22/网络编程知识/x层协议对比.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/04/22/网络编程知识/"/>
+
+
+
+
+
+  <title>网络编程知识 | Just Try It</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Just Try It</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/22/网络编程知识/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ninghuang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Just Try It">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">网络编程知识</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-22T15:22:31+08:00">
+                2019-04-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p> 这是摘要<br> <a id="more"></a></p>
+<h2 id="网络模型"><a href="#网络模型" class="headerlink" title="网络模型"></a>网络模型</h2><h3 id="模型对比"><a href="#模型对比" class="headerlink" title="模型对比"></a>模型对比</h3><img src="/2019/04/22/网络编程知识/x层协议对比.png" title="x层协议对比">
+<h3 id="OSI七层模型"><a href="#OSI七层模型" class="headerlink" title="OSI七层模型"></a>OSI七层模型</h3><img src="/2019/04/22/网络编程知识/OSI七层网络协议.gif" title="OSI七层协议模型">
+<h3 id="五层模型"><a href="#五层模型" class="headerlink" title="五层模型"></a>五层模型</h3><ol>
+<li>在向下的过程中，需要添加下层协议所需要的首部或者尾部</li>
+<li>中间经过路由器的时候为了读取MAC地址和IP地址会拆包,拆到网络层</li>
+<li>在向上的过程中不断拆开首部和尾部<img src="/2019/04/22/网络编程知识/网络层级结构图.png" title="网络层级结构">
+<img src="/2019/04/22/网络编程知识/数据包传输过程.jpg" title="数据包传输过程">
+</li>
+</ol>
+<h3 id="从设计者角度看流程"><a href="#从设计者角度看流程" class="headerlink" title="从设计者角度看流程"></a>从设计者角度看流程</h3><blockquote>
+<p>参考地址:<a href="http://www.ruanyifeng.com/blog/2012/05/internet_protocol_suite_part_i.html" target="_blank" rel="noopener">http://www.ruanyifeng.com/blog/2012/05/internet_protocol_suite_part_i.html</a></p>
+</blockquote>
+<h4 id="物理层"><a href="#物理层" class="headerlink" title="物理层"></a>物理层</h4><p>电缆连接计算机,传输电信号,</p>
+<h3 id="数据链路层-MAC地址"><a href="#数据链路层-MAC地址" class="headerlink" title="数据链路层(MAC地址)"></a>数据链路层(MAC地址)</h3><ol>
+<li>以太网协议(Ethernet):定义01信号的意义</li>
+<li>MAC地址:前6个十六进制数是厂商编号，后6个是该厂商的网卡流水号。有了MAC地址，就可以定位网卡和数据包的路径了。</li>
+<li>广播:子网中进行广播</li>
+</ol>
+<h4 id="网络层-IP地址"><a href="#网络层-IP地址" class="headerlink" title="网络层(IP地址)"></a>网络层(IP地址)</h4><p>简历主机到主机之间的通信</p>
+<ol>
+<li>由于一台电脑不可能接受世界上所有电脑的数据包,所以全世界广播是不可能的,需要新的寻址方法</li>
+<li>“网络层”出现以后，每台计算机有了两种地址，一种是MAC地址，另一种是网络地址。两种地址之间没有任何联系，MAC地址是绑定在网卡上的，网络地址则是管理员分配的，它们只是随机组合在一起。</li>
+<li>网络层使用IP协议,根据IP协议找到子网络,在子网络中通过MAC地址找到具体的计算机<ol>
+<li>互联网上的每一台计算机，都会分配到一个IP地址。这个地址分成两个部分，前一部分代表网络，后一部分代表主机。比如，IP地址172.16.254.1，这是一个32位的地址，假定它的网络部分是前24位（172.16.254），那么主机部分就是后8位（最后的那个1）。</li>
+<li>通过IP地址和子网掩码来确定网段<br>比如，已知IP地址172.16.254.1和172.16.254.233的子网掩码都是255.255.255.0，请问它们是否在同一个子网络？两者与子网掩码分别进行AND运算，结果都是172.16.254.0，因此它们在同一个子网络。</li>
+</ol>
+</li>
+<li>如何获取目标IP地址主机的MAC地址<ol>
+<li>如果不在同一个子网,那么只能通过网关(gateway)处理</li>
+<li>如果在同一个子网则通过ARP(Address Resolution Protocol)协议,也是通过广播询问对方(某个IP地址)的MAC地址</li>
+</ol>
+</li>
+</ol>
+<h4 id="传输层-端口号"><a href="#传输层-端口号" class="headerlink" title="传输层(端口号)"></a>传输层(端口号)</h4><p>“传输层”的功能，就是建立”端口到端口”的通信。只要确定主机和端口，我们就能实现程序之间的交流。</p>
+<ol>
+<li>UDP协议和TCP协议
+</li>
+</ol>
+<h4 id="应用层-http协议"><a href="#应用层-http协议" class="headerlink" title="应用层(http协议)"></a>应用层(http协议)</h4>
+<p>应用程序收到”传输层”的数据，接下来就要进行解读。由于互联网是开放架构，数据来源五花八门，必须事先规定好格式，否则根本无法解读。<br><strong>“应用层”的作用，就是规定应用程序的数据格式。</strong><br></p>
+<h3 id="从用户角度看流程"><a href="#从用户角度看流程" class="headerlink" title="从用户角度看流程"></a>从用户角度看流程</h3><p>参考地址:<a href="http://www.ruanyifeng.com/blog/2012/06/internet_protocol_suite_part_ii.html" target="_blank" rel="noopener">http://www.ruanyifeng.com/blog/2012/06/internet_protocol_suite_part_ii.html</a></p>
+<h3 id="电脑是如何上网的"><a href="#电脑是如何上网的" class="headerlink" title="电脑是如何上网的"></a>电脑是如何上网的</h3><ol>
+<li>设置静态IP<br>也就是手动设置固定的:<ol>
+<li>IP地址</li>
+<li>子网掩码</li>
+<li>网关的IP地址</li>
+<li>还有DNS的IP地址</li>
+</ol>
+</li>
+<li>设置动态IP(DHCP协议)<br>这个协议规定，每一个子网络中，有一台计算机负责管理本网络的所有IP地址，它叫做”DHCP服务器”。新的计算机加入网络，必须向”DHCP服务器”发送一个”DHCP请求”数据包，申请IP地址和相关的网络参数。<img src="/2019/04/22/网络编程知识/DHCP数据包.png" title="DHCP数据包">
+<ol>
+<li>数据包格式<ol>
+<li>最前面的”以太网标头”，设置发出方（本机）的MAC地址和接收方（DHCP服务器）的MAC地址。前者就是本机网卡的MAC地址，后者这时不知道，就填入一个广播地址：FF-FF-FF-FF-FF-FF。</li>
+<li>后面的”IP标头”，设置发出方的IP地址和接收方的IP地址。这时，对于这两者，本机都不知道。于是，发出方的IP地址就设为0.0.0.0，接收方的IP地址设为255.255.255.255。然后广播的时候DHCP服务器就知道这个数据包是发给自己的</li>
+<li>最后的”UDP标头”，设置发出方的端口和接收方的端口。这一部分是DHCP协议规定好的，发出方是68端口，接收方是67端口。</li>
+</ol>
+</li>
+<li>原理<br>这个数据包构造完成后，就可以发出了。以太网是广播发送，同一个子网络的每台计算机都收到了这个包。因为接收方的MAC地址是FF-FF-FF-FF-FF-FF，看不出是发给谁的，所以每台收到这个包的计算机，还必须分析这个包的IP地址，才能确定是不是发给自己的。当看到发出方IP地址是0.0.0.0，接收方是255.255.255.255，于是DHCP服务器知道”这个包是发给我的”，而其他计算机就可以丢弃这个包。<br>接下来，DHCP服务器读出这个包的数据内容，分配好IP地址，发送回去一个”DHCP响应”数据包。这个响应包的结构也是类似的，以太网标头的MAC地址是双方的网卡地址，IP标头的IP地址是DHCP服务器的IP地址（发出方）和255.255.255.255（接收方），UDP标头的端口是67（发出方）和68（接收方），分配给请求端的IP地址和本网络的具体参数则包含在Data部分。</li>
+</ol>
+</li>
+<li>DNS(domain name service)协议<br>IP 8.8.8.8  端口 53<br>获取域名对应的IP地址,现在开始,假设要浏览器要访问Google:<ol>
+<li>首先会通过DNS得到Google服务器的IP地址</li>
+<li>判断得到不是同一个网段,所以请求需要通过网关转发处理</li>
+<li>于是确定是数据包的目的IP地址为Google服务器的IP地址,目的MAC地址为同网关的MAC地址,目的端口号80</li>
+</ol>
+</li>
+<li>走5层网络模型<ol>
+<li>应用层<br>浏览器根据http协议,打包数据</li>
+<li>传输层<br>按照TCP协议,打包数据,加入端口号</li>
+<li>网络层<br>按照IP协议打包数据,加入IP地址</li>
+<li>数据链路层<br>按照以太网协议打包数据,加入MAC地址</li>
+<li>物理层<br>传输电信号<br>因为以太网协议的数据包最大长度为1500字节,所有请求可能会被分为几个数据包来发送</li>
+</ol>
+</li>
+<li>Google服务器收到请求<br>将收到的数据包按照IP头标号顺序拼接,读取最终的数据后,进行处理并返回response</li>
+</ol>
+<hr>
+<h2 id="tcp、udp、http、https等常用协议"><a href="#tcp、udp、http、https等常用协议" class="headerlink" title="tcp、udp、http、https等常用协议"></a>tcp、udp、http、https等常用协议</h2><h3 id="tcp协议"><a href="#tcp协议" class="headerlink" title="tcp协议"></a>tcp协议</h3><h4 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h4><ul>
+<li>TCP支持的应用协议主要有：Telnet、FTP、SMTP,http,pop3等； </li>
+<li>应用场景<br>优点:可靠稳定,通过三次握手建立连接,有流量控制,差错控制等机制(握手 确认 窗口 拥塞控制 重传等)<br>缺点:传输速度慢,效率低,占用系统资源高,容易被攻击(DOS,DDOS,CC,通过大量建立无效连接来耗光服务器资源)<ol>
+<li>文件传输:FTP</li>
+<li>邮件:SMTP</li>
+<li>putty:ssh,TELNET</li>
+<li>浏览器:http<br>DOS攻击:denial of service<br>DDOS攻击:distributed denial of service    </li>
+</ol>
+</li>
+</ul>
+<blockquote>
+<p>参考地址:<a href="https://www.jianshu.com/p/dff5a0d537d8" target="_blank" rel="noopener">https://www.jianshu.com/p/dff5a0d537d8</a></p>
+</blockquote>
+<h4 id="三次握手与四次关闭"><a href="#三次握手与四次关闭" class="headerlink" title="三次握手与四次关闭"></a>三次握手与四次关闭</h4><ul>
+<li>建立连接过程(3次握手)<img src="/2019/04/22/网络编程知识/tcp3次握手.png"></li>
+</ul>
+<ol>
+<li>C发送一个请求连接的位码SYN和一个随机产生的序列号给Seq，然后S收到了这些数据。</li>
+<li>S收到了这个请求连接的位码，啊呀，有人向我发出请求了么，那我要不要接受他的请求，得实现确认一下，于是，发送了一个确认码 ACN（seq+1），和SYN，Seq给C，然后C收到了，这个是第二次连接。</li>
+<li>C收到了确认的码和之前发送的SYN一比较，偶哟，对上了么，于是他又发送了一个ACN（SEQ+1）给S，S收到以后就确定建立连接，至此，TCP连接建立完成。<br><strong>为什么要3次:</strong><br>一端(client)A发出去的第一个连接请求报文并没有丢失，而是因为某些未知的原因在某个网络节点上发生滞留，导致延迟到连接释放以后的某个时间才到达另一端(server)B。<br>本来这是一个早已失效的报文段，但是B收到此失效的报文之后，会误认为是A再次发出的一个新的连接请求，于是B端就向A又发出确认报文，表示同意建立连接。如果不采用“三次握手”，那么只要B端发出确认报文就会认为新的连接已经建立了，但是A端并没有发出建立连接的请求，因此不会去向B端发送数据，B端没有收到数据就会一直等待，这样B端就会白白浪费掉很多资源。<br>如果采用“三次握手”的话就不会出现这种情况，B端收到一个过时失效的报文段之后，向A端发出确认，此时A并没有要求建立连接，所以就不会向B端发送确认，这个时候B端也能够知道连接没有建立。</li>
+</ol>
+<ul>
+<li>断开连接过程(4次挥手)<img src="/2019/04/22/网络编程知识/tcp4次挥手.png"></li>
+</ul>
+<ol>
+<li>客户端进程发出连接释放报文，并且停止发送数据。释放数据报文首部，FIN=1，其序列号为seq=u（等于前面已经传送过来的数据的最后一个字节的序号加1），此时，客户端进入FIN-WAIT-1（终止等待1）状态。 TCP规定，FIN报文段即使不携带数据，也要消耗一个序号。</li>
+<li>服务器收到连接释放报文，发出确认报文，ACK=1，ack=u+1，并且带上自己的序列号seq=v，此时，服务端就进入了CLOSE-WAIT（关闭等待）状态。TCP服务器通知高层的应用进程，客户端向服务器的方向就释放了，这时候处于半关闭状态，即客户端已经没有数据要发送了，但是服务器若发送数据，客户端依然要接受。这个状态还要持续一段时间，也就是整个CLOSE-WAIT状态持续的时间。</li>
+<li>客户端收到服务器的确认请求后，此时，客户端就进入FIN-WAIT-2（终止等待2）状态，等待服务器发送连接释放报文（在这之前还需要接受服务器发送的最后的数据）。</li>
+<li>服务器将最后的数据发送完毕后，就向客户端发送连接释放报文，FIN=1，ack=u+1，由于在半关闭状态，服务器很可能又发送了一些数据，假定此时的序列号为seq=w，此时，服务器就进入了LAST-ACK（最后确认）状态，等待客户端的确认。</li>
+<li>客户端收到服务器的连接释放报文后，必须发出确认，ACK=1，ack=w+1，而自己的序列号是seq=u+1，此时，客户端就进入了TIME-WAIT（时间等待）状态。注意此时TCP连接还没有释放，必须经过2∗∗MSL（最长报文段寿命）的时间后，当客户端撤销相应的TCB后，才进入CLOSED状态。</li>
+<li>服务器只要收到了客户端发出的确认，立即进入CLOSED状态。同样，撤销TCB后，就结束了这次的TCP连接。可以看到，服务器结束TCP连接的时间要比客户端早一些。<br>为了确保数据能够完成传输。<br>关闭连接时，当收到对方的FIN报文通知时，它仅仅表示对方没有数据发送给你了；但未必你所有的数据都全部发送给对方了，所以你可以未必会马上会关闭SOCKET,也即你可能还需要发送一些数据给对方之后，再发送FIN报文给对方来表示你同意现在可以关闭连接了，所以它这里的ACK报文和FIN报文多数情况下都是分开发送的。</li>
+</ol>
+<h4 id="流量控制和拥塞控制"><a href="#流量控制和拥塞控制" class="headerlink" title="流量控制和拥塞控制"></a>流量控制和拥塞控制</h4><ul>
+<li><p>流量控制<br>参考地址:<a href="https://blog.csdn.net/yechaodechuntian/article/details/25429143" target="_blank" rel="noopener">https://blog.csdn.net/yechaodechuntian/article/details/25429143</a><br>使用滑动窗口来控制流量,限制发送端可以发送的数据量</p>
+<img src="/2019/04/22/网络编程知识/滑动窗口控制流量.jpg" title="滑动窗口控制流量">
+</li>
+<li><p>拥塞控制<br>发送方控制拥塞窗口的原则是：只要网络没有出现拥塞，拥塞窗口就再增大一些，以便把更多的分组发送出去。但只要网络出现拥塞，拥塞窗口就减小一些，以减少注入到网络中的分组数。</p>
+</li>
+</ul>
+<ol>
+<li>慢开始和拥塞避免<ol>
+<li>当 cwnd &lt; ssthresh 时，使用慢开始算法,每次经过一轮传输,cwnd就扩大一倍。</li>
+<li>当 cwnd &gt; ssthresh 时，停止使用慢开始算法而改用拥塞避免算法。</li>
+<li>当 cwnd = ssthresh 时，既可使用慢开始算法，也可使用拥塞控制避免算法。</li>
+<li>当网络出现拥塞的时候,将ssthresh设置成当前cwnd的一半(但是不能小于2),重新执行慢开始算法</li>
+</ol>
+</li>
+<li>慢开始算法<br>一开始将cwnd设置为1,每经过一个传输轮次，拥塞窗口 cwnd 就加倍。</li>
+<li><p>拥塞避免算法<br>让拥塞窗口cwnd缓慢地增大，即每经过一个往返时间RTT就把发送方的拥塞窗口cwnd加1，而不是加倍。这样拥塞窗口cwnd按线性规律缓慢增长，比慢开始算法的拥塞窗口增长速率缓慢得多。</p>
+<img src="/2019/04/22/网络编程知识/慢开始和拥塞避免.jpg" title="慢开始和拥塞避免">
+</li>
+<li><p>快重传和快恢复</p>
+<ol>
+<li>快重传算法首先要求接收方每收到一个失序的报文段后就立即发出重复确认（为的是使发送方及早知道有报文段没有到达对方）而不要等到自己发送数据时才进行捎带确认。</li>
+<li>当发送方连续收到3次重复确认消息,就会直接发送对应的数据包,并且将ssthresh减半,开始使用快恢复算法(即从新的ththresh开始拥塞避免算法)</li>
+</ol>
+</li>
+</ol>
+<img src="/2019/04/22/网络编程知识/快重传和快恢复.jpg" title="快重传和快恢复">
+<h4 id="tcp粘包与拆包"><a href="#tcp粘包与拆包" class="headerlink" title="tcp粘包与拆包"></a>tcp粘包与拆包</h4><h4 id="tcp和udp比较"><a href="#tcp和udp比较" class="headerlink" title="tcp和udp比较"></a>tcp和udp比较</h4><img src="/2019/04/22/网络编程知识/tcp和udp比较.png" title="tcp和udp比较">
+<h3 id="udp协议"><a href="#udp协议" class="headerlink" title="udp协议"></a>udp协议</h3><ol>
+<li>UDP支持的应用层协议主要有：NFS（网络文件系统）、SNMP（简单网络管理协议）、DNS（主域名称系统）、TFTP（通用文件传输协议）等。</li>
+<li>应用场景<br>优点:因为是无状态传输协议,所以传输速度很快;因为没有各种控制机制,容易被利用的漏洞较少(但是也有UDP FLOOD攻击)<br>缺点:不稳定,不可靠,网络条件差的情况下容易丢包<ol>
+<li>在线视频:</li>
+<li>语音通话</li>
+<li>TFTP</li>
+</ol>
+</li>
+</ol>
+<hr>
+<h3 id="http协议"><a href="#http协议" class="headerlink" title="http协议"></a>http协议</h3><h4 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h4><ol>
+<li>简单快速<br>请求方法非常简单,只需要传送请求方法和路径</li>
+<li>灵活<br>可以传输任意类型的数据,使用content-type标记</li>
+<li>无连接<br>每次连接仅处理一个请求,服务器处理完客户端的请求并收到应答后即断开连接,节省传输时间<br>http1.1版本已经默认使用长连接,使用<code>Connection: close</code>关闭</li>
+<li>无状态<br>不记录请求的状态,加快应答</li>
+</ol>
+<h4 id="http请求方法"><a href="#http请求方法" class="headerlink" title="http请求方法"></a>http请求方法</h4><ol>
+<li>GET(幂等,无副作用,不能带Request Body)<br>获取资源</li>
+<li><p>POST(非幂等,有副作用,能带Request Body)<br>新建或者更新资源<br>RFC文档例举的使用场景:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">- Annotation of existing resources;</span><br><span class="line">- Posting a message to a bulletin board, newsgroup, mailing list, or   </span><br><span class="line">  similar group of articles;</span><br><span class="line">- Providing a block of data, such as the result of submitting a</span><br><span class="line">  form, to a data-handling process;</span><br><span class="line">- Extending a database through an append operation.</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>PUT(幂等,有副作用,能带Request Body)<br>更新资源,如修改帖子,同一个修改不管提交几次都是一样的结果</p>
+</li>
+<li>DELETE(幂等,有副作用,不能带Request Body)<br>删除资源</li>
+<li>PATCH()<br>更新资源的一部分</li>
+<li>HEAD<br>HEAD方法跟GET方法相同，只不过服务器响应时不会返回消息体。一个HEAD请求的响应中，HTTP头中包含的元信息应该和一个GET请求的响应消息相同。这种方法可以用来获取请求中隐含的元信息，而不用传输实体本身。也经常用来测试超链接的有效性、可用性和最近的修改。</li>
+</ol>
+<h4 id="关于GET-POST-PUT的区别"><a href="#关于GET-POST-PUT的区别" class="headerlink" title="关于GET,POST,PUT的区别"></a>关于GET,POST,PUT的区别</h4><ol>
+<li>很多浏览器对GET请求的URI长度有限制</li>
+<li>GET请求是安全的(对服务器而言),因为不会改变什么</li>
+<li></li>
+</ol>
+<h4 id="请求和响应"><a href="#请求和响应" class="headerlink" title="请求和响应"></a>请求和响应</h4><p>http1.0规定请求头或者响应头的数据格式必须是ASCII码,后面的数据可以是任意类型</p>
+<ol>
+<li><p>get请求</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//请求行</span></span><br><span class="line">GET / HTTP/<span class="number">1.1</span>		<span class="comment">//第一行指定请求方法和协议版本号,后面的都是描述客户端情况</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//请求头</span></span><br><span class="line">Transfer-Encoding: chunked</span><br><span class="line">Accept-Encoding: gzip, deflate 		<span class="comment">//指定可以接受的压缩类型</span></span><br><span class="line">Accept-Language: zh-CN,zh;q=<span class="number">0.8</span></span><br><span class="line">Accept-Charset: GBK,utf-<span class="number">8</span>;q=<span class="number">0.7</span>,*;q=<span class="number">0.3</span></span><br><span class="line">Connection: close	<span class="comment">//明确要求服务器关闭tcp连接,在http1.0还只有短连接的时候请求头中需要声明keep-alive来保持连接</span></span><br><span class="line">Accept: *<span class="comment">/*	 		//指定客户端可以接收的数据类型</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>post请求</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">POST / HTTP1.1 <span class="comment">//请求行</span></span><br><span class="line"><span class="comment">//请求头</span></span><br><span class="line">Host:www.wrox.com</span><br><span class="line">User-Agent:Mozilla/<span class="number">4.0</span> (compatible; MSIE <span class="number">6.0</span>; Windows NT <span class="number">5.1</span>; SV1; .NET CLR <span class="number">2.0</span>.50727; .NET CLR <span class="number">3.0</span>.04506.648; .NET CLR <span class="number">3.5</span>.21022)</span><br><span class="line">Content-Type:application/x-www-form-urlencoded</span><br><span class="line">Content-Length:<span class="number">40</span></span><br><span class="line">Connection: Keep-Alive</span><br><span class="line"><span class="comment">//数据</span></span><br><span class="line">name=Professional%<span class="number">20</span>Ajax&amp;publisher=Wiley</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>响应</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//响应行</span></span><br><span class="line">HTTP/<span class="number">1.1</span> <span class="number">200</span> OK <span class="comment">//第一行是协议版本和状态码</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//响应头</span></span><br><span class="line">Content-Type: text/plain	<span class="comment">//说明response-body中的数据格式</span></span><br><span class="line">Content-Length: <span class="number">137582</span>		<span class="comment">//本次回应的数据长度,1.1中一个tcp连接可以回应多个请求</span></span><br><span class="line">Transfer-Encoding: chunked	<span class="comment">//分块传输,返回数据长度不定</span></span><br><span class="line">Server: Apache <span class="number">0.84</span>			<span class="comment">//服务器类型</span></span><br><span class="line">Content-Encoding: gzip		<span class="comment">//说明数据的压缩类型</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//响应数据</span></span><br><span class="line">&lt;html&gt;</span><br><span class="line">  &lt;body&gt;Hello World&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="常见http协议状态码"><a href="#常见http协议状态码" class="headerlink" title="常见http协议状态码"></a>常见http协议状态码</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1xx：指示信息--表示请求已接收，继续处理</span><br><span class="line">2xx：成功--表示请求已被成功接收、理解、接受</span><br><span class="line">3xx：重定向--要完成请求必须进行更进一步的操作</span><br><span class="line">4xx：客户端错误--请求有语法错误或请求无法实现</span><br><span class="line">5xx：服务器端错误--服务器未能实现合法的请求</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">200</span> OK - [GET]：服务器成功返回用户请求的数据，该操作是幂等的（Idempotent）。</span><br><span class="line"><span class="number">201</span> CREATED - [POST/PUT/PATCH]：用户新建或修改数据成功。</span><br><span class="line"><span class="number">202</span> Accepted - [*]：表示一个请求已经进入后台排队（异步任务）</span><br><span class="line"><span class="number">204</span> NO CONTENT - [DELETE]：用户删除数据成功。</span><br><span class="line"><span class="number">400</span> INVALID REQUEST - [POST/PUT/PATCH]：用户发出的请求有错误，服务器没有进行新建或修改数据的操作，该操作是幂等的。</span><br><span class="line"><span class="number">401</span> Unauthorized - [*]：表示用户没有权限（令牌、用户名、密码错误）。</span><br><span class="line"><span class="number">403</span> Forbidden - [*] 表示用户得到授权（与<span class="number">401</span>错误相对），但是访问是被禁止的。</span><br><span class="line"><span class="number">404</span> NOT FOUND - [*]：用户发出的请求针对的是不存在的记录，服务器没有进行操作，该操作是幂等的。</span><br><span class="line"><span class="number">406</span> Not Acceptable - [GET]：用户请求的格式不可得（比如用户请求JSON格式，但是只有XML格式）。</span><br><span class="line"><span class="number">410</span> Gone -[GET]：用户请求的资源被永久删除，且不会再得到的。</span><br><span class="line"><span class="number">422</span> Unprocesable entity - [POST/PUT/PATCH] 当创建一个对象时，发生一个验证错误。</span><br><span class="line"><span class="number">500</span> INTERNAL SERVER ERROR - [*]：服务器发生错误，用户将无法判断发出的请求是否成功。</span><br></pre></td></tr></table></figure>
+<h3 id="HTTPS"><a href="#HTTPS" class="headerlink" title="HTTPS"></a>HTTPS</h3><h4 id="aes与sra加密"><a href="#aes与sra加密" class="headerlink" title="aes与sra加密"></a>aes与sra加密</h4><ol>
+<li>aes是对称加密,秘钥只有一个,一般是256bit,<br>优点是加密速度快,<br>缺点是在不安全的网络中传输容易别窃取</li>
+<li>sra是非对称加密,分为公钥和私钥,公钥在网络中传输,私钥安全保存,<br>优点是网络传输更安全,<br>缺点是加密速度相对较慢</li>
+<li>结合两者:<br>将公钥给对方,让对方用公钥加密aes的秘钥,然后发回给自己,自己通过私钥解密获得aes秘钥后加密数据发给对方,对方就能用公用的aes秘钥解密,<br>这样既能保证加密速度,又能保证秘钥传输安全</li>
+</ol>
+<h4 id="非对称加密"><a href="#非对称加密" class="headerlink" title="非对称加密"></a>非对称加密</h4><ol>
+<li>公钥加密,私钥解密</li>
+<li>私钥签名,公钥认证</li>
+<li>其实公钥私钥可以相互解密</li>
+</ol>
+<h4 id="SSL层"><a href="#SSL层" class="headerlink" title="SSL层"></a>SSL层</h4><p>实现安全连接</p>
+<ul>
+<li>工作原理<br>重点为:加密/解密,认证和数据完整性</li>
+<li>证书<br>证书包括以下内容:</li>
+</ul>
+<ol>
+<li>公钥</li>
+<li>公钥的发布者</li>
+<li>证书的发行机构</li>
+<li>证书到期的时间戳<br>证书类型有:</li>
+<li>域名型SSL证书(DVSSL Domain Validation SSL)<br> 审核内容:域名 管理权限<br> 证书详情:使用者身份只显示某某域名<br> 一般用途:个人站点 IOS应用分发下载 登录等纯HTTPS加密需求的链接</li>
+<li>企业型SSL(OVSSL Organization Validation SSL)<br> 审核内容:域名管理权限 企业名称,地址,电话等信息的真实性<br> 证书详情:使用证身份显示公司名称<br> 一般用途:企业站点</li>
+<li>增强型SSL(EVSSL extend Validation SSL)<br> 审核内容:域名管理权限 企业名称地址电话等信息的真实性 第三方数据库的审查,例如邓白氏,114查号台,律师证明等<br> 证书详情:显示使用者显示公司名称<br> 一般用途:企业官网,电商,P2P等互联网金融网站</li>
+</ol>
+<ul>
+<li>数字签名<br>签名的目的是为了检查文件是否完整(被篡改)</li>
+</ul>
+<ol>
+<li>生成原文件的摘要</li>
+<li>使用私钥对摘要进行加密</li>
+<li>客户端通过对比使用公钥解密的摘要和重新生成的摘要判断消息完整性</li>
+</ol>
+<ul>
+<li>证书颁布过程</li>
+</ul>
+<ol>
+<li>Bob生成公钥和私钥,Bob用自己的公钥向证书机构申请证书,</li>
+<li>证书机构通过自己的私钥加密Bob的公钥,Bob的信息,证书机构的信息以及证书到期时间戳来生成证书</li>
+</ol>
+<ul>
+<li>认证过程</li>
+</ul>
+<ol>
+<li>Alice想要与Bob建立安全连接</li>
+<li>Bob将自己的证书发给Alice,通过证书机构的公钥解密证书(如果证书是假的,则解密出来就有问题)可以获得Bob的公钥</li>
+<li>Bob发送消息和私钥加密后的消息摘要(如果Bob是假的,那么生成的消息摘要Alice解密出来会有问题)给Alice</li>
+<li>Alice通过从证书中获取的公钥解密摘要,通过对比重新生成的摘要判断Bob身份的真实性</li>
+</ol>
+<h4 id="Socket通信"><a href="#Socket通信" class="headerlink" title="Socket通信"></a>Socket通信</h4><ol>
+<li>java封装类</li>
+<li>阻塞和非阻塞<ol>
+<li>Java服务器网络开发时， 请说明通讯中阻塞（blocking）/非阻塞（non-blocking 与 同步/异步IO的区别。<ol>
+<li>同步／异步主要针对客户端：<br> 同步：就是当客户端发出一个功能调用时，在没有得到结果之前，该调用就不返回。也就是说必须一件一件的事情去做，等一件做完了才能去做下一件。<br> 异步：就是当客户端发出一个功能调用时，调用者不用等接收方发出响应。实际处理这个调用的部件在完成后，会通过状态，通知和回调来通知调用者。客户端可以接着去做 后面的事情。<br> 虽然主要是针对客户端，但是服务器端不是完全没有关系的，同步／异步必须配合服务器端才能实现。同步／异步是由客户端自己控制，但是服务器端是否阻塞/非阻塞，客户端完全不需要关心。</li>
+<li>阻塞／非阻塞主要是针对服务器端：<br> 阻塞：阻塞调用是指服务器端被调用者调用结果返回之前，当前线程会被挂起。调用线程只有在得到结果之后才会返回。<br> 非阻塞：指在不能立即得到结果之前，该调用不会阻塞当前线程。</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+
+<h4 id="HTTPS-握手机制："><a href="#HTTPS-握手机制：" class="headerlink" title="HTTPS 握手机制："></a>HTTPS 握手机制：</h4><ol>
+<li>客户端 向服务器发起请求。</li>
+<li>服务端 取出公有密钥及证书并发送给客户端。</li>
+<li>客户端判断公有密钥是否有效，无效则显示警告。有效则生成一个随机数串，并以此生成客户端的对称密钥。</li>
+<li>用步骤 2 到的公有密钥对该随机数串加密，发送到服务器。</li>
+<li>服务器得到加密报文，用私有密钥解密报文，得到随机数串，并以此生成服务器端的对称密钥。此时客户端和服务端拥有相同的对称密钥，可以用该对称密钥进行安全通信。</li>
+<li>服务器对响应进行加密，客户端对报文进行解密。</li>
+</ol>
+<h4 id="跨站请求伪造"><a href="#跨站请求伪造" class="headerlink" title="跨站请求伪造"></a>跨站请求伪造</h4><p>CSRF:Cross—Site Request Forgery<br>参考地址:<a href="http://blog.csdn.net/stpeace/article/details/53512283" target="_blank" rel="noopener">http://blog.csdn.net/stpeace/article/details/53512283</a><br>过程:</p>
+<ol>
+<li>me登录网易邮箱</li>
+<li>hack制作了钓鱼网站</li>
+<li>me在没有登出邮箱的时候访问了钓鱼网站</li>
+<li>于是钓鱼网站通过me的浏览器访问了网易邮箱,带着me的cookie(此时me的浏览器与网易邮箱网站服务器之间的session尚未过期)进行了一些操作</li>
+</ol>
+<h5 id="防御CSRF攻击"><a href="#防御CSRF攻击" class="headerlink" title="防御CSRF攻击"></a>防御CSRF攻击</h5><ol>
+<li>验证HTTP referer字段<br>HTTP referer指向前一个网页的URL,而hack要发起跨站请求伪造的话只能通过他的钓鱼网站发起,合法的HTTP referer一般都是网易邮箱的页面的URL.但是这种方法依赖于浏览器的安全性和设置,浏览器可以设置成不带上referer值</li>
+<li>在请求地址中添加token并验证<br>服务器生成token发给客户端,然后客户端发起请求的时候带上token<br>GET将token放在URL后面<br>POST则将请求放在form标签最后加上<code>&lt;input type=&quot;hidden&quot; name=&quot;token&quot; value=&quot;tokenValue&quot;&gt;</code><br>但是一些论坛网站中token很难保证安全,以为用户可以自己发帖子,然后帖子中的链接就会带上token</li>
+<li>在HTTP头中增加自定义属性并验证</li>
+</ol>
+<h2 id="http-1-0-http-1-1-http-2之间的区别"><a href="#http-1-0-http-1-1-http-2之间的区别" class="headerlink" title="http/1.0 http/1.1 http/2之间的区别"></a>http/1.0 http/1.1 http/2之间的区别</h2><h2 id="http-3"><a href="#http-3" class="headerlink" title="http/3"></a>http/3</h2><h2 id="Java-RMI，Socket，HttpClient"><a href="#Java-RMI，Socket，HttpClient" class="headerlink" title="Java RMI，Socket，HttpClient"></a>Java RMI，Socket，HttpClient</h2><h2 id="cookie-与-session"><a href="#cookie-与-session" class="headerlink" title="cookie 与 session"></a>cookie 与 session</h2><blockquote>
+<p>参考地址:<a href="https://www.javazhiyin.com/12939.html" target="_blank" rel="noopener">https://www.javazhiyin.com/12939.html</a> </p>
+</blockquote>
+<h3 id="会话跟踪的方式"><a href="#会话跟踪的方式" class="headerlink" title="会话跟踪的方式"></a>会话跟踪的方式</h3><ol>
+<li>URL重写<br>通过URL带上会话ID</li>
+<li>隐藏表单域<br>将会话ID添加到HTML表单提交到服务器</li>
+</ol>
+<h3 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a>cookie</h3><p>客户端可以保存在内存中(临时cookie),也可以保存到硬盘上(有效期cookie),<br>用cookie写一个历史浏览记录</p>
+<h3 id="session"><a href="#session" class="headerlink" title="session"></a>session</h3><p>session依赖于cookie</p>
+<ul>
+<li>用session实现购物记录</li>
+</ul>
+<ol>
+<li>session的原理 </li>
+<li>设置session的有效期 </li>
+<li>浏览器禁用Cookie后servlet共享数据导致的问题:url重写</li>
+</ol>
+<ul>
+<li>session的常见应用</li>
+</ul>
+<ol>
+<li>登录 </li>
+<li>防止表单重复提交 前台javaScript 后台表单带随机数 </li>
+<li>实现一次性校验码<br>实现带验证码的登录</li>
+</ol>
+<h3 id="cookie被禁用，如何实现session"><a href="#cookie被禁用，如何实现session" class="headerlink" title="cookie被禁用，如何实现session"></a>cookie被禁用，如何实现session</h3><h2 id="用Java写一个简单的静态文件的HTTP服务器"><a href="#用Java写一个简单的静态文件的HTTP服务器" class="headerlink" title="用Java写一个简单的静态文件的HTTP服务器"></a>用Java写一个简单的静态文件的HTTP服务器</h2><h2 id="了解nginx和apache服务器的特性并搭建一个对应的服务器"><a href="#了解nginx和apache服务器的特性并搭建一个对应的服务器" class="headerlink" title="了解nginx和apache服务器的特性并搭建一个对应的服务器"></a>了解nginx和apache服务器的特性并搭建一个对应的服务器</h2><h2 id="用Java实现FTP、SMTP协议"><a href="#用Java实现FTP、SMTP协议" class="headerlink" title="用Java实现FTP、SMTP协议"></a>用Java实现FTP、SMTP协议</h2><h2 id="进程间通讯的方式"><a href="#进程间通讯的方式" class="headerlink" title="进程间通讯的方式"></a>进程间通讯的方式</h2><h2 id="什么是CDN？如果实现？"><a href="#什么是CDN？如果实现？" class="headerlink" title="什么是CDN？如果实现？"></a>什么是CDN？如果实现？</h2><ol>
+<li>cdn<br>内容分发网络(content delivery network)</li>
+</ol>
+<blockquote>
+<p>参考地址:<a href="https://www.jianshu.com/p/57433bc34659" target="_blank" rel="noopener">https://www.jianshu.com/p/57433bc34659</a></p>
+</blockquote>
+<h2 id="DNS？"><a href="#DNS？" class="headerlink" title="DNS？"></a>DNS？</h2><p>什么是DNS 、记录类型:A记录、CNAME记录、AAAA记录等</p>
+<p>域名解析、根域名服务器</p>
+<p>DNS污染、DNS劫持、公共DNS：114 DNS、Google DNS、OpenDNS</p>
+<h2 id="代理"><a href="#代理" class="headerlink" title="代理"></a>代理</h2><h3 id="正向代理"><a href="#正向代理" class="headerlink" title="正向代理"></a>正向代理</h3>
+<p>正向代理的用途</p>
+<ol>
+<li>突破访问限制<br>通过代理服务器，可以突破自身IP访问限制，访问国外网站，教育网等。</li>
+<li>提高访问速度 通常代理服务器都设置一个较大的硬盘缓冲区，会将部分请求的响应保存到缓冲区中，当其他用户再访问相同的信息时,则直接由缓冲区中取出信息，传给用户，以提高访问速度。</li>
+<li>隐藏客户端真实IP<br>上网者也可以通过这种方法隐藏自己的IP，免受攻击。</li>
+</ol>
+<h3 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h3>
+<ol>
+<li>隐藏服务器真实IP<br>使用反向代理，可以对客户端隐藏服务器的IP地址。</li>
+<li>负载均衡<br>反向代理服务器可以做负载均衡，根据所有真实服务器的负载情况，将客户端请求分发到不同的真实服务器上。</li>
+<li>提高访问速度<br>反向代理服务器可以对于静态内容及短时间内有大量访问请求的动态内容提供缓存服务，提高访问速度。</li>
+<li>提供安全保障<br>反向代理服务器可以作为应用层防火墙，为网站提供对基于Web的攻击行为（例如DoS/DDoS）的防护，更容易排查恶意软件等。还可以为后端服务器统一提供加密和SSL加速（如SSL终端代理），提供HTTP访问认证等。</li>
+</ol>
+<h3 id="反向代理服务器"><a href="#反向代理服务器" class="headerlink" title="反向代理服务器"></a>反向代理服务器</h3>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/19/toBeTopJavaer-扩展篇/" rel="next" title="toBeTopJavaer-扩展篇">
+                <i class="fa fa-chevron-left"></i> toBeTopJavaer-扩展篇
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/22/spring-boot-in-action/" rel="prev" title="spring-boot-in-action">
+                spring-boot-in-action <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">ninghuang</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">55</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">75</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#网络模型"><span class="nav-number">1.</span> <span class="nav-text">网络模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#模型对比"><span class="nav-number">1.1.</span> <span class="nav-text">模型对比</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OSI七层模型"><span class="nav-number">1.2.</span> <span class="nav-text">OSI七层模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五层模型"><span class="nav-number">1.3.</span> <span class="nav-text">五层模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#从设计者角度看流程"><span class="nav-number">1.4.</span> <span class="nav-text">从设计者角度看流程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#物理层"><span class="nav-number">1.4.1.</span> <span class="nav-text">物理层</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据链路层-MAC地址"><span class="nav-number">1.5.</span> <span class="nav-text">数据链路层(MAC地址)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#网络层-IP地址"><span class="nav-number">1.5.1.</span> <span class="nav-text">网络层(IP地址)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#传输层-端口号"><span class="nav-number">1.5.2.</span> <span class="nav-text">传输层(端口号)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#应用层-http协议"><span class="nav-number">1.5.3.</span> <span class="nav-text">应用层(http协议)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#从用户角度看流程"><span class="nav-number">1.6.</span> <span class="nav-text">从用户角度看流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#电脑是如何上网的"><span class="nav-number">1.7.</span> <span class="nav-text">电脑是如何上网的</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tcp、udp、http、https等常用协议"><span class="nav-number">2.</span> <span class="nav-text">tcp、udp、http、https等常用协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#tcp协议"><span class="nav-number">2.1.</span> <span class="nav-text">tcp协议</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#简介"><span class="nav-number">2.1.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三次握手与四次关闭"><span class="nav-number">2.1.2.</span> <span class="nav-text">三次握手与四次关闭</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#流量控制和拥塞控制"><span class="nav-number">2.1.3.</span> <span class="nav-text">流量控制和拥塞控制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#tcp粘包与拆包"><span class="nav-number">2.1.4.</span> <span class="nav-text">tcp粘包与拆包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#tcp和udp比较"><span class="nav-number">2.1.5.</span> <span class="nav-text">tcp和udp比较</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#udp协议"><span class="nav-number">2.2.</span> <span class="nav-text">udp协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#http协议"><span class="nav-number">2.3.</span> <span class="nav-text">http协议</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#特点"><span class="nav-number">2.3.1.</span> <span class="nav-text">特点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#http请求方法"><span class="nav-number">2.3.2.</span> <span class="nav-text">http请求方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关于GET-POST-PUT的区别"><span class="nav-number">2.3.3.</span> <span class="nav-text">关于GET,POST,PUT的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#请求和响应"><span class="nav-number">2.3.4.</span> <span class="nav-text">请求和响应</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常见http协议状态码"><span class="nav-number">2.3.5.</span> <span class="nav-text">常见http协议状态码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTPS"><span class="nav-number">2.4.</span> <span class="nav-text">HTTPS</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#aes与sra加密"><span class="nav-number">2.4.1.</span> <span class="nav-text">aes与sra加密</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#非对称加密"><span class="nav-number">2.4.2.</span> <span class="nav-text">非对称加密</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SSL层"><span class="nav-number">2.4.3.</span> <span class="nav-text">SSL层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Socket通信"><span class="nav-number">2.4.4.</span> <span class="nav-text">Socket通信</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HTTPS-握手机制："><span class="nav-number">2.4.5.</span> <span class="nav-text">HTTPS 握手机制：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#跨站请求伪造"><span class="nav-number">2.4.6.</span> <span class="nav-text">跨站请求伪造</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#防御CSRF攻击"><span class="nav-number">2.4.6.1.</span> <span class="nav-text">防御CSRF攻击</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#http-1-0-http-1-1-http-2之间的区别"><span class="nav-number">3.</span> <span class="nav-text">http/1.0 http/1.1 http/2之间的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#http-3"><span class="nav-number">4.</span> <span class="nav-text">http/3</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java-RMI，Socket，HttpClient"><span class="nav-number">5.</span> <span class="nav-text">Java RMI，Socket，HttpClient</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cookie-与-session"><span class="nav-number">6.</span> <span class="nav-text">cookie 与 session</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#会话跟踪的方式"><span class="nav-number">6.1.</span> <span class="nav-text">会话跟踪的方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cookie"><span class="nav-number">6.2.</span> <span class="nav-text">cookie</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#session"><span class="nav-number">6.3.</span> <span class="nav-text">session</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cookie被禁用，如何实现session"><span class="nav-number">6.4.</span> <span class="nav-text">cookie被禁用，如何实现session</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用Java写一个简单的静态文件的HTTP服务器"><span class="nav-number">7.</span> <span class="nav-text">用Java写一个简单的静态文件的HTTP服务器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#了解nginx和apache服务器的特性并搭建一个对应的服务器"><span class="nav-number">8.</span> <span class="nav-text">了解nginx和apache服务器的特性并搭建一个对应的服务器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用Java实现FTP、SMTP协议"><span class="nav-number">9.</span> <span class="nav-text">用Java实现FTP、SMTP协议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程间通讯的方式"><span class="nav-number">10.</span> <span class="nav-text">进程间通讯的方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是CDN？如果实现？"><span class="nav-number">11.</span> <span class="nav-text">什么是CDN？如果实现？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DNS？"><span class="nav-number">12.</span> <span class="nav-text">DNS？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代理"><span class="nav-number">13.</span> <span class="nav-text">代理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#正向代理"><span class="nav-number">13.1.</span> <span class="nav-text">正向代理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#反向代理"><span class="nav-number">13.2.</span> <span class="nav-text">反向代理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#反向代理服务器"><span class="nav-number">13.3.</span> <span class="nav-text">反向代理服务器</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ninghuang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

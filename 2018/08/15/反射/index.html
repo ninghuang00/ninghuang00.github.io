@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Just Try It">
 <meta property="og:description" content="这是摘要">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-19T05:58:19.000Z">
+<meta property="og:updated_time" content="2019-04-22T08:48:19.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="反射">
 <meta name="twitter:description" content="这是摘要">
@@ -358,16 +358,19 @@
       
         <p> 这是摘要<br> <a id="more"></a></p>
 <h2 id="为什么"><a href="#为什么" class="headerlink" title="为什么"></a>为什么</h2><p>因为有时候编码的时候需要实例化的类并不明确,需要在运行时动态加载,随机应变.<br>比如在运行的时候不知道传进来的classPath具体是哪一个(但是知道它会继承某个类或者实现某个接口).</p>
-<h2 id="Class类"><a href="#Class类" class="headerlink" title="Class类"></a>Class类</h2><p>可以理解成类类型对象</p>
-<h3 id="三种使用方式"><a href="#三种使用方式" class="headerlink" title="三种使用方式"></a>三种使用方式</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//方式1 可以把class理解成User类的隐藏的静态类成员变量</span></span><br><span class="line">Class clazz1 = User.class;</span><br><span class="line"><span class="comment">//方式2 继承自Object对象的 public final native Class&lt;?&gt; getClass();</span></span><br><span class="line">User user = <span class="keyword">new</span> User();</span><br><span class="line">Class clazz2 = user.getClass();</span><br><span class="line"><span class="comment">//方式3 </span></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    Class clazz3 = Class.forName(<span class="string">"cn.hn.Demo"</span>);</span><br><span class="line">&#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">    e.printStackTrace();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Class类"><a href="#Class类" class="headerlink" title="Class类"></a>Class类</h2><p>可以理解成类类型对象,三种使用方式<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//方式1 可以把class理解成User类的隐藏的静态类成员变量</span></span><br><span class="line">Class clazz1 = User.class;</span><br><span class="line"><span class="comment">//方式2 继承自Object对象的 public final native Class&lt;?&gt; getClass();</span></span><br><span class="line">User user = <span class="keyword">new</span> User();</span><br><span class="line">Class clazz2 = user.getClass();</span><br><span class="line"><span class="comment">//方式3 </span></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    Class clazz3 = Class.forName(<span class="string">"cn.hn.Demo"</span>);</span><br><span class="line">&#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">    e.printStackTrace();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h3 id="类加载"><a href="#类加载" class="headerlink" title="类加载"></a>类加载</h3><ol>
 <li>静态加载类<br>通过new创建对象是静态加载类,需要在编译的时候就将所有可能使用到的类加载好,如果程序中要用到的类找不到,编译就会通不过</li>
-<li>动态加载类<br>在代码中使用反射创建类对象(<code>Class.forName()</code>),然后使用,这样就是在运行时刻才决定加载那个类,</li>
+<li>动态加载类<br>在代码中使用反射创建类对象(<code>Class.forName()</code>),然后使用,这样就是在运行时刻才决定加载那个类</li>
 </ol>
 <h3 id="使用反射获取类信息"><a href="#使用反射获取类信息" class="headerlink" title="使用反射获取类信息"></a>使用反射获取类信息</h3><ol>
-<li>获取成员变量</li>
+<li>访问私有变量和私有方法<ol>
+<li>调用类的getDeclaredFields()和getDeclaredMethods()方法获得相应的field和method</li>
+<li>调用method和field的setAccessible()方法允许访问私有成员属性</li>
+<li>field调用get(实例)方法,获得对应field的值</li>
+<li>method调用invoke()方法执行私有方法</li>
 </ol>
-<ol start="2">
+</li>
 <li><p>获取方法</p>
 <ol>
 <li><p><code>getDeclaredMethods()</code><br>获取类自己声明的public,private的方法,不包括从父类继承的,反射不能直接获得父类的方法<br>反射父类方法:</p>
@@ -459,8 +462,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/08/16/信号量/" rel="prev" title="信号量">
-                信号量 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/08/18/maven入门/" rel="prev" title="maven入门">
+                maven入门 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -538,7 +541,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-count">55</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -549,7 +552,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -560,7 +563,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">117</span>
+                  <span class="site-state-item-count">75</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -593,7 +596,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么"><span class="nav-number">1.</span> <span class="nav-text">为什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Class类"><span class="nav-number">2.</span> <span class="nav-text">Class类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#三种使用方式"><span class="nav-number">2.1.</span> <span class="nav-text">三种使用方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类加载"><span class="nav-number">2.2.</span> <span class="nav-text">类加载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用反射获取类信息"><span class="nav-number">2.3.</span> <span class="nav-text">使用反射获取类信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过反射理解泛型的本质"><span class="nav-number">2.4.</span> <span class="nav-text">通过反射理解泛型的本质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#反射的应用场景"><span class="nav-number">2.5.</span> <span class="nav-text">反射的应用场景</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么"><span class="nav-number">1.</span> <span class="nav-text">为什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Class类"><span class="nav-number">2.</span> <span class="nav-text">Class类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#类加载"><span class="nav-number">2.1.</span> <span class="nav-text">类加载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用反射获取类信息"><span class="nav-number">2.2.</span> <span class="nav-text">使用反射获取类信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过反射理解泛型的本质"><span class="nav-number">2.3.</span> <span class="nav-text">通过反射理解泛型的本质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#反射的应用场景"><span class="nav-number">2.4.</span> <span class="nav-text">反射的应用场景</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -613,7 +616,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
