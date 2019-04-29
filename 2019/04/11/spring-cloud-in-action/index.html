@@ -79,20 +79,21 @@
 
 
 
-<meta name="description" content="这是摘要">
+<meta name="description" content="spring cloud微服务实战实践笔记">
 <meta property="og:type" content="article">
 <meta property="og:title" content="spring-cloud-in-action">
 <meta property="og:url" content="http://yoursite.com/2019/04/11/spring-cloud-in-action/index.html">
 <meta property="og:site_name" content="Just Try It">
-<meta property="og:description" content="这是摘要">
+<meta property="og:description" content="spring cloud微服务实战实践笔记">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2019/04/11/spring-cloud-in-action/eureka-server-peer1.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/11/spring-cloud-in-action/eureka-server-peer2.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/11/spring-cloud-in-action/eureka服务治理机制.png">
-<meta property="og:updated_time" content="2019-04-19T11:32:19.000Z">
+<meta property="og:image" content="http://yoursite.com/2019/04/11/spring-cloud-in-action/hystrix工作流程.png">
+<meta property="og:updated_time" content="2019-04-27T12:59:25.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="spring-cloud-in-action">
-<meta name="twitter:description" content="这是摘要">
+<meta name="twitter:description" content="spring cloud微服务实战实践笔记">
 <meta name="twitter:image" content="http://yoursite.com/2019/04/11/spring-cloud-in-action/eureka-server-peer1.png">
 
 
@@ -359,7 +360,7 @@
       
 
       
-        <p> 这是摘要<br> <a id="more"></a></p>
+        <p> spring cloud微服务实战实践笔记<br> <a id="more"></a></p>
 <h2 id="碰到的问题"><a href="#碰到的问题" class="headerlink" title="碰到的问题"></a>碰到的问题</h2><ol>
 <li>UnknownHostException异常,服务消费者无法通过服务名消费服务<br>是因为spring-cloud和eureka以及ribbon的版本搭配不对,spring-cloud的Finchley版本应该使用spring-cloud-starter-netfilx-eureka-server,spring-cloud-starter-netfilx-eureka-client和spring-cloud-starter-netfilx-ribbon</li>
 </ol>
@@ -395,7 +396,7 @@
 </table>
 <h3 id="spring-cloud和eureka的版本关系"><a href="#spring-cloud和eureka的版本关系" class="headerlink" title="spring-cloud和eureka的版本关系"></a>spring-cloud和eureka的版本关系</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependencies&gt;</span><br><span class="line">	&lt;!--注册中心依赖--&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;spring-cloud-starter-netflix-eureka-server&lt;/artifactId&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">    &lt;!-- 服务提供者依赖 --&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;spring-cloud-starter-netflix-eureka-client&lt;/artifactId&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">    &lt;!-- 负载均衡,服务消费者依赖 --&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;spring-cloud-starter-netflix-ribbon&lt;/artifactId&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">&lt;/dependencies&gt;</span><br><span class="line">&lt;dependencyManagement&gt;</span><br><span class="line">    &lt;dependencies&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-cloud-dependencies&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;Finchley.RELEASE&lt;/version&gt;</span><br><span class="line">            &lt;type&gt;pom&lt;/type&gt;</span><br><span class="line">            &lt;scope&gt;import&lt;/scope&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">    &lt;/dependencies&gt;</span><br><span class="line">&lt;/dependencyManagement&gt;</span><br></pre></td></tr></table></figure>
 <h2 id="启动java应用是配置内存限制"><a href="#启动java应用是配置内存限制" class="headerlink" title="启动java应用是配置内存限制"></a>启动java应用是配置内存限制</h2><p><code>nohup java -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=128m -Xms1024m -Xmx1024m -Xmn256m -Xss256k -XX:SurvivorRatio=8 -XX:+UseConcMarkSweepGC -jar /jar包路径</code><br> -XX:MetaspaceSize=128m: 元空间初始大小<br> -XX:MaxMetaspaceSize=128m: 元空间最大值<br> -Xms1024m :堆初始化<br> -Xmx1024m :堆最大值<br> -Xmn256m :新生代大小<br> -Xss256k :栈大小<br> -XX:SurvivorRatio=8 :新生代老年代比例<br> -XX:+UseConcMarkSweepGC :</p>
-<h2 id="eureka-server配置"><a href="#eureka-server配置" class="headerlink" title="eureka-server配置"></a>eureka-server配置</h2><ol>
+<h1 id="第三章-服务治理"><a href="#第三章-服务治理" class="headerlink" title="第三章 服务治理"></a>第三章 服务治理</h1><h2 id="eureka-server配置"><a href="#eureka-server配置" class="headerlink" title="eureka-server配置"></a>eureka-server配置</h2><ol>
 <li><p>依赖</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;parent&gt;</span><br><span class="line">	&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;</span><br><span class="line">	&lt;version&gt;2.0.4.RELEASE&lt;/version&gt; &lt;!-- lookup parent from repository --&gt;</span><br><span class="line">&lt;/parent&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--注册中心依赖--&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-cloud-starter-netflix-eureka-server&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">&lt;dependencyManagement&gt;</span><br><span class="line">    &lt;dependencies&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-cloud-dependencies&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;Finchley.RELEASE&lt;/version&gt;</span><br><span class="line">            &lt;type&gt;pom&lt;/type&gt;</span><br><span class="line">            &lt;scope&gt;import&lt;/scope&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">    &lt;/dependencies&gt;</span><br><span class="line">&lt;/dependencyManagement&gt;</span><br></pre></td></tr></table></figure>
 </li>
@@ -497,7 +498,7 @@
 </code></pre><ol start="3">
 <li>拦截器LoadBalancerInterceptor类<br>该类中首先注入了LoadBalancerClient的实现(RibbonLoadBalancerClient),然后在intercept()方法中调用client的execute()方法对拦截到的请求进行处理,execute()方法的第一步就是根据传入的serviceId获取服务实例,</li>
 </ol>
-<h3 id="负载均衡的策略"><a href="#负载均衡的策略" class="headerlink" title="负载均衡的策略"></a>负载均衡的策略</h3><ol>
+<h1 id="第四章-负载均衡策略"><a href="#第四章-负载均衡策略" class="headerlink" title="第四章 负载均衡策略"></a>第四章 负载均衡策略</h1><ol>
 <li>RandomRule<br>根据服务实例列表的大小,随机产生一个数字选取实例</li>
 <li>RoundRobinRule<br>线性循环使用服务实例</li>
 <li>RetryRule<br>可反复重试的策略,规定时间内如果一直获取不到可用的服务实例就返回null</li>
@@ -525,6 +526,58 @@
 </ol>
 </li>
 </ol>
+<h1 id="第五章-断路器"><a href="#第五章-断路器" class="headerlink" title="第五章 断路器"></a>第五章 断路器</h1><h2 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h2><p>配置在服务消费端<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--断路器依赖--&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-cloud-starter-netflix-hystrix&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure></p>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><ol>
+<li>在主程序添加<code>@EnableCircuitBreaker</code>注解启动断路器</li>
+<li>在service类中相应的方法上添加<code>@HystrixCommand(fallbackMethod = &quot;helloFallback&quot;)</code>注解,并编写<code>helloFallback()</code>方法处理返回超时的情况</li>
+</ol>
+<h2 id="原理解析"><a href="#原理解析" class="headerlink" title="原理解析"></a>原理解析</h2><h3 id="工作流程"><a href="#工作流程" class="headerlink" title="工作流程"></a>工作流程</h3><img src="/2019/04/11/spring-cloud-in-action/hystrix工作流程.png" title="hystrix工作流程">
+<ol>
+<li>创建HystrixCommand或HystrixObservableCommand对象<br>用来表示对依赖的服务的操作请求,从命名中可以看出这是使用命令模式设计的,分别用于处理返回一个结果和多个结果的应用场景.</li>
+<li>执行命令<ul>
+<li>HystrixCommand实现了两个方法:</li>
+</ul>
+<ol>
+<li>execute():同步执行,从依赖的服务返回一个单一的结果对象,其实就是调用的queue().get()</li>
+<li>queue():异步执行,直接返回一个Future对象,其中包含了服务执行结束时要返回的单一结果对象</li>
+</ol>
+<ul>
+<li>HystrixObservableCommand实现了:</li>
+</ul>
+<ol>
+<li>observe():返回Observable对象,代表了操作的多个结果,是一个Hot Observable,即”事件源”在没有”订阅者”的时候也会发布,订阅者可能只能看到整个操作的局部</li>
+<li>toObservable():返回的也是Observable对象,但是是一个Cold Observable,即”事件源”在没有”订阅者”的时候不会进行发布</li>
+</ol>
+</li>
+<li>结果是否被缓存<br>如果当前命令的请求缓存功能开启,并且缓存命中,那么就将缓存结果以Observable对象的形式直接返回</li>
+<li>断路器是否打开<br>在命令结果没有缓存命中的时候会检查是否打开了断路器</li>
+</ol>
+<ul>
+<li>如果断路器是打开的,那么会直接调用fallback处理逻辑(跳到步骤8)</li>
+<li>如果断路器没有打开,那么进行步骤5,检查是否有可用的资源来执行命令</li>
+</ul>
+<ol start="5">
+<li>线程池/请求队列/信号量是否占满<br>如果被占满了,那么进入步骤8,调用fallback处理逻辑.这里的线程池不是容器的线程池,而是为了隔离依赖服务而为每个服务创建的独立的线程池,避免因为某个服务的延迟太高而影响到了其他服务,也叫做”舱壁模式”</li>
+<li>调用HystrixCommand.run()或者HystrixObservableCommand.construct()根据用户具体实现进行处理<br>如果方法执行时间超过了设定的阈值,那么进入步骤8执行fallback处理逻辑.如果没有抛出异常并且返回了结果,那么最终会返回Observable对象</li>
+<li>计算断路器的监健康度</li>
+<li>fallback处理逻辑</li>
+</ol>
+<h3 id="断路器的原理"><a href="#断路器的原理" class="headerlink" title="断路器的原理"></a>断路器的原理</h3><p>主要是接口HystrixCircuitBreaker及其实现类HystrixCircuitBreakerImpl,其中HystrixCircuitBreakerImpl实现类包括了4个核心对象:</p>
+<ul>
+<li>HystrixCommandPropertites:断路器对应的HystrixCommand实例的属性对象</li>
+<li>HystrixCommandMetrics:用来让HystrixCommand记录各类度量指标</li>
+<li>AtomicBoolean circuitOpen:断路器是否打开的标记</li>
+<li>AtomicLong circuitOpenedOrLastTestedTime:断路器上一次打开或是测试的时间戳</li>
+</ul>
+<h2 id="使用详解"><a href="#使用详解" class="headerlink" title="使用详解"></a>使用详解</h2><h3 id="创建请求命令"><a href="#创建请求命令" class="headerlink" title="创建请求命令"></a>创建请求命令</h3><ol>
+<li>继承HystrixCommand抽象类,实现其中的run()方法,在其中实现请求依赖服务的具体逻辑,使用的时候就是:<code>User user = new UserCommand(RestTemplate,id).execute()</code>进行同步调用,或者是<code>Future&lt;User&gt; future = newUserCommand(RestTemplate,id).queue()</code>进行异步调用.</li>
+<li>也可以使用<code>@HystrixCommand</code>直接来实现,但是如果需要异步调用,需要额外的处理</li>
+</ol>
+<h3 id="定义服务降级"><a href="#定义服务降级" class="headerlink" title="定义服务降级"></a>定义服务降级</h3><ol>
+<li>继承HystrixCommand,覆写其中的getFallback()方法即可</li>
+<li>如果是使用<code>@HystrixCommand</code>注解实现的命令,则在注解中配置<code>fallbackMethod</code>参数即可</li>
+</ol>
+<h3 id="请求缓存"><a href="#请求缓存" class="headerlink" title="请求缓存"></a>请求缓存</h3><h3 id="请求合并"><a href="#请求合并" class="headerlink" title="请求合并"></a>请求合并</h3><h2 id="Hystrix仪表盘"><a href="#Hystrix仪表盘" class="headerlink" title="Hystrix仪表盘"></a>Hystrix仪表盘</h2><p>可以使用Hystrix dashboard监控请求命令的信息</p>
 
       
     </div>
@@ -693,7 +746,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#碰到的问题"><span class="nav-number">1.</span> <span class="nav-text">碰到的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#版本对应关系"><span class="nav-number">2.</span> <span class="nav-text">版本对应关系</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#spring-boot和spring-cloud的版本关系"><span class="nav-number">2.1.</span> <span class="nav-text">spring-boot和spring-cloud的版本关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#spring-cloud和eureka的版本关系"><span class="nav-number">2.2.</span> <span class="nav-text">spring-cloud和eureka的版本关系</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动java应用是配置内存限制"><span class="nav-number">3.</span> <span class="nav-text">启动java应用是配置内存限制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#eureka-server配置"><span class="nav-number">4.</span> <span class="nav-text">eureka-server配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#eureka-client配置"><span class="nav-number">5.</span> <span class="nav-text">eureka-client配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动两个注册中心eureka-server和两个服务器提供者eureka-client之后的效果"><span class="nav-number">6.</span> <span class="nav-text">启动两个注册中心eureka-server和两个服务器提供者eureka-client之后的效果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务消费者配置-这里使用的ribbon实现"><span class="nav-number">7.</span> <span class="nav-text">服务消费者配置,这里使用的ribbon实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#eureka服务治理机制"><span class="nav-number">8.</span> <span class="nav-text">eureka服务治理机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#服务提供者"><span class="nav-number">8.1.</span> <span class="nav-text">服务提供者</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务消费者"><span class="nav-number">9.</span> <span class="nav-text">服务消费者</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务注册中心"><span class="nav-number">10.</span> <span class="nav-text">服务注册中心</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#eureka-server和eureka-client的配置类"><span class="nav-number">11.</span> <span class="nav-text">eureka-server和eureka-client的配置类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#eureka-instance配置类"><span class="nav-number">12.</span> <span class="nav-text">eureka-instance配置类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#健康状态信息页面配置"><span class="nav-number">13.</span> <span class="nav-text">健康状态信息页面配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#端点配置"><span class="nav-number">13.1.</span> <span class="nav-text">端点配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#健康监测"><span class="nav-number">13.2.</span> <span class="nav-text">健康监测</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ribbon实现客户端负载均衡的原理"><span class="nav-number">14.</span> <span class="nav-text">ribbon实现客户端负载均衡的原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RestTemplate介绍"><span class="nav-number">14.1.</span> <span class="nav-text">RestTemplate介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#负载均衡源码分析"><span class="nav-number">14.2.</span> <span class="nav-text">负载均衡源码分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#负载均衡的策略"><span class="nav-number">14.3.</span> <span class="nav-text">负载均衡的策略</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#碰到的问题"><span class="nav-number">1.</span> <span class="nav-text">碰到的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#版本对应关系"><span class="nav-number">2.</span> <span class="nav-text">版本对应关系</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#spring-boot和spring-cloud的版本关系"><span class="nav-number">2.1.</span> <span class="nav-text">spring-boot和spring-cloud的版本关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#spring-cloud和eureka的版本关系"><span class="nav-number">2.2.</span> <span class="nav-text">spring-cloud和eureka的版本关系</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动java应用是配置内存限制"><span class="nav-number">3.</span> <span class="nav-text">启动java应用是配置内存限制</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第三章-服务治理"><span class="nav-number"></span> <span class="nav-text">第三章 服务治理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#eureka-server配置"><span class="nav-number">1.</span> <span class="nav-text">eureka-server配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#eureka-client配置"><span class="nav-number">2.</span> <span class="nav-text">eureka-client配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动两个注册中心eureka-server和两个服务器提供者eureka-client之后的效果"><span class="nav-number">3.</span> <span class="nav-text">启动两个注册中心eureka-server和两个服务器提供者eureka-client之后的效果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务消费者配置-这里使用的ribbon实现"><span class="nav-number">4.</span> <span class="nav-text">服务消费者配置,这里使用的ribbon实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#eureka服务治理机制"><span class="nav-number">5.</span> <span class="nav-text">eureka服务治理机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#服务提供者"><span class="nav-number">5.1.</span> <span class="nav-text">服务提供者</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务消费者"><span class="nav-number">6.</span> <span class="nav-text">服务消费者</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务注册中心"><span class="nav-number">7.</span> <span class="nav-text">服务注册中心</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#eureka-server和eureka-client的配置类"><span class="nav-number">8.</span> <span class="nav-text">eureka-server和eureka-client的配置类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#eureka-instance配置类"><span class="nav-number">9.</span> <span class="nav-text">eureka-instance配置类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#健康状态信息页面配置"><span class="nav-number">10.</span> <span class="nav-text">健康状态信息页面配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#端点配置"><span class="nav-number">10.1.</span> <span class="nav-text">端点配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#健康监测"><span class="nav-number">10.2.</span> <span class="nav-text">健康监测</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ribbon实现客户端负载均衡的原理"><span class="nav-number">11.</span> <span class="nav-text">ribbon实现客户端负载均衡的原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RestTemplate介绍"><span class="nav-number">11.1.</span> <span class="nav-text">RestTemplate介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#负载均衡源码分析"><span class="nav-number">11.2.</span> <span class="nav-text">负载均衡源码分析</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第四章-负载均衡策略"><span class="nav-number"></span> <span class="nav-text">第四章 负载均衡策略</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第五章-断路器"><span class="nav-number"></span> <span class="nav-text">第五章 断路器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#依赖"><span class="nav-number">1.</span> <span class="nav-text">依赖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用"><span class="nav-number">2.</span> <span class="nav-text">使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原理解析"><span class="nav-number">3.</span> <span class="nav-text">原理解析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#工作流程"><span class="nav-number">3.1.</span> <span class="nav-text">工作流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#断路器的原理"><span class="nav-number">3.2.</span> <span class="nav-text">断路器的原理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用详解"><span class="nav-number">4.</span> <span class="nav-text">使用详解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建请求命令"><span class="nav-number">4.1.</span> <span class="nav-text">创建请求命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#定义服务降级"><span class="nav-number">4.2.</span> <span class="nav-text">定义服务降级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#请求缓存"><span class="nav-number">4.3.</span> <span class="nav-text">请求缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#请求合并"><span class="nav-number">4.4.</span> <span class="nav-text">请求合并</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hystrix仪表盘"><span class="nav-number">5.</span> <span class="nav-text">Hystrix仪表盘</span></a></li></ol></div>
             
 
           </div>

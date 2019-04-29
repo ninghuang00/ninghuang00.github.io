@@ -90,7 +90,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/08/19/concurrent包常用类/ConcurrentHashMap1.8.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/19/concurrent包常用类/ConcurrentHashMap1.7.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/19/concurrent包常用类/cas原理.png">
-<meta property="og:updated_time" content="2019-04-22T08:11:12.000Z">
+<meta property="og:updated_time" content="2019-04-29T03:14:59.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="concurrent包常用类">
 <meta name="twitter:description" content="参考地址:https://my.oschina.net/yu120/blog/689204">
@@ -361,19 +361,17 @@
 
       
         <p> 参考地址:<a href="https://my.oschina.net/yu120/blog/689204" target="_blank" rel="noopener">https://my.oschina.net/yu120/blog/689204</a><br> <a id="more"></a></p>
-<h2 id="ConcurrentHashmap-K-V-not-null"><a href="#ConcurrentHashmap-K-V-not-null" class="headerlink" title="ConcurrentHashmap(K/V not null)"></a>ConcurrentHashmap(K/V not null)</h2><p>参考地址(更完整):<a href="https://blog.csdn.net/u010412719/article/details/52145145" target="_blank" rel="noopener">https://blog.csdn.net/u010412719/article/details/52145145</a><br><a href="https://www.jianshu.com/p/e694f1e868ec" target="_blank" rel="noopener">https://www.jianshu.com/p/e694f1e868ec</a></p>
+<h2 id="ConcurrentHashmap-K-V-not-null"><a href="#ConcurrentHashmap-K-V-not-null" class="headerlink" title="ConcurrentHashmap(K/V not null)"></a>ConcurrentHashmap(K/V not null)</h2><blockquote>
+<p>参考地址(更完整):<a href="https://blog.csdn.net/u010412719/article/details/52145145" target="_blank" rel="noopener">https://blog.csdn.net/u010412719/article/details/52145145</a><br><a href="https://www.jianshu.com/p/e694f1e868ec" target="_blank" rel="noopener">https://www.jianshu.com/p/e694f1e868ec</a></p>
 <ol>
 <li>1.8中的实现<img src="/2018/08/19/concurrent包常用类/ConcurrentHashMap1.8.png" title="ConcurrentHashMap1.8">
 使用Node+CAS+synchronized实现</li>
 </ol>
-<p>sizeCtl是控制标识符，不同的值表示不同的意义。</p>
-<blockquote>
-<ul>
-<li>负数代表正在进行初始化或扩容操作 ,其中-1代表正在初始化 ,-N 表示有N-1个线程正在进行扩容操作</li>
-<li>正数或0代表hash表还没有被初始化，这个数值表示初始化或下一次进行扩容的大小，类似于扩容阈值。它的值始终是当前ConcurrentHashMap容量的0.75倍，这与loadfactor是对应的。实际容量&gt;=sizeCtl，则扩容。</li>
-</ul>
 </blockquote>
-<ol start="2">
+<pre><code>sizeCtl是控制标识符，不同的值表示不同的意义。
+* 负数代表正在进行初始化或扩容操作 ,其中-1代表正在初始化 ,-N 表示有N-1个线程正在进行扩容操作
+* 正数或0代表hash表还没有被初始化，这个数值表示初始化或下一次进行扩容的大小，类似于扩容阈值。它的值始终是当前ConcurrentHashMap容量的0.75倍，这与loadfactor是对应的。实际容量&gt;=sizeCtl，则扩容。
+</code></pre><ol start="2">
 <li><p>put()的实现大致流程</p>
 <ol>
 <li>检查key/value是否为空，如果为空，则抛异常，否则进行2<br>为什么不支持key/value为null<ol>
