@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Just Try It">
 <meta property="og:description" content="参考书籍:Linux命令行与shell脚本编程大全(第三版)">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-04-29T03:13:30.000Z">
+<meta property="og:updated_time" content="2019-05-04T13:13:06.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux命令行与shell脚本编程">
 <meta name="twitter:description" content="参考书籍:Linux命令行与shell脚本编程大全(第三版)">
@@ -653,13 +653,336 @@
 </li>
 </ul>
 <ol>
-<li>usermod: 修改用户账户的字段</li>
+<li>usermod: 修改用户账户的字段,使用参数-G可以添加用户到组,如<code>usermod -G groupname username</code></li>
 <li>passwd: 修改已有的用户密码,使用<code>-e</code>参数可以强制要求被修改密码的用户在登录后修改密码</li>
 <li>chpasswd: 可以批量修改密码,<code>chpasswd &lt; users.txt</code>,其中users.txt存放的是userid:passwd的列表</li>
 <li>chage: 修改密码的过期日期</li>
 <li>chfn: 修改用户备注信息</li>
 <li>chsh: 修改用户默认登录shell</li>
 </ol>
+<h2 id="组"><a href="#组" class="headerlink" title="组"></a>组</h2><ul>
+<li>/etc/group文件<br>保存组信息,包含字段:组名,组密码(允许非组内成员临时成为组员),GID,属于该组的用户列表</li>
+</ul>
+<ol>
+<li>groupadd: 添加新组,默认创建新组之后不包含任何用户,可以使用usermod添加</li>
+<li>groupmod: 修改组信息,-n参数修改组名,-g参数修改GID.修改组名不会影响GID,安全权限是基于GID的</li>
+</ol>
+<h2 id="文件权限-1"><a href="#文件权限-1" class="headerlink" title="文件权限"></a>文件权限</h2><ul>
+<li>文件权限符</li>
+</ul>
+<ol>
+<li>-: 文件</li>
+<li>d: 目录</li>
+<li>l: 链接</li>
+<li>c: 字符型设备</li>
+<li>b: 块设备</li>
+<li><p>n: 网络设备</p>
+</li>
+<li><p>r: 可读</p>
+</li>
+<li>w: 可写</li>
+<li>x: 可执行<br>读写执行权限分为:文件的属主,文件的属组,系统其他用户</li>
+</ol>
+<ul>
+<li><p>默认权限<br>执行<code>umask 022</code>指定创建新文件或文件夹时的默认权限</p>
+</li>
+<li><p>修改权限<br><code>chmod options mode file</code></p>
+</li>
+</ul>
+<ol>
+<li>八进制模式文件权限:<code>chmod 755 filename</code></li>
+<li>符号模式文件权限:<code>chmod o+r filename</code>,给系统其他用户添加读权限,其中u代表用户,g代表组,o代表其他用户,a代表全部</li>
+</ol>
+<ul>
+<li>修改所属关系<br><code>chown options owener[.group] file</code>,如<code>chown username.groupname filename</code>同时改变属组和属主,<code>chown username filename</code>只改变属主.<code>chgrp</code>命令改版创建文件时的默认属组</li>
+</ul>
+<h2 id="共享文件"><a href="#共享文件" class="headerlink" title="共享文件"></a>共享文件</h2><p>Linux还会为每个文件和目录存储3个额外的信息位:SUID(共享用户ID,当用户使用文件时,文件会以属主的权限运行),SGID(共享组ID,在目录中创建的新文件和目录会以该目录默认属组作为属组),粘着位(进程结束后文件还会留在内存中).创建共享目录的步骤如下:</p>
+<ol>
+<li>只用mkdir创建希望共享目录</li>
+<li>使用chgrp将目录的默认属组修改成所有需要共享目录的用户的属组,当然自己要属于这个组</li>
+<li>使用<code>chmod g+s dirname</code>将SGID置为,使得之后在该文件夹中创建的文件和目录的默认属组都是该目录的默认属组</li>
+<li>组成员将umask修改成002,保证文件对属组是可写的</li>
+</ol>
+<h1 id="安装软件程序"><a href="#安装软件程序" class="headerlink" title="安装软件程序"></a>安装软件程序</h1><h2 id="包管理基础"><a href="#包管理基础" class="headerlink" title="包管理基础"></a>包管理基础</h2><h2 id="基于Debian系统"><a href="#基于Debian系统" class="headerlink" title="基于Debian系统"></a>基于Debian系统</h2><p>dpkg命令是基于Debian系PMS工具的核心,包含工具有:</p>
+<ol>
+<li>apt-get</li>
+<li>apt-cache</li>
+<li>aptitude</li>
+</ol>
+<h2 id="基于Red-Hat的系统"><a href="#基于Red-Hat的系统" class="headerlink" title="基于Red Hat的系统"></a>基于Red Hat的系统</h2><ol>
+<li>yum: 在Red Hat和Fedora中使用</li>
+<li>urpm: 在Mandriva中使用</li>
+<li>zypper: 在openSUSE中使用</li>
+</ol>
+<h1 id="使用编辑器"><a href="#使用编辑器" class="headerlink" title="使用编辑器"></a>使用编辑器</h1><h2 id="vim编辑器"><a href="#vim编辑器" class="headerlink" title="vim编辑器"></a>vim编辑器</h2><h3 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h3><ul>
+<li>移动光标:h(左),j(下),k(上),l(右),Ctrl+f(下翻一屏),Ctrl+b(上翻一屏),G(到最后一行,注意要大写),num G(跳转到指定行),gg(回到顶部)</li>
+<li>保存:q(如果没有修改缓存区,直接退出),q!(取消对缓存区的修改并退出),wq(保存并退出),w filename(将缓存区的内容保存到另一个文件中)</li>
+<li>编辑数据<br>|命令|描述|<br>|—|—|<br>|x |删除当前光标所在位置的字符 |<br>|dd |删除当前行 |<br>|dw |删除当前单词 |<br>|d$ |删除光标到行尾的内容 |<br>|J |删除当前行的换行符 |<br>|u |撤销 |<br>|a |在当前光标后面追加数据 |<br>|A |当前行尾部追加数据 |<br>|r char |使用char替换当前字符|<br>|R |从当前光标所在位置开始覆盖字符,直到ESC|</li>
+</ul>
+<p>允许使用数字修饰符来指定命令重复次数,比如<code>5dd</code>删除5行</p>
+<ul>
+<li>复制和粘贴</li>
+</ul>
+<ol>
+<li>剪切和粘贴<br>首先所有的删除命令,如<code>dd</code>,都是将数据保存在单独的寄存器中,并不是真的删除了,因此可以使用<code>p</code>命令粘贴到需要的地方.</li>
+<li>复制和粘贴<br>可以先使用<code>v</code>命令打开可视模式,选择需要复制的内容,然后使用<code>y</code>命令(yank)复制,然后粘贴到需要的位置,<code>p</code>表示粘贴到光标后,<code>P</code>表示粘贴到光标前<ol>
+<li>yy: 复制光标所在行</li>
+<li>yw: 复制光标所在单词</li>
+<li>y$: 复制光标所在位置到行尾</li>
+</ol>
+</li>
+</ol>
+<ul>
+<li>查找和替换<br>普通模式下,使用<code>/</code>,输入需要查找的单词:</li>
+</ul>
+<ol>
+<li>光标会出现在光标当前位置之后的第一个匹配的文本位置处;如果当前光标之后没有匹配内容,匹配内容出现在当前光标之前,那么光标会跳过末尾,从头开始寻找第一个匹配文本.<br>普通模式下,输入<code>:s/old/new/</code>命令来替换文本<ol>
+<li><code>:s/old/new/</code>替换当前行的第一个old</li>
+<li><code>:s/old/new/g</code>替换当前行所有的old</li>
+<li><code>:n,ms/old/new/g</code></li>
+<li><code>:%s/old/new/g</code>替换整个文件中所有的old</li>
+<li><code>:%s/old/new/gc</code>替换整个文件中所有的old并且每次出现确认信息</li>
+</ol>
+</li>
+</ol>
+<h1 id="构建基本脚本"><a href="#构建基本脚本" class="headerlink" title="构建基本脚本"></a>构建基本脚本</h1><h2 id="创建shell脚本"><a href="#创建shell脚本" class="headerlink" title="创建shell脚本"></a>创建shell脚本</h2><ol>
+<li>在问价第一行指定需要使用的shell:<br><code>#!/bin/bash</code>    </li>
+<li>使用<code>chmod u+x test.sh</code>赋予执行权限</li>
+<li>可以将脚本所在的路径添加到<code>PATH</code>环境变量来直接以命令的方式调用shell脚本,不过一般是使用相对路径<code>./test.sh</code>的形式执行脚本</li>
+</ol>
+<h2 id="使用多个命令"><a href="#使用多个命令" class="headerlink" title="使用多个命令"></a>使用多个命令</h2><p>在一行命令中使用<code>;</code>分隔命令,如<code>date;who</code></p>
+<h2 id="显示消息"><a href="#显示消息" class="headerlink" title="显示消息"></a>显示消息</h2><p>使用<code>echo</code>来显示信息,需要注意的是,如果需要显示<code>&#39;</code>或者<code>&quot;</code>或是’`‘,需要使用另外一种引号框起来,如<code>echo &quot;you&#39;re good&quot;</code></p>
+<ol>
+<li>-n: 可以让echo输出内容最后不换行</li>
+</ol>
+<h2 id="使用变量"><a href="#使用变量" class="headerlink" title="使用变量"></a>使用变量</h2><ul>
+<li>环境变量</li>
+</ul>
+<ol>
+<li>在shell脚本中使用<code>$</code>加上环境变量的名称可以引用环境变量的值</li>
+<li>在双引号内使用<code>$</code>引用变量时,shell脚本依然能够分辨,如果需要使用<code>$</code>符号,使用转义字符<code>\</code>即可,即<code>\$</code></li>
+</ol>
+<ul>
+<li>用户变量</li>
+</ul>
+<ol>
+<li>用户变量由任何字母,数字和下划线组成,不超过20个,区分大小写</li>
+<li>在声明用户变量的时候不能在<code>=</code>前后加空格,并且变量名之前不需要加<code>$</code>,如<code>var1=10</code>,操作的时候不需要<code>$</code>,引用的时候才需要<code>$</code></li>
+</ol>
+<ul>
+<li>命令来替换<br>将命令的输出赋值给变量</li>
+</ul>
+<ol>
+<li>使用’`‘将命令框起来</li>
+<li>使用$()将命令框起来<br>如<code>var=$(date +%y%m%d);ls -al /usr/bin &gt; $var.log</code></li>
+</ol>
+<h2 id="重定向输入和输出"><a href="#重定向输入和输出" class="headerlink" title="重定向输入和输出"></a>重定向输入和输出</h2><ul>
+<li>输出重定向</li>
+</ul>
+<ol>
+<li><code>command &gt; file</code>,使用<code>&gt;</code>将命令执行结果输出到文件中覆盖原内容,使用<code>&gt;&gt;</code>则是将结果追加到文件</li>
+</ol>
+<ul>
+<li>输入重定向</li>
+</ul>
+<ol>
+<li><code>command &lt; file</code>,将文件中的数据传递给命令,比如<code>wc &lt; file</code>,<code>wc</code>命令将对文件file进行统计,输出文件文本的行数,单词数,字节数</li>
+<li>如果不需要使用文件,那么可以直接使用<code>&lt;&lt;</code>(内联输入重定向),来将一段数据传递给命令,格式如下<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">command &lt;&lt; marker</span><br><span class="line">data</span><br><span class="line">marker</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ul>
+<li><p>管道<br>使用<code>|</code>来向右传递数据,如<code>command1 | command2</code>,将command的结果作为参数传递给command2处理</p>
+</li>
+<li><p>执行数学运算</p>
+</li>
+</ul>
+<ol>
+<li>使用<code>expr</code>命令,缺点很多,如使用<code>*</code>进行乘法运算时需要使用<code>\</code>转义,一般不用</li>
+<li>使用<code>$[ operation ]</code>来执行数学运算,可以直接使用<code>*</code>,不需要转义,但是只支持整型运算</li>
+<li>使用<code>bc</code>命令进行浮点数运算,结合内联输入重定向<code>&lt;&lt;</code>,可以在脚本中方便的进行数学运算,示例如下:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash </span><br><span class="line">radius=10</span><br><span class="line">pi=3.14159</span><br><span class="line">money=100</span><br><span class="line">total=`bc&lt;&lt;eof</span><br><span class="line">scale=4</span><br><span class="line">s=$pi*$radius*$radius</span><br><span class="line">s*$money</span><br><span class="line">eof`</span><br><span class="line">echo total money is $total</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>需要注意的是,在<code>bc</code>命令中,引用bc中的局部变量不需要在变量之前加<code>$</code>,如上例中的<code>s</code></p>
+<h2 id="退出脚本"><a href="#退出脚本" class="headerlink" title="退出脚本"></a>退出脚本</h2><ul>
+<li>退出状态码<br>shell会以脚本中最后一个执行的命令的退出状态码退出,可以在脚本中使用<code>exit</code>自定义状态码,但是不能超过255<br>|状态码|描述|<br>|—|—|<br>|0|命令成功结束|<br>|1|一般性未知错误|<br>|2|不适合的shell命令|<br>|126|命令不可执行|<br>|127|没有找到命令|<br>|128|无效的退出参数|<br>|128+x|与linux信号x相关的严重错误|<br>|130|通过Ctrl_C终止的命令|<br>|255|正常范围之外的退出状态码|</li>
+</ul>
+<h1 id="使用结构化命令"><a href="#使用结构化命令" class="headerlink" title="使用结构化命令"></a>使用结构化命令</h1><h2 id="使用if-than语句"><a href="#使用if-than语句" class="headerlink" title="使用if-than语句"></a>使用if-than语句</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">if command1</span><br><span class="line">then</span><br><span class="line">	commands</span><br><span class="line">elif command2</span><br><span class="line">then</span><br><span class="line">	commands</span><br><span class="line">else</span><br><span class="line">	commands</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<p>当位于if之后的command执行后的退出状态码是0,则执行then后面的命令</p>
+<h2 id="test命令"><a href="#test命令" class="headerlink" title="test命令"></a>test命令</h2><p>由于if中只能判断命令的退出状态码,所以可以结合<code>test condition</code>命令来测试退出状态码之外的条件是否成立,其实也就是使用了一条命令,如果只是用<code>test</code>而没有condition,那么退出状态码将会是非零的.如果<code>test</code>命令之后跟随的变量有值<br>除了使用<code>test</code>,可以直接使用中括号,<code>[ condition ]</code>,需要注意的是中括号需要和<code>condition</code>使用空格隔开,并且<code>[</code>需要和<code>if</code>使用空格隔开,即<code>if [ condition ]</code><br>test命令可以判断三种条件:</p>
+<ul>
+<li>数值比较</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>比较</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-eq</td>
+<td>是否相等</td>
+</tr>
+<tr>
+<td>-ge</td>
+<td>大于等于</td>
+</tr>
+<tr>
+<td>-gn</td>
+<td>大于</td>
+</tr>
+<tr>
+<td>-le</td>
+<td>小于等于</td>
+</tr>
+<tr>
+<td>-lt</td>
+<td>小于</td>
+</tr>
+<tr>
+<td>-ne</td>
+<td>不等于</td>
+</tr>
+</tbody>
+</table>
+<p>需要注意的是,shell只能比较整数,比较浮点数会报错</p>
+<ul>
+<li>字符串比较<br>|比较|描述|<br>|—|—|<br>|=|字符串是否相等|<br>|!=|不相等|<br>|&gt;|大于|<br>|&lt;|小于|<br>|-n str|str长度是否不为0|<br>|-z str|str长度是否为0|</li>
+</ul>
+<p>需要注意的是:</p>
+<ol>
+<li>使用<code>&gt;</code>,<code>&lt;</code>的时候需要转义,即<code>if [ $var1 \&gt; $var2 ]</code>,不然shell会把它们当成重定向符号</li>
+<li><code>test</code>命令比较字符的字典序和<code>sort</code>可能不同(在mac上好像相同)</li>
+</ol>
+<ul>
+<li>文件比较</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>比较</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-d file</td>
+<td>检查file是否存在并且是一个目录</td>
+</tr>
+<tr>
+<td>-e file</td>
+<td>检查file是否存在</td>
+</tr>
+<tr>
+<td>-f file</td>
+<td>检查file是否存在并且是一个文件</td>
+</tr>
+<tr>
+<td>-r file</td>
+<td>检查file是否存在并可读</td>
+</tr>
+<tr>
+<td>-s file</td>
+<td>检查file是否存在并非空</td>
+</tr>
+<tr>
+<td>-w file</td>
+<td>是否存在并可写</td>
+</tr>
+<tr>
+<td>-x file</td>
+<td>是否存在并可执行</td>
+</tr>
+<tr>
+<td>-O file</td>
+<td>是否存在并属于当前用户</td>
+</tr>
+<tr>
+<td>-G file</td>
+<td>是否存在并默认组与当前用户相同</td>
+</tr>
+<tr>
+<td>file1 -nt file2</td>
+<td>file1是否比file2新</td>
+</tr>
+<tr>
+<td>file1 -ot file2</td>
+<td>file1是否比file2旧</td>
+</tr>
+</tbody>
+</table>
+<h2 id="复合条件测试"><a href="#复合条件测试" class="headerlink" title="复合条件测试"></a>复合条件测试</h2><p>可以使用<code>||</code>和<code>&amp;&amp;</code></p>
+<h2 id="if-than的高级特性"><a href="#if-than的高级特性" class="headerlink" title="if-than的高级特性"></a>if-than的高级特性</h2><h3 id="用于数学表达式的双括号"><a href="#用于数学表达式的双括号" class="headerlink" title="用于数学表达式的双括号"></a>用于数学表达式的双括号</h3><p>使用<code>test</code>命令的时候只能使用简单的算术操作,使用双括号就能使用高级数学表达式</p>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>val++</td>
+<td>后加</td>
+</tr>
+<tr>
+<td>val–</td>
+<td>后减</td>
+</tr>
+<tr>
+<td>++val</td>
+<td>先加</td>
+</tr>
+<tr>
+<td>–val</td>
+<td>先减</td>
+</tr>
+<tr>
+<td>!</td>
+<td>逻辑求反</td>
+</tr>
+<tr>
+<td>~</td>
+<td>位求反</td>
+</tr>
+<tr>
+<td>**</td>
+<td>幂运算</td>
+</tr>
+<tr>
+<td>&lt;&lt;</td>
+<td>左位移</td>
+</tr>
+<tr>
+<td>&gt;&gt;</td>
+<td>右位移</td>
+</tr>
+<tr>
+<td>&amp;</td>
+<td>位与</td>
+</tr>
+<tr>
+<td>`</td>
+<td>`</td>
+<td>位或</td>
+</tr>
+<tr>
+<td>&amp;&amp;</td>
+<td>逻辑与</td>
+</tr>
+<tr>
+<td>`</td>
+<td></td>
+<td>`</td>
+<td>逻辑或</td>
+</tr>
+</tbody>
+</table>
+<p><code>if (( 10 ** 2 &gt; 99 ))</code><br>这里需要注意的是双括号中的<code>&gt;</code>等不需要转义</p>
+<h3 id="用于高级字符串处理功能的双方括号"><a href="#用于高级字符串处理功能的双方括号" class="headerlink" title="用于高级字符串处理功能的双方括号"></a>用于高级字符串处理功能的双方括号</h3><p>相比较于<code>test</code>命令,双方括号可以进行正则匹配<br>如<code>if [[ &#39;admin&#39;==ad* ]]</code>,这里需要注意的是方括号前后需要空格</p>
+<h2 id="case命令"><a href="#case命令" class="headerlink" title="case命令"></a>case命令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">case $var in</span><br><span class="line">pattern1 | pattern2)</span><br><span class="line">	command1;;</span><br><span class="line">pattern3)</span><br><span class="line">	command2;;</span><br><span class="line">*)</span><br><span class="line">	default commands;;</span><br><span class="line">esac</span><br></pre></td></tr></table></figure>
+<p>这里需要注意的是需要在条件体的最后一个命令后面加上<code>;;</code></p>
 
       
     </div>
@@ -824,7 +1147,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux基本知识"><span class="nav-number">1.</span> <span class="nav-text">Linux基本知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#常见目录功能"><span class="nav-number">1.1.</span> <span class="nav-text">常见目录功能</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#的bash-shell命令"><span class="nav-number">2.</span> <span class="nav-text">的bash shell命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本命令"><span class="nav-number">2.1.</span> <span class="nav-text">基本命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系统变量"><span class="nav-number">2.2.</span> <span class="nav-text">系统变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定位系统环境变量"><span class="nav-number">2.2.1.</span> <span class="nav-text">定位系统环境变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组变量"><span class="nav-number">2.2.2.</span> <span class="nav-text">数组变量</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文件权限"><span class="nav-number">3.</span> <span class="nav-text">文件权限</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安全"><span class="nav-number">3.1.</span> <span class="nav-text">安全</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux基本知识"><span class="nav-number">1.</span> <span class="nav-text">Linux基本知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#常见目录功能"><span class="nav-number">1.1.</span> <span class="nav-text">常见目录功能</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#的bash-shell命令"><span class="nav-number">2.</span> <span class="nav-text">的bash shell命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本命令"><span class="nav-number">2.1.</span> <span class="nav-text">基本命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系统变量"><span class="nav-number">2.2.</span> <span class="nav-text">系统变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定位系统环境变量"><span class="nav-number">2.2.1.</span> <span class="nav-text">定位系统环境变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组变量"><span class="nav-number">2.2.2.</span> <span class="nav-text">数组变量</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文件权限"><span class="nav-number">3.</span> <span class="nav-text">文件权限</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安全"><span class="nav-number">3.1.</span> <span class="nav-text">安全</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#组"><span class="nav-number">3.2.</span> <span class="nav-text">组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件权限-1"><span class="nav-number">3.3.</span> <span class="nav-text">文件权限</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#共享文件"><span class="nav-number">3.4.</span> <span class="nav-text">共享文件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装软件程序"><span class="nav-number">4.</span> <span class="nav-text">安装软件程序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#包管理基础"><span class="nav-number">4.1.</span> <span class="nav-text">包管理基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于Debian系统"><span class="nav-number">4.2.</span> <span class="nav-text">基于Debian系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于Red-Hat的系统"><span class="nav-number">4.3.</span> <span class="nav-text">基于Red Hat的系统</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用编辑器"><span class="nav-number">5.</span> <span class="nav-text">使用编辑器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#vim编辑器"><span class="nav-number">5.1.</span> <span class="nav-text">vim编辑器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基础"><span class="nav-number">5.1.1.</span> <span class="nav-text">基础</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#构建基本脚本"><span class="nav-number">6.</span> <span class="nav-text">构建基本脚本</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建shell脚本"><span class="nav-number">6.1.</span> <span class="nav-text">创建shell脚本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用多个命令"><span class="nav-number">6.2.</span> <span class="nav-text">使用多个命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#显示消息"><span class="nav-number">6.3.</span> <span class="nav-text">显示消息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用变量"><span class="nav-number">6.4.</span> <span class="nav-text">使用变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重定向输入和输出"><span class="nav-number">6.5.</span> <span class="nav-text">重定向输入和输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#退出脚本"><span class="nav-number">6.6.</span> <span class="nav-text">退出脚本</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用结构化命令"><span class="nav-number">7.</span> <span class="nav-text">使用结构化命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用if-than语句"><span class="nav-number">7.1.</span> <span class="nav-text">使用if-than语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#test命令"><span class="nav-number">7.2.</span> <span class="nav-text">test命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#复合条件测试"><span class="nav-number">7.3.</span> <span class="nav-text">复合条件测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#if-than的高级特性"><span class="nav-number">7.4.</span> <span class="nav-text">if-than的高级特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#用于数学表达式的双括号"><span class="nav-number">7.4.1.</span> <span class="nav-text">用于数学表达式的双括号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用于高级字符串处理功能的双方括号"><span class="nav-number">7.4.2.</span> <span class="nav-text">用于高级字符串处理功能的双方括号</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#case命令"><span class="nav-number">7.5.</span> <span class="nav-text">case命令</span></a></li></ol></li></ol></div>
             
 
           </div>
