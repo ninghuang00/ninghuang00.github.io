@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Just Try It">
 <meta property="og:description" content="参考书籍:Linux命令行与shell脚本编程大全(第三版)">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-04T13:13:06.000Z">
+<meta property="og:updated_time" content="2019-05-06T05:56:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux命令行与shell脚本编程">
 <meta name="twitter:description" content="参考书籍:Linux命令行与shell脚本编程大全(第三版)">
@@ -361,78 +361,62 @@
 <tr>
 <th>目录</th>
 <th>用途</th>
+<th>目录</th>
+<th>用途</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>/</td>
 <td>虚拟目录的根目录,通常不会在这里存储文件</td>
-</tr>
-<tr>
 <td>/bin</td>
 <td>二进制目录,存放用户级的GNU工具</td>
 </tr>
 <tr>
 <td>/boot</td>
 <td>启动目录,存放启动文件</td>
-</tr>
-<tr>
 <td>/dev</td>
 <td>设备目录,Linux在这里创建设备节点</td>
 </tr>
 <tr>
 <td>/etc</td>
 <td>系统配置文件目录</td>
-</tr>
-<tr>
 <td>/home</td>
 <td>主目录,创建用户目录用</td>
 </tr>
 <tr>
 <td>/lib</td>
 <td>库目录,存放系统和程序的库文件</td>
-</tr>
-<tr>
 <td>/media,/mnt</td>
 <td>常用挂载目录</td>
 </tr>
 <tr>
 <td>/opt</td>
 <td>可选目录,常用于存放第三方软件包和数据文件</td>
-</tr>
-<tr>
 <td>/proc</td>
 <td>进程目录,存放现有硬件以及当前进程的信息</td>
 </tr>
 <tr>
 <td>/root</td>
 <td>root用户主目录</td>
-</tr>
-<tr>
 <td>/sbin</td>
 <td>系统二进制目录,存放GUN管理员级工具</td>
 </tr>
 <tr>
 <td>/run</td>
 <td>运行目录,存放系统运行时数据</td>
-</tr>
-<tr>
 <td>/srv</td>
 <td>服务目录,存放本地服务相关文件</td>
 </tr>
 <tr>
 <td>/sys</td>
 <td>系统目录,存放系统硬件信息的相关文件</td>
-</tr>
-<tr>
 <td>/tmp</td>
 <td>临时目录</td>
 </tr>
 <tr>
 <td>/usr</td>
 <td>用户二进制目录,大量用户级的GNU工具和数据文件存放</td>
-</tr>
-<tr>
 <td>/var</td>
 <td>可变目录,存放经常变化的文件,比如日志文件</td>
 </tr>
@@ -770,7 +754,7 @@
 <li>在声明用户变量的时候不能在<code>=</code>前后加空格,并且变量名之前不需要加<code>$</code>,如<code>var1=10</code>,操作的时候不需要<code>$</code>,引用的时候才需要<code>$</code></li>
 </ol>
 <ul>
-<li>命令来替换<br>将命令的输出赋值给变量</li>
+<li>命令替换<br>将命令的输出赋值给变量</li>
 </ul>
 <ol>
 <li>使用’`‘将命令框起来</li>
@@ -863,52 +847,45 @@
 <tr>
 <th>比较</th>
 <th>描述</th>
+<th>比较</th>
+<th>描述</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>-d file</td>
 <td>检查file是否存在并且是一个目录</td>
-</tr>
-<tr>
 <td>-e file</td>
 <td>检查file是否存在</td>
 </tr>
 <tr>
 <td>-f file</td>
 <td>检查file是否存在并且是一个文件</td>
-</tr>
-<tr>
 <td>-r file</td>
 <td>检查file是否存在并可读</td>
 </tr>
 <tr>
 <td>-s file</td>
 <td>检查file是否存在并非空</td>
-</tr>
-<tr>
 <td>-w file</td>
 <td>是否存在并可写</td>
 </tr>
 <tr>
 <td>-x file</td>
 <td>是否存在并可执行</td>
-</tr>
-<tr>
 <td>-O file</td>
 <td>是否存在并属于当前用户</td>
 </tr>
 <tr>
 <td>-G file</td>
 <td>是否存在并默认组与当前用户相同</td>
-</tr>
-<tr>
 <td>file1 -nt file2</td>
 <td>file1是否比file2新</td>
 </tr>
 <tr>
 <td>file1 -ot file2</td>
 <td>file1是否比file2旧</td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -979,10 +956,43 @@
 </tr>
 </tbody>
 </table>
-<p><code>if (( 10 ** 2 &gt; 99 ))</code><br>这里需要注意的是双括号中的<code>&gt;</code>等不需要转义</p>
-<h3 id="用于高级字符串处理功能的双方括号"><a href="#用于高级字符串处理功能的双方括号" class="headerlink" title="用于高级字符串处理功能的双方括号"></a>用于高级字符串处理功能的双方括号</h3><p>相比较于<code>test</code>命令,双方括号可以进行正则匹配<br>如<code>if [[ &#39;admin&#39;==ad* ]]</code>,这里需要注意的是方括号前后需要空格</p>
+<p><code>if (( 10 ** 2 &gt; 99 ))</code><br>这里需要注意的是双括号中的<code>&gt;</code>等不需要转义,<strong>还有其实括号的前后都不需要空格</strong><br>双括号还可以进行浮点型数学运算并返回结果,如<code>var=(($var - 4.5))</code></p>
+<h3 id="用于高级字符串处理功能的双方括号"><a href="#用于高级字符串处理功能的双方括号" class="headerlink" title="用于高级字符串处理功能的双方括号"></a>用于高级字符串处理功能的双方括号</h3><p>相比较于<code>test</code>命令,双方括号可以进行正则匹配<br>如<code>if [[ &#39;admin&#39;==ad* ]]</code>,这里需要注意的是<strong>方括号前后需要空格</strong><br>需要注意的是,双方括号可以进行整型数学运算并返回结果,如<code>var=$[[ $var - 1 ]]</code></p>
 <h2 id="case命令"><a href="#case命令" class="headerlink" title="case命令"></a>case命令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">case $var in</span><br><span class="line">pattern1 | pattern2)</span><br><span class="line">	command1;;</span><br><span class="line">pattern3)</span><br><span class="line">	command2;;</span><br><span class="line">*)</span><br><span class="line">	default commands;;</span><br><span class="line">esac</span><br></pre></td></tr></table></figure>
 <p>这里需要注意的是需要在条件体的最后一个命令后面加上<code>;;</code></p>
+<h1 id="更多的结构化命令"><a href="#更多的结构化命令" class="headerlink" title="更多的结构化命令"></a>更多的结构化命令</h1><h2 id="for命令"><a href="#for命令" class="headerlink" title="for命令"></a>for命令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for var in list</span><br><span class="line">do </span><br><span class="line"> commands</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<p>例子<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for area in Alabama Alaska California</span><br><span class="line">do </span><br><span class="line">	echo $area is the next state</span><br><span class="line">done</span><br></pre></td></tr></table></figure></p>
+<p>这里需要注意的是如果in后面的元素中包含<code>&#39;</code>,空格之类的,就需要使用双引号框起来</p>
+<ul>
+<li><p>从命令中读取值<br><code>for var in $(cat filename)</code>,in可以从命令替换返回的值中取值</p>
+</li>
+<li><p>更改字段分隔符<br>环境变量IFS(internal field separator),内部字段分隔符定义了用于字段分割的一系列字符,默认情况下包括空格,制表符和换行符<br>可以在脚本中临时指定IFS的值,来定义唯一的分隔符,如<code>IFS=$&#39;\n&#39;</code>就是使用换行符来分割<br>这里需要注意的是,为了安全起见,使用完IFS之后尽快回复,可以这样</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">IFS.OLD=$IFS </span><br><span class="line">IFS=$&apos;\n&apos;</span><br><span class="line">...</span><br><span class="line">IFS=$IFS.OLD</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用通配符读取目录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">for file in /home/me/* /home/he/*</span><br><span class="line">do </span><br><span class="line">	if [ -d &quot;$file&quot;]</span><br><span class="line">	then</span><br><span class="line">		echo &quot;$filr is a directory&quot;</span><br><span class="line">	elif [ -f &quot;$file&quot;]</span><br><span class="line">	then </span><br><span class="line">		echo &quot;$file is a file&quot;</span><br><span class="line">	fi </span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>这里需要注意的是目录名可能会包含空格,所以使用双引号框起来,还有就是in后面可以跟多个正则表达式</p>
+<h2 id="c语言风格的for命令"><a href="#c语言风格的for命令" class="headerlink" title="c语言风格的for命令"></a>c语言风格的for命令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for((i=0;i&lt;=10;i++))</span><br><span class="line">do</span><br><span class="line">	echo i is $i </span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<h2 id="while命令"><a href="#while命令" class="headerlink" title="while命令"></a>while命令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">while test command</span><br><span class="line">do</span><br><span class="line">	other commands</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<p>需要注意的是,while后面可以跟多个测试条件,需要分行,按照最后一个命令的退出状态码决定是否退出while,只要状态码是0就继续循环</p>
+<h2 id="until命令"><a href="#until命令" class="headerlink" title="until命令"></a>until命令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">until test commands</span><br><span class="line">do</span><br><span class="line">	other commands</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<p>until后面的条件成立则退出循环,只要退出状态码不是0就继续循环</p>
+<h2 id="控制循环"><a href="#控制循环" class="headerlink" title="控制循环"></a>控制循环</h2><p>可以使用break和continue来控制循环,<code>break n</code>中的n可以控制跳出循环的层级,默认是1;<code>continue n</code>中的n可以指定继续执行那一层循环</p>
+<h2 id="将结果重定向到文件中"><a href="#将结果重定向到文件中" class="headerlink" title="将结果重定向到文件中"></a>将结果重定向到文件中</h2><p>在done后面可以添加重定向命令<code>&gt;</code>或是使用管道<code>|</code>来传递for命令处理的结果,<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for i in a c b e f d</span><br><span class="line">do</span><br><span class="line">	echo i is $i</span><br><span class="line">done | sort</span><br></pre></td></tr></table></figure></p>
+<p>输出居然是已经排好序的,很奇怪</p>
+<h1 id="处理用户输入"><a href="#处理用户输入" class="headerlink" title="处理用户输入"></a>处理用户输入</h1><h2 id="命令行参数"><a href="#命令行参数" class="headerlink" title="命令行参数"></a>命令行参数</h2><p>$0是程序名称,$1到$9是第一个到第九个参数,从第十个参数开始需要使用${10}的形式引用</p>
+<h2 id="后获取脚本名"><a href="#后获取脚本名" class="headerlink" title="后获取脚本名"></a>后获取脚本名</h2><p>如果在脚本中直接使用<code>$0</code>可能会出现问题,因为$0的值会根据执行脚本的形式而变化,这里可以使用<code>$(basename $0)</code>来获取脚本的名称</p>
+<ul>
+<li>测试参数<br>如果脚本中使用了用户输入的参数,但是执行脚本时却没有参数传入,那么就会报错,因此可以在脚本开始的地方测试参数<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">if [ -n &quot;$1&quot; ]</span><br><span class="line">then</span><br><span class="line">	echo first arg is $1</span><br><span class="line">else</span><br><span class="line">	echo please input a arg</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>当然还可以先使用<code>$#</code>来判断参数的个数;使用<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">* 一次性获取所有参数</span><br><span class="line">1. `$*`: 将所有参数变成一个</span><br><span class="line">2. `$@`: 将所有参数编程列表,可以使用for命令遍历</span><br><span class="line"></span><br><span class="line">## 移动变量</span><br><span class="line">可以使用`shift n`命令移动参数的位置,默认是左移一位,使用n指定移动的位数</span><br><span class="line"></span><br><span class="line">## 处理选项</span><br><span class="line">* 查找选项</span><br><span class="line">可以结合while,case,shift命令俩实现简单选项</span><br></pre></td></tr></table></figure></p>
+<p>#!/bin/bash<br>while [ -n “$1” ]<br>do<br>    case “$1” in<br>        -a) echo “found option -a”;;<br>        -b) echo “found option -b”;;<br>        *) echo “$1 is not a option”;;<br>    esac<br>    shift<br>done<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">只要第一个参数有值,就判断参数是不是在case中,找到一个参数后将所有的参数左移一位</span><br><span class="line">处理带值的选项时,只要在case中取出$2即可</span><br><span class="line">分离选项和参数的方法是用`--`分隔,在case中添加`--`一项</span><br><span class="line"></span><br><span class="line">* 处理合并选项</span><br><span class="line">使用getopt或者getopts命令,`getopt optstring parameters`,如`getopt ab:cd -a -b str1 -cd str2 str3`</span><br><span class="line">其中规定了abcd四个选项,b后面的:代表b后面跟着参数,然后str1到str3三个是参数,返回的结果是:`-a -b str1 -c -d -- str2 str3`需要注意的是,这里还是需要按照先选项后参数的顺序,否则无法正常解析,如`getopt ab:cd -a -b str1 str3 -cd str2`的解析结果就是`-a -b str1 -- str3 -cd str2`</span><br><span class="line">如果在parameters中有optstring中不包含的选项,那么就会报出错误,如果想要忽略,使用`-q`参数,即`getopt -q ab:cd -a -b str1 -cd str2 str3`</span><br><span class="line">需要注意的是,getopt不能处理`&quot;str1 str2&quot;`这样的参数,它会将空格当成参数分隔符,而不是将双引号框起来的整体当成参数</span><br><span class="line"></span><br><span class="line">* 在脚本中使用getopt命令</span><br><span class="line">使用`set -- $(getopt -q ab:cd &quot;$@&quot;)`可以将脚本原始参数传递给`getopt`解析之后再通过`set`命令替换原始参数</span><br><span class="line"></span><br><span class="line">* 使用getopts处理选项和参数</span><br><span class="line">`getopts optstring parameters`,一次会处理参数列表中的一个参数并返回退出状态码0,当所有参数处理完之后返回大于0的状态码,适合在循环中使用,该命令使用了两个环境变量,分别是OPTARG(保存参数值),OPTIND(保存当前读取参数的位置),这里忽略未定义选项错误是在optstring之前加`:`</span><br></pre></td></tr></table></figure></p>
+<p>while getopts :ab:c opt<br>do<br>    case “$opt” in<br>        a) echo “found option -a”;;<br>        b) echo “found option -b with argument $OPTARG”;;<br>        c) echo “found option -c”;;<br>        *) echo “unknow option $opt”;;<br>    esac<br>done<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">1. 这里要注意的是,getopts命令会自动去除选项之前的`-`,因此case中不用加`-`</span><br><span class="line">2. 参数可以包括空格</span><br><span class="line">3. 处理完选项之后,可以只用shift命令和$OPTIND来处理剩下的参数,`shift $[ $OPTIND - 1 ]`,然后使用`$@`取出参数列表</span><br><span class="line"></span><br><span class="line">## 将选项标准化</span><br><span class="line">常用的Linux命令选项</span><br><span class="line">|选项|描述|选项|描述|</span><br><span class="line">|---|---|---|---|</span><br><span class="line">|-a|显示所有对象|-c|生成一个计数|</span><br><span class="line">|-d|指定一个目录|-e|扩展一个对象|</span><br><span class="line">|-f|指定读入数据的文件|-h|显示命令的帮助信息|</span><br><span class="line">|-i|忽略文本大小写|-l|产生输出的长格式版本|</span><br><span class="line">|-n|使用非交互模式(批处理)|-o|将所有的输出重定向到指定的输出文件|</span><br><span class="line">|-q|以安静模式运行|-r|递归处理目录和文件|</span><br><span class="line">|-s|以安静模式运行|-v|生成详细的输出|</span><br><span class="line">|-x|排除某个对象|-y|对所有问题回答yes|</span><br><span class="line"></span><br><span class="line">## 获取用户输入</span><br><span class="line">* 基本的读取</span><br><span class="line">使用`read`命令获取键盘输入</span><br></pre></td></tr></table></figure></p>
+<p>echo -n “input your name:”<br>read name<br>echo “your name is $name”<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`-n`参数可以让输出不换行,直接在行尾输入,也可以使用`read -p`来代替echo显示提示信息</span><br></pre></td></tr></table></figure></p>
+<p>read -p “input your name:” name<br>echo “your name is $name”<br><code>`</code><br>如果read后面没有指定接受参数的变量,那么read命令会将参数存到<code>$REPLY</code>环境变量中</p>
 
       
     </div>
@@ -1147,7 +1157,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux基本知识"><span class="nav-number">1.</span> <span class="nav-text">Linux基本知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#常见目录功能"><span class="nav-number">1.1.</span> <span class="nav-text">常见目录功能</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#的bash-shell命令"><span class="nav-number">2.</span> <span class="nav-text">的bash shell命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本命令"><span class="nav-number">2.1.</span> <span class="nav-text">基本命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系统变量"><span class="nav-number">2.2.</span> <span class="nav-text">系统变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定位系统环境变量"><span class="nav-number">2.2.1.</span> <span class="nav-text">定位系统环境变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组变量"><span class="nav-number">2.2.2.</span> <span class="nav-text">数组变量</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文件权限"><span class="nav-number">3.</span> <span class="nav-text">文件权限</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安全"><span class="nav-number">3.1.</span> <span class="nav-text">安全</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#组"><span class="nav-number">3.2.</span> <span class="nav-text">组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件权限-1"><span class="nav-number">3.3.</span> <span class="nav-text">文件权限</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#共享文件"><span class="nav-number">3.4.</span> <span class="nav-text">共享文件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装软件程序"><span class="nav-number">4.</span> <span class="nav-text">安装软件程序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#包管理基础"><span class="nav-number">4.1.</span> <span class="nav-text">包管理基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于Debian系统"><span class="nav-number">4.2.</span> <span class="nav-text">基于Debian系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于Red-Hat的系统"><span class="nav-number">4.3.</span> <span class="nav-text">基于Red Hat的系统</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用编辑器"><span class="nav-number">5.</span> <span class="nav-text">使用编辑器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#vim编辑器"><span class="nav-number">5.1.</span> <span class="nav-text">vim编辑器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基础"><span class="nav-number">5.1.1.</span> <span class="nav-text">基础</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#构建基本脚本"><span class="nav-number">6.</span> <span class="nav-text">构建基本脚本</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建shell脚本"><span class="nav-number">6.1.</span> <span class="nav-text">创建shell脚本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用多个命令"><span class="nav-number">6.2.</span> <span class="nav-text">使用多个命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#显示消息"><span class="nav-number">6.3.</span> <span class="nav-text">显示消息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用变量"><span class="nav-number">6.4.</span> <span class="nav-text">使用变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重定向输入和输出"><span class="nav-number">6.5.</span> <span class="nav-text">重定向输入和输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#退出脚本"><span class="nav-number">6.6.</span> <span class="nav-text">退出脚本</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用结构化命令"><span class="nav-number">7.</span> <span class="nav-text">使用结构化命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用if-than语句"><span class="nav-number">7.1.</span> <span class="nav-text">使用if-than语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#test命令"><span class="nav-number">7.2.</span> <span class="nav-text">test命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#复合条件测试"><span class="nav-number">7.3.</span> <span class="nav-text">复合条件测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#if-than的高级特性"><span class="nav-number">7.4.</span> <span class="nav-text">if-than的高级特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#用于数学表达式的双括号"><span class="nav-number">7.4.1.</span> <span class="nav-text">用于数学表达式的双括号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用于高级字符串处理功能的双方括号"><span class="nav-number">7.4.2.</span> <span class="nav-text">用于高级字符串处理功能的双方括号</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#case命令"><span class="nav-number">7.5.</span> <span class="nav-text">case命令</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux基本知识"><span class="nav-number">1.</span> <span class="nav-text">Linux基本知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#常见目录功能"><span class="nav-number">1.1.</span> <span class="nav-text">常见目录功能</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#的bash-shell命令"><span class="nav-number">2.</span> <span class="nav-text">的bash shell命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本命令"><span class="nav-number">2.1.</span> <span class="nav-text">基本命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系统变量"><span class="nav-number">2.2.</span> <span class="nav-text">系统变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定位系统环境变量"><span class="nav-number">2.2.1.</span> <span class="nav-text">定位系统环境变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组变量"><span class="nav-number">2.2.2.</span> <span class="nav-text">数组变量</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文件权限"><span class="nav-number">3.</span> <span class="nav-text">文件权限</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安全"><span class="nav-number">3.1.</span> <span class="nav-text">安全</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#组"><span class="nav-number">3.2.</span> <span class="nav-text">组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件权限-1"><span class="nav-number">3.3.</span> <span class="nav-text">文件权限</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#共享文件"><span class="nav-number">3.4.</span> <span class="nav-text">共享文件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装软件程序"><span class="nav-number">4.</span> <span class="nav-text">安装软件程序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#包管理基础"><span class="nav-number">4.1.</span> <span class="nav-text">包管理基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于Debian系统"><span class="nav-number">4.2.</span> <span class="nav-text">基于Debian系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于Red-Hat的系统"><span class="nav-number">4.3.</span> <span class="nav-text">基于Red Hat的系统</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用编辑器"><span class="nav-number">5.</span> <span class="nav-text">使用编辑器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#vim编辑器"><span class="nav-number">5.1.</span> <span class="nav-text">vim编辑器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基础"><span class="nav-number">5.1.1.</span> <span class="nav-text">基础</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#构建基本脚本"><span class="nav-number">6.</span> <span class="nav-text">构建基本脚本</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建shell脚本"><span class="nav-number">6.1.</span> <span class="nav-text">创建shell脚本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用多个命令"><span class="nav-number">6.2.</span> <span class="nav-text">使用多个命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#显示消息"><span class="nav-number">6.3.</span> <span class="nav-text">显示消息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用变量"><span class="nav-number">6.4.</span> <span class="nav-text">使用变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重定向输入和输出"><span class="nav-number">6.5.</span> <span class="nav-text">重定向输入和输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#退出脚本"><span class="nav-number">6.6.</span> <span class="nav-text">退出脚本</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用结构化命令"><span class="nav-number">7.</span> <span class="nav-text">使用结构化命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用if-than语句"><span class="nav-number">7.1.</span> <span class="nav-text">使用if-than语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#test命令"><span class="nav-number">7.2.</span> <span class="nav-text">test命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#复合条件测试"><span class="nav-number">7.3.</span> <span class="nav-text">复合条件测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#if-than的高级特性"><span class="nav-number">7.4.</span> <span class="nav-text">if-than的高级特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#用于数学表达式的双括号"><span class="nav-number">7.4.1.</span> <span class="nav-text">用于数学表达式的双括号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用于高级字符串处理功能的双方括号"><span class="nav-number">7.4.2.</span> <span class="nav-text">用于高级字符串处理功能的双方括号</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#case命令"><span class="nav-number">7.5.</span> <span class="nav-text">case命令</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#更多的结构化命令"><span class="nav-number">8.</span> <span class="nav-text">更多的结构化命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#for命令"><span class="nav-number">8.1.</span> <span class="nav-text">for命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#c语言风格的for命令"><span class="nav-number">8.2.</span> <span class="nav-text">c语言风格的for命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#while命令"><span class="nav-number">8.3.</span> <span class="nav-text">while命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#until命令"><span class="nav-number">8.4.</span> <span class="nav-text">until命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#控制循环"><span class="nav-number">8.5.</span> <span class="nav-text">控制循环</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#将结果重定向到文件中"><span class="nav-number">8.6.</span> <span class="nav-text">将结果重定向到文件中</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#处理用户输入"><span class="nav-number">9.</span> <span class="nav-text">处理用户输入</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#命令行参数"><span class="nav-number">9.1.</span> <span class="nav-text">命令行参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后获取脚本名"><span class="nav-number">9.2.</span> <span class="nav-text">后获取脚本名</span></a></li></ol></li></ol></div>
             
 
           </div>
