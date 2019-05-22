@@ -1,0 +1,1376 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Linux命令行与shell脚本编程15章开始">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux命令行与shell脚本编程续">
+<meta property="og:url" content="http://yoursite.com/2019/05/06/Linux命令行与shell脚本编程续/index.html">
+<meta property="og:site_name" content="Just Try It">
+<meta property="og:description" content="Linux命令行与shell脚本编程15章开始">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-05-18T03:28:49.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux命令行与shell脚本编程续">
+<meta name="twitter:description" content="Linux命令行与shell脚本编程15章开始">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/05/06/Linux命令行与shell脚本编程续/"/>
+
+
+
+
+
+  <title>Linux命令行与shell脚本编程续 | Just Try It</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Just Try It</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/06/Linux命令行与shell脚本编程续/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ninghuang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Just Try It">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Linux命令行与shell脚本编程续</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-06T15:51:45+08:00">
+                2019-05-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p> Linux命令行与shell脚本编程15章开始<br> <a id="more"></a></p>
+<h1 id="呈现数据"><a href="#呈现数据" class="headerlink" title="呈现数据"></a>呈现数据</h1><ul>
+<li>标准文件描述符</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>文件描述符</th>
+<th>缩写</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>STDIN</td>
+<td>标准输入</td>
+</tr>
+<tr>
+<td>1</td>
+<td>STDOUT</td>
+<td>标准输出</td>
+</tr>
+<tr>
+<td>2</td>
+<td>STDERR</td>
+<td>标准错误</td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>STDIN<br>对于终端界面来说,标准输入就是键盘,</li>
+<li>STDOUT<br>对于终端界面来说,标准输出就是终端显示器,</li>
+<li>STDERR<br>默认输出的位置和STDOUT一样,也就是输出到显示器,</li>
+</ol>
+<ul>
+<li>重定向错误</li>
+</ul>
+<ol>
+<li><p>只重定向错误<br><code>ls -al notexistfile 2&gt; error.log</code>,在重定向符的前面加上STDERR的文件描述符值,将错误重定向到指定文件中,这样错误信息就不会显示在显示器上了</p>
+</li>
+<li><p>重定向正常数据和错误信息<br><code>ls -al test1 notexistfile 1&gt; normal.log 2&gt; error.log</code>,使用两个重定向符将数据重定向到对应的文件中<br>如果需要将两种信息重定向到一个文件中,那么可以使用<code>&amp;&gt;</code></p>
+</li>
+</ol>
+<h2 id="在脚本中重定向输出"><a href="#在脚本中重定向输出" class="headerlink" title="在脚本中重定向输出"></a>在脚本中重定向输出</h2><ul>
+<li><p>临时重定向<br><code>echo &quot;welcome to the real world. &quot; &gt;&amp;2</code>,将输出重定向到STDERR</p>
+</li>
+<li><p>永久重定向<br>在脚本中使用<code>exec 1&gt;testout</code>可以将原本发送到STDOUT的输出全部重定向到testout文件中,这里需要注意的是,重定向之后不会自动回复原来的输出位置</p>
+</li>
+</ul>
+<h2 id="创建自己的重定向"><a href="#创建自己的重定向" class="headerlink" title="创建自己的重定向"></a>创建自己的重定向</h2><p>除了0,1,2还可以使用3到8来创建自己的重定向位置,如<code>exec 3&gt;out</code>,这样就有办法在重定向STDERR和STDOUT之后将他们恢复了:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">exec 3&gt;&amp;1</span><br><span class="line">exec 1&gt;out </span><br><span class="line">...</span><br><span class="line">exec 1&gt;&amp;3</span><br></pre></td></tr></table></figure></p>
+<h2 id="在脚本中重定向输入"><a href="#在脚本中重定向输入" class="headerlink" title="在脚本中重定向输入"></a>在脚本中重定向输入</h2><ul>
+<li>创建输出文件描述符<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">exec 6&lt;&amp;0</span><br><span class="line">exec 0&lt;inputfile</span><br><span class="line">while read line</span><br><span class="line">do</span><br><span class="line">	echo $line</span><br><span class="line">done</span><br><span class="line">exec 0&lt;&amp;6</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>例子中将STDIN重定向到文件,因此read会从文件中读取数据</p>
+<ul>
+<li>关闭文件描述符<br><code>exec 3&gt;&amp;-</code><br>需要注意的是,关闭之后再打开,发送的数据会覆盖原来的数据,而不是追加</li>
+</ul>
+<h2 id="列出打开的文件描述符"><a href="#列出打开的文件描述符" class="headerlink" title="列出打开的文件描述符"></a>列出打开的文件描述符</h2><p><code>lsof -a -p $$ -d 0,1,2</code>,-a对结果进行AND运算,-p指定进程ID,$$为特殊环境变量,是当前的进程ID,-d指定要显示的文件描述符编号</p>
+<h2 id="阻止命令输出"><a href="#阻止命令输出" class="headerlink" title="阻止命令输出"></a>阻止命令输出</h2><p><code>echo something &gt; /dev/null</code>,将信息重定向到这个地方相当于删除,<br><code>cat /dev/null &gt; file</code>可以用于快速清空file文件的内容,而不用删除file在重新创建</p>
+<h2 id="记录消息"><a href="#记录消息" class="headerlink" title="记录消息"></a>记录消息</h2><p><code>tee filename</code>可以即将消息发送到STDOUT,又将消息发送到指定文件,如<code>date | tee -a out</code>,-a参数指的是append</p>
+<h2 id="实例-从文件中获取数据然后生成SQL文件"><a href="#实例-从文件中获取数据然后生成SQL文件" class="headerlink" title="实例:从文件中获取数据然后生成SQL文件"></a>实例:从文件中获取数据然后生成SQL文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">outfile=&apos;member.sql&apos;</span><br><span class="line">IFS=&apos;,&apos;	# 定义分隔符</span><br><span class="line">while read var1 var2 var3</span><br><span class="line">do</span><br><span class="line">	cat &gt;&gt; $outfile &lt;&lt; EOF # &gt;&gt;将cat的结果重定向到指定文件中,&lt;&lt;将输入重定向到将脚本中定义的语句,而不是STDIN</span><br><span class="line">	insert into members (name,address,city) values(&apos;$var1&apos;, &apos;$var2&apos;, &apos;$var3&apos;);</span><br><span class="line">	EOF</span><br><span class="line">done &lt; $&#123;1&#125; # 将输入重定向到指定文件</span><br></pre></td></tr></table></figure>
+<h1 id="控制脚本"><a href="#控制脚本" class="headerlink" title="控制脚本"></a>控制脚本</h1><h2 id="处信号"><a href="#处信号" class="headerlink" title="处信号"></a>处信号</h2><ul>
+<li>常见linux信号</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>信号</th>
+<th>值</th>
+<th>描述</th>
+<th>信号</th>
+<th>值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>SIGHUP</td>
+<td>挂起进程</td>
+<td>2</td>
+<td>SIGINT</td>
+<td>终止进程</td>
+</tr>
+<tr>
+<td>3</td>
+<td>SIGQUIT</td>
+<td>停止进程</td>
+<td>9</td>
+<td>SIGKILLL</td>
+<td>无条件终止进程</td>
+</tr>
+<tr>
+<td>15</td>
+<td>SIGTERM</td>
+<td>尽可能终止进程</td>
+<td>17</td>
+<td>SIGNSTOP</td>
+<td>无条件停止进程,但是不终止进程</td>
+</tr>
+<tr>
+<td>18</td>
+<td>SIGTSTP</td>
+<td>停止或暂停进程,但是不终止进程</td>
+<td>19</td>
+<td>SIGCONT</td>
+<td>继续运行停止的进程</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>生成信号</li>
+</ul>
+<ol>
+<li><p>中断进程<br>Ctrl+C会生成SIGINT信号,发送给当前shell中运行的所有进程,终止进程</p>
+</li>
+<li><p>暂停进程<br>Ctrl+Z会生成SIGTSTP信号,停止进程,停止进程不是终止进程,还会保留程序在内存中,并能够从上次停止的位置继续,停止进程的时候会返回一个作业号(job number),shell中运行的进程成为作业,如果当前shell中有停止的作业,那么退出shell的时候会有提示.</p>
+</li>
+</ol>
+<ul>
+<li>捕获信号<br>在脚本中使用<code>trap commands signals</code>,可以捕获指定的信号,然后进行自定义的处理<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">trap &quot;echo &apos;trap signal sigint here! &apos;&quot; SIGINT</span><br><span class="line">echo &apos;this is a test script&apos;</span><br><span class="line">count=0</span><br><span class="line">while [ $count -le 10 ]</span><br><span class="line">do</span><br><span class="line">	echo &apos;in loop $count&apos;</span><br><span class="line">	sleep 1</span><br><span class="line">	count=$[ $count + 1 ]</span><br><span class="line">done</span><br><span class="line">echo &apos;this is the end of script&apos;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>当以上脚本运行时,就不能使用Ctrl+c来终止了,而是会打印<code>trap signal sigint here!</code></p>
+<ul>
+<li>移除捕获<br><code>trap -- SIGINT</code></li>
+</ul>
+<h2 id="以后天模式运行脚本"><a href="#以后天模式运行脚本" class="headerlink" title="以后天模式运行脚本"></a>以后天模式运行脚本</h2><p><code>./test.sh &amp;</code>,会返回作业号和进程号<br>需要注意的是,脚本中的标准输出还是会打印在显示器上,这样就不好输入新的命令了,因此最好同时重定向输出</p>
+<h2 id="在非控制台下运行脚本"><a href="#在非控制台下运行脚本" class="headerlink" title="在非控制台下运行脚本"></a>在非控制台下运行脚本</h2><p><code>nohup ./test.sh &amp;</code><br>使用nohup命令,在关闭shell的时候,脚本会忽略终端会话发送的SIGHUP信号,阻止程序退出,脚本中的STDOUT和STDERR会被重定向到nohup.out中</p>
+<h2 id="作业控制"><a href="#作业控制" class="headerlink" title="作业控制"></a>作业控制</h2><p>启动,停止,终止和恢复作业</p>
+<ul>
+<li>查看作业<br>在脚本中使用<code>$$</code>可以显示shell分配给该脚本的PID,如<code>echo &quot;script process ID: $$&quot;</code><br>使用<code>jobs</code>命令可以查看分配给当前shell的作业,相关参数如下:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-l</td>
+<td>显示PID和作业号</td>
+</tr>
+<tr>
+<td>-n</td>
+<td>只列出上次shell发出通知后改变了状态的作业</td>
+</tr>
+<tr>
+<td>-p</td>
+<td>只是列出作业的PID</td>
+</tr>
+<tr>
+<td>-r</td>
+<td>只是列出运行中的作业</td>
+</tr>
+<tr>
+<td>-s</td>
+<td>只是列出已停止的作业</td>
+</tr>
+</tbody>
+</table>
+<p><code>jobs</code>命令返回的作业号前面会显示加减号,加号代表默认的作业,如果使用作业控制命令的时候没有指定作业号,那么就默认是带加号的作业<br>,而带减号的作业会在带加号的作业结束后成为下一个默认作业,任何时候都只会有一个加号作业和减号作业</p>
+<ul>
+<li>重启停止的作业 </li>
+</ul>
+<ol>
+<li>以后台模式重启一个作业,使用<code>bg jobId</code>即可,没有指定作业号的话就是使用默认作业</li>
+<li>而<code>fg jobId</code>则会以前台模式重启一个作业,直到作业执行结束才会返回命令行界面的提示符</li>
+</ol>
+<h2 id="调整谦让度"><a href="#调整谦让度" class="headerlink" title="调整谦让度"></a>调整谦让度</h2><p>优先级从-20到19,数字越小优先级越高,默认优先级是0</p>
+<ul>
+<li><p>nice命令<br>使用<code>nice -n 10</code>来降低默认的优先级,但是提高优先级需要系管理员权限</p>
+</li>
+<li><p>renice命令<br>可以使用renice命令俩修改正在运行中的进程的优先级,<code>renice -n 级别 -p PID</code>,限制:</p>
+</li>
+</ul>
+<ol>
+<li>只能修改属于自己的进程的优先级</li>
+<li>普通用户只能降低进程的优先级,root用户可以随意修改</li>
+</ol>
+<h2 id="定时运行作业"><a href="#定时运行作业" class="headerlink" title="定时运行作业"></a>定时运行作业</h2><ul>
+<li>使用at命令<br>使用at命令来定时执行任务,at的守护进程atd会以后台模式运行,在系统启动的时候就会启动,并定时检查<code>/vat/spool/at</code>目录,<br><code>at [-f filename] time</code><br>默认情况下,at命令会将STDIN的输入放到队列中,<code>-f</code>参数可以从指定的文件中读取脚本,然后at命令会将作业提交到作业队列,</li>
+</ul>
+<p>使用<code>atq</code>命令查看队列中的作业,使用<code>atrm jobId</code>来删除队列中的作业</p>
+<ul>
+<li>周期性执行脚本</li>
+</ul>
+<ol>
+<li><p>使用cron时间表<br><code>min hour dayofmonth month dayofweek command</code>,来设置周期性执行的脚本,command需要绝对路径<br>dayofmonth:月份中的日期,1到31<br>dayofweek:星期中的日期,0到6<br>允许使用特定值,取值范围,通配符来指定条目,如<code>15 10 * * * command</code>指定的就是每天15:10执行命令<br>可以使用<code>00 12 * * * if [</code>date +%d -d tomorrow<code>= 01 ] ; then ; command</code>来检测明天是不是一号,间接检测每个月的最后一天</p>
+</li>
+<li><p>构建cron时间表<br>使用<code>crontab -l</code>来显示已经创建好的时间表,使用<code>crontab -e</code>命令可以编辑时间表</p>
+</li>
+<li><p>corn目录<br>在<code>/etc/cron.*ly</code>目录下直接放置脚本就会定时运行</p>
+</li>
+<li><p>anacron程序<br>cron在关机期间是不会运行定时脚本的,而anacron则会在开机后运行之前关机期间没有运行的脚本</p>
+</li>
+</ol>
+<h1 id="创建函数"><a href="#创建函数" class="headerlink" title="创建函数"></a>创建函数</h1><h2 id="基本的脚本函数"><a href="#基本的脚本函数" class="headerlink" title="基本的脚本函数"></a>基本的脚本函数</h2><ul>
+<li>创建函数<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function name &#123;</span><br><span class="line">	commands</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>这里需要注意的是函数名后面需要空格,然后再接<code>{</code></p>
+<ul>
+<li>使用函数<br>在脚本中调用函数名即可,但是要先定义后使用</li>
+</ul>
+<h2 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h2><ul>
+<li><p>return命令<br>使用return命令可以返回自定义的退出状态码,但是只能是0到255之间</p>
+</li>
+<li><p>使用函数输出</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function fun &#123;</span><br><span class="line">	read -p &quot;enter a value: &quot; value</span><br><span class="line">	echo $[ $value * 2 ]</span><br><span class="line">&#125;</span><br><span class="line">result=$(fun)</span><br><span class="line">echo &quot;new result is $result&quot;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="在函数中使用变量"><a href="#在函数中使用变量" class="headerlink" title="在函数中使用变量"></a>在函数中使用变量</h2><ul>
+<li>向函数传递参数<br><code>func arg1 arg2</code></li>
+</ul>
+<h2 id="函数变量和数组"><a href="#函数变量和数组" class="headerlink" title="函数变量和数组"></a>函数变量和数组</h2><ul>
+<li>向函数传递数组参数<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function test &#123;</span><br><span class="line">	local newarray</span><br><span class="line">	newarray=(&apos;echo &quot;$@&quot;&apos;)</span><br><span class="line">	echo &quot;the new array values are: $&#123;newarray[*]&#125;&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">myarray=(1 2 3 4 5)</span><br><span class="line">echo &quot;the original array is $&#123;myarray[*]&#125;&quot;</span><br><span class="line">test $&#123;myarray[*]&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>向函数传递数组需要将整个数组拆分成一个个参数一起传递,然后再在函数中一个个读取并重建数组,这样如果有多个数组的话就会很麻烦</p>
+<ul>
+<li><p>从函数中返回数组<br>就是使用echo将所有的值打印</p>
+</li>
+<li><p>函数递归</p>
+</li>
+<li><p>在<code>.bashrc</code>文件中定义函数</p>
+</li>
+</ul>
+<ol>
+<li>直接写函数</li>
+<li>引用函数文件<br>使用<code>source</code>命令或者它的别名<code>.</code>后面跟上函数文件的路径,来加载函数</li>
+</ol>
+<h1 id="初识sed-stream-editor-和gawk命令"><a href="#初识sed-stream-editor-和gawk命令" class="headerlink" title="初识sed(stream editor)和gawk命令"></a>初识sed(stream editor)和gawk命令</h1><h2 id="文本处理"><a href="#文本处理" class="headerlink" title="文本处理"></a>文本处理</h2><ul>
+<li>sed编辑器<br>sed编辑器可以根据命令来处理数据流中的数据,这些命令要么从命令行中输入,要么从命令文本文件中获取.sed编辑器会执行以下操作:</li>
+</ul>
+<ol>
+<li>一次从输入中读取一行数据</li>
+<li>根据所提供的编辑器命令匹配数据</li>
+<li>按照命令修改流中的数据</li>
+<li>将新的数据输出到STDOUT</li>
+</ol>
+<p><code>sed options script file</code>,常用选项如下:</p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-e script</td>
+<td>在处理输入时,将script中指定的命令添加到已有的命令中</td>
+</tr>
+<tr>
+<td>-f file</td>
+<td>在处理输入时,将file中指定的命令添加到已有的命令中</td>
+</tr>
+<tr>
+<td>-n</td>
+<td>不产生命令输出,使用print命令来完成输出</td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li><p>在命令行中定义编辑器命令<br>如<code>echo this is a test | sed &quot;s/test/big test/&quot;</code>,输出结果为<code>this is a big test</code><br>如<code>sed &quot;s/test/big test/&quot; data.txt &gt; bigtest.txt</code>,将文件data.txt中的<code>test</code>全部替换成<code>big test</code>然后写入文件bigtest.txt中</p>
+</li>
+<li><p>在命令行使用多个编辑器命令<br>如<code>sed -e &#39;s/brown/green/; s/dog/cat/&#39; data.txt</code>,将data.txt中所有的brown和dog全部替换成green和cat<br>需要注意的是编辑器命令之间需要使用分号间隔,并且每一个命令末尾和分号之间不能有空格</p>
+</li>
+<li><p>从文件中读取编辑器命令<br>如<code>sed -f script.sed data.txt</code>,将文件data.txt按照文件script.sed中的命令替换<br>文件script.sed如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s/brown/green/</span><br><span class="line">s/dog/cat/</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ul>
+<li>gawk编辑器</li>
+</ul>
+<ol>
+<li>命令格式<br><code>gawk options program file</code></li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-F fs</td>
+<td>指定行中划分数据字段的字段分隔符</td>
+</tr>
+<tr>
+<td>-f file</td>
+<td>从指定的文件中读取程序</td>
+</tr>
+<tr>
+<td>-v var=value</td>
+<td>定义gawk程序中的一个变量及其默认值</td>
+</tr>
+<tr>
+<td>-mf N</td>
+<td>指定要处理的数据文件中的最大字段数</td>
+</tr>
+<tr>
+<td>-mr N</td>
+<td>指定数据文件中的最大数据行数</td>
+</tr>
+<tr>
+<td>-W keyword</td>
+<td>指定gawk的兼容模式或警告等级</td>
+</tr>
+</tbody>
+</table>
+<ol start="2">
+<li></li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/28/Linux命令行与shell脚本编程/" rel="next" title="Linux命令行与shell脚本编程">
+                <i class="fa fa-chevron-left"></i> Linux命令行与shell脚本编程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/22/读书笔记/" rel="prev" title="读书笔记">
+                读书笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">ninghuang</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">58</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">75</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#呈现数据"><span class="nav-number">1.</span> <span class="nav-text">呈现数据</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#在脚本中重定向输出"><span class="nav-number">1.1.</span> <span class="nav-text">在脚本中重定向输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建自己的重定向"><span class="nav-number">1.2.</span> <span class="nav-text">创建自己的重定向</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在脚本中重定向输入"><span class="nav-number">1.3.</span> <span class="nav-text">在脚本中重定向输入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#列出打开的文件描述符"><span class="nav-number">1.4.</span> <span class="nav-text">列出打开的文件描述符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#阻止命令输出"><span class="nav-number">1.5.</span> <span class="nav-text">阻止命令输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#记录消息"><span class="nav-number">1.6.</span> <span class="nav-text">记录消息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实例-从文件中获取数据然后生成SQL文件"><span class="nav-number">1.7.</span> <span class="nav-text">实例:从文件中获取数据然后生成SQL文件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#控制脚本"><span class="nav-number">2.</span> <span class="nav-text">控制脚本</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#处信号"><span class="nav-number">2.1.</span> <span class="nav-text">处信号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#以后天模式运行脚本"><span class="nav-number">2.2.</span> <span class="nav-text">以后天模式运行脚本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在非控制台下运行脚本"><span class="nav-number">2.3.</span> <span class="nav-text">在非控制台下运行脚本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#作业控制"><span class="nav-number">2.4.</span> <span class="nav-text">作业控制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#调整谦让度"><span class="nav-number">2.5.</span> <span class="nav-text">调整谦让度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定时运行作业"><span class="nav-number">2.6.</span> <span class="nav-text">定时运行作业</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建函数"><span class="nav-number">3.</span> <span class="nav-text">创建函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本的脚本函数"><span class="nav-number">3.1.</span> <span class="nav-text">基本的脚本函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#返回值"><span class="nav-number">3.2.</span> <span class="nav-text">返回值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在函数中使用变量"><span class="nav-number">3.3.</span> <span class="nav-text">在函数中使用变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数变量和数组"><span class="nav-number">3.4.</span> <span class="nav-text">函数变量和数组</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#初识sed-stream-editor-和gawk命令"><span class="nav-number">4.</span> <span class="nav-text">初识sed(stream editor)和gawk命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#文本处理"><span class="nav-number">4.1.</span> <span class="nav-text">文本处理</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ninghuang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
